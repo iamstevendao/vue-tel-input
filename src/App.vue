@@ -1,24 +1,24 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <HelloWorld/>
+    <tel-input/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import TelInput from './components/tel-input';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
+    TelInput,
   },
 };
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

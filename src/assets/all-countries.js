@@ -1272,6 +1272,7 @@ for (let i = 0; i < allCountries.length; i++) {
     dialCode: c[2],
     priority: c[3] || 0,
     areaCodes: c[4] || null,
+    icon: `https://raw.githubusercontent.com/behdad/region-flags/gh-pages/png/${c[1].toUpperCase()}.png`,
   };
 }
 

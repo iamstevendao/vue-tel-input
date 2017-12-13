@@ -1,10 +1,14 @@
 <template lang="pug">
 b-input-group
-  b-dropdown(variant="success")
-    template(slot="button-content") {{ choosen['iso2'] }}
+  b-dropdown(variant="light")
+    template(slot="button-content") 
+      img(:src="imgLink")
     b-dropdown-item(v-for="pb in phoneBook"
                     :key="pb['iso2']" 
-                    @click="choose(pb)") {{ pb['iso2'] }}
+                    @click="choose(pb)")
+      img(:src="`https://raw.githubusercontent.com/behdad/region-flags/gh-pages/png/${pb['iso2']}.png`")
+      strong {{ pb.name }}  
+      span +{{ pb.dialCode }}
   b-form-input
 </template>
 
@@ -16,23 +20,30 @@ export default {
   data() {
     return {
       phoneBook,
-      choosen: phoneBook[0],
+      choosen: phoneBook[0].iso2,
     };
   },
   computed: {
+    imgLink() {
+      return "https://raw.githubusercontent.com/behdad/region-flags/gh-pages/png/" + this.choosen + ".png";
+    },
   },
   methods: {
     choose(country) {
-      this.choosen = country;
-    }
+      this.choosen = country.iso2;
+    },
   },
 };
 </script>
 
-<style scoped>
+<style>
 .dropdown-menu.show {
   max-height: 200px;
   overflow: scroll;
+}
+.input-group img {
+  width: 25px;
+  margin-right: 5px;
 }
 </style>
 

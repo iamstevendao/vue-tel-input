@@ -1268,7 +1268,7 @@ for (let i = 0; i < allCountries.length; i++) {
   const c = allCountries[i];
   allCountries[i] = {
     name: c[0],
-    iso2: c[1],
+    iso2: c[1].toUpperCase(),
     dialCode: c[2],
     priority: c[3] || 0,
     areaCodes: c[4] || null,

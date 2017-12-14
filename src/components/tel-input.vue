@@ -16,7 +16,7 @@ b-row.justify-content-md-center
                   :state="state"
                   :formatter="format")
     h1 {{ formattedResult }}
-    h1 {{ parsedResult }}
+    h3 {{ parsedResult }}
     
 </template>
 

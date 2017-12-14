@@ -18,7 +18,6 @@ b-row.justify-content-md-center
                   :formatter="format")
     h1 {{ formattedResult }}
     h3 {{ parsedResult }}
-    
 </template>
 
 <script>
@@ -52,7 +51,7 @@ export default {
     },
     parsedResult() {
       const result = parse(this.phoneNumber, this.activeCountry.iso2);
-      return Object.keys(result).length > 0 ? result : '';
+      return Object.keys(result).length > 0 && this.state ? result : '';
     },
     state() {
       return isValidNumber(this.formattedResult);

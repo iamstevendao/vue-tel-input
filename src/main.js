@@ -10,7 +10,6 @@ import App from './App';
 
 Vue.use(BootstrapVue);
 
-
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

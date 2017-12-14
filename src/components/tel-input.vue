@@ -24,9 +24,15 @@ b-row.justify-content-md-center
 <script>
 import { parse, format, asYouType, isValidNumber } from 'libphonenumber-js';
 import allCountries from '../assets/all-countries';
+import getCountry from '../assets/default-country';
 
 export default {
   name: 'tel-input',
+  mounted() {
+    getCountry().then((res) => {
+      this.activeCountry = allCountries.find(country => country.iso2 === res);
+    });
+  },
   data() {
     return {
       allCountries,

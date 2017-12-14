@@ -42,7 +42,7 @@ export default {
       return Object.keys(result).length > 0 ? result : '';
     },
     state() {
-      return isValidNumber(this.phoneNumber, this.activeCountry.iso2);
+      return isValidNumber(this.formattedResult);
     },
   },
   methods: {
@@ -58,7 +58,7 @@ export default {
 
 <style>
 .dropdown-menu.show {
-  max-height: 200px;
+  max-height: 300px;
   overflow: scroll;
 }
 .input-group img {

@@ -1,9 +1,11 @@
 # vue-tel-input
+International Telephone Input Boilerplate with Vue
 
-> International Telephone Input Boilerplate with Vue
+<p align="center">
+<img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/VagueUntriedIndochinahogdeer-size_restricted.gif"/>
+</p>
 
 ## Build Setup
-
 ``` bash
 npm install             # install dependencies
 npm run dev             # serve with hot reload at localhost:8080
@@ -13,4 +15,4 @@ npm run unit            # run unit tests
 npm test                # run all tests
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+made with &#x2764; by [Steven](https://github.com/iamstevendao).

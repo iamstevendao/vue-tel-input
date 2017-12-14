@@ -37,7 +37,7 @@ export default {
     },
     parsedResult() {
       const result = parse(this.phoneNumber, this.activeCountry.iso2);
-      return result.length > 0 ? result : '';
+      return Object.keys(result).length > 0 ? result : '';
     },
     state() {
       return isValidNumber(this.phoneNumber, this.activeCountry.iso2);

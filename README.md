@@ -8,7 +8,8 @@ International Telephone Input Boilerplate with Vue
 ## Highlights & Credits
 - Vue app created by [vue-cli](https://github.com/vuejs/vue-cli).
 - Telephone Number parsing, validation by [libphonenumber-js](https://catamphetamine.github.io/libphonenumber-js/).
-- Countries code data from [intl-tel-input](https://github.com/jackocnr/intl-tel-input/blob/master/src/js/data.js).
+- Country Codes data from [intl-tel-input](https://github.com/jackocnr/intl-tel-input/blob/master/src/js/data.js).
+- Country Flags by [behdad/region-flags](https://github.com/behdad/region-flags).
 - [Boostrap-Vue](https://bootstrap-vue.js.org/docs/).
 
 ## Build Setup

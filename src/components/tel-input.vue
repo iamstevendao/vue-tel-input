@@ -1,21 +1,23 @@
 <template lang="pug">
-b-card
-  b-input-group
-    b-dropdown(variant="light")
-      template(slot="button-content") 
-        img(:src="activeCountry.icon")
-      b-dropdown-item(v-for="pb in allCountries"
-                      :key="pb['iso2']" 
-                      @click="choose(pb)")
-        img(:src="pb.icon")
-        strong {{ pb.name }}  
-        span +{{ pb.dialCode }}
-    b-form-input(v-model="phoneNumber"
-                placeholder="Enter your phone number"
-                :state="state"
-                :formatter="format")
-  h1 {{ formattedResult }}
-  h1 {{ parsedResult }}
+b-row.justify-content-md-center
+  b-col(col md="5")
+    b-input-group
+      b-dropdown(variant="outline-secondary")
+        template(slot="button-content") 
+          img(:src="activeCountry.icon")
+        b-dropdown-item(v-for="pb in allCountries"
+                        :key="pb['iso2']" 
+                        @click="choose(pb)")
+          img(:src="pb.icon")
+          strong {{ pb.name }}  
+          span +{{ pb.dialCode }}
+      b-form-input(v-model="phoneNumber"
+                  placeholder="Enter your phone number"
+                  :state="state"
+                  :formatter="format")
+    h1 {{ formattedResult }}
+    h1 {{ parsedResult }}
+    
 </template>
 
 <script>
@@ -62,6 +64,9 @@ export default {
 .input-group img {
   width: 25px;
   margin-right: 5px;
+}
+h1 {
+  margin-top: 30px;
 }
 </style>
 

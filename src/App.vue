@@ -1,8 +1,8 @@
-<template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <tel-input/>
-  </div>
+<template lang="pug">
+#app
+  b-card(title="Telephone Input Vue"
+          sub-title="made with &#x2764; by Steven.")
+    tel-input
 </template>
 
 <script>
@@ -24,5 +24,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.card-subtitle {
+  margin: 5px;
+  padding-bottom: 30px;
 }
 </style>

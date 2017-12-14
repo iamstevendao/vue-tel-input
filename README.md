@@ -5,6 +5,12 @@ International Telephone Input Boilerplate with Vue
 <img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/VagueUntriedIndochinahogdeer-size_restricted.gif"/>
 </p>
 
+## Highlights & Credits
+- Vue app created by [vue-cli](https://github.com/vuejs/vue-cli).
+- Telephone Number parsing, validation by [libphonenumber-js](https://catamphetamine.github.io/libphonenumber-js/).
+- Countries code data from [intl-tel-input](https://github.com/jackocnr/intl-tel-input/blob/master/src/js/data.js).
+- [Boostrap-Vue](https://bootstrap-vue.js.org/docs/).
+
 ## Build Setup
 ``` bash
 npm install             # install dependencies

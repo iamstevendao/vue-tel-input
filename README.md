@@ -2,7 +2,7 @@
 International Telephone Input Boilerplate with Vue
 
 <p align="center">
-<img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/VagueUntriedIndochinahogdeer-size_restricted.gif"/>
+<img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
 </p>
 
 ## Highlights & Credits

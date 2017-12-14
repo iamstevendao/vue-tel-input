@@ -7,7 +7,8 @@ b-row.justify-content-md-center
           img(:src="activeCountry.icon")
         b-dropdown-item(v-for="pb in allCountries"
                         :key="pb['iso2']" 
-                        @click="choose(pb)")
+                        @click="choose(pb)"
+                        @keyup="search($event)")
           img(:src="pb.icon")
           strong {{ pb.name }}  
           span +{{ pb.dialCode }}
@@ -35,6 +36,12 @@ export default {
   },
   computed: {
     formattedResult() {
+      const formatter = new asYouType();
+      const result = formatter.input(this.phoneNumber);
+      if (this.phoneNumber && this.phoneNumber[0] === '+') {
+        // if user manually type the country code
+        this.activeCountry = this.allCountries.find(ele => ele['iso2'].toUpperCase() === formatter.country) || this.activeCountry;
+      }
       return format(this.phoneNumber, this.activeCountry.iso2, 'International');
     },
     parsedResult() {
@@ -44,13 +51,17 @@ export default {
     state() {
       return isValidNumber(this.formattedResult);
     },
+
   },
   methods: {
     choose(country) {
       this.activeCountry = country;
     },
-    format(value, event) {
+    format(value) {
       return new asYouType(this.activeCountry.iso2).input(value);
+    },
+    search(value) {
+      console.log('--- search: ', value);
     },
   },
 };

@@ -1,5 +1,7 @@
 # vue-tel-input
-International Telephone Input Boilerplate with Vue
+International Telephone Input Boilerplate with Vue.
+
+Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
 
 <p align="center">
 <img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>

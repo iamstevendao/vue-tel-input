@@ -1,7 +1,7 @@
 <template lang="pug">
 #app
   b-card(title="Telephone Input Vue"
-          sub-title="made with &#x2764; by Steven.")
+        sub-title="made with &#x2764; by Steven.")
     tel-input
 </template>
 

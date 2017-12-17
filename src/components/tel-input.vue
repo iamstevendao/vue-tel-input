@@ -7,8 +7,7 @@ b-row.justify-content-md-center
           img(:src="activeCountry.icon")
         b-dropdown-item(v-for="pb in allCountries"
                         :key="pb['iso2']" 
-                        @click="choose(pb)"
-                        @keyup="search($event)")
+                        @click="choose(pb)")
           img(:src="pb.icon")
           strong {{ pb.name }}  
           span +{{ pb.dialCode }}
@@ -51,6 +50,7 @@ export default {
     },
     parsedResult() {
       const result = parse(this.phoneNumber, this.activeCountry.iso2);
+      // only shows result when the number is a valid phone number
       return Object.keys(result).length > 0 && this.state ? result : '';
     },
     state() {
@@ -64,9 +64,6 @@ export default {
     },
     format(value) {
       return new asYouType(this.activeCountry.iso2).input(value);
-    },
-    search(value) {
-      console.log('--- search: ', value);
     },
   },
 };

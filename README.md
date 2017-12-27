@@ -1,11 +1,57 @@
 # vue-tel-input
-International Telephone Input Boilerplate with Vue.
+International Telephone Input Boilerplate with Vue ((integrated with [VueFormGenerator](https://github.com/vue-generators/vue-form-generator)).
 
 Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
 
 <p align="center">
 <img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
 </p>
+
+## Installation
+```bash
+npm install --save vue-tel-input
+```
+
+## Usage
+- As a standalone component:  
+  Import `vue-tel-input` into your Vue component and use as a normal component:
+     ```js
+     <template>
+     ...
+       <tel-input></tel-input>
+     ...
+     <template>
+     <script>
+     import TelInput from '../vue-tel-input'   
+     export default {
+       ...
+       components: {
+         TelInput
+       }
+     }
+     </script>
+     ```
+
+- As a field of VueFormGenerator
+  1. Register `vue-tel-input` as a global component:
+     ```js
+      import vueTelInput from "../vue-tel-input.vue";
+      ...
+      Vue.component("fieldTelephone", vueTelInput);
+     ```
+     !! As the naming convention for custom field in VueFormGenerator, you need to put the name of the component as: `field<ANameInCamelKey>.
+  
+  2. Now you can you it in your schema:
+     ```js
+     var schema: {
+      fields: [{
+        type: "telephone",
+        label: "Phone Number",
+        model: "phone"
+      }]
+     };
+     ```
+  For more info: [vue-form-generator/custom-fields](https://icebob.gitbooks.io/vueformgenerator/content/fields/custom_fields.html)
 
 ## Highlights & Credits
 - Vue app created by [vue-cli](https://github.com/vuejs/vue-cli).
@@ -15,7 +61,7 @@ Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
 - [Boostrap-Vue](https://bootstrap-vue.js.org/docs/).
 - User's Location by [get-json](https://www.npmjs.com/package/get-json) and [ipifo.io](https://ipinfo.io/json)
 
-## Build Setup
+## Example App Build Setup
 ``` bash
 npm install             # install dependencies
 npm run dev             # serve with hot reload at localhost:8080

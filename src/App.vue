@@ -3,6 +3,9 @@
   b-card(title="Telephone Input Vue"
         sub-title="made with &#x2764; by Steven.")
     tel-input
+  
+  b-card(title="Use as a VueFormGenerator's field")
+    vue-form-generator(:schema="schema", :model="model", :options="formOptions")
 </template>
 
 <script>
@@ -12,6 +15,35 @@ export default {
   name: 'app',
   components: {
     TelInput,
+  },
+  data() {
+    return {
+      model: {
+        id: 1,
+        name: "John Doe",
+        password: "J0hnD03!x4",
+        skills: ["Javascript", "VueJS"],
+        phone: "+91231209231",
+        email: "john.doe@gmail.com",
+        status: true
+      },
+
+      schema: {
+        fields: [
+          {
+            type: 'telephone',
+            model: 'phone',
+            inputType: 'text',
+            label: 'Phone number',
+          }
+        ],
+      },
+      formOptions: {
+        validateAfterLoad: true,
+        validateAfterChanged: true,
+        fieldIdPrefix: 'user-'
+      }
+    };
   },
 };
 </script>

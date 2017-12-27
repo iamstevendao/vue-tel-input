@@ -1,5 +1,5 @@
 {
-  "name": "vue-tel-input",
+  "name": "vue-tel-input-example",
   "version": "1.0.0",
   "description": "International Telephone Input Boilerplate with Vue",
   "author": "Steven Dao <iamstevendao@users.noreply.github.com>",
@@ -19,7 +19,8 @@
     "libphonenumber-js": "^0.4.44",
     "pug": "^2.0.0-rc.4",
     "vue": "^2.5.2",
-    "vue-select": "github:sagalbot/vue-select"
+    "vue-form-generator": "^2.1.1",
+    "vue-tel-input": "^1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

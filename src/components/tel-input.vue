@@ -15,17 +15,19 @@ b-row.justify-content-md-center
                   placeholder="Enter your phone number"
                   :state="state"
                   :formatter="format")
-    h1 {{ formattedResult }}
-    h3 {{ parsedResult }}
+    // h1 {{ formattedResult }}
+    // h3 {{ parsedResult }}
 </template>
 
 <script>
 import { parse, format, asYouType, isValidNumber } from 'libphonenumber-js';
+import { abstractField } from "vue-form-generator";
 import allCountries from '../assets/all-countries';
 import getCountry from '../assets/default-country';
 
 export default {
-  name: 'tel-input',
+  name: 'vfg-field-telephone',
+  mixins: [abstractField],
   mounted() {
     getCountry().then((res) => {
       this.activeCountry = allCountries.find(country => country.iso2 === res);
@@ -48,15 +50,16 @@ export default {
       }
       return format(this.phoneNumber, this.activeCountry.iso2, 'International');
     },
-    parsedResult() {
-      const result = parse(this.phoneNumber, this.activeCountry.iso2);
-      // only shows result when the number is a valid phone number
-      return Object.keys(result).length > 0 && this.state ? result : '';
-    },
     state() {
       return isValidNumber(this.formattedResult);
     },
-
+  },
+  watch: {
+    state(value) {
+      if (value) {
+        this.phoneNumber = this.formattedResult;
+      }
+    },
   },
   methods: {
     choose(country) {

@@ -8,6 +8,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import App from './App';
 
+console.log(vueTelInput);
 // register component for vue-form-generator
 Vue.component('fieldTelephone', vueTelInput);
 

@@ -28,8 +28,8 @@
 <script>
 import { parse, format, asYouType, isValidNumber } from 'libphonenumber-js';
 import { abstractField } from "vue-form-generator";
-import allCountries from './assets/all-countries';
-import getCountry from './assets/default-country';
+import allCountries from '../assets/all-countries';
+import getCountry from '../assets/default-country';
 
 export default {
   name: 'vue-tel-input',

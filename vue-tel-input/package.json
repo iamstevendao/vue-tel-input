@@ -1,14 +1,31 @@
 {
   "name": "vue-tel-input",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Vue International Telephone Input",
-  "main": "vue-tel-input.vue",
-  "scripts": {},
+  "main": "src/main.js",
+  "scripts": {
+    "build": "webpack -p"
+  },
   "dependencies": {
     "bootstrap": "^4.0.0-beta.2",
     "bootstrap-vue": "^1.3.0",
     "get-json": "^1.0.0",
-    "libphonenumber-js": "^0.4.44"
+    "libphonenumber-js": "^0.4.44",
+    "vue": "^2.5.9"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "cross-env": "^5.1.1",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.5",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    "vue-loader": "^13.5.0",
+    "vue-template-compiler": "^2.5.9",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
   },
   "repository": {
     "type": "git",

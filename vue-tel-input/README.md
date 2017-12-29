@@ -1,5 +1,5 @@
 # vue-tel-input
-International Telephone Input Boilerplate with Vue ((integrated with [VueFormGenerator](https://github.com/vue-generators/vue-form-generator)).
+International Telephone Input Boilerplate with Vue (integrated with [VueFormGenerator](https://github.com/vue-generators/vue-form-generator)).
 
 Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
 
@@ -14,26 +14,30 @@ npm install --save vue-tel-input
 
 ## Usage
 - As a standalone component:  
-  Import `vue-tel-input` into your Vue component and use as a normal component:
+  Install `vue-tel-input`:
+     ```js
+     // main.js
+
+     import Vue from 'vue';
+     import VueTelInput from 'vue-tel-input';
+
+     Vue.use(VueTelInput);
+     ```
+  Then you can use it in your components:
      ```html
      <template>
      ...
-       <tel-input></tel-input>
+       <vue-tel-input></vue-tel-input>
      ...
      <template>
-
      <script>
-     import TelInput from '../vue-tel-input';   
      export default {
        ...
-       components: {
-         TelInput
-       },
-     };
+     }
      </script>
      ```
 
-- As a field of VueFormGenerator
+- ~~As a field of VueFormGenerator~~ (Under construction)
   1. Register `vue-tel-input` as a global component:
      ```js
       import vueTelInput from "../vue-tel-input.vue";

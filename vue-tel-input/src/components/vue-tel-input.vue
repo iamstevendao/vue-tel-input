@@ -26,14 +26,12 @@
 </template>
 
 <script>
-import { parse, format, asYouType, isValidNumber } from 'libphonenumber-js';
-import { abstractField } from "vue-form-generator";
+import { format, asYouType, isValidNumber } from 'libphonenumber-js';
 import allCountries from '../assets/all-countries';
 import getCountry from '../assets/default-country';
 
 export default {
   name: 'vue-tel-input',
-  mixins: [abstractField],
   mounted() {
     getCountry().then((res) => {
       this.activeCountry = allCountries.find(country => country.iso2 === res);
@@ -48,11 +46,10 @@ export default {
   },
   computed: {
     formattedResult() {
-      const formatter = new asYouType();
-      const result = formatter.input(this.phoneNumber);
+      const formatter = new asYouType();// eslint-disable-line
       if (this.phoneNumber && this.phoneNumber[0] === '+') {
         // if user manually type the country code
-        this.activeCountry = this.allCountries.find(ele => ele['iso2'].toUpperCase() === formatter.country) || this.activeCountry;
+        this.activeCountry = this.allCountries.find(ele => ele.iso2.toUpperCase() === formatter.country) || this.activeCountry;// eslint-disable-line
       }
       return format(this.phoneNumber, this.activeCountry.iso2, 'International');
     },
@@ -72,7 +69,7 @@ export default {
       this.activeCountry = country;
     },
     format(value) {
-      return new asYouType(this.activeCountry.iso2).input(value);
+      return new asYouType(this.activeCountry.iso2).input(value);// eslint-disable-line
     },
   },
 };

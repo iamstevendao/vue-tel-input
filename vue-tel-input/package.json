@@ -1,36 +1,59 @@
 {
   "name": "vue-tel-input",
-  "version": "1.0.2",
   "description": "Vue International Telephone Input",
-  "main": "src/main.js",
+  "version": "1.2.0",
+  "author": {
+    "name": "Steven Dao",
+    "email": "iamstevendao@users.noreply.github.com"
+  },
+  "keywords": [
+    "vue",
+    "vuejs",
+    "plugin"
+  ],
+  "license": "MIT",
+  "main": "dist/vue-tel-input.common.js",
+  "unpkg": "dist/vue-tel-input.browser.js",
+  "module": "index.js",
   "scripts": {
-    "build": "webpack -p"
-  },
-  "dependencies": {
-    "bootstrap": "^4.0.0-beta.2",
-    "bootstrap-vue": "^1.3.0",
-    "get-json": "^1.0.0",
-    "libphonenumber-js": "^0.4.44",
-    "vue": "^2.5.9"
-  },
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
-    "cross-env": "^5.1.1",
-    "css-loader": "^0.28.7",
-    "file-loader": "^1.1.5",
-    "node-sass": "^4.7.2",
-    "sass-loader": "^6.0.6",
-    "vue-loader": "^13.5.0",
-    "vue-template-compiler": "^2.5.9",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7"
+    "dev": "cross-env NODE_ENV=development webpack --config config/webpack.config.dev.js --progress --watch",
+    "build": "npm run build:browser && npm run build:common",
+    "build:browser": "cross-env NODE_ENV=production webpack --config config/webpack.config.browser.js --progress --hide-modules",
+    "build:common": "cross-env NODE_ENV=production webpack --config config/webpack.config.common.js --progress --hide-modules",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/EducationLink/vue-tel-input.git"
   },
-  "author": "Steven Dao <https://github.com/iamstevendao>",
-  "license": "ISC"
+  "bugs": {
+    "url": "https://github.com/EducationLink/vue-tel-input/issues"
+  },
+  "homepage": "https://github.com/EducationLink/vue-tel-input#readme",
+  "dependencies": {
+    "bootstrap": "^4.0.0-beta.2",
+    "bootstrap-vue": "^1.3.0",
+    "get-json": "^1.0.0",
+    "libphonenumber-js": "^0.4.44"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.0",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.0.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "cross-env": "^3.1.3",
+    "css-loader": "^0.26.1",
+    "eslint": "^3.12.1",
+    "eslint-config-airbnb-base": "^11.3.0",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-html": "^1.6.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-promise": "^3.4.0",
+    "extract-text-webpack-plugin": "^2.0.0-beta.4",
+    "vue-loader": "^10.0.0",
+    "vue-template-compiler": "^2.1.6",
+    "webpack": "^2.1.0-beta.28",
+    "webpack-merge": "^1.1.2"
+  }
 }

@@ -20,12 +20,12 @@ export default {
     return {
       model: {
         id: 1,
-        name: "John Doe",
-        password: "J0hnD03!x4",
-        skills: ["Javascript", "VueJS"],
-        phone: "+91231209231",
-        email: "john.doe@gmail.com",
-        status: true
+        name: 'John Doe',
+        password: 'J0hnD03!x4',
+        skills: ['Javascript', 'VueJS'],
+        phone: '+91231209231',
+        email: 'john.doe@gmail.com',
+        status: true,
       },
 
       schema: {
@@ -35,14 +35,14 @@ export default {
             model: 'phone',
             inputType: 'text',
             label: 'Phone number',
-          }
+          },
         ],
       },
       formOptions: {
         validateAfterLoad: true,
         validateAfterChanged: true,
-        fieldIdPrefix: 'user-'
-      }
+        fieldIdPrefix: 'user-',
+      },
     };
   },
 };

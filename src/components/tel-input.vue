@@ -1,6 +1,6 @@
 <template lang="pug">
 b-row.justify-content-md-center
-  b-col(col md="5")
+  b-col(col md="12")
     b-input-group
       b-dropdown(variant="outline-secondary")
         template(slot="button-content") 
@@ -9,9 +9,9 @@ b-row.justify-content-md-center
                         :key="pb['iso2']" 
                         @click="choose(pb)")
           img(:src="pb.icon")
-          strong {{ pb.name }}  
+          strong &nbsp&nbsp{{ pb.name }}&nbsp&nbsp
           span +{{ pb.dialCode }}
-      b-form-input(v-model="phoneNumber"
+      b-form-input(v-model="value"
                   placeholder="Enter your phone number"
                   :state="state"
                   :formatter="format")
@@ -30,22 +30,24 @@ export default {
     getCountry().then((res) => {
       this.activeCountry = allCountries.find(country => country.iso2 === res);
     });
+    this.value = this.value || '';
   },
   data() {
     return {
       allCountries,
       activeCountry: allCountries[0],
-      phoneNumber: '',
     };
   },
   computed: {
     formattedResult() {
-      const formatter = new asYouType();// eslint-disable-line
-      if (this.phoneNumber && this.phoneNumber[0] === '+') {
+      if (this.value && this.value[0] === '+') {
         // if user manually type the country code
+        const formatter = new asYouType();// eslint-disable-line
+        formatter.input(this.value);
+
         this.activeCountry = this.allCountries.find(ele => ele.iso2.toUpperCase() === formatter.country) || this.activeCountry;// eslint-disable-line
       }
-      return format(this.phoneNumber, this.activeCountry.iso2, 'International');
+      return format(this.value, this.activeCountry.iso2, 'International');
     },
     state() {
       return isValidNumber(this.formattedResult);
@@ -54,7 +56,7 @@ export default {
   watch: {
     state(value) {
       if (value) {
-        this.phoneNumber = this.formattedResult;
+        this.value = this.formattedResult;
       }
     },
   },
@@ -77,9 +79,6 @@ export default {
 .input-group img {
   width: 25px;
   margin-right: 5px;
-}
-h1 {
-  margin-top: 30px;
 }
 </style>
 

@@ -1,5 +1,5 @@
 # vue-tel-input
-International Telephone Input Boilerplate with Vue ((integrated with [VueFormGenerator](https://github.com/vue-generators/vue-form-generator)).
+International Telephone Input with Vue.
 
 Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
 
@@ -8,8 +8,14 @@ Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
 </p>
 
 ## Installation
-- **yarn**: `yarn add vue-tel-input`  
-- **npm**: `npm i --save vue-tel-input`
+- **yarn**: 
+  ```bash 
+    yarn add vue-tel-input 
+  ```  
+- **npm**: 
+  ```bash 
+    npm i --save vue-tel-input 
+  ```
 
 ## Usage
 - Import default `CSS` to your project:

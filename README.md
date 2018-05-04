@@ -8,50 +8,49 @@ Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
 </p>
 
 ## Installation
-```bash
-npm install --save vue-tel-input
-```
+- **yarn**: `yarn add vue-tel-input`  
+- **npm**: `npm i --save vue-tel-input`
 
 ## Usage
-- As a standalone component:  
-  Import `vue-tel-input` into your Vue component and use as a normal component:
+- Import default `CSS` to your project:
+    ```js
+    import 'vue-tel-input/dist/vue-tel-input.css';
+    ```
+
+- Install as a global component:
+    ```javascript
+    import Vue from 'vue'
+    import VueTelInput from 'vue-tel-input'
+
+    Vue.use(VueTelInput)
+    ```
+
+- In your component:  
      ```js
      <template>
      ...
-       <tel-input></tel-input>
+       <vue-tel-input @onInput="onInput"></vue-tel-input>
      ...
      <template>
      <script>
-     import TelInput from '../vue-tel-input'   
      export default {
-       ...
-       components: {
-         TelInput
-       }
+       methods: {
+         /** 
+          * @param {string} number
+          * the phone number inputted by user, will be formatted along with country code 
+          * // Ex: inputted: (AU) 0432 432 432
+          * // number = '+61432421546'
+          * 
+          * @param {Boolean} isValid
+          * @param {string} country
+          */
+          onInput({ number, isValid, country }) {
+            console.log(number, isValid, country);
+          },
+       },
      }
      </script>
      ```
-
-- As a field of VueFormGenerator
-  1. Register `vue-tel-input` as a global component:
-     ```js
-      import vueTelInput from "../vue-tel-input.vue";
-      ...
-      Vue.component("fieldTelephone", vueTelInput);
-     ```
-     !! As the naming convention for custom field in VueFormGenerator, you need to put the name of the component as: `field<ANameInCamelKey>.
-  
-  2. Now you can you it in your schema:
-     ```js
-     var schema: {
-      fields: [{
-        type: "telephone",
-        label: "Phone Number",
-        model: "phone"
-      }]
-     };
-     ```
-  For more info: [vue-form-generator/custom-fields](https://icebob.gitbooks.io/vueformgenerator/content/fields/custom_fields.html)
 
 ## Highlights & Credits
 - Vue app created by [vue-cli](https://github.com/vuejs/vue-cli).
@@ -61,14 +60,25 @@ npm install --save vue-tel-input
 - [Boostrap-Vue](https://bootstrap-vue.js.org/docs/).
 - User's Location by [get-json](https://www.npmjs.com/package/get-json) and [ipifo.io](https://ipinfo.io/json)
 
-## Example App Build Setup
-``` bash
-npm install             # install dependencies
-npm run dev             # serve with hot reload at localhost:8080
-npm run build           # build for production with minification
-npm run build --report  # build for production and view the bundle analyzer report
-npm run unit            # run unit tests
-npm test                # run all tests
+## Demo Usage
+
+```bash
+
+# install dependencies
+$ yarn/npm install
+
+# compile demo for development
+$ yarn/npm dev
+
+# open Browser and start serve in demo
+$ yarn/npm demo:open
+
+# compile dist demo
+$ yarn/npm dist:demo
+
+# compile dist
+$ yarn/npm dist
+
 ```
 
 made with &#x2764; by [Steven](https://github.com/iamstevendao).

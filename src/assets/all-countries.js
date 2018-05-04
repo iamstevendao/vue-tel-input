@@ -1264,7 +1264,7 @@ const allCountries = [
 ];
 
 // loop over all of the countries above
-for (let i = 0; i < allCountries.length; i++) {
+for (let i = 0; i < allCountries.length; i += 1) {
   const c = allCountries[i];
   allCountries[i] = {
     name: c[0],

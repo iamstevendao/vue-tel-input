@@ -35,7 +35,7 @@ Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
      ```js
      <template>
      ...
-        <vue-tel-input v-model="phone", 
+        <vue-tel-input v-model="phone" 
                        @onInput="onInput">
         </vue-tel-input>
      ...

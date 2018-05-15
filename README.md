@@ -35,11 +35,18 @@ Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
      ```js
      <template>
      ...
-       <vue-tel-input @onInput="onInput"></vue-tel-input>
+        <vue-tel-input v-model="phone", 
+                       @onInput="onInput">
+        </vue-tel-input>
      ...
      <template>
      <script>
      export default {
+       data() {
+         return {
+           phone: '',
+         };
+       },
        methods: {
          /** 
           * @param {string} number

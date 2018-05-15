@@ -35,6 +35,11 @@ import getCountry from './assets/default-country';
 
 export default {
   name: 'vue-tel-input',
+  props: {
+    value: {
+      type: String,
+    },
+  },
   mounted() {
     getCountry().then((res) => {
       this.activeCountry = allCountries.find(country => country.iso2 === res);
@@ -113,6 +118,10 @@ export default {
       return new asYouType(this.activeCountry.iso2).input(value);// eslint-disable-line
     },
     onInput() {
+      // Emit input event in case v-model is used in the parent
+      this.$emit('input', this.response.number);
+
+      // Emit the response, includes phone, validity and country
       this.$emit('onInput', this.response);
     },
   },

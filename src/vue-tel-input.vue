@@ -45,6 +45,11 @@ export default {
       this.activeCountry = allCountries.find(country => country.iso2 === res);
     });
   },
+  created() {
+    if(this.value) {
+      this.phone = this.value
+    }
+  },
   data() {
     return {
       phone: '',

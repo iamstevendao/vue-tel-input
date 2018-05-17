@@ -42,11 +42,12 @@ export default {
   },
   mounted() {
     getCountry().then((res) => {
-      this.activeCountry = allCountries.find(country => country.iso2 === res);
+      this.activeCountry = allCountries.find(country => country.iso2 === res) ||
+        allCountries[0];
     });
   },
   created() {
-    if(this.value) {
+    if (this.value) {
       this.phone = this.value
     }
   },

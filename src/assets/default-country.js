@@ -6,7 +6,7 @@ const getCountry = function () {
       if (error) {
         reject(error);
       }
-      resolve(response.country);
+      resolve(response && response.country);
     });
   });
 };

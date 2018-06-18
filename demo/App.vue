@@ -5,8 +5,10 @@
       <b-row style="margin-top: 20px;">
         <b-col md="4"
                offset="4">
+		<div style="width: 270px">
           <vue-tel-input @onInput="onInput">
           </vue-tel-input>
+		  </div>
         </b-col>
       </b-row>
       <b-row v-if="phone.number"

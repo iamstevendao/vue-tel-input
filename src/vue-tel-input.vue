@@ -18,7 +18,7 @@
 	  </ul>
 	</div>
 	<input v-model="phone"
-				  placeholder="Enter your phone number"
+				  :placeholder="placeholder"
 				  :state="state"
 				  :formatter="format"
 				  @input="onInput">
@@ -115,6 +115,10 @@ export default {
     value: {
       type: String,
     },
+	placeholder: {
+	  default: "Enter a phone number",
+	  type: String,
+	}
   },
   mounted() {
     getCountry().then((res) => {

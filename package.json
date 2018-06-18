@@ -8,10 +8,10 @@
   "scripts": {
     "dist": "poi build ./src/vue-tel-input.js --format umd --module-name VueTelInput --filename.js vue-tel-input.js --filename.css vue-tel-input.css --no-sourceMap --no-html",
     "dist:demo": "poi build ./demo/index.js --config ./demo/build.config.js --filename.css vue-tel-input.css --no-sourceMap --dist ./docs",
-    "start": "yarn dev",
+    "start": "npm run dev",
     "dev": "poi build ./demo/index.js --config ./demo/build.config.js --filename.css vue-tel-input.css --no-sourceMap --no-minimize --dist ./docs",
-    "release": "rm -rf dist && yarn dist",
-    "demo": "yarn dist && yarn dev && yarn demo:open",
+    "release": "rm -rf dist && npm run dist",
+    "demo": "npm run dist && npm run dev && npm run demo:open",
     "demo:open": "open 'http://localhost:5000/'; serve ./docs/"
   },
   "files": [
@@ -26,10 +26,9 @@
     "telephone input"
   ],
   "dependencies": {
-    "bootstrap": "^4.0.0-beta.2",
-    "bootstrap-vue": "^1.3.0",
     "get-json": "^1.0.0",
-    "libphonenumber-js": "^0.4.44"
+    "libphonenumber-js": "^0.4.44",
+    "ssri": "^6.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

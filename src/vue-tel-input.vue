@@ -28,7 +28,6 @@
 
 <style scoped>
 :local {
-	--width: 270px;
 	--border-radius: 2px;
 }
 .selection {
@@ -41,7 +40,6 @@
 	border-radius: 3px;
 	display: flex;
 	border: 1px solid #bbb;
-	width: var(--width);
 	text-align: left;
 }
 .vue-tel-input:focus-within {
@@ -69,6 +67,14 @@ ul {
 	border: 1px solid #ccc;
 	width: 390px;
 }
+.dropdown {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+	position: relative;
+	padding: 7px;
+}
 .dropdown.open {
 	background-color: #f3f3f3;
 }
@@ -86,11 +92,6 @@ ul {
 }
 .dropdown-item:hover {
 	background-color: #f3f3f3;
-}
-.dropdown {
-	display: inline-block;
-	position: relative;
-	padding: 7px;
 }
 .flag {
 	width: 25px;

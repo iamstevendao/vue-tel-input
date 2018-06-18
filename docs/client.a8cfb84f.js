@@ -43,6 +43,8 @@ webpackJsonp([0],[
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'app',
@@ -4696,12 +4698,14 @@ var render = function() {
             "b-row",
             { staticStyle: { "margin-top": "20px" } },
             [
-              _c(
-                "b-col",
-                { attrs: { md: "4", offset: "4" } },
-                [_c("vue-tel-input", { on: { onInput: _vm.onInput } })],
-                1
-              )
+              _c("b-col", { attrs: { md: "4", offset: "4" } }, [
+                _c(
+                  "div",
+                  { staticStyle: { width: "270px" } },
+                  [_c("vue-tel-input", { on: { onInput: _vm.onInput } })],
+                  1
+                )
+              ])
             ],
             1
           ),
@@ -4714,19 +4718,19 @@ var render = function() {
                   _c("b-col", { attrs: { md: "4", offset: "4" } }, [
                     _c("code", [
                       _c("span", [
-                        _vm._v("Number:\n            "),
+                        _vm._v("Number:\n              "),
                         _c("strong", [_vm._v(_vm._s(_vm.phone.number))]),
-                        _vm._v(", \n          ")
+                        _vm._v(", \n            ")
                       ]),
                       _vm._v(" "),
                       _c("span", [
-                        _vm._v("Is valid:\n            "),
+                        _vm._v("Is valid:\n              "),
                         _c("strong", [_vm._v(_vm._s(_vm.phone.isValid))]),
-                        _vm._v(", \n          ")
+                        _vm._v(", \n            ")
                       ]),
                       _vm._v(" "),
                       _c("span", [
-                        _vm._v("Country:\n            "),
+                        _vm._v("Country:\n              "),
                         _c("strong", [_vm._v(_vm._s(_vm.phone.country))])
                       ])
                     ])

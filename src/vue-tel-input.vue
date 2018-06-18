@@ -95,6 +95,7 @@ ul {
 .flag {
 	width: 25px;
 	margin-right: 5px;
+	height: 100%;
 }
 .dropdown-menu.show {
   max-height: 300px;

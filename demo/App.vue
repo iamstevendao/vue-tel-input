@@ -1,21 +1,12 @@
 <template>
   <div id="app">
-    <b-card title="Telephone Input Vue"
-            sub-title="made with &amp;#x2764; by Steven.">
-      <b-row style="margin-top: 20px;">
-        <b-col md="4"
-               offset="4">
-		<div style="width: 270px">
-          <vue-tel-input @onInput="onInput">
-          </vue-tel-input>
-		  </div>
-        </b-col>
-      </b-row>
-      <b-row v-if="phone.number"
-             style="margin-top: 20px;">
-        <b-col md="4"
-               offset="4">
-          <code>
+    <h1>Telephone Input Vue</h1>
+	<h2 style="color: #999">made with &#x2764; by Steven.</h2>
+	<div style="width: 500px; margin: 20px auto;">
+	  <vue-tel-input @onInput="onInput">
+	  </vue-tel-input>
+    </div>
+    <div v-if="phone.number" style="color: #e83e8c">
             <span>Number:
               <strong>{{ phone.number }}</strong>,&nbsp;
             </span>
@@ -25,12 +16,8 @@
             <span>Country:
               <strong>{{ phone.country }}</strong>
             </span>
-          </code>
-        </b-col>
-      </b-row>
-    </b-card>
-  </div>
-
+    </div>
+	</div>
 </template>
 
 <script>

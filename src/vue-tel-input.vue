@@ -34,7 +34,7 @@
 	cursor: pointer;
 	font-size: 0.8em;
 	display: flex;
-	arrange-items: center;
+	align-items: center;
 }
 .vue-tel-input {
 	border-radius: 3px;
@@ -95,8 +95,9 @@ ul {
 }
 .flag {
 	width: 25px;
-	margin-right: 5px;
-	height: 100%;
+	margin-left: 5px;
+	margin-right: 8px;
+	height: 1em;
 }
 .dropdown-menu.show {
   max-height: 300px;

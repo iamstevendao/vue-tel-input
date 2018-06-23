@@ -65,6 +65,20 @@ Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
      </script>
      ```
 
+### Props
+
+  | Property value | Type | Default value | Description |
+  | -------------- | ---- | ------------- | ----------- |
+  | placeholder | string | Enter a phone number | Placeholder for the input |
+  | disabledFetchingCountry | Boolean | false | Disable fetching current country based on IP address of user |
+
+### Events
+
+  | Property value | Arguments | Description |
+  | -------------- | --------- | ----------- |
+  | onInput | Object | Fires when the input changes with the argument is the object includes `{ number, isValid, country }` |
+  | onBlur |  | Fires on blur event |
+
 ## Highlights & Credits
 - Vue app created by [vue-cli](https://github.com/vuejs/vue-cli).
 - Telephone Number parsing, validation by [libphonenumber-js](https://catamphetamine.github.io/libphonenumber-js/).

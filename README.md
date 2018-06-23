@@ -108,4 +108,8 @@ $ yarn/npm dist
 
 ```
 
+## Contributors
+- [mikob](https://github.com/mikob) for super awesome work to [remove the bootstrap dependency](https://github.com/EducationLink/vue-tel-input/pull/13).
+- [kalcifield](https://github.com/kalcifield) for helping make the input [preload with a phone number](https://github.com/EducationLink/vue-tel-input/pull/8).
+
 made with &#x2764; by [Steven](https://github.com/iamstevendao).

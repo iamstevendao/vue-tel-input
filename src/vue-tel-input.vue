@@ -123,15 +123,21 @@ export default {
       type: String,
     },
     placeholder: {
-      default: "Enter a phone number",
       type: String,
-    }
+      default: 'Enter a phone number',
+    },
+    disabledFetchingCountry: {
+      type: Boolean,
+      default: false,
+    },
   },
   mounted() {
-    getCountry().then((res) => {
-      this.activeCountry = allCountries.find(country => country.iso2 === res) ||
-        allCountries[0];
-    });
+    if (!this.disabledFetchingCountry) {
+      getCountry().then((res) => {
+        this.activeCountry = allCountries.find(country => country.iso2 === res) ||
+          allCountries[0];
+      });
+    }
   },
   created() {
     if (this.value) {
@@ -142,7 +148,7 @@ export default {
     return {
       phone: '',
       allCountries,
-      activeCountry: { iso2: '' },
+      activeCountry: allCountries[0],
       open: false,
     };
   },

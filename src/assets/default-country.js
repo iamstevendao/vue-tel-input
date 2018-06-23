@@ -1,4 +1,4 @@
-const getJSON = require('get-json');
+import getJSON from 'get-json';
 
 const getCountry = function () {
   return new Promise((resolve, reject) => {

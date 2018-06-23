@@ -26,8 +26,6 @@
     "telephone input"
   ],
   "dependencies": {
-    "bootstrap": "^4.0.0-beta.2",
-    "bootstrap-vue": "^1.3.0",
     "get-json": "^1.0.0",
     "libphonenumber-js": "^0.4.44"
   },

@@ -27,6 +27,7 @@
            :placeholder="placeholder"
            :state="state"
            :formatter="format"
+           @blur="onBlur"
            @input="onInput">
   </div>
 </template>
@@ -223,6 +224,9 @@ export default {
 
       // Emit the response, includes phone, validity and country
       this.$emit('onInput', this.response);
+    },
+    onBlur() {
+      this.$emit('onBlur');
     },
     toggleDropdown: function () {
       this.open = !this.open;

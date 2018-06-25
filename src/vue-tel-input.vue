@@ -1,14 +1,16 @@
 <template>
   <div class="vue-tel-input">
-	<div class="dropdown"  @click="toggleDropdown" v-click-outside="clickedOutside" :class="{open: open}">
+	<div class="dropdown"  @click="toggleDropdown" v-click-outside="clickedOutside" :class="{open: open}" @keydown="keyboardNav" tabindex="1" @keydown.esc="reset">
 	<span class="selection">
 		<img :src="activeCountry.icon" class="flag" />
 		<span class="dropdown-arrow">
 		{{ open ? '▲' : '▼' }}
 		</span>
 	</span>
-	  <ul v-show="open">
-		  <li class="dropdown-item" v-for="(pb, index) in sortedCountries" :class="{'last-preferred': preferredCountries.length && index === preferredCountries.length - 1, preferred: !!~preferredCountries.map(c => c.toUpperCase()).indexOf(pb.iso2)}"
+	  <ul v-show="open" ref="list">
+		  <li class="dropdown-item" v-for="(pb, index) in sortedCountries"
+		  	  :class="{highlighted: selectedIndex === index, 'last-preferred': preferredCountries.length && index === preferredCountries.length - 1, preferred: !!~preferredCountries.map(c => c.toUpperCase()).indexOf(pb.iso2)}"
+				@mousemove="selectedIndex = index"
 						   :key="pb.iso2"
 						   @click="choose(pb)">
 			<img :src="pb.icon" style="width: 25px; margin-right: 5px" />
@@ -35,7 +37,6 @@ li.last-preferred {
 	border-bottom: 1px solid #cacaca;
 }
 .selection {
-	cursor: pointer;
 	font-size: 0.8em;
 	display: flex;
 	align-items: center;
@@ -78,6 +79,7 @@ ul {
 	justify-content: center;
 	position: relative;
 	padding: 7px;
+	cursor: pointer;
 }
 .dropdown.open {
 	background-color: #f3f3f3;
@@ -94,7 +96,7 @@ ul {
 	cursor: pointer;
 	padding: 4px 15px;
 }
-.dropdown-item:hover {
+.dropdown-item.highlighted {
 	background-color: #f3f3f3;
 }
 .flag {
@@ -146,6 +148,7 @@ export default {
       allCountries,
       activeCountry: { iso2: '' },
 	  open: false,
+	  selectedIndex: null,
     };
   },
   computed: {
@@ -236,6 +239,42 @@ export default {
 		this.open = !this.open;
 	},
 	clickedOutside: function() {
+		this.open = false;
+	},
+	keyboardNav: function(e) {
+
+		if (e.keyCode === 40) {
+			// down arrow
+			this.open = true;
+			if (this.selectedIndex === null) {
+				this.selectedIndex = 0;
+			} else {
+				this.selectedIndex = Math.min(this.sortedCountries.length - 1, this.selectedIndex + 1);
+			}
+			let selEle = this.$refs.list.children[this.selectedIndex];
+			if (selEle.offsetTop + selEle.clientHeight > this.$refs.list.scrollTop + this.$refs.list.clientHeight)
+				this.$refs.list.scrollTop = selEle.offsetTop - this.$refs.list.clientHeight + selEle.clientHeight;
+		} else if (e.keyCode === 38) {
+			// up arrow
+			this.open = true;
+			if (this.selectedIndex === null) {
+				this.selectedIndex = this.sortedCountries.length - 1;
+			} else {
+				this.selectedIndex = Math.max(0, this.selectedIndex - 1);
+			}
+			let selEle = this.$refs.list.children[this.selectedIndex];
+			if (selEle.offsetTop < this.$refs.list.scrollTop)
+				this.$refs.list.scrollTop = selEle.offsetTop;
+		} else if (e.keyCode === 13) {
+			// enter key
+			if (this.selectedIndex) {
+				this.choose(this.sortedCountries[this.selectedIndex]);
+			}
+			this.open = !this.open;
+		}
+	},
+	reset: function() {
+		this.selectedIndex = this.sortedCountries.map(c => c.iso2).indexOf(this.activeCountry.iso2);
 		this.open = false;
 	},
   },

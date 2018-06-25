@@ -149,6 +149,8 @@ export default {
       activeCountry: { iso2: '' },
 	  open: false,
 	  selectedIndex: null,
+	  typeToFindInput: '',
+	  typeToFindTimer: null,
     };
   },
   computed: {
@@ -242,7 +244,6 @@ export default {
 		this.open = false;
 	},
 	keyboardNav: function(e) {
-
 		if (e.keyCode === 40) {
 			// down arrow
 			this.open = true;
@@ -271,6 +272,22 @@ export default {
 				this.choose(this.sortedCountries[this.selectedIndex]);
 			}
 			this.open = !this.open;
+		} else {
+			// typing a country's name
+			this.typeToFindInput += e.key;
+			clearTimeout(this.typeToFindTimer);
+			this.typeToFindTimer = setTimeout(() => {
+				this.typeToFindInput = '';
+			}, 700);
+			// don't include preferred countries so we jump to the right place in the alphabet
+			let typedCountryI = this.sortedCountries.slice(this.preferredCountries.length).findIndex(c => c.name.toLowerCase().startsWith(this.typeToFindInput));
+			if (~typedCountryI) {
+				this.selectedIndex = this.preferredCountries.length + typedCountryI;
+				let selEle = this.$refs.list.children[this.selectedIndex];
+				if (selEle.offsetTop < this.$refs.list.scrollTop || selEle.offsetTop + selEle.clientHeight > this.$refs.list.scrollTop + this.$refs.list.clientHeight) {
+					this.$refs.list.scrollTop = selEle.offsetTop - this.$refs.list.clientHeight / 2;
+				}
+			}
 		}
 	},
 	reset: function() {

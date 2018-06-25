@@ -8,13 +8,13 @@ Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
 </p>
 
 ## Installation
-- **yarn**: 
-  ```bash 
-    yarn add vue-tel-input 
-  ```  
-- **npm**: 
-  ```bash 
-    npm i --save vue-tel-input 
+- **yarn**:
+  ```bash
+    yarn add vue-tel-input
+  ```
+- **npm**:
+  ```bash
+    npm i --save vue-tel-input
   ```
 
 ## Usage
@@ -31,12 +31,14 @@ Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
     Vue.use(VueTelInput)
     ```
 
-- In your component:  
+- In your component:
      ```js
      <template>
      ...
-        <vue-tel-input v-model="phone" 
-                       @onInput="onInput">
+        <vue-tel-input v-model="phone"
+                       @onInput="onInput"
+                       <!-- optional -->
+                       :preferredCountries="['us', 'gb', 'ua']">
         </vue-tel-input>
      ...
      <template>
@@ -48,12 +50,12 @@ Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
          };
        },
        methods: {
-         /** 
+         /**
           * @param {string} number
-          * the phone number inputted by user, will be formatted along with country code 
+          * the phone number inputted by user, will be formatted along with country code
           * // Ex: inputted: (AU) 0432 432 432
           * // number = '+61432421546'
-          * 
+          *
           * @param {Boolean} isValid
           * @param {string} country
           */

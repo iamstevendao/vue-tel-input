@@ -1628,11 +1628,11 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         }, clickedOutside: function clickedOutside() {
           this.open = !1;
         }, keyboardNav: function keyboardNav(t) {
-          var e = this;if (console.dir(t), 40 === t.keyCode) {
+          var e = this;if (40 === t.keyCode) {
             this.open = !0, null === this.selectedIndex ? this.selectedIndex = 0 : this.selectedIndex = Math.min(this.sortedCountries.length - 1, this.selectedIndex + 1);var n = this.$refs.list.children[this.selectedIndex];n.offsetTop + n.clientHeight > this.$refs.list.scrollTop + this.$refs.list.clientHeight && (this.$refs.list.scrollTop = n.offsetTop - this.$refs.list.clientHeight + n.clientHeight);
           } else if (38 === t.keyCode) {
             this.open = !0, null === this.selectedIndex ? this.selectedIndex = this.sortedCountries.length - 1 : this.selectedIndex = Math.max(0, this.selectedIndex - 1);var r = this.$refs.list.children[this.selectedIndex];r.offsetTop < this.$refs.list.scrollTop && (this.$refs.list.scrollTop = r.offsetTop);
-          } else if (13 === t.keyCode) this.selectedIndex && this.choose(this.sortedCountries[this.selectedIndex]), this.open = !this.open;else {
+          } else if (13 === t.keyCode) null !== this.selectedIndex && this.choose(this.sortedCountries[this.selectedIndex]), this.open = !this.open;else {
             this.typeToFindInput += t.key, clearTimeout(this.typeToFindTimer), this.typeToFindTimer = setTimeout(function () {
               e.typeToFindInput = "";
             }, 700);var i = this.sortedCountries.slice(this.preferredCountries.length).findIndex(function (t) {

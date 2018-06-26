@@ -268,7 +268,7 @@ export default {
 				this.$refs.list.scrollTop = selEle.offsetTop;
 		} else if (e.keyCode === 13) {
 			// enter key
-			if (this.selectedIndex) {
+			if (this.selectedIndex !== null) {
 				this.choose(this.sortedCountries[this.selectedIndex]);
 			}
 			this.open = !this.open;

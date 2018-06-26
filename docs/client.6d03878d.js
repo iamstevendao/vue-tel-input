@@ -4584,7 +4584,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
     var r = function r() {
       var t = this,
           e = t.$createElement,
-          n = t._self._c || e;return n("div", { staticClass: "vue-tel-input" }, [n("div", { directives: [{ name: "click-outside", rawName: "v-click-outside", value: t.clickedOutside, expression: "clickedOutside" }], staticClass: "dropdown", class: { open: t.open }, attrs: { tabindex: "1" }, on: { click: t.toggleDropdown, keydown: [t.keyboardNav, function (e) {
+          n = t._self._c || e;return n("div", { staticClass: "vue-tel-input" }, [n("div", { directives: [{ name: "click-outside", rawName: "v-click-outside", value: t.clickedOutside, expression: "clickedOutside" }], staticClass: "dropdown", class: { open: t.open }, attrs: { tabindex: "0" }, on: { click: t.toggleDropdown, keydown: [t.keyboardNav, function (e) {
             if (!("button" in e) && t._k(e.keyCode, "esc", 27, e.key)) return null;t.reset(e);
           }] } }, [n("span", { staticClass: "selection" }, [n("img", { staticClass: "flag", attrs: { src: t.activeCountry.icon } }), t._v(" "), n("span", { staticClass: "dropdown-arrow" }, [t._v("\n\t\t" + t._s(t.open ? "▲" : "▼") + "\n\t\t")])]), t._v(" "), n("ul", { directives: [{ name: "show", rawName: "v-show", value: t.open, expression: "open" }], ref: "list" }, t._l(t.sortedCountries, function (e, r) {
         return n("li", { key: e.iso2, staticClass: "dropdown-item", class: { highlighted: t.selectedIndex === r, "last-preferred": t.preferredCountries.length && r === t.preferredCountries.length - 1, preferred: !!~t.preferredCountries.map(function (t) {

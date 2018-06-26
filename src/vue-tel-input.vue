@@ -1,6 +1,6 @@
 <template>
   <div class="vue-tel-input">
-	<div class="dropdown"  @click="toggleDropdown" v-click-outside="clickedOutside" :class="{open: open}" @keydown="keyboardNav" tabindex="1" @keydown.esc="reset">
+	<div class="dropdown"  @click="toggleDropdown" v-click-outside="clickedOutside" :class="{open: open}" @keydown="keyboardNav" tabindex="0" @keydown.esc="reset">
 	<span class="selection">
 		<img :src="activeCountry.icon" class="flag" />
 		<span class="dropdown-arrow">

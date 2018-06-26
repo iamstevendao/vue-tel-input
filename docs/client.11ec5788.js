@@ -1587,7 +1587,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
     "use strict";
     var r = n(71),
         i = n(110),
-        o = n(111);e.a = { name: "vue-tel-input", props: { value: { type: String }, placeholder: { default: "Enter a phone number", type: String }, preferredCountries: { default: [], type: Array } }, mounted: function mounted() {
+        o = n(111);e.a = { name: "vue-tel-input", props: { value: { type: String }, placeholder: { default: "Enter a phone number", type: String }, preferredCountries: { default: [], type: Array }, invalidMsg: { default: "no, no", type: String } }, mounted: function mounted() {
         var t = this;Object(o.a)().then(function (e) {
           t.activeCountry = i.a.find(function (t) {
             return t.iso2 === e;
@@ -1622,7 +1622,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         }, format: function format(t) {
           return new r.a(this.activeCountry.iso2).input(t);
         }, onInput: function onInput() {
-          this.$emit("input", this.response.number), this.$emit("onInput", this.response);
+          this.$refs.input.setCustomValidity(this.response.isValid ? "" : this.invalidMsg), this.$emit("input", this.response.number), this.$emit("onInput", this.response);
         }, toggleDropdown: function toggleDropdown() {
           this.open = !this.open;
         }, clickedOutside: function clickedOutside() {
@@ -4594,7 +4594,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
             }, click: function click(n) {
               t.choose(e);
             } } }, [n("img", { staticStyle: { width: "25px", "margin-right": "5px" }, attrs: { src: e.icon } }), t._v(" "), n("strong", [t._v(t._s(e.name) + " ")]), t._v(" "), n("span", [t._v("+" + t._s(e.dialCode))])]);
-      }))]), t._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: t.phone, expression: "phone" }], attrs: { placeholder: t.placeholder, state: t.state, formatter: t.format }, domProps: { value: t.phone }, on: { input: [function (e) {
+      }))]), t._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: t.phone, expression: "phone" }], ref: "input", attrs: { placeholder: t.placeholder, state: t.state, formatter: t.format }, domProps: { value: t.phone }, on: { input: [function (e) {
             e.target.composing || (t.phone = e.target.value);
           }, t.onInput] } })]);
     },

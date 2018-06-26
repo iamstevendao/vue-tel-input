@@ -23,6 +23,7 @@
 				  :placeholder="placeholder"
 				  :state="state"
 				  :formatter="format"
+				  ref="input"
 				  @input="onInput">
 	</input>
   </div>
@@ -130,6 +131,10 @@ export default {
 	  default: [],
 	  type: Array,
 	},
+	invalidMsg: {
+	  default: "",
+	  type: String,
+	},
   },
   mounted() {
     getCountry().then((res) => {
@@ -231,6 +236,7 @@ export default {
       return new asYouType(this.activeCountry.iso2).input(value);// eslint-disable-line
     },
     onInput() {
+	  this.$refs.input.setCustomValidity(this.response.isValid ? '' : this.invalidMsg);
       // Emit input event in case v-model is used in the parent
       this.$emit('input', this.response.number);
 

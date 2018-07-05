@@ -188,7 +188,7 @@ export default {
       return format(phone, this.activeCountry && this.activeCountry.iso2, 'International');
     },
     state() {
-      return isValidNumber(this.formattedResult);
+      return (this.validateNum() && isValidNumber(this.formattedResult));
     },
     response() {
       const number = this.formattedResult && this.formattedResult.replace(/ /g, '');
@@ -233,6 +233,12 @@ export default {
     },
     clickedOutside: function () {
       this.open = false;
+    },
+    validateNum() {
+      let num = this.phone,
+      reg     = new RegExp('[^+?0-9]','g').exec(num);
+
+      return (this.phone !== '' && !reg);
     },
   },
   directives: {

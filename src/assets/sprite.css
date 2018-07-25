@@ -1056,14 +1056,14 @@
   width: 20px;
   height: 15px;
   box-shadow: 0px 0px 1px 0px #888;
-  background-image: url("./flags.png");
+  background-image: url("https://raw.githubusercontent.com/EducationLink/vue-tel-input/master/src/assets/flags.png");
   background-repeat: no-repeat;
   background-color: #dbdbdb;
   background-position: 20px 0;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
   .iti-flag {
-    background-image: url("./flags@2x.png");
+    background-image: url("https://raw.githubusercontent.com/EducationLink/vue-tel-input/master/src/assets/flags@2x.png");
   }
 }
 .iti-flag.np {

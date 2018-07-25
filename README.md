@@ -1,7 +1,7 @@
 # vue-tel-input
 International Telephone Input with Vue.
 
-Checkout Demo at [Codesandbox](https://ry3wlvlxkn.codesandbox.io/).
+Checkout Demo at [Github pages](https://educationlink.github.io/vue-tel-input/).
 
 <p align="center">
 <img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>

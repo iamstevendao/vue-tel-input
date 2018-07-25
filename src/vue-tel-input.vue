@@ -1,5 +1,6 @@
 <template>
-  <div class="vue-tel-input">
+  <div class="vue-tel-input"
+       :class="{ disabled: disabled }">
     <div class="dropdown"
          @click="toggleDropdown"
          v-click-outside="clickedOutside"
@@ -27,6 +28,7 @@
            :placeholder="placeholder"
            :state="state"
            :formatter="format"
+           :disabled="disabled"
            @blur="onBlur"
            @input="onInput">
   </div>
@@ -110,6 +112,11 @@ ul {
   max-height: 300px;
   overflow: scroll;
 }
+.vue-tel-input.disabled .selection,
+.vue-tel-input.disabled .dropdown,
+.vue-tel-input.disabled input {
+  cursor: no-drop;
+}
 </style>
 
 <script>
@@ -128,6 +135,10 @@ export default {
       default: 'Enter a phone number',
     },
     disabledFetchingCountry: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -224,6 +235,9 @@ export default {
       this.$emit('onBlur');
     },
     toggleDropdown: function () {
+      if (this.disabled) {
+        return;
+      }
       this.open = !this.open;
     },
     clickedOutside: function () {

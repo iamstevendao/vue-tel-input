@@ -6,8 +6,8 @@
          v-click-outside="clickedOutside"
          :class="{open: open}">
       <span class="selection">
-        <img :src="activeCountry.icon"
-             class="flag" />
+        <div class="iti-flag"
+             :class="activeCountry.iso2.toLowerCase()"></div>
         <span class="dropdown-arrow">
           {{ open ? '▲' : '▼' }}
         </span>
@@ -17,8 +17,8 @@
             v-for="pb in allCountries"
             :key="pb['iso2']"
             @click="choose(pb)">
-          <img :src="pb.icon"
-               style="width: 25px; margin-right: 5px" />
+          <div class="iti-flag"
+               :class="pb.iso2.toLowerCase()"></div>
           <strong>{{ pb.name }} </strong>
           <span>+{{ pb.dialCode }}</span>
         </li>
@@ -34,9 +34,18 @@
   </div>
 </template>
 
+<style src="./assets/sprite.css"></style>
 <style scoped>
 :local {
   --border-radius: 2px;
+}
+.iti-flag {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.dropdown-item .iti-flag {
+  display: inline-block;
+  margin-right: 5px;
 }
 .selection {
   cursor: pointer;
@@ -101,12 +110,6 @@ ul {
 }
 .dropdown-item:hover {
   background-color: #f3f3f3;
-}
-.flag {
-  width: 25px;
-  margin-left: 5px;
-  margin-right: 8px;
-  height: 1em;
 }
 .dropdown-menu.show {
   max-height: 300px;

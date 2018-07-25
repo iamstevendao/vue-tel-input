@@ -1263,17 +1263,10 @@ const allCountries = [
   ],
 ];
 
-// loop over all of the countries above
-for (let i = 0; i < allCountries.length; i += 1) {
-  const c = allCountries[i];
-  allCountries[i] = {
-    name: c[0],
-    iso2: c[1].toUpperCase(),
-    dialCode: c[2],
-    priority: c[3] || 0,
-    areaCodes: c[4] || null,
-    icon: `https://raw.githubusercontent.com/behdad/region-flags/gh-pages/png/${c[1].toUpperCase()}.png`,
-  };
-}
-
-export default allCountries;
+export default allCountries.map(country => ({
+  name: country[0],
+  iso2: country[1].toUpperCase(),
+  dialCode: country[2],
+  priority: country[3] || 0,
+  areaCodes: country[4] || null,
+}));

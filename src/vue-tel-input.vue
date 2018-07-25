@@ -195,7 +195,7 @@ export default {
       return {
         number,
         isValid: this.state,
-        country: this.activeCountry.name,
+        country: this.activeCountry,
       };
     },
   },
@@ -204,9 +204,7 @@ export default {
       if (value) {
         // If mode is 'prefix', keep the number as user typed,
         // Otherwise format it
-        if (this.mode !== 'prefix') {
-          this.phone = this.formattedResult;
-        }
+        this.phone = this.formattedResult;
       }
     },
   },
@@ -215,11 +213,8 @@ export default {
       this.activeCountry = country;
       this.$emit('onInput', this.response);
     },
-    format(value) {
-      return new asYouType(this.activeCountry.iso2).input(value);// eslint-disable-line
-    },
     onInput() {
-      // Emit input event in case v-model is used in the parent
+      // Emit the input event in case v-model is used in the parent
       this.$emit('input', this.response.number);
 
       // Emit the response, includes phone, validity and country

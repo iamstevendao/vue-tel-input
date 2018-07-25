@@ -37,7 +37,7 @@ export default {
     onInput({ number, isValid, country }) {
       this.phone.number = number;
       this.phone.isValid = isValid;
-      this.phone.country = country;
+      this.phone.country = country && country.name;
     },
   },
 };

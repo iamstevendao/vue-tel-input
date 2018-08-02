@@ -5,6 +5,11 @@
   "author": "Steven Dao <iamstevendao@users.noreply.github.com>",
   "main": "dist/vue-tel-input.js",
   "license": "MIT",
+  "homepage": "https://educationlink.github.io/vue-tel-input/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EducationLink/vue-tel-input.git"
+  },
   "scripts": {
     "dist": "poi build ./src/vue-tel-input.js --format umd --module-name VueTelInput --filename.js vue-tel-input.js --filename.css vue-tel-input.css --no-sourceMap --no-html",
     "dist:demo": "poi build ./demo/index.js --config ./demo/build.config.js --filename.css vue-tel-input.css --no-sourceMap --dist ./docs",

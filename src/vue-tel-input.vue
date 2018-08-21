@@ -4,7 +4,10 @@
     <div class="dropdown"
          @click="toggleDropdown"
          v-click-outside="clickedOutside"
-         :class="{open: open}">
+         :class="{open: open}"
+         @keydown="keyboardNav"
+         tabindex="0"
+         @keydown.esc="reset">
       <span class="selection">
         <div class="iti-flag"
              :class="activeCountry.iso2.toLowerCase()"></div>
@@ -12,11 +15,14 @@
           {{ open ? '▲' : '▼' }}
         </span>
       </span>
-      <ul v-show="open">
+      <ul v-show="open"
+          ref="list">
         <li class="dropdown-item"
-            v-for="pb in allCountries"
-            :key="pb['iso2']"
-            @click="choose(pb)">
+            v-for="(pb, index) in sortedCountries"
+            :key="pb.iso2"
+            @click="choose(pb)"
+            :class="getItemClass(index, pb.iso2)"
+            @mousemove="selectedIndex = index">
           <div class="iti-flag"
                :class="pb.iso2.toLowerCase()"></div>
           <strong>{{ pb.name }} </strong>
@@ -24,7 +30,8 @@
         </li>
       </ul>
     </div>
-    <input v-model="phone"
+    <input ref="input"
+           v-model="phone"
            :placeholder="placeholder"
            :state="state"
            :formatter="format"
@@ -39,6 +46,10 @@
 :local {
   --border-radius: 2px;
 }
+
+li.last-preferred {
+  border-bottom: 1px solid #cacaca;
+}
 .iti-flag {
   margin-right: 5px;
   margin-left: 5px;
@@ -48,7 +59,6 @@
   margin-right: 5px;
 }
 .selection {
-  cursor: pointer;
   font-size: 0.8em;
   display: flex;
   align-items: center;
@@ -92,6 +102,7 @@ ul {
   justify-content: center;
   position: relative;
   padding: 7px;
+  cursor: pointer;
 }
 .dropdown.open {
   background-color: #f3f3f3;
@@ -108,7 +119,7 @@ ul {
   cursor: pointer;
   padding: 4px 15px;
 }
-.dropdown-item:hover {
+.dropdown-item.highlighted {
   background-color: #f3f3f3;
 }
 .dropdown-menu.show {
@@ -145,14 +156,20 @@ export default {
       type: Boolean,
       default: false,
     },
+    preferredCountries: {
+      type: Array,
+      default: () => ([]),
+    },
+    invalidMsg: {
+      default: "",
+      type: String,
+    },
   },
   mounted() {
-    if (!this.disabledFetchingCountry) {
-      getCountry().then((res) => {
-        this.activeCountry = allCountries.find(country => country.iso2 === res) ||
-          allCountries[0];
-      });
-    }
+    getCountry().then((res) => {
+      this.activeCountry = allCountries.find(country => country.iso2 === res) ||
+        allCountries[0];
+    });
   },
   created() {
     if (this.value) {
@@ -163,8 +180,11 @@ export default {
     return {
       phone: '',
       allCountries,
-      activeCountry: allCountries[0],
+      activeCountry: { iso2: '' },
       open: false,
+      selectedIndex: null,
+      typeToFindInput: '',
+      typeToFindTimer: null,
     };
   },
   computed: {
@@ -179,6 +199,17 @@ export default {
         return 'prefix';
       }
       return 'normal';
+    },
+    sortedCountries() {
+      let countries = [];
+      for (let i = 0; i < this.preferredCountries.length; i++) {
+        for (let k = 0; k < allCountries.length; k++) {
+          if (allCountries[k].iso2 === this.preferredCountries[i].toUpperCase()) {
+            countries.push(allCountries[k]);
+          }
+        }
+      }
+      return [...countries, ...allCountries];
     },
     formattedResult() {
       // Calculate phone number based on mode
@@ -223,12 +254,23 @@ export default {
     },
   },
   methods: {
+    getItemClass(index, iso2) {
+      const highlighted = this.selectedIndex === index;
+      const lastPreferred = index === this.preferredCountries.length - 1;
+      const preferred = !!~this.preferredCountries.map(c => c.toUpperCase()).indexOf(iso2);
+      return {
+        highlighted,
+        'last-preferred': lastPreferred,
+        preferred,
+      };
+    },
     choose(country) {
       this.activeCountry = country;
       this.$emit('onInput', this.response);
     },
     onInput() {
-      // Emit the input event in case v-model is used in the parent
+      this.$refs.input.setCustomValidity(this.response.isValid ? '' : this.invalidMsg);
+      // Emit input event in case v-model is used in the parent
       this.$emit('input', this.response.number);
 
       // Emit the response, includes phone, validity and country
@@ -237,13 +279,64 @@ export default {
     onBlur() {
       this.$emit('onBlur');
     },
-    toggleDropdown: function () {
+    toggleDropdown() {
       if (this.disabled) {
         return;
       }
       this.open = !this.open;
     },
-    clickedOutside: function () {
+    clickedOutside() {
+      this.open = false;
+    },
+    keyboardNav(e) {
+      if (e.keyCode === 40) {
+        // down arrow
+        this.open = true;
+        if (this.selectedIndex === null) {
+          this.selectedIndex = 0;
+        } else {
+          this.selectedIndex = Math.min(this.sortedCountries.length - 1, this.selectedIndex + 1);
+        }
+        let selEle = this.$refs.list.children[this.selectedIndex];
+        if (selEle.offsetTop + selEle.clientHeight > this.$refs.list.scrollTop + this.$refs.list.clientHeight)
+          this.$refs.list.scrollTop = selEle.offsetTop - this.$refs.list.clientHeight + selEle.clientHeight;
+      } else if (e.keyCode === 38) {
+        // up arrow
+        this.open = true;
+        if (this.selectedIndex === null) {
+          this.selectedIndex = this.sortedCountries.length - 1;
+        } else {
+          this.selectedIndex = Math.max(0, this.selectedIndex - 1);
+        }
+        let selEle = this.$refs.list.children[this.selectedIndex];
+        if (selEle.offsetTop < this.$refs.list.scrollTop)
+          this.$refs.list.scrollTop = selEle.offsetTop;
+      } else if (e.keyCode === 13) {
+        // enter key
+        if (this.selectedIndex !== null) {
+          this.choose(this.sortedCountries[this.selectedIndex]);
+        }
+        this.open = !this.open;
+      } else {
+        // typing a country's name
+        this.typeToFindInput += e.key;
+        clearTimeout(this.typeToFindTimer);
+        this.typeToFindTimer = setTimeout(() => {
+          this.typeToFindInput = '';
+        }, 700);
+        // don't include preferred countries so we jump to the right place in the alphabet
+        let typedCountryI = this.sortedCountries.slice(this.preferredCountries.length).findIndex(c => c.name.toLowerCase().startsWith(this.typeToFindInput));
+        if (~typedCountryI) {
+          this.selectedIndex = this.preferredCountries.length + typedCountryI;
+          let selEle = this.$refs.list.children[this.selectedIndex];
+          if (selEle.offsetTop < this.$refs.list.scrollTop || selEle.offsetTop + selEle.clientHeight > this.$refs.list.scrollTop + this.$refs.list.clientHeight) {
+            this.$refs.list.scrollTop = selEle.offsetTop - this.$refs.list.clientHeight / 2;
+          }
+        }
+      }
+    },
+    reset() {
+      this.selectedIndex = this.sortedCountries.map(c => c.iso2).indexOf(this.activeCountry.iso2);
       this.open = false;
     },
   },
@@ -277,6 +370,6 @@ export default {
         el.__vueClickOutside__ = null
       }
     }
-  }
+  },
 };
 </script>

@@ -1322,7 +1322,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         }, sortedCountries: function sortedCountries() {
           for (var t = [], e = 0; e < this.preferredCountries.length; e++) {
             for (var n = 0; n < o.a.length; n++) {
-              o.a[n].iso2 === this.preferredCountries[e].toUpperCase() && t.push(o.a[n]);
+              o.a[n].iso2 === this.preferredCountries[e].toUpperCase() && t.push(Object.assign({}, o.a[n], { preferred: !0 }));
             }
           }return [].concat(t, r(o.a));
         }, formattedResult: function formattedResult() {
@@ -2331,7 +2331,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         o = n(153),
         a = n(71),
         d = r,
-        s = a(i.a, o.a, !1, d, "data-v-a24212dc", null);e.a = s.exports;
+        s = a(i.a, o.a, !1, d, "data-v-6ce50225", null);e.a = s.exports;
   }, function (t, e) {}, function (t, e) {}, function (t, e) {
     t.exports = function (t, e, n, r, i, o) {
       var a,
@@ -4512,12 +4512,12 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
           n = t._self._c || e;return n("div", { staticClass: "vue-tel-input", class: { disabled: t.disabled } }, [n("div", { directives: [{ name: "click-outside", rawName: "v-click-outside", value: t.clickedOutside, expression: "clickedOutside" }], staticClass: "dropdown", class: { open: t.open }, attrs: { tabindex: "0" }, on: { click: t.toggleDropdown, keydown: [t.keyboardNav, function (e) {
             return "button" in e || !t._k(e.keyCode, "esc", 27, e.key, "Escape") ? t.reset(e) : null;
           }] } }, [n("span", { staticClass: "selection" }, [n("div", { staticClass: "iti-flag", class: t.activeCountry.iso2.toLowerCase() }), t._v(" "), n("span", { staticClass: "dropdown-arrow" }, [t._v("\n        " + t._s(t.open ? "▲" : "▼") + "\n      ")])]), t._v(" "), n("ul", { directives: [{ name: "show", rawName: "v-show", value: t.open, expression: "open" }], ref: "list" }, t._l(t.sortedCountries, function (e, r) {
-        return n("li", { key: e.iso2, staticClass: "dropdown-item", class: t.getItemClass(r, e.iso2), on: { click: function click(n) {
+        return n("li", { key: e.iso2 + (e.preferred ? "-preferred" : ""), staticClass: "dropdown-item", class: t.getItemClass(r, e.iso2), on: { click: function click(n) {
               t.choose(e);
             }, mousemove: function mousemove(e) {
               t.selectedIndex = r;
             } } }, [n("div", { staticClass: "iti-flag", class: e.iso2.toLowerCase() }), t._v(" "), n("strong", [t._v(t._s(e.name) + " ")]), t._v(" "), n("span", [t._v("+" + t._s(e.dialCode))])]);
-      }))]), t._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: t.phone, expression: "phone" }], ref: "input", attrs: { placeholder: t.placeholder, state: t.state, formatter: t.format, disabled: t.disabled }, domProps: { value: t.phone }, on: { blur: t.onBlur, input: [function (e) {
+      }))]), t._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: t.phone, expression: "phone" }], ref: "input", attrs: { type: "tel", placeholder: t.placeholder, state: t.state, formatter: t.format, disabled: t.disabled }, domProps: { value: t.phone }, on: { blur: t.onBlur, input: [function (e) {
             e.target.composing || (t.phone = e.target.value);
           }, t.onInput] } })]);
     },

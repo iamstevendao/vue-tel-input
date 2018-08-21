@@ -19,7 +19,7 @@
           ref="list">
         <li class="dropdown-item"
             v-for="(pb, index) in sortedCountries"
-            :key="pb.iso2"
+            :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
             @click="choose(pb)"
             :class="getItemClass(index, pb.iso2)"
             @mousemove="selectedIndex = index">
@@ -206,7 +206,7 @@ export default {
       for (let i = 0; i < this.preferredCountries.length; i++) {
         for (let k = 0; k < allCountries.length; k++) {
           if (allCountries[k].iso2 === this.preferredCountries[i].toUpperCase()) {
-            countries.push(allCountries[k]);
+            countries.push({ ...allCountries[k], preferred: true });
           }
         }
       }

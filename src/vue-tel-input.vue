@@ -237,7 +237,9 @@ export default {
       return isValidNumber(this.formattedResult);
     },
     response() {
-      const number = this.formattedResult && this.formattedResult.replace(/ /g, '');
+      // If it is a valid number, returns the formatted value
+      // Otherwise returns what it is
+      const number = this.state ? this.formattedResult : this.phone;
       return {
         number,
         isValid: this.state,
@@ -247,11 +249,14 @@ export default {
   },
   watch: {
     state(value) {
-      if (value) {
+      if (value && this.mode !== 'prefix') {
         // If mode is 'prefix', keep the number as user typed,
         // Otherwise format it
         this.phone = this.formattedResult;
       }
+    },
+    value() {
+      this.phone = this.value;
     },
   },
   methods: {

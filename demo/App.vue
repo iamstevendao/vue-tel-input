@@ -3,8 +3,8 @@
     <h1>Telephone Input Vue</h1>
     <h2 style="color: #999">made with &#x2764; by Steven.</h2>
     <div style="width: 500px; margin: 20px auto;">
-	  <vue-tel-input @onInput="onInput"
-			:preferredCountries="['us', 'gb', 'ua']">
+      <vue-tel-input @onInput="onInput"
+                     :preferredCountries="['us', 'gb', 'ua']">
       </vue-tel-input>
     </div>
     <div v-if="phone.number"
@@ -43,14 +43,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

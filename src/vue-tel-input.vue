@@ -38,7 +38,8 @@
            :formatter="format"
            :disabled="disabled"
            @blur="onBlur"
-           @input="onInput">
+           @input="onInput"
+           :required="required">
   </div>
 </template>
 
@@ -165,6 +166,10 @@ export default {
       default: "",
       type: String,
     },
+    required:{
+        type: Boolean,
+        default: true,
+    }
   },
   mounted() {
     getCountry().then((res) => {

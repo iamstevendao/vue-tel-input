@@ -166,16 +166,19 @@ export default {
       default: "",
       type: String,
     },
-    required:{
-        type: Boolean,
-        default: true,
-    }
+    required: {
+      type: Boolean,
+      default: false,
+    },
+    defaultCountry: {
+      // Default country code, ie: 'AU'
+      // Will override the current country of user
+      type: String,
+      default: '',
+    },
   },
   mounted() {
-    getCountry().then((res) => {
-      this.activeCountry = allCountries.find(country => country.iso2 === res) ||
-        allCountries[0];
-    });
+    this.initializeCountry();
   },
   created() {
     if (this.value) {
@@ -207,15 +210,13 @@ export default {
       return 'normal';
     },
     sortedCountries() {
-      let countries = [];
-      for (let i = 0; i < this.preferredCountries.length; i++) {
-        for (let k = 0; k < allCountries.length; k++) {
-          if (allCountries[k].iso2 === this.preferredCountries[i].toUpperCase()) {
-            countries.push({ ...allCountries[k], preferred: true });
-          }
-        }
-      }
-      return [...countries, ...allCountries];
+      // Sort the list countries: from preferred countries to all countries
+      const preferredCountries = this.preferredCountries
+        .map(country => this.findCountry(country))
+        .filter(Boolean)
+        .map(country => ({ ...country, preferred: true }));
+
+      return [...preferredCountries, ...allCountries];
     },
     formattedResult() {
       // Calculate phone number based on mode
@@ -229,8 +230,7 @@ export default {
         formatter.input(this.phone);
 
         // Find inputted country in the countries list
-        this.activeCountry = this.allCountries.find(ele =>
-          ele.iso2.toUpperCase() === formatter.country) || this.activeCountry;
+        this.activeCountry = this.findCountry(formatter.country) || this.activeCountry;
       } else if (this.mode === 'prefix') {
         // Remove the first '0' if this is a '0' prefix number
         // Ex: 0432421999
@@ -265,6 +265,33 @@ export default {
     },
   },
   methods: {
+    initializeCountry() {
+      /**
+       * 1. Use default country if passed from parent
+       */
+      if (this.defaultCountry) {
+        const defaultCountry = this.findCountry(this.defaultCountry);
+        if (defaultCountry) {
+          this.activeCountry = defaultCountry;
+          return;
+        }
+      }
+      /**
+       * 2. Use the first country from preferred list (if available) or all countries list
+       */
+      this.activeCountry = this.findCountry(this.preferredCountries[0]) || allCountries[0];
+      /**
+       * 3. Check if fetching country based on user's IP is allowed, set it as the default country
+       */
+      if (!this.disabledFetchingCountry) {
+        getCountry().then((res) => {
+          this.activeCountry = this.findCountry(res) || this.activeCountry;
+        });
+      }
+    },
+    findCountry(iso = '') {
+      return allCountries.find(country => country.iso2 === iso.toUpperCase());
+    },
     getItemClass(index, iso2) {
       const highlighted = this.selectedIndex === index;
       const lastPreferred = index === this.preferredCountries.length - 1;

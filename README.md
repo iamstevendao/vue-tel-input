@@ -71,15 +71,19 @@ Checkout Demo at [Github pages](https://educationlink.github.io/vue-tel-input/).
 
   | Property value | Type | Default value | Description |
   | -------------- | ---- | ------------- | ----------- |
-  | placeholder | string | Enter a phone number | Placeholder for the input |
-  | disabledFetchingCountry | Boolean | false | Disable fetching current country based on IP address of user |
+  | `defaultCountry` | `string` | `''` | Default country, will override the country fetched from IP address of user |
+  | `disabledFetchingCountry` | `Boolean` | false | Disable fetching current country based on IP address of user |
+  | `preferredCountries` | `Array` | `[]` | Preferred countries list, will be on top of the dropdown. ie `['AU', 'BR']` |
+  | `disabled` | `Boolean` | `false` | Disable input field |
+  | `placeholder` | `string` | Enter a phone number | Placeholder for the input |
+  | `required` | `Boolean` | `false` | Required property for HTML5 required attribute |
 
 ### Events
 
   | Property value | Arguments | Description |
   | -------------- | --------- | ----------- |
-  | onInput | Object | Fires when the input changes with the argument is the object includes `{ number, isValid, country }` |
-  | onBlur |  | Fires on blur event |
+  | `onInput` | `Object` | Fires when the input changes with the argument is the object includes `{ number, isValid, country }` |
+  | `onBlur` |  | Fires on blur event |
 
 ## Highlights & Credits
 - Vue app created by [vue-cli](https://github.com/vuejs/vue-cli).

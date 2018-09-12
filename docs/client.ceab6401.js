@@ -1307,12 +1307,8 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         o = n(111),
         a = n(112);e.a = { name: "vue-tel-input", props: { value: { type: String }, placeholder: { type: String, default: "Enter a phone number" }, disabledFetchingCountry: { type: Boolean, default: !1 }, disabled: { type: Boolean, default: !1 }, preferredCountries: { type: Array, default: function _default() {
             return [];
-          } }, invalidMsg: { default: "", type: String } }, mounted: function mounted() {
-        var t = this;Object(a.a)().then(function (e) {
-          t.activeCountry = o.a.find(function (t) {
-            return t.iso2 === e;
-          }) || o.a[0];
-        });
+          } }, invalidMsg: { default: "", type: String }, required: { type: Boolean, default: !1 }, defaultCountry: { type: String, default: "" } }, mounted: function mounted() {
+        this.initializeCountry();
       }, created: function created() {
         this.value && (this.phone = this.value);
       }, data: function data() {
@@ -1320,16 +1316,14 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
       }, computed: { mode: function mode() {
           return this.phone ? "+" === this.phone[0] ? "code" : "0" === this.phone[0] ? "prefix" : "normal" : "";
         }, sortedCountries: function sortedCountries() {
-          for (var t = [], e = 0; e < this.preferredCountries.length; e++) {
-            for (var n = 0; n < o.a.length; n++) {
-              o.a[n].iso2 === this.preferredCountries[e].toUpperCase() && t.push(Object.assign({}, o.a[n], { preferred: !0 }));
-            }
-          }return [].concat(t, r(o.a));
+          var t = this;return [].concat(r(this.preferredCountries.map(function (e) {
+            return t.findCountry(e);
+          }).filter(Boolean).map(function (t) {
+            return Object.assign({}, t, { preferred: !0 });
+          })), r(o.a));
         }, formattedResult: function formattedResult() {
           if (!this.mode || !this.allCountries) return "";var t = this.phone;if ("code" === this.mode) {
-            var e = new i.a();e.input(this.phone), this.activeCountry = this.allCountries.find(function (t) {
-              return t.iso2.toUpperCase() === e.country;
-            }) || this.activeCountry;
+            var e = new i.a();e.input(this.phone), this.activeCountry = this.findCountry(e.country) || this.activeCountry;
           } else "prefix" === this.mode && (t = this.phone.slice(1));return Object(i.b)(t, this.activeCountry && this.activeCountry.iso2, "International");
         }, state: function state() {
           return Object(i.c)(this.formattedResult);
@@ -1339,7 +1333,17 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
           t && "prefix" !== this.mode && (this.phone = this.formattedResult);
         }, value: function value() {
           this.phone = this.value;
-        } }, methods: { getItemClass: function getItemClass(t, e) {
+        } }, methods: { initializeCountry: function initializeCountry() {
+          var t = this;if (this.defaultCountry) {
+            var e = this.findCountry(this.defaultCountry);if (e) return void (this.activeCountry = e);
+          }this.activeCountry = this.findCountry(this.preferredCountries[0]) || o.a[0], this.disabledFetchingCountry || Object(a.a)().then(function (e) {
+            t.activeCountry = t.findCountry(e) || t.activeCountry;
+          });
+        }, findCountry: function findCountry() {
+          var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "";return o.a.find(function (e) {
+            return e.iso2 === t.toUpperCase();
+          });
+        }, getItemClass: function getItemClass(t, e) {
           return { highlighted: this.selectedIndex === t, "last-preferred": t === this.preferredCountries.length - 1, preferred: !!~this.preferredCountries.map(function (t) {
               return t.toUpperCase();
             }).indexOf(e) };
@@ -2333,7 +2337,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         o = n(153),
         a = n(71),
         d = r,
-        s = a(i.a, o.a, !1, d, "data-v-20f24c5c", null);e.a = s.exports;
+        s = a(i.a, o.a, !1, d, "data-v-607bcec5", null);e.a = s.exports;
   }, function (t, e) {}, function (t, e) {}, function (t, e) {
     t.exports = function (t, e, n, r, i, o) {
       var a,
@@ -4519,7 +4523,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
             }, mousemove: function mousemove(e) {
               t.selectedIndex = r;
             } } }, [n("div", { staticClass: "iti-flag", class: e.iso2.toLowerCase() }), t._v(" "), n("strong", [t._v(t._s(e.name) + " ")]), t._v(" "), n("span", [t._v("+" + t._s(e.dialCode))])]);
-      }))]), t._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: t.phone, expression: "phone" }], ref: "input", attrs: { type: "tel", placeholder: t.placeholder, state: t.state, formatter: t.format, disabled: t.disabled }, domProps: { value: t.phone }, on: { blur: t.onBlur, input: [function (e) {
+      }))]), t._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: t.phone, expression: "phone" }], ref: "input", attrs: { type: "tel", placeholder: t.placeholder, state: t.state, formatter: t.format, disabled: t.disabled, required: t.required }, domProps: { value: t.phone }, on: { blur: t.onBlur, input: [function (e) {
             e.target.composing || (t.phone = e.target.value);
           }, t.onInput] } })]);
     },

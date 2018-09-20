@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "get-json": "^1.0.0",
-    "libphonenumber-js": "^0.4.44"
+    "libphonenumber-js": "^1.4.6"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

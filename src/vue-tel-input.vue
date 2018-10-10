@@ -136,7 +136,7 @@ ul {
 </style>
 
 <script>
-import { format, asYouType, isValidNumber } from 'libphonenumber-js';
+import { formatNumber, AsYouType, isValidNumber } from 'libphonenumber-js';
 import allCountries from './assets/all-countries';
 import getCountry from './assets/default-country';
 
@@ -226,7 +226,7 @@ export default {
       let phone = this.phone;
       if (this.mode === 'code') {
         // If user manually type the country code
-        const formatter = new asYouType();// eslint-disable-line
+        const formatter = new AsYouType();// eslint-disable-line
         formatter.input(this.phone);
 
         // Find inputted country in the countries list
@@ -236,10 +236,11 @@ export default {
         // Ex: 0432421999
         phone = this.phone.slice(1);
       }
-      return format(phone, this.activeCountry && this.activeCountry.iso2, 'International');
+
+      return formatNumber(phone, this.activeCountry && this.activeCountry.iso2, 'International');
     },
     state() {
-      return isValidNumber(this.formattedResult);
+      return isValidNumber(this.formattedResult, this.activeCountry && this.activeCountry.iso2);
     },
     response() {
       // If it is a valid number, returns the formatted value

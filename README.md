@@ -67,6 +67,50 @@ Checkout Demo at [Github pages](https://educationlink.github.io/vue-tel-input/).
      </script>
      ```
 
+### Use as a custom field of [vue-form-generator](https://github.com/vue-generators/vue-form-generator)
+- Add a component with `vue-form-generator`'s abstractField
+  ```js
+  // tel-input.vue
+  <template>
+    <vue-tel-input v-model="value"></vue-tel-input>
+  </template>
+
+  <script>
+  import VueTelInput from 'vue-tel-input'
+  import { abstractField } from 'vue-form-generator';
+
+  export default {
+    name: 'TelephoneInput',
+    mixins: [abstractField],
+    components: {
+      VueTelInput,
+    },
+  };
+  </script>
+  ```
+
+- Register the new field as a global component
+  ```js
+    import Vue from 'vue';
+    import TelInput from '<path>/tel-input.vue';
+
+    import 'vue-tel-input/dist/vue-tel-input.css';
+
+    Vue.component('field-tel-input', TelInput);
+  ```
+
+- Now it can be used as `tel-input` in schema of `vue-form-generator`
+  ```js
+  var schema: {
+    fields: [{
+        type: "tel-input",
+        label: "Awesome (tel input)",
+        model: "telephone"
+    }]
+  };
+  ```
+Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.io/vueformgenerator/content/fields/custom_fields.html)
+
 ### Props
 
   | Property value | Type | Default value | Description |

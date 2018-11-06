@@ -10,7 +10,7 @@
          @keydown.esc="reset">
       <span class="selection">
         <div class="iti-flag"
-             v-if="flags"
+             v-if="enabledFlags"
              :class="activeCountry.iso2.toLowerCase()"></div>
         <span class="dropdown-arrow">
           {{ open ? '▲' : '▼' }}
@@ -25,7 +25,7 @@
             :class="getItemClass(index, pb.iso2)"
             @mousemove="selectedIndex = index">
           <div class="iti-flag"
-               v-if="flags"
+               v-if="enabledFlags"
                :class="pb.iso2.toLowerCase()"></div>
           <strong>{{ pb.name }} </strong>
           <span>+{{ pb.dialCode }}</span>
@@ -165,7 +165,7 @@ export default {
       default: () => ([]),
     },
     invalidMsg: {
-      default: "",
+      default: '',
       type: String,
     },
     required: {
@@ -178,7 +178,7 @@ export default {
       type: String,
       default: '',
     },
-    flags: {
+    enabledFlags: {
       type: Boolean,
       default: true
     }

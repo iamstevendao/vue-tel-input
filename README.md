@@ -77,6 +77,7 @@ Checkout Demo at [Github pages](https://educationlink.github.io/vue-tel-input/).
   | `disabled` | `Boolean` | `false` | Disable input field |
   | `placeholder` | `string` | Enter a phone number | Placeholder for the input |
   | `required` | `Boolean` | `false` | Required property for HTML5 required attribute |
+  | `enabledFlags` | `Boolean` | `true` | Enable flags in the input |
 
 ### Events
 

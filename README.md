@@ -122,6 +122,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `placeholder` | `string` | Enter a phone number | Placeholder for the input |
   | `required` | `Boolean` | `false` | Required property for HTML5 required attribute |
   | `enabledFlags` | `Boolean` | `true` | Enable flags in the input |
+  | `onlyCountries` | `Array` | `[]` | Only display specific countries list |
 
 ### Events
 

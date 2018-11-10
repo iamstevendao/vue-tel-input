@@ -181,6 +181,10 @@ export default {
     enabledFlags: {
       type: Boolean,
       default: true
+    },
+    onlyCountries: {
+      type: Array,
+      default: []
     }
   },
   mounted() {
@@ -222,7 +226,12 @@ export default {
         .filter(Boolean)
         .map(country => ({ ...country, preferred: true }));
 
-      return [...preferredCountries, ...allCountries];
+      let countryList = allCountries;
+      if (this.onlyCountries.length > 0) {
+        countryList = allCountries.filter(c => this.onlyCountries.includes(c.iso2));
+      }
+
+      return [...preferredCountries, ...this.getCountryList()];
     },
     formattedResult() {
       // Calculate phone number based on mode
@@ -298,6 +307,13 @@ export default {
     },
     findCountry(iso = '') {
       return allCountries.find(country => country.iso2 === iso.toUpperCase());
+    },
+    getCountryList() {
+      let countryList = allCountries;
+      if (this.onlyCountries.length > 0) {
+        countryList = allCountries.filter(c => this.onlyCountries.map(oc => oc.toUpperCase()).includes(c.iso2));
+      }
+      return countryList;
     },
     getItemClass(index, iso2) {
       const highlighted = this.selectedIndex === index;

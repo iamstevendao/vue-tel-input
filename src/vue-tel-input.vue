@@ -17,7 +17,7 @@
         </span>
       </span>
       <ul v-show="open"
-          ref="list">
+          ref="list" style="z-index: 1;">
         <li class="dropdown-item"
             v-for="(pb, index) in sortedCountries"
             :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
@@ -59,7 +59,6 @@ li.last-preferred {
   margin-left: 5px;
 }
 .dropdown-item .iti-flag {
-  z-index: 900;
   display: inline-block;
   margin-right: 5px;
 }

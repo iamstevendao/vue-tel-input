@@ -1,18 +1,18 @@
 <template>
   <div class="vue-tel-input"
        :class="{ disabled: disabled }">
-    <div class="dropdown"
+    <!--<div class="dropdown"
          @click="toggleDropdown"
          v-click-outside="clickedOutside"
          :class="{open: open}"
          @keydown="keyboardNav"
          tabindex="0"
          @keydown.esc="reset">
-      <span class="selection">
+      <span class="selection">-->
         <div class="iti-flag"
              v-if="enabledFlags"
              :class="activeCountry.iso2.toLowerCase()"></div>
-        <span class="dropdown-arrow">
+        <!--<span class="dropdown-arrow">
           {{ open ? '▲' : '▼' }}
         </span>
       </span>
@@ -31,7 +31,7 @@
           <span>+{{ pb.dialCode }}</span>
         </li>
       </ul>
-    </div>
+    </div>-->
     <input ref="input"
            v-model="phone"
            type="tel"

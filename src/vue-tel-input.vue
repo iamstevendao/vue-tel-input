@@ -59,7 +59,7 @@ li.last-preferred {
   margin-left: 5px;
 }
 .dropdown-item .iti-flag {
-  z-index: 7;
+  z-index: 900;
   display: inline-block;
   margin-right: 5px;
 }

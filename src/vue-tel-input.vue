@@ -17,7 +17,7 @@
         </span>
       </span>
       <ul v-show="open"
-          ref="list" style="z-index: 1;">
+          ref="list">
         <li class="dropdown-item"
             v-for="(pb, index) in sortedCountries"
             :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
@@ -86,6 +86,7 @@ input {
   padding-left: 7px;
 }
 ul {
+  z-index: 1;
   padding: 0;
   margin: 0;
   text-align: left;

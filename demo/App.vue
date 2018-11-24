@@ -6,6 +6,7 @@
       <vue-tel-input @onInput="onInput"
                      :preferredCountries="['us', 'gb', 'ua']">
       </vue-tel-input>
+      <div>aaaaas</div>
     </div>
     <div v-if="phone.number"
          style="color: #e83e8c">

@@ -1,47 +1,45 @@
 <template>
-  <div class="vue-tel-input"
-       :class="{ disabled: disabled }">
-    <div class="dropdown"
-         @click="toggleDropdown"
-         v-click-outside="clickedOutside"
-         :class="{open: open}"
-         @keydown="keyboardNav"
-         tabindex="0"
-         @keydown.esc="reset">
+  <div class="vue-tel-input" :class="{ disabled: disabled }">
+    <div
+      class="dropdown"
+      @click="toggleDropdown"
+      v-click-outside="clickedOutside"
+      :class="{open: open}"
+      @keydown="keyboardNav"
+      tabindex="0"
+      @keydown.esc="reset"
+    >
       <span class="selection">
-        <div class="iti-flag"
-             v-if="enabledFlags"
-             :class="activeCountry.iso2.toLowerCase()"></div>
-        <span class="dropdown-arrow">
-          {{ open ? '▲' : '▼' }}
-        </span>
+        <div class="iti-flag" v-if="enabledFlags" :class="activeCountry.iso2.toLowerCase()"></div>
+        <span class="dropdown-arrow">{{ open ? '▲' : '▼' }}</span>
       </span>
-      <ul v-show="open"
-          ref="list">
-        <li class="dropdown-item"
-            v-for="(pb, index) in sortedCountries"
-            :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
-            @click="choose(pb)"
-            :class="getItemClass(index, pb.iso2)"
-            @mousemove="selectedIndex = index">
-          <div class="iti-flag"
-               v-if="enabledFlags"
-               :class="pb.iso2.toLowerCase()"></div>
-          <strong>{{ pb.name }} </strong>
+      <ul v-show="open" ref="list">
+        <li
+          class="dropdown-item"
+          v-for="(pb, index) in sortedCountries"
+          :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
+          @click="choose(pb)"
+          :class="getItemClass(index, pb.iso2)"
+          @mousemove="selectedIndex = index"
+        >
+          <div class="iti-flag" v-if="enabledFlags" :class="pb.iso2.toLowerCase()"></div>
+          <strong>{{ pb.name }}</strong>
           <span>+{{ pb.dialCode }}</span>
         </li>
       </ul>
     </div>
-    <input ref="input"
-           v-model="phone"
-           type="tel"
-           :placeholder="placeholder"
-           :state="state"
-           :formatter="format"
-           :disabled="disabled"
-           @blur="onBlur"
-           @input="onInput"
-           :required="required">
+    <input
+      ref="input"
+      v-model="phone"
+      type="tel"
+      :placeholder="placeholder"
+      :state="state"
+      :formatter="format"
+      :disabled="disabled"
+      @blur="onBlur"
+      @input="onInput"
+      :required="required"
+    >
   </div>
 </template>
 

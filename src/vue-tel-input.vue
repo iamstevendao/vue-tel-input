@@ -159,10 +159,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    preferredCountries: {
-      type: Array,
-      default: () => ([]),
-    },
     invalidMsg: {
       default: '',
       type: String,
@@ -180,7 +176,19 @@ export default {
     enabledFlags: {
       type: Boolean,
       default: true
-    }
+    },
+    preferredCountries: {
+      type: Array,
+      default: () => [],
+    },
+    onlyCountries: {
+      type: Array,
+      default: () => [],
+    },
+    ignoredCountries: {
+      type: Array,
+      default: () => [],
+    },
   },
   mounted() {
     this.initializeCountry();
@@ -193,7 +201,6 @@ export default {
   data() {
     return {
       phone: '',
-      allCountries,
       activeCountry: { iso2: '' },
       open: false,
       selectedIndex: null,
@@ -214,18 +221,30 @@ export default {
       }
       return 'normal';
     },
+    filteredCountries() {
+      // List countries after filtered
+      if (this.onlyCountries.length) {
+        return this.getCountries(this.onlyCountries);
+      }
+
+      if (this.ignoredCountries.length) {
+        return allCountries.filter(({ iso2 }) => 
+          !this.ignoredCountries.includes(iso2.toUpperCase()) &&
+          !this.ignoredCountries.includes(iso2.toLowerCase()))
+      }
+
+      return allCountries;
+    },
     sortedCountries() {
       // Sort the list countries: from preferred countries to all countries
-      const preferredCountries = this.preferredCountries
-        .map(country => this.findCountry(country))
-        .filter(Boolean)
+      const preferredCountries = this.getCountries(this.preferredCountries)
         .map(country => ({ ...country, preferred: true }));
 
-      return [...preferredCountries, ...allCountries];
+      return [...preferredCountries, ...this.filteredCountries];
     },
     formattedResult() {
       // Calculate phone number based on mode
-      if (!this.mode || !this.allCountries) {
+      if (!this.mode || !this.filteredCountries) {
         return '';
       }
       let phone = this.phone;
@@ -285,7 +304,7 @@ export default {
       /**
        * 2. Use the first country from preferred list (if available) or all countries list
        */
-      this.activeCountry = this.findCountry(this.preferredCountries[0]) || allCountries[0];
+      this.activeCountry = this.findCountry(this.preferredCountries[0]) || this.filteredCountries[0];
       /**
        * 3. Check if fetching country based on user's IP is allowed, set it as the default country
        */
@@ -294,6 +313,14 @@ export default {
           this.activeCountry = this.findCountry(res) || this.activeCountry;
         });
       }
+    },
+    /**
+     * Get the list of countries from the list of iso2 code
+     */
+    getCountries(list = []) {
+      return list
+        .map(countryCode => this.findCountry(countryCode))
+        .filter(Boolean);
     },
     findCountry(iso = '') {
       return allCountries.find(country => country.iso2 === iso.toUpperCase());

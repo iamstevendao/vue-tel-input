@@ -86,6 +86,7 @@ input {
   padding-left: 7px;
 }
 ul {
+  z-index: 1;
   padding: 0;
   margin: 0;
   text-align: left;

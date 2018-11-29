@@ -117,11 +117,13 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | -------------- | ---- | ------------- | ----------- |
   | `defaultCountry` | `string` | `''` | Default country, will override the country fetched from IP address of user |
   | `disabledFetchingCountry` | `Boolean` | false | Disable fetching current country based on IP address of user |
-  | `preferredCountries` | `Array` | `[]` | Preferred countries list, will be on top of the dropdown. ie `['AU', 'BR']` |
   | `disabled` | `Boolean` | `false` | Disable input field |
   | `placeholder` | `string` | Enter a phone number | Placeholder for the input |
   | `required` | `Boolean` | `false` | Required property for HTML5 required attribute |
   | `enabledFlags` | `Boolean` | `true` | Enable flags in the input |
+  | `preferredCountries` | `Array` | `[]` | Preferred countries list, will be on top of the dropdown. ie `['AU', 'BR']` |
+  | `onlyCountries` | `Array` | `[]` | List of countries will be shown on the dropdown. ie `['AU', 'BR']` |
+  | `ignoredCountries` | `Array` | `[]` | List of countries will NOT be shown on the dropdown. ie `['AU', 'BR']` |
 
 ### Events
 

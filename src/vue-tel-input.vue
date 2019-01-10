@@ -192,6 +192,7 @@ export default {
   },
   mounted() {
     this.initializeCountry();
+    this.$emit('onValidate', this.response);
   },
   created() {
     if (this.value) {
@@ -284,6 +285,7 @@ export default {
         // Otherwise format it
         this.phone = this.formattedResult;
       }
+      this.$emit('onValidate', this.response);
     },
     value() {
       this.phone = this.value;

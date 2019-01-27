@@ -218,6 +218,7 @@ export default {
   },
   mounted() {
     this.initializeCountry();
+    this.choose(this.activeCountry);
     this.$emit('onValidate', this.response);
   },
   created() {
@@ -374,6 +375,7 @@ export default {
     },
     choose(country) {
       this.activeCountry = country;
+      this.phone = '+' + country.dialCode;
       this.$emit('onInput', this.response);
     },
     onInput() {

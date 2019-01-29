@@ -192,7 +192,7 @@ export default {
   },
   mounted() {
     this.initializeCountry();
-    this.$emit('onValidate', this.response);
+    this.$emit('on-validate', this.response);
   },
   created() {
     if (this.value) {
@@ -285,7 +285,7 @@ export default {
         // Otherwise format it
         this.phone = this.formattedResult;
       }
-      this.$emit('onValidate', this.response);
+      this.$emit('on-validate', this.response);
     },
     value() {
       this.phone = this.value;
@@ -339,7 +339,7 @@ export default {
     },
     choose(country) {
       this.activeCountry = country;
-      this.$emit('onInput', this.response);
+      this.$emit('on-input', this.response);
     },
     onInput() {
       this.$refs.input.setCustomValidity(this.response.isValid ? '' : this.invalidMsg);
@@ -347,7 +347,7 @@ export default {
       this.$emit('input', this.response.number);
 
       // Emit the response, includes phone, validity and country
-      this.$emit('onInput', this.response);
+      this.$emit('on-input', this.response);
     },
     onBlur() {
       this.$emit('onBlur');

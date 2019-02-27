@@ -39,6 +39,7 @@
       @blur="onBlur"
       @input="onInput"
       :required="required"
+      :autocomplete="autocomplete"
     >
   </div>
 </template>
@@ -189,6 +190,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    autocomplete: {
+      type: String,
+      default: 'on',
+    }
   },
   mounted() {
     this.initializeCountry();

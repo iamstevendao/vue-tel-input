@@ -124,6 +124,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `preferredCountries` | `Array` | `[]` | Preferred countries list, will be on top of the dropdown. ie `['AU', 'BR']` |
   | `onlyCountries` | `Array` | `[]` | List of countries will be shown on the dropdown. ie `['AU', 'BR']` |
   | `ignoredCountries` | `Array` | `[]` | List of countries will NOT be shown on the dropdown. ie `['AU', 'BR']` |
+  | `autocomplete`| `String` | `"on"` | Native input autocomplete attribute                  |
 
 ### Events
 

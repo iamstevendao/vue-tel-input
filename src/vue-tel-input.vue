@@ -155,6 +155,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    formatted: {
+      type: Boolean,
+      default: true
+    },
     disabled: {
       type: Boolean,
       default: false,
@@ -280,7 +284,7 @@ export default {
   },
   watch: {
     state(value) {
-      if (value && this.mode !== 'prefix') {
+      if (value && this.mode !== 'prefix' && this.formatted) {
         // If mode is 'prefix', keep the number as user typed,
         // Otherwise format it
         this.phone = this.formattedResult;

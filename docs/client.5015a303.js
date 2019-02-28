@@ -34,12 +34,21 @@ webpackJsonp([1],[
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'app',
   data: function data() {
     return {
       phone: {
+        formattedNumber: '',
         number: '',
         isValid: false,
         country: undefined
@@ -51,11 +60,13 @@ webpackJsonp([1],[
     onInput: function onInput(_ref) {
       var number = _ref.number,
           isValid = _ref.isValid,
-          country = _ref.country;
+          country = _ref.country,
+          formattedNumber = _ref.formattedNumber;
 
       this.phone.number = number;
       this.phone.isValid = isValid;
       this.phone.country = country && country.name;
+      this.phone.formattedNumber = formattedNumber;
     }
   }
 });
@@ -1961,7 +1972,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
       }return Array.from(t);
     }var i = n(51),
         a = n(59),
-        o = n(60);e.a = { name: "vue-tel-input", props: { value: { type: String }, placeholder: { type: String, default: "Enter a phone number" }, disabledFetchingCountry: { type: Boolean, default: !1 }, disabled: { type: Boolean, default: !1 }, invalidMsg: { default: "", type: String }, required: { type: Boolean, default: !1 }, defaultCountry: { type: String, default: "" }, enabledFlags: { type: Boolean, default: !0 }, preferredCountries: { type: Array, default: function _default() {
+        o = n(60);e.a = { name: "vue-tel-input", props: { value: { type: String }, placeholder: { type: String, default: "Enter a phone number" }, disabledFetchingCountry: { type: Boolean, default: !1 }, disabled: { type: Boolean, default: !1 }, disabledFormatting: { type: Boolean, default: !1 }, invalidMsg: { default: "", type: String }, required: { type: Boolean, default: !1 }, defaultCountry: { type: String, default: "" }, enabledFlags: { type: Boolean, default: !0 }, preferredCountries: { type: Array, default: function _default() {
             return [];
           } }, onlyCountries: { type: Array, default: function _default() {
             return [];
@@ -1986,11 +1997,11 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         }, formattedResult: function formattedResult() {
           if (!this.mode || !this.filteredCountries) return "";var t = this.phone;if ("code" === this.mode) {
             var e = new i.a();e.input(this.phone), this.activeCountry = this.findCountry(e.country) || this.activeCountry;
-          } else "prefix" === this.mode && (t = this.phone.slice(1));return Object(i.b)(t, this.activeCountry && this.activeCountry.iso2, "International");
+          } else "prefix" === this.mode && (t = this.phone.slice(1));return this.disabledFormatting ? this.phone : Object(i.b)(t, this.activeCountry && this.activeCountry.iso2, "International");
         }, state: function state() {
           return Object(i.c)(this.formattedResult, this.activeCountry && this.activeCountry.iso2);
         }, response: function response() {
-          return { number: this.state ? this.formattedResult : this.phone, isValid: this.state, country: this.activeCountry };
+          var t = { number: this.state ? this.formattedResult : this.phone, isValid: this.state, country: this.activeCountry };return this.disabledFormatting && Object.assign(t, { formattedNumber: Object(i.b)(this.phone, this.activeCountry && this.activeCountry.iso2, "International") }), t;
         } }, watch: { state: function state(t) {
           t && "prefix" !== this.mode && (this.phone = this.formattedResult), this.$emit("onValidate", this.response);
         }, value: function value() {
@@ -2610,7 +2621,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         a = n(105),
         o = n(50),
         d = r,
-        s = o(i.a, a.a, !1, d, "data-v-eddc7100", null);e.a = s.exports;
+        s = o(i.a, a.a, !1, d, "data-v-87a6ba94", null);e.a = s.exports;
   }, function (t, e) {}, function (t, e) {}, function (t, e) {
     t.exports = function (t, e, n, r, i, a) {
       var o,
@@ -4653,7 +4664,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_presets_Users_stevend_coding_vue_vue_tel_input_node_modules_babel_preset_poi_index_js_jsx_vue_cacheDirectory_true_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(/*! !babel-loader?{"babelrc":false,"presets":[["/Users/stevend/coding/vue/vue-tel-input/node_modules/babel-preset-poi/index.js",{"jsx":"vue"}]],"cacheDirectory":true}!../node_modules/vue-loader/lib/selector?type=script&index=0!./App.vue */ 2);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_652e1d43_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(/*! !../node_modules/vue-loader/lib/template-compiler/index?{"id":"data-v-652e1d43","hasScoped":false,"buble":{"transforms":{}}}!../node_modules/vue-loader/lib/selector?type=template&index=0!./App.vue */ 13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e223f86e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(/*! !../node_modules/vue-loader/lib/template-compiler/index?{"id":"data-v-e223f86e","hasScoped":false,"buble":{"transforms":{}}}!../node_modules/vue-loader/lib/selector?type=template&index=0!./App.vue */ 13);
 var normalizeComponent = __webpack_require__(/*! ../node_modules/vue-loader/lib/component-normalizer */ 12)
 /* script */
 
@@ -4670,7 +4681,7 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_presets_Users_stevend_coding_vue_vue_tel_input_node_modules_babel_preset_poi_index_js_jsx_vue_cacheDirectory_true_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_652e1d43_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e223f86e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
@@ -4684,14 +4695,14 @@ var Component = normalizeComponent(
 /* 12 */,
 /* 13 */
 /*!***********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-652e1d43","hasScoped":false,"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./demo/App.vue ***!
+  !*** ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-e223f86e","hasScoped":false,"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./demo/App.vue ***!
   \***********************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('h1',[_vm._v("Telephone Input Vue")]),_vm._v(" "),_c('h2',{staticStyle:{"color":"#999"}},[_vm._v("made with ❤ by Steven.")]),_vm._v(" "),_c('div',{staticStyle:{"width":"500px","margin":"20px auto"}},[_c('vue-tel-input',{attrs:{"preferredCountries":['us', 'gb', 'ua']},on:{"onInput":_vm.onInput}})],1),_vm._v(" "),(_vm.phone.number)?_c('div',{staticStyle:{"color":"#e83e8c"}},[_c('span',[_vm._v("\n      Number:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.number))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Is valid:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.isValid))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Country:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.country))])])]):_vm._e()])}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('h1',[_vm._v("Telephone Input Vue")]),_vm._v(" "),_c('h2',{staticStyle:{"color":"#999"}},[_vm._v("made with ❤ by Steven.")]),_vm._v(" "),_c('div',{staticStyle:{"width":"500px","margin":"20px auto"}},[_c('vue-tel-input',{attrs:{"disabledFormatting":true,"preferredCountries":['us', 'gb', 'ua']},on:{"onInput":_vm.onInput}})],1),_vm._v(" "),(_vm.phone.number)?_c('div',{staticStyle:{"color":"#e83e8c"}},[_c('span',[_vm._v("\n      Number:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.number))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Is valid:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.isValid))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Country:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.country))])]),_vm._v(" "),_c('span',[_vm._v("\n      formattedNumber:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.formattedNumber))])])]):_vm._e()])}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

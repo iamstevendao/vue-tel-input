@@ -46,10 +46,6 @@
 
 <style src="./assets/sprite.css"></style>
 <style scoped>
-:local {
-  --border-radius: 2px;
-}
-
 li.last-preferred {
   border-bottom: 1px solid #cacaca;
 }
@@ -79,7 +75,7 @@ li.last-preferred {
 }
 input {
   border: none;
-  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  border-radius: 0 2px 2px 0;
   width: 100%;
   outline: none;
   padding-left: 7px;

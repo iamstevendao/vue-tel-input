@@ -40,6 +40,7 @@
       @input="onInput"
       :required="required"
       :autocomplete="autocomplete"
+      :name="name"
     >
   </div>
 </template>
@@ -189,7 +190,11 @@ export default {
     autocomplete: {
       type: String,
       default: 'on',
-    }
+    },
+    name: {
+      type: String,
+      default: 'telephone',
+    },
   },
   mounted() {
     this.initializeCountry();

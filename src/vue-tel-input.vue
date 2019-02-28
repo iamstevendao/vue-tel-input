@@ -157,6 +157,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    disabledFormatting: {
+      type: Boolean,
+      default: false,
+    },
     invalidMsg: {
       default: '',
       type: String,
@@ -267,6 +271,9 @@ export default {
         // Ex: 0432421999
         phone = this.phone.slice(1);
       }
+      if (this.disabledFormatting) {
+        return this.phone;
+      }
 
       return formatNumber(phone, this.activeCountry && this.activeCountry.iso2, 'International');
     },
@@ -276,12 +283,18 @@ export default {
     response() {
       // If it is a valid number, returns the formatted value
       // Otherwise returns what it is
-      const number = this.state ? this.formattedResult : this.phone;
-      return {
-        number,
+      const response = {
+        number: this.state ? this.formattedResult : this.phone,
         isValid: this.state,
         country: this.activeCountry,
-      };
+      }
+      // If formatting to the input is disabled, try to return the formatted value to its parent
+      if (this.disabledFormatting) {
+        Object.assign(response, {
+          formattedNumber: formatNumber(this.phone, this.activeCountry && this.activeCountry.iso2, 'International')
+        })
+      }
+      return response;
     },
   },
   watch: {

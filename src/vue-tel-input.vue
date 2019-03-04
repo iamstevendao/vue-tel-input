@@ -41,7 +41,7 @@
       :required="required"
       :autocomplete="autocomplete"
       :name="name"
-      :class="customInputClass"
+      :class="inputClasses"
     >
   </div>
 </template>
@@ -200,7 +200,7 @@ export default {
       type: String,
       default: 'telephone',
     },
-    customInputClass {
+    inputClasses: {
       type: String,
       default: '',
     }

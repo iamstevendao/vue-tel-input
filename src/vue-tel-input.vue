@@ -24,7 +24,7 @@
         >
           <div class="iti-flag" v-if="enabledFlags" :class="pb.iso2.toLowerCase()"></div>
           <strong>{{ pb.name }}</strong>
-          <span>+{{ pb.dialCode }}</span>
+          <span v-if="dropdownOptions && !dropdownOptions.disabledDialCode">+{{ pb.dialCode }}</span>
         </li>
       </ul>
     </div>
@@ -36,12 +36,12 @@
       :state="state"
       :formatter="format"
       :disabled="disabled"
-      @blur="onBlur"
-      @input="onInput"
       :required="required"
       :autocomplete="autocomplete"
       :name="name"
       :class="inputClasses"
+      @blur="onBlur"
+      @input="onInput"
     >
   </div>
 </template>
@@ -203,7 +203,11 @@ export default {
     inputClasses: {
       type: String,
       default: '',
-    }
+    },
+    dropdownOptions: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   mounted() {
     this.initializeCountry();

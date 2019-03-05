@@ -38,17 +38,12 @@ webpackJsonp([1],[
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'app',
   data: function data() {
     return {
       phone: {
-        formattedNumber: '',
         number: '',
         isValid: false,
         country: undefined
@@ -60,13 +55,11 @@ webpackJsonp([1],[
     onInput: function onInput(_ref) {
       var number = _ref.number,
           isValid = _ref.isValid,
-          country = _ref.country,
-          formattedNumber = _ref.formattedNumber;
+          country = _ref.country;
 
       this.phone.number = number;
       this.phone.isValid = isValid;
       this.phone.country = country && country.name;
-      this.phone.formattedNumber = formattedNumber;
     }
   }
 });
@@ -628,9 +621,9 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         if (n + r > t.length) throw new RangeError("Index out of range");if (n < 0) throw new RangeError("Index out of range");
       }function F(t, e, n, r, i) {
         return i || j(t, e, n, 4, 3.4028234663852886e38, -3.4028234663852886e38), X.write(t, e, n, r, 23, 4), n + 4;
-      }function U(t, e, n, r, i) {
+      }function D(t, e, n, r, i) {
         return i || j(t, e, n, 8, 1.7976931348623157e308, -1.7976931348623157e308), X.write(t, e, n, r, 52, 8), n + 8;
-      }function D(t) {
+      }function U(t) {
         if (t = z(t).replace(tt, ""), t.length < 2) return "";for (; t.length % 4 != 0;) {
           t += "=";
         }return t;
@@ -669,7 +662,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
           n = t.charCodeAt(o), r = n >> 8, i = n % 256, a.push(i), a.push(r);
         }return a;
       }function Y(t) {
-        return V.toByteArray(D(t));
+        return V.toByteArray(U(t));
       }function W(t, e, n, r) {
         for (var i = 0; i < r && !(i + n >= e.length || i >= t.length); ++i) {
           e[i + n] = t[i];
@@ -866,9 +859,9 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
       }, a.prototype.writeFloatBE = function (t, e, n) {
         return F(this, t, e, !1, n);
       }, a.prototype.writeDoubleLE = function (t, e, n) {
-        return U(this, t, e, !0, n);
+        return D(this, t, e, !0, n);
       }, a.prototype.writeDoubleBE = function (t, e, n) {
-        return U(this, t, e, !1, n);
+        return D(this, t, e, !1, n);
       }, a.prototype.copy = function (t, e, n, r) {
         if (n || (n = 0), r || 0 === r || (r = this.length), e >= t.length && (e = t.length), e || (e = 0), r > 0 && r < n && (r = n), r === n) return 0;if (0 === t.length || 0 === this.length) return 0;if (e < 0) throw new RangeError("targetStart out of bounds");if (n < 0 || n >= this.length) throw new RangeError("sourceStart out of bounds");if (r < 0) throw new RangeError("sourceEnd out of bounds");r > this.length && (r = this.length), t.length - e < r - n && (r = t.length - e + n);var i,
             o = r - n;if (this === t && n < e && e < r) for (i = o - 1; i >= 0; --i) {
@@ -1772,15 +1765,15 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
                   F = N.match(y);F && (B.push(F[1]), j.unshift(F[2])), j.length && (d = "/" + j.join(".") + d), this.hostname = B.join(".");break;
             }
           }
-        }this.hostname.length > 255 ? this.hostname = "" : this.hostname = this.hostname.toLowerCase(), T || (this.hostname = s.toASCII(this.hostname));var U = this.port ? ":" + this.port : "",
-            D = this.hostname || "";this.host = D + U, this.href += this.host, T && (this.hostname = this.hostname.substr(1, this.hostname.length - 2), "/" !== d[0] && (d = "/" + d));
+        }this.hostname.length > 255 ? this.hostname = "" : this.hostname = this.hostname.toLowerCase(), T || (this.hostname = s.toASCII(this.hostname));var D = this.port ? ":" + this.port : "",
+            U = this.hostname || "";this.host = U + D, this.href += this.host, T && (this.hostname = this.hostname.substr(1, this.hostname.length - 2), "/" !== d[0] && (d = "/" + d));
       }if (!v[$]) for (var S = 0, I = p.length; S < I; S++) {
         var z = p[S];if (-1 !== d.indexOf(z)) {
           var Z = encodeURIComponent(z);Z === z && (Z = escape(z)), d = d.split(z).join(Z);
         }
       }var G = d.indexOf("#");-1 !== G && (this.hash = d.substr(G), d = d.slice(0, G));var H = d.indexOf("?");if (-1 !== H ? (this.search = d.substr(H), this.query = d.substr(H + 1), e && (this.query = E.parse(this.query)), d = d.slice(0, H)) : e && (this.search = "", this.query = {}), d && (this.pathname = d), w[$] && this.hostname && !this.pathname && (this.pathname = "/"), this.pathname || this.search) {
-        var U = this.pathname || "",
-            q = this.search || "";this.path = U + q;
+        var D = this.pathname || "",
+            q = this.search || "";this.path = D + q;
       }return this.href = this.format(), this;
     }, r.prototype.format = function () {
       var t = this.auth || "";t && (t = encodeURIComponent(t), t = t.replace(/%3A/i, ":"), t += "@");var e = this.protocol || "",
@@ -1978,7 +1971,9 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
             return [];
           } }, ignoredCountries: { type: Array, default: function _default() {
             return [];
-          } }, autocomplete: { type: String, default: "on" }, name: { type: String, default: "telephone" } }, mounted: function mounted() {
+          } }, autocomplete: { type: String, default: "on" }, name: { type: String, default: "telephone" }, inputClasses: { type: String, default: "" }, dropdownOptions: { type: Object, default: function _default() {
+            return {};
+          } } }, mounted: function mounted() {
         this.initializeCountry(), this.$emit("onValidate", this.response);
       }, created: function created() {
         this.value && (this.phone = this.value);
@@ -2218,27 +2213,27 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
           }e.ended = !0, g(t);
         }
       }function g(t) {
-        var e = t._readableState;e.needReadable = !1, e.emittedReadable || (D("emitReadable", e.flowing), e.emittedReadable = !0, e.sync ? I(m, t) : m(t));
+        var e = t._readableState;e.needReadable = !1, e.emittedReadable || (U("emitReadable", e.flowing), e.emittedReadable = !0, e.sync ? I(m, t) : m(t));
       }function m(t) {
-        D("emit readable"), t.emit("readable"), x(t);
+        U("emit readable"), t.emit("readable"), x(t);
       }function _(t, e) {
         e.readingMore || (e.readingMore = !0, I(y, t, e));
       }function y(t, e) {
-        for (var n = e.length; !e.reading && !e.flowing && !e.ended && e.length < e.highWaterMark && (D("maybeReadMore read 0"), t.read(0), n !== e.length);) {
+        for (var n = e.length; !e.reading && !e.flowing && !e.ended && e.length < e.highWaterMark && (U("maybeReadMore read 0"), t.read(0), n !== e.length);) {
           n = e.length;
         }e.readingMore = !1;
       }function v(t) {
         return function () {
-          var e = t._readableState;D("pipeOnDrain", e.awaitDrain), e.awaitDrain && e.awaitDrain--, 0 === e.awaitDrain && M(t, "data") && (e.flowing = !0, x(t));
+          var e = t._readableState;U("pipeOnDrain", e.awaitDrain), e.awaitDrain && e.awaitDrain--, 0 === e.awaitDrain && M(t, "data") && (e.flowing = !0, x(t));
         };
       }function b(t) {
-        D("readable nexttick read 0"), t.read(0);
+        U("readable nexttick read 0"), t.read(0);
       }function w(t, e) {
         e.resumeScheduled || (e.resumeScheduled = !0, I(E, t, e));
       }function E(t, e) {
-        e.reading || (D("resume read 0"), t.read(0)), e.resumeScheduled = !1, e.awaitDrain = 0, t.emit("resume"), x(t), e.flowing && !e.reading && t.read(0);
+        e.reading || (U("resume read 0"), t.read(0)), e.resumeScheduled = !1, e.awaitDrain = 0, t.emit("resume"), x(t), e.flowing && !e.reading && t.read(0);
       }function x(t) {
-        var e = t._readableState;for (D("flow", e.flowing); e.flowing && null !== t.read();) {}
+        var e = t._readableState;for (U("flow", e.flowing); e.flowing && null !== t.read();) {}
       }function k(t, e) {
         if (0 === e.length) return null;var n;return e.objectMode ? n = e.buffer.shift() : !t || t >= e.length ? (n = e.decoder ? e.buffer.join("") : 1 === e.buffer.length ? e.buffer.head.data : e.buffer.concat(e.length), e.buffer.clear()) : n = S(t, e.buffer, e.decoder), n;
       }function S(t, e, n) {
@@ -2276,8 +2271,8 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
           P = n(37),
           B = n(17).Buffer,
           j = e.Uint8Array || function () {},
-          F = n(12);F.inherits = n(6);var U = n(69),
-          D = void 0;D = U && U.debuglog ? U.debuglog("stream") : function () {};var z,
+          F = n(12);F.inherits = n(6);var D = n(69),
+          U = void 0;U = D && D.debuglog ? D.debuglog("stream") : function () {};var z,
           Z = n(70),
           G = n(38);F.inherits(s, P);var H = ["error", "close", "destroy", "pause", "resume"];Object.defineProperty(s.prototype, "destroyed", { get: function get() {
           return void 0 !== this._readableState && this._readableState.destroyed;
@@ -2295,34 +2290,34 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
       }, s.prototype.setEncoding = function (t) {
         return z || (z = n(39).StringDecoder), this._readableState.decoder = new z(t), this._readableState.encoding = t, this;
       };var q = 8388608;s.prototype.read = function (t) {
-        D("read", t), t = parseInt(t, 10);var e = this._readableState,
-            n = t;if (0 !== t && (e.emittedReadable = !1), 0 === t && e.needReadable && (e.length >= e.highWaterMark || e.ended)) return D("read: emitReadable", e.length, e.ended), 0 === e.length && e.ended ? R(this) : g(this), null;if (0 === (t = $(t, e)) && e.ended) return 0 === e.length && R(this), null;var r = e.needReadable;D("need readable", r), (0 === e.length || e.length - t < e.highWaterMark) && (r = !0, D("length less than watermark", r)), e.ended || e.reading ? (r = !1, D("reading or ended", r)) : r && (D("do read"), e.reading = !0, e.sync = !0, 0 === e.length && (e.needReadable = !0), this._read(e.highWaterMark), e.sync = !1, e.reading || (t = $(n, e)));var i;return i = t > 0 ? k(t, e) : null, null === i ? (e.needReadable = !0, t = 0) : e.length -= t, 0 === e.length && (e.ended || (e.needReadable = !0), n !== t && e.ended && R(this)), null !== i && this.emit("data", i), i;
+        U("read", t), t = parseInt(t, 10);var e = this._readableState,
+            n = t;if (0 !== t && (e.emittedReadable = !1), 0 === t && e.needReadable && (e.length >= e.highWaterMark || e.ended)) return U("read: emitReadable", e.length, e.ended), 0 === e.length && e.ended ? R(this) : g(this), null;if (0 === (t = $(t, e)) && e.ended) return 0 === e.length && R(this), null;var r = e.needReadable;U("need readable", r), (0 === e.length || e.length - t < e.highWaterMark) && (r = !0, U("length less than watermark", r)), e.ended || e.reading ? (r = !1, U("reading or ended", r)) : r && (U("do read"), e.reading = !0, e.sync = !0, 0 === e.length && (e.needReadable = !0), this._read(e.highWaterMark), e.sync = !1, e.reading || (t = $(n, e)));var i;return i = t > 0 ? k(t, e) : null, null === i ? (e.needReadable = !0, t = 0) : e.length -= t, 0 === e.length && (e.ended || (e.needReadable = !0), n !== t && e.ended && R(this)), null !== i && this.emit("data", i), i;
       }, s.prototype._read = function (t) {
         this.emit("error", new Error("_read() is not implemented"));
       }, s.prototype.pipe = function (t, e) {
         function n(t, e) {
-          D("onunpipe"), t === h && e && !1 === e.hasUnpiped && (e.hasUnpiped = !0, a());
+          U("onunpipe"), t === h && e && !1 === e.hasUnpiped && (e.hasUnpiped = !0, a());
         }function i() {
-          D("onend"), t.end();
+          U("onend"), t.end();
         }function a() {
-          D("cleanup"), t.removeListener("close", u), t.removeListener("finish", l), t.removeListener("drain", g), t.removeListener("error", s), t.removeListener("unpipe", n), h.removeListener("end", i), h.removeListener("end", f), h.removeListener("data", d), m = !0, !c.awaitDrain || t._writableState && !t._writableState.needDrain || g();
+          U("cleanup"), t.removeListener("close", u), t.removeListener("finish", l), t.removeListener("drain", g), t.removeListener("error", s), t.removeListener("unpipe", n), h.removeListener("end", i), h.removeListener("end", f), h.removeListener("data", d), m = !0, !c.awaitDrain || t._writableState && !t._writableState.needDrain || g();
         }function d(e) {
-          D("ondata"), _ = !1, !1 !== t.write(e) || _ || ((1 === c.pipesCount && c.pipes === t || c.pipesCount > 1 && -1 !== O(c.pipes, t)) && !m && (D("false write response, pause", h._readableState.awaitDrain), h._readableState.awaitDrain++, _ = !0), h.pause());
+          U("ondata"), _ = !1, !1 !== t.write(e) || _ || ((1 === c.pipesCount && c.pipes === t || c.pipesCount > 1 && -1 !== O(c.pipes, t)) && !m && (U("false write response, pause", h._readableState.awaitDrain), h._readableState.awaitDrain++, _ = !0), h.pause());
         }function s(e) {
-          D("onerror", e), f(), t.removeListener("error", s), 0 === M(t, "error") && t.emit("error", e);
+          U("onerror", e), f(), t.removeListener("error", s), 0 === M(t, "error") && t.emit("error", e);
         }function u() {
           t.removeListener("finish", l), f();
         }function l() {
-          D("onfinish"), t.removeListener("close", u), f();
+          U("onfinish"), t.removeListener("close", u), f();
         }function f() {
-          D("unpipe"), h.unpipe(t);
+          U("unpipe"), h.unpipe(t);
         }var h = this,
             c = this._readableState;switch (c.pipesCount) {case 0:
             c.pipes = t;break;case 1:
             c.pipes = [c.pipes, t];break;default:
-            c.pipes.push(t);}c.pipesCount += 1, D("pipe count=%d opts=%j", c.pipesCount, e);var $ = (!e || !1 !== e.end) && t !== r.stdout && t !== r.stderr,
+            c.pipes.push(t);}c.pipesCount += 1, U("pipe count=%d opts=%j", c.pipesCount, e);var $ = (!e || !1 !== e.end) && t !== r.stdout && t !== r.stderr,
             p = $ ? i : f;c.endEmitted ? I(p) : h.once("end", p), t.on("unpipe", n);var g = v(h);t.on("drain", g);var m = !1,
-            _ = !1;return h.on("data", d), o(t, "error", s), t.once("close", u), t.once("finish", l), t.emit("pipe", h), c.flowing || (D("pipe resume"), h.resume()), t;
+            _ = !1;return h.on("data", d), o(t, "error", s), t.once("close", u), t.once("finish", l), t.emit("pipe", h), c.flowing || (U("pipe resume"), h.resume()), t;
       }, s.prototype.unpipe = function (t) {
         var e = this._readableState,
             n = { hasUnpiped: !1 };if (0 === e.pipesCount) return this;if (1 === e.pipesCount) return t && t !== e.pipes ? this : (t || (t = e.pipes), e.pipes = null, e.pipesCount = 0, e.flowing = !1, t && t.emit("unpipe", this, n), this);if (!t) {
@@ -2336,18 +2331,18 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
           var r = this._readableState;r.endEmitted || r.readableListening || (r.readableListening = r.needReadable = !0, r.emittedReadable = !1, r.reading ? r.length && g(this) : I(b, this));
         }return n;
       }, s.prototype.addListener = s.prototype.on, s.prototype.resume = function () {
-        var t = this._readableState;return t.flowing || (D("resume"), t.flowing = !0, w(this, t)), this;
+        var t = this._readableState;return t.flowing || (U("resume"), t.flowing = !0, w(this, t)), this;
       }, s.prototype.pause = function () {
-        return D("call pause flowing=%j", this._readableState.flowing), !1 !== this._readableState.flowing && (D("pause"), this._readableState.flowing = !1, this.emit("pause")), this;
+        return U("call pause flowing=%j", this._readableState.flowing), !1 !== this._readableState.flowing && (U("pause"), this._readableState.flowing = !1, this.emit("pause")), this;
       }, s.prototype.wrap = function (t) {
         var e = this._readableState,
             n = !1,
             r = this;t.on("end", function () {
-          if (D("wrapped end"), e.decoder && !e.ended) {
+          if (U("wrapped end"), e.decoder && !e.ended) {
             var t = e.decoder.end();t && t.length && r.push(t);
           }r.push(null);
         }), t.on("data", function (i) {
-          if (D("wrapped data"), e.decoder && (i = e.decoder.write(i)), (!e.objectMode || null !== i && void 0 !== i) && (e.objectMode || i && i.length)) {
+          if (U("wrapped data"), e.decoder && (i = e.decoder.write(i)), (!e.objectMode || null !== i && void 0 !== i) && (e.objectMode || i && i.length)) {
             r.push(i) || (n = !0, t.pause());
           }
         });for (var i in t) {
@@ -2359,7 +2354,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         }for (var a = 0; a < H.length; a++) {
           t.on(H[a], r.emit.bind(r, H[a]));
         }return r._read = function (e) {
-          D("wrapped _read", e), n && (n = !1, t.resume());
+          U("wrapped _read", e), n && (n = !1, t.resume());
         }, r;
       }, s._fromList = k;
     }).call(e, n(0), n(2));
@@ -2621,7 +2616,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         a = n(105),
         o = n(50),
         d = r,
-        s = o(i.a, a.a, !1, d, "data-v-87a6ba94", null);e.a = s.exports;
+        s = o(i.a, a.a, !1, d, "data-v-b5193524", null);e.a = s.exports;
   }, function (t, e) {}, function (t, e) {}, function (t, e) {
     t.exports = function (t, e, n, r, i, a) {
       var o,
@@ -3764,11 +3759,11 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
     }function v() {
       this.strm = null, this.status = 0, this.pending_buf = null, this.pending_buf_size = 0, this.pending_out = 0, this.pending = 0, this.wrap = 0, this.gzhead = null, this.gzindex = 0, this.method = J, this.last_flush = -1, this.w_size = 0, this.w_bits = 0, this.w_mask = 0, this.window = null, this.window_size = 0, this.prev = null, this.head = null, this.ins_h = 0, this.hash_size = 0, this.hash_bits = 0, this.hash_mask = 0, this.hash_shift = 0, this.block_start = 0, this.match_length = 0, this.prev_match = 0, this.match_available = 0, this.strstart = 0, this.match_start = 0, this.lookahead = 0, this.prev_length = 0, this.max_chain_length = 0, this.max_lazy_match = 0, this.level = 0, this.strategy = 0, this.good_match = 0, this.nice_match = 0, this.dyn_ltree = new T.Buf16(2 * at), this.dyn_dtree = new T.Buf16(2 * (2 * rt + 1)), this.bl_tree = new T.Buf16(2 * (2 * it + 1)), a(this.dyn_ltree), a(this.dyn_dtree), a(this.bl_tree), this.l_desc = null, this.d_desc = null, this.bl_desc = null, this.bl_count = new T.Buf16(ot + 1), this.heap = new T.Buf16(2 * nt + 1), a(this.heap), this.heap_len = 0, this.heap_max = 0, this.depth = new T.Buf16(2 * nt + 1), a(this.depth), this.l_buf = 0, this.lit_bufsize = 0, this.last_lit = 0, this.d_buf = 0, this.opt_len = 0, this.static_len = 0, this.matches = 0, this.insert = 0, this.bi_buf = 0, this.bi_valid = 0;
     }function b(t) {
-      var e;return t && t.state ? (t.total_in = t.total_out = 0, t.data_type = X, e = t.state, e.pending = 0, e.pending_out = 0, e.wrap < 0 && (e.wrap = -e.wrap), e.status = e.wrap ? ft : gt, t.adler = 2 === e.wrap ? 0 : 1, e.last_flush = M, O._tr_init(e), U) : r(t, z);
+      var e;return t && t.state ? (t.total_in = t.total_out = 0, t.data_type = X, e = t.state, e.pending = 0, e.pending_out = 0, e.wrap < 0 && (e.wrap = -e.wrap), e.status = e.wrap ? ft : gt, t.adler = 2 === e.wrap ? 0 : 1, e.last_flush = M, O._tr_init(e), D) : r(t, z);
     }function w(t) {
-      var e = b(t);return e === U && y(t.state), e;
+      var e = b(t);return e === D && y(t.state), e;
     }function E(t, e) {
-      return t && t.state ? 2 !== t.state.wrap ? z : (t.state.gzhead = e, U) : z;
+      return t && t.state ? 2 !== t.state.wrap ? z : (t.state.gzhead = e, D) : z;
     }function x(t, e, n, i, a, o) {
       if (!t) return z;var d = 1;if (e === H && (e = 6), i < 0 ? (d = 0, i = -i) : i > 15 && (d = 2, i -= 16), a < 1 || a > Q || n !== J || i < 8 || i > 15 || e < 0 || e > 9 || o < 0 || o > K) return r(t, z);8 === i && (i = 9);var s = new v();return t.state = s, s.strm = t, s.wrap = d, s.gzhead = null, s.w_bits = i, s.w_size = 1 << s.w_bits, s.w_mask = s.w_size - 1, s.hash_bits = a + 7, s.hash_size = 1 << s.hash_bits, s.hash_mask = s.hash_size - 1, s.hash_shift = ~~((s.hash_bits + dt - 1) / dt), s.window = new T.Buf8(2 * s.w_size), s.head = new T.Buf16(s.hash_size), s.prev = new T.Buf16(s.w_size), s.lit_bufsize = 1 << a + 6, s.pending_buf_size = 4 * s.lit_bufsize, s.pending_buf = new T.Buf8(s.pending_buf_size), s.d_buf = 1 * s.lit_bufsize, s.l_buf = 3 * s.lit_bufsize, s.level = e, s.strategy = o, s.method = n, w(t);
     }function k(t, e) {
@@ -3794,12 +3789,12 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
           }f = d.gzindex < d.gzhead.comment.length ? 255 & d.gzhead.comment.charCodeAt(d.gzindex++) : 0, s(d, f);
         } while (0 !== f);d.gzhead.hcrc && d.pending > l && (t.adler = N(t.adler, d.pending_buf, d.pending - l, l)), 0 === f && (d.status = pt);
       } else d.status = pt;if (d.status === pt && (d.gzhead.hcrc ? (d.pending + 2 > d.pending_buf_size && o(t), d.pending + 2 <= d.pending_buf_size && (s(d, 255 & t.adler), s(d, t.adler >> 8 & 255), t.adler = 0, d.status = gt)) : d.status = gt), 0 !== d.pending) {
-        if (o(t), 0 === t.avail_out) return d.last_flush = -1, U;
+        if (o(t), 0 === t.avail_out) return d.last_flush = -1, D;
       } else if (0 === t.avail_in && i(e) <= i(n) && e !== j) return r(t, G);if (d.status === mt && 0 !== t.avail_in) return r(t, G);if (0 !== t.avail_in || 0 !== d.lookahead || e !== M && d.status !== mt) {
-        var $ = d.strategy === Y ? m(d, e) : d.strategy === W ? g(d, e) : R[d.level].func(d, e);if ($ !== vt && $ !== bt || (d.status = mt), $ === _t || $ === vt) return 0 === t.avail_out && (d.last_flush = -1), U;if ($ === yt && (e === P ? O._tr_align(d) : e !== F && (O._tr_stored_block(d, 0, 0, !1), e === B && (a(d.head), 0 === d.lookahead && (d.strstart = 0, d.block_start = 0, d.insert = 0))), o(t), 0 === t.avail_out)) return d.last_flush = -1, U;
-      }return e !== j ? U : d.wrap <= 0 ? D : (2 === d.wrap ? (s(d, 255 & t.adler), s(d, t.adler >> 8 & 255), s(d, t.adler >> 16 & 255), s(d, t.adler >> 24 & 255), s(d, 255 & t.total_in), s(d, t.total_in >> 8 & 255), s(d, t.total_in >> 16 & 255), s(d, t.total_in >> 24 & 255)) : (u(d, t.adler >>> 16), u(d, 65535 & t.adler)), o(t), d.wrap > 0 && (d.wrap = -d.wrap), 0 !== d.pending ? U : D);
+        var $ = d.strategy === Y ? m(d, e) : d.strategy === W ? g(d, e) : R[d.level].func(d, e);if ($ !== vt && $ !== bt || (d.status = mt), $ === _t || $ === vt) return 0 === t.avail_out && (d.last_flush = -1), D;if ($ === yt && (e === P ? O._tr_align(d) : e !== F && (O._tr_stored_block(d, 0, 0, !1), e === B && (a(d.head), 0 === d.lookahead && (d.strstart = 0, d.block_start = 0, d.insert = 0))), o(t), 0 === t.avail_out)) return d.last_flush = -1, D;
+      }return e !== j ? D : d.wrap <= 0 ? U : (2 === d.wrap ? (s(d, 255 & t.adler), s(d, t.adler >> 8 & 255), s(d, t.adler >> 16 & 255), s(d, t.adler >> 24 & 255), s(d, 255 & t.total_in), s(d, t.total_in >> 8 & 255), s(d, t.total_in >> 16 & 255), s(d, t.total_in >> 24 & 255)) : (u(d, t.adler >>> 16), u(d, 65535 & t.adler)), o(t), d.wrap > 0 && (d.wrap = -d.wrap), 0 !== d.pending ? D : U);
     }function C(t) {
-      var e;return t && t.state ? (e = t.state.status) !== ft && e !== ht && e !== ct && e !== $t && e !== pt && e !== gt && e !== mt ? r(t, z) : (t.state = null, e === gt ? r(t, Z) : U) : z;
+      var e;return t && t.state ? (e = t.state.status) !== ft && e !== ht && e !== ct && e !== $t && e !== pt && e !== gt && e !== mt ? r(t, z) : (t.state = null, e === gt ? r(t, Z) : D) : z;
     }function A(t, e) {
       var n,
           r,
@@ -3813,7 +3808,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         r = n.strstart, i = n.lookahead - (dt - 1);do {
           n.ins_h = (n.ins_h << n.hash_shift ^ n.window[r + dt - 1]) & n.hash_mask, n.prev[r & n.w_mask] = n.head[n.ins_h], n.head[n.ins_h] = r, r++;
         } while (--i);n.strstart = r, n.lookahead = dt - 1, h(n);
-      }return n.strstart += n.lookahead, n.block_start = n.strstart, n.insert = n.lookahead, n.lookahead = 0, n.match_length = n.prev_length = dt - 1, n.match_available = 0, t.next_in = s, t.input = u, t.avail_in = d, n.wrap = o, U;
+      }return n.strstart += n.lookahead, n.block_start = n.strstart, n.insert = n.lookahead, n.lookahead = 0, n.match_length = n.prev_length = dt - 1, n.match_available = 0, t.next_in = s, t.input = u, t.avail_in = d, n.wrap = o, D;
     }var R,
         T = n(18),
         O = n(94),
@@ -3825,8 +3820,8 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         B = 3,
         j = 4,
         F = 5,
-        U = 0,
-        D = 1,
+        D = 0,
+        U = 1,
         z = -2,
         Z = -3,
         G = -5,
@@ -3930,7 +3925,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
           n,
           r,
           a,
-          o = new Array(q + 1);for (n = 0, r = 0; r < U - 1; r++) {
+          o = new Array(q + 1);for (n = 0, r = 0; r < D - 1; r++) {
         for (dt[r] = n, t = 0; t < 1 << Q[r]; t++) {
           ot[n++] = r;
         }
@@ -3954,7 +3949,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         rt[2 * t + 1] = 8, t++, o[8]++;
       }for (c(rt, z + 1, o), t = 0; t < Z; t++) {
         it[2 * t + 1] = 5, it[2 * t] = l(t, 5);
-      }ut = new i(rt, Q, D + 1, z, q), lt = new i(it, tt, 0, Z, q), ft = new i(new Array(0), et, 0, G, W);
+      }ut = new i(rt, Q, U + 1, z, q), lt = new i(it, tt, 0, Z, q), ft = new i(new Array(0), et, 0, G, W);
     }function p(t) {
       var e;for (e = 0; e < z; e++) {
         t.dyn_ltree[2 * e] = 0;
@@ -3980,7 +3975,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
           a,
           d,
           l = 0;if (0 !== t.last_lit) do {
-        r = t.pending_buf[t.d_buf + 2 * l] << 8 | t.pending_buf[t.d_buf + 2 * l + 1], i = t.pending_buf[t.l_buf + l], l++, 0 === r ? u(t, i, e) : (a = ot[i], u(t, a + D + 1, e), d = Q[a], 0 !== d && (i -= dt[a], s(t, i, d)), r--, a = o(r), u(t, a, n), 0 !== (d = tt[a]) && (r -= st[a], s(t, r, d)));
+        r = t.pending_buf[t.d_buf + 2 * l] << 8 | t.pending_buf[t.d_buf + 2 * l + 1], i = t.pending_buf[t.l_buf + l], l++, 0 === r ? u(t, i, e) : (a = ot[i], u(t, a + U + 1, e), d = Q[a], 0 !== d && (i -= dt[a], s(t, i, d)), r--, a = o(r), u(t, a, n), 0 !== (d = tt[a]) && (r -= st[a], s(t, r, d)));
       } while (l < t.last_lit);u(t, K, e);
     }function b(t, e) {
       var n,
@@ -4033,7 +4028,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
       var e,
           n = 4093624447;for (e = 0; e <= 31; e++, n >>>= 1) {
         if (1 & n && 0 !== t.dyn_ltree[2 * e]) return L;
-      }if (0 !== t.dyn_ltree[18] || 0 !== t.dyn_ltree[20] || 0 !== t.dyn_ltree[26]) return M;for (e = 32; e < D; e++) {
+      }if (0 !== t.dyn_ltree[18] || 0 !== t.dyn_ltree[20] || 0 !== t.dyn_ltree[26]) return M;for (e = 32; e < U; e++) {
         if (0 !== t.dyn_ltree[2 * e]) return M;
       }return L;
     }function C(t) {
@@ -4047,7 +4042,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
           a,
           o = 0;t.level > 0 ? (t.strm.data_type === P && (t.strm.data_type = S(t)), b(t, t.l_desc), b(t, t.d_desc), o = x(t), i = t.opt_len + 3 + 7 >>> 3, (a = t.static_len + 3 + 7 >>> 3) <= i && (i = a)) : i = a = n + 5, n + 4 <= i && -1 !== e ? A(t, e, n, r) : t.strategy === N || a === i ? (s(t, (j << 1) + (r ? 1 : 0), 3), v(t, rt, it)) : (s(t, (F << 1) + (r ? 1 : 0), 3), k(t, t.l_desc.max_code + 1, t.d_desc.max_code + 1, o + 1), v(t, t.dyn_ltree, t.dyn_dtree)), p(t), r && g(t);
     }function O(t, e, n) {
-      return t.pending_buf[t.d_buf + 2 * t.last_lit] = e >>> 8 & 255, t.pending_buf[t.d_buf + 2 * t.last_lit + 1] = 255 & e, t.pending_buf[t.l_buf + t.last_lit] = 255 & n, t.last_lit++, 0 === e ? t.dyn_ltree[2 * n]++ : (t.matches++, e--, t.dyn_ltree[2 * (ot[n] + D + 1)]++, t.dyn_dtree[2 * o(e)]++), t.last_lit === t.lit_bufsize - 1;
+      return t.pending_buf[t.d_buf + 2 * t.last_lit] = e >>> 8 & 255, t.pending_buf[t.d_buf + 2 * t.last_lit + 1] = 255 & e, t.pending_buf[t.l_buf + t.last_lit] = 255 & n, t.last_lit++, 0 === e ? t.dyn_ltree[2 * n]++ : (t.matches++, e--, t.dyn_ltree[2 * (ot[n] + U + 1)]++, t.dyn_dtree[2 * o(e)]++), t.last_lit === t.lit_bufsize - 1;
     }var I = n(18),
         N = 4,
         L = 0,
@@ -4056,9 +4051,9 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         B = 0,
         j = 1,
         F = 2,
-        U = 29,
-        D = 256,
-        z = D + 1 + U,
+        D = 29,
+        U = 256,
+        z = U + 1 + D,
         Z = 30,
         G = 19,
         H = 2 * z + 1,
@@ -4073,7 +4068,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         tt = [0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13],
         et = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 7],
         nt = [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15],
-        rt = new Array(2 * (z + 2));r(rt);var it = new Array(2 * Z);r(it);var at = new Array(512);r(at);var ot = new Array(256);r(ot);var dt = new Array(U);r(dt);var st = new Array(Z);r(st);var ut,
+        rt = new Array(2 * (z + 2));r(rt);var it = new Array(2 * Z);r(it);var at = new Array(512);r(at);var ot = new Array(256);r(ot);var dt = new Array(D);r(dt);var st = new Array(Z);r(st);var ut,
         lt,
         ft,
         ht = !1;e._tr_init = C, e._tr_stored_block = A, e._tr_flush_block = T, e._tr_tally = O, e._tr_align = R;
@@ -4164,10 +4159,10 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
             }n.head && (n.head.text = h >> 8 & 1), 512 & n.flags && (Ct[0] = 255 & h, Ct[1] = h >>> 8 & 255, n.check = v(n.check, Ct, 2, 0)), h = 0, c = 0, n.mode = F;case F:
             for (; c < 32;) {
               if (0 === s) break t;s--, h += i[o++] << c, c += 8;
-            }n.head && (n.head.time = h), 512 & n.flags && (Ct[0] = 255 & h, Ct[1] = h >>> 8 & 255, Ct[2] = h >>> 16 & 255, Ct[3] = h >>> 24 & 255, n.check = v(n.check, Ct, 4, 0)), h = 0, c = 0, n.mode = U;case U:
+            }n.head && (n.head.time = h), 512 & n.flags && (Ct[0] = 255 & h, Ct[1] = h >>> 8 & 255, Ct[2] = h >>> 16 & 255, Ct[3] = h >>> 24 & 255, n.check = v(n.check, Ct, 4, 0)), h = 0, c = 0, n.mode = D;case D:
             for (; c < 16;) {
               if (0 === s) break t;s--, h += i[o++] << c, c += 8;
-            }n.head && (n.head.xflags = 255 & h, n.head.os = h >> 8), 512 & n.flags && (Ct[0] = 255 & h, Ct[1] = h >>> 8 & 255, n.check = v(n.check, Ct, 2, 0)), h = 0, c = 0, n.mode = D;case D:
+            }n.head && (n.head.xflags = 255 & h, n.head.os = h >> 8), 512 & n.flags && (Ct[0] = 255 & h, Ct[1] = h >>> 8 & 255, n.check = v(n.check, Ct, 2, 0)), h = 0, c = 0, n.mode = U;case U:
             if (1024 & n.flags) {
               for (; c < 16;) {
                 if (0 === s) break t;s--, h += i[o++] << c, c += 8;
@@ -4357,8 +4352,8 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         B = 1,
         j = 2,
         F = 3,
-        U = 4,
-        D = 5,
+        D = 4,
+        U = 5,
         z = 6,
         Z = 7,
         G = 8,
@@ -4630,8 +4625,8 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
               t.choose(e);
             }, mousemove: function mousemove(e) {
               t.selectedIndex = r;
-            } } }, [t.enabledFlags ? n("div", { staticClass: "iti-flag", class: e.iso2.toLowerCase() }) : t._e(), t._v(" "), n("strong", [t._v(t._s(e.name))]), t._v(" "), n("span", [t._v("+" + t._s(e.dialCode))])]);
-      }))]), t._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: t.phone, expression: "phone" }], ref: "input", attrs: { type: "tel", placeholder: t.placeholder, state: t.state, formatter: t.format, disabled: t.disabled, required: t.required, autocomplete: t.autocomplete, name: t.name }, domProps: { value: t.phone }, on: { blur: t.onBlur, input: [function (e) {
+            } } }, [t.enabledFlags ? n("div", { staticClass: "iti-flag", class: e.iso2.toLowerCase() }) : t._e(), t._v(" "), n("strong", [t._v(t._s(e.name))]), t._v(" "), t.dropdownOptions && !t.dropdownOptions.disabledDialCode ? n("span", [t._v("+" + t._s(e.dialCode))]) : t._e()]);
+      }))]), t._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: t.phone, expression: "phone" }], ref: "input", class: t.inputClasses, attrs: { type: "tel", placeholder: t.placeholder, state: t.state, formatter: t.format, disabled: t.disabled, required: t.required, autocomplete: t.autocomplete, name: t.name }, domProps: { value: t.phone }, on: { blur: t.onBlur, input: [function (e) {
             e.target.composing || (t.phone = e.target.value);
           }, t.onInput] } })]);
     },
@@ -4664,7 +4659,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_presets_Users_stevend_coding_vue_vue_tel_input_node_modules_babel_preset_poi_index_js_jsx_vue_cacheDirectory_true_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(/*! !babel-loader?{"babelrc":false,"presets":[["/Users/stevend/coding/vue/vue-tel-input/node_modules/babel-preset-poi/index.js",{"jsx":"vue"}]],"cacheDirectory":true}!../node_modules/vue-loader/lib/selector?type=script&index=0!./App.vue */ 2);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e223f86e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(/*! !../node_modules/vue-loader/lib/template-compiler/index?{"id":"data-v-e223f86e","hasScoped":false,"buble":{"transforms":{}}}!../node_modules/vue-loader/lib/selector?type=template&index=0!./App.vue */ 13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_11c469da_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(/*! !../node_modules/vue-loader/lib/template-compiler/index?{"id":"data-v-11c469da","hasScoped":false,"buble":{"transforms":{}}}!../node_modules/vue-loader/lib/selector?type=template&index=0!./App.vue */ 13);
 var normalizeComponent = __webpack_require__(/*! ../node_modules/vue-loader/lib/component-normalizer */ 12)
 /* script */
 
@@ -4681,7 +4676,7 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_presets_Users_stevend_coding_vue_vue_tel_input_node_modules_babel_preset_poi_index_js_jsx_vue_cacheDirectory_true_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e223f86e_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_11c469da_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
@@ -4695,14 +4690,14 @@ var Component = normalizeComponent(
 /* 12 */,
 /* 13 */
 /*!***********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-e223f86e","hasScoped":false,"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./demo/App.vue ***!
+  !*** ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-11c469da","hasScoped":false,"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./demo/App.vue ***!
   \***********************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('h1',[_vm._v("Telephone Input Vue")]),_vm._v(" "),_c('h2',{staticStyle:{"color":"#999"}},[_vm._v("made with ❤ by Steven.")]),_vm._v(" "),_c('div',{staticStyle:{"width":"500px","margin":"20px auto"}},[_c('vue-tel-input',{attrs:{"disabledFormatting":true,"preferredCountries":['us', 'gb', 'ua']},on:{"onInput":_vm.onInput}})],1),_vm._v(" "),(_vm.phone.number)?_c('div',{staticStyle:{"color":"#e83e8c"}},[_c('span',[_vm._v("\n      Number:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.number))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Is valid:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.isValid))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Country:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.country))])]),_vm._v(" "),_c('span',[_vm._v("\n      formattedNumber:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.formattedNumber))])])]):_vm._e()])}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('h1',[_vm._v("Telephone Input Vue")]),_vm._v(" "),_c('h2',{staticStyle:{"color":"#999"}},[_vm._v("made with ❤ by Steven.")]),_vm._v(" "),_c('div',{staticStyle:{"width":"500px","margin":"20px auto"}},[_c('vue-tel-input',{attrs:{"preferredCountries":['us', 'gb', 'ua'],"dropdownOptions":{ disabledDialCode: true }},on:{"input":_vm.onInput}})],1),_vm._v(" "),(_vm.phone.number)?_c('div',{staticStyle:{"color":"#e83e8c"}},[_c('span',[_vm._v("\n      Number:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.number))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Is valid:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.isValid))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Country:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.country))])])]):_vm._e()])}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

@@ -11,6 +11,7 @@
     >
       <span class="selection">
         <div class="iti-flag" v-if="enabledFlags" :class="activeCountry.iso2.toLowerCase()"></div>
+        <span class="country-code" v-if="enabledCountryCode">+{{ activeCountry.dialCode }}</span>
         <span class="dropdown-arrow">{{ open ? '▲' : '▼' }}</span>
       </span>
       <ul v-show="open" ref="list">
@@ -113,6 +114,9 @@ ul {
 .dropdown:hover {
   background-color: #f3f3f3;
 }
+.country-code {
+  color: #666;
+}
 .dropdown-arrow {
   transform: scaleY(0.5);
   display: inline-block;
@@ -172,6 +176,10 @@ export default {
       // Will override the current country of user
       type: String,
       default: '',
+    },
+    enabledCountryCode: {
+      type: Boolean,
+      default: false
     },
     enabledFlags: {
       type: Boolean,

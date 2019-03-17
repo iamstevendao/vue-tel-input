@@ -121,6 +121,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `disabledFormatting` | `Boolean` | `false` | Disable formatting the phone number in the input, the formatted result still be accessible by `formattedNumber` returned from `onInput` event |
   | `placeholder` | `string` | Enter a phone number | Placeholder for the input |
   | `required` | `Boolean` | `false` | Required property for HTML5 required attribute |
+  | `enabledCountryCode` | `Boolean` | `false` | Enable country code in the input |
   | `enabledFlags` | `Boolean` | `true` | Enable flags in the input |
   | `preferredCountries` | `Array` | `[]` | Preferred countries list, will be on top of the dropdown. ie `['AU', 'BR']` |
   | `onlyCountries` | `Array` | `[]` | List of countries will be shown on the dropdown. ie `['AU', 'BR']` |

@@ -72,8 +72,7 @@ li.last-preferred {
   text-align: left;
 }
 .vue-tel-input:focus-within {
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
-    0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
   border-color: #66afe9;
 }
 input {
@@ -182,7 +181,7 @@ export default {
     },
     enabledCountryCode: {
       type: Boolean,
-      default: false
+      default: false,
     },
     enabledFlags: {
       type: Boolean,
@@ -256,7 +255,7 @@ export default {
       }
 
       if (this.ignoredCountries.length) {
-        return allCountries.filter(({ iso2 }) => 
+        return allCountries.filter(({ iso2 }) =>
           !this.ignoredCountries.includes(iso2.toUpperCase()) &&
           !this.ignoredCountries.includes(iso2.toLowerCase()))
       }

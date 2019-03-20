@@ -214,10 +214,14 @@ export default {
     dropdownOptions: {
       type: Object,
       default: () => ({}),
+    selectedCountryCode: {
+      type: Boolean,
+      default: false
     },
   },
   mounted() {
     this.initializeCountry();
+    this.choose(this.activeCountry);
     this.$emit('onValidate', this.response);
   },
   created() {
@@ -374,6 +378,9 @@ export default {
     },
     choose(country) {
       this.activeCountry = country;
+      if (this.selectedCountryCode === true) {
+        this.phone = '+' + country.dialCode;
+      }
       this.$emit('onInput', this.response);
     },
     onInput() {

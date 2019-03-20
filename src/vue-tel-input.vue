@@ -214,6 +214,9 @@ export default {
     dropdownOptions: {
       type: Object,
       default: () => ({}),
+    selectedCountryCode: {
+      type: Boolean,
+      default: false
     },
   },
   mounted() {
@@ -375,7 +378,9 @@ export default {
     },
     choose(country) {
       this.activeCountry = country;
-      this.phone = '+' + country.dialCode;
+      if (this.selectedCountryCode === true) {
+        this.phone = '+' + country.dialCode;
+      }
       this.$emit('onInput', this.response);
     },
     onInput() {

@@ -128,6 +128,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `ignoredCountries` | `Array` | `[]` | List of countries will NOT be shown on the dropdown. ie `['AU', 'BR']` |
   | `autocomplete`| `String` | `'on'` | Native input 'autocomplete' attribute |
   | `name`| `String` | `'telephone'` | Native input 'name' attribute |
+  | `maxLen`| `Number` | `25` | Native input 'maxlength' attribute |
   | `inputClasses`| `String` | `''` | Custom classes for the `input` |
   | `dropdownOptions`| `Object` | `{ disabledDialCode: false }` | Options for dropdown, supporting `disabledDialCode` |
 

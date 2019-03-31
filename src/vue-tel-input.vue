@@ -4,7 +4,7 @@
       class="dropdown"
       @click="toggleDropdown"
       v-click-outside="clickedOutside"
-      :class="{open: open}"
+      :class="{ open: open }"
       @keydown="keyboardNav"
       tabindex="0"
       @keydown.esc="reset"
@@ -41,6 +41,7 @@
       :autocomplete="autocomplete"
       :name="name"
       :class="inputClasses"
+      :maxlength="maxLen"
       @blur="onBlur"
       @input="onInput"
     >
@@ -218,6 +219,10 @@ export default {
     selectedCountryCode: {
       type: Boolean,
       default: false,
+    },
+    maxLen: {
+      type: Number,
+      default: 25,
     },
   },
   mounted() {

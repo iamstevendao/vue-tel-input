@@ -216,9 +216,9 @@ export default {
       type: Object,
       default: () => ({}),
     },
-    selectedCountryCode: {
-      type: Boolean,
-      default: false,
+    inputOptions: {
+      type: Object,
+      default: () => ({}),
     },
     maxLen: {
       type: Number,
@@ -227,7 +227,7 @@ export default {
   },
   mounted() {
     this.initializeCountry();
-    if (this.selectedCountryCode && this.activeCountry) {
+    if (this.inputOptions && this.inputOptions.showDialCode && this.activeCountry) {
       this.phone = '+' + this.activeCountry.dialCode;
     }
     this.$emit('onValidate', this.response);
@@ -386,7 +386,7 @@ export default {
     },
     choose(country) {
       this.activeCountry = country;
-      if (this.selectedCountryCode && country) {
+      if (this.inputOptions && this.inputOptions.showDialCode && country) {
         this.phone = '+' + country.dialCode;
       }
       this.$emit('onInput', this.response);

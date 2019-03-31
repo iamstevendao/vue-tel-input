@@ -131,6 +131,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `maxLen`| `Number` | `25` | Native input 'maxlength' attribute |
   | `inputClasses`| `String` | `''` | Custom classes for the `input` |
   | `dropdownOptions`| `Object` | `{ disabledDialCode: false }` | Options for dropdown, supporting `disabledDialCode` |
+  | `inputOptions`| `Object` | `{ showDialCode: false }` | Options for input, always show dial code in the input |
 
 ### Events
 

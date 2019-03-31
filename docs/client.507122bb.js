@@ -38,6 +38,8 @@ webpackJsonp([1],[
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'app',
@@ -1965,7 +1967,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
       }return Array.from(t);
     }var i = n(51),
         a = n(59),
-        o = n(60);e.a = { name: "vue-tel-input", props: { value: { type: String }, placeholder: { type: String, default: "Enter a phone number" }, disabledFetchingCountry: { type: Boolean, default: !1 }, disabled: { type: Boolean, default: !1 }, disabledFormatting: { type: Boolean, default: !1 }, invalidMsg: { default: "", type: String }, required: { type: Boolean, default: !1 }, defaultCountry: { type: String, default: "" }, enabledFlags: { type: Boolean, default: !0 }, preferredCountries: { type: Array, default: function _default() {
+        o = n(60);e.a = { name: "vue-tel-input", props: { value: { type: String }, placeholder: { type: String, default: "Enter a phone number" }, disabledFetchingCountry: { type: Boolean, default: !1 }, disabled: { type: Boolean, default: !1 }, disabledFormatting: { type: Boolean, default: !1 }, invalidMsg: { default: "", type: String }, required: { type: Boolean, default: !1 }, defaultCountry: { type: String, default: "" }, enabledCountryCode: { type: Boolean, default: !1 }, enabledFlags: { type: Boolean, default: !0 }, preferredCountries: { type: Array, default: function _default() {
             return [];
           } }, onlyCountries: { type: Array, default: function _default() {
             return [];
@@ -1973,8 +1975,8 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
             return [];
           } }, autocomplete: { type: String, default: "on" }, name: { type: String, default: "telephone" }, inputClasses: { type: String, default: "" }, dropdownOptions: { type: Object, default: function _default() {
             return {};
-          } } }, mounted: function mounted() {
-        this.initializeCountry(), this.$emit("onValidate", this.response);
+          } }, selectedCountryCode: { type: Boolean, default: !1 }, maxLen: { type: Number, default: 25 } }, mounted: function mounted() {
+        this.initializeCountry(), this.selectedCountryCode && this.activeCountry && (this.phone = "+" + this.activeCountry.dialCode), this.$emit("onValidate", this.response);
       }, created: function created() {
         this.value && (this.phone = this.value);
       }, data: function data() {
@@ -2020,7 +2022,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
               return t.toUpperCase();
             }).indexOf(e) };
         }, choose: function choose(t) {
-          this.activeCountry = t, this.$emit("onInput", this.response);
+          this.activeCountry = t, this.selectedCountryCode && t && (this.phone = "+" + t.dialCode), this.$emit("onInput", this.response);
         }, onInput: function onInput() {
           this.$refs.input.setCustomValidity(this.response.isValid ? "" : this.invalidMsg), this.$emit("input", this.response.number), this.$emit("onInput", this.response);
         }, onBlur: function onBlur() {
@@ -2616,7 +2618,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
         a = n(105),
         o = n(50),
         d = r,
-        s = o(i.a, a.a, !1, d, "data-v-b5193524", null);e.a = s.exports;
+        s = o(i.a, a.a, !1, d, "data-v-f9293032", null);e.a = s.exports;
   }, function (t, e) {}, function (t, e) {}, function (t, e) {
     t.exports = function (t, e, n, r, i, a) {
       var o,
@@ -4620,13 +4622,13 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
           e = t.$createElement,
           n = t._self._c || e;return n("div", { staticClass: "vue-tel-input", class: { disabled: t.disabled } }, [n("div", { directives: [{ name: "click-outside", rawName: "v-click-outside", value: t.clickedOutside, expression: "clickedOutside" }], staticClass: "dropdown", class: { open: t.open }, attrs: { tabindex: "0" }, on: { click: t.toggleDropdown, keydown: [t.keyboardNav, function (e) {
             if (!("button" in e) && t._k(e.keyCode, "esc", 27, e.key)) return null;t.reset(e);
-          }] } }, [n("span", { staticClass: "selection" }, [t.enabledFlags ? n("div", { staticClass: "iti-flag", class: t.activeCountry.iso2.toLowerCase() }) : t._e(), t._v(" "), n("span", { staticClass: "dropdown-arrow" }, [t._v(t._s(t.open ? "▲" : "▼"))])]), t._v(" "), n("ul", { directives: [{ name: "show", rawName: "v-show", value: t.open, expression: "open" }], ref: "list" }, t._l(t.sortedCountries, function (e, r) {
+          }] } }, [n("span", { staticClass: "selection" }, [t.enabledFlags ? n("div", { staticClass: "iti-flag", class: t.activeCountry.iso2.toLowerCase() }) : t._e(), t._v(" "), t.enabledCountryCode ? n("span", { staticClass: "country-code" }, [t._v("+" + t._s(t.activeCountry.dialCode))]) : t._e(), t._v(" "), n("span", { staticClass: "dropdown-arrow" }, [t._v(t._s(t.open ? "▲" : "▼"))])]), t._v(" "), n("ul", { directives: [{ name: "show", rawName: "v-show", value: t.open, expression: "open" }], ref: "list" }, t._l(t.sortedCountries, function (e, r) {
         return n("li", { key: e.iso2 + (e.preferred ? "-preferred" : ""), staticClass: "dropdown-item", class: t.getItemClass(r, e.iso2), on: { click: function click(n) {
               t.choose(e);
             }, mousemove: function mousemove(e) {
               t.selectedIndex = r;
             } } }, [t.enabledFlags ? n("div", { staticClass: "iti-flag", class: e.iso2.toLowerCase() }) : t._e(), t._v(" "), n("strong", [t._v(t._s(e.name))]), t._v(" "), t.dropdownOptions && !t.dropdownOptions.disabledDialCode ? n("span", [t._v("+" + t._s(e.dialCode))]) : t._e()]);
-      }))]), t._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: t.phone, expression: "phone" }], ref: "input", class: t.inputClasses, attrs: { type: "tel", placeholder: t.placeholder, state: t.state, formatter: t.format, disabled: t.disabled, required: t.required, autocomplete: t.autocomplete, name: t.name }, domProps: { value: t.phone }, on: { blur: t.onBlur, input: [function (e) {
+      }))]), t._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: t.phone, expression: "phone" }], ref: "input", class: t.inputClasses, attrs: { type: "tel", placeholder: t.placeholder, state: t.state, formatter: t.format, disabled: t.disabled, required: t.required, autocomplete: t.autocomplete, name: t.name, maxlength: t.maxLen }, domProps: { value: t.phone }, on: { blur: t.onBlur, input: [function (e) {
             e.target.composing || (t.phone = e.target.value);
           }, t.onInput] } })]);
     },
@@ -4659,7 +4661,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */](Object.assign({}, __WEB
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_presets_Users_stevend_coding_vue_vue_tel_input_node_modules_babel_preset_poi_index_js_jsx_vue_cacheDirectory_true_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(/*! !babel-loader?{"babelrc":false,"presets":[["/Users/stevend/coding/vue/vue-tel-input/node_modules/babel-preset-poi/index.js",{"jsx":"vue"}]],"cacheDirectory":true}!../node_modules/vue-loader/lib/selector?type=script&index=0!./App.vue */ 2);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_11c469da_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(/*! !../node_modules/vue-loader/lib/template-compiler/index?{"id":"data-v-11c469da","hasScoped":false,"buble":{"transforms":{}}}!../node_modules/vue-loader/lib/selector?type=template&index=0!./App.vue */ 13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3b4f459a_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(/*! !../node_modules/vue-loader/lib/template-compiler/index?{"id":"data-v-3b4f459a","hasScoped":false,"buble":{"transforms":{}}}!../node_modules/vue-loader/lib/selector?type=template&index=0!./App.vue */ 13);
 var normalizeComponent = __webpack_require__(/*! ../node_modules/vue-loader/lib/component-normalizer */ 12)
 /* script */
 
@@ -4676,7 +4678,7 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_presets_Users_stevend_coding_vue_vue_tel_input_node_modules_babel_preset_poi_index_js_jsx_vue_cacheDirectory_true_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_11c469da_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_3b4f459a_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
@@ -4690,14 +4692,14 @@ var Component = normalizeComponent(
 /* 12 */,
 /* 13 */
 /*!***********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-11c469da","hasScoped":false,"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./demo/App.vue ***!
+  !*** ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-3b4f459a","hasScoped":false,"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./demo/App.vue ***!
   \***********************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('h1',[_vm._v("Telephone Input Vue")]),_vm._v(" "),_c('h2',{staticStyle:{"color":"#999"}},[_vm._v("made with ❤ by Steven.")]),_vm._v(" "),_c('div',{staticStyle:{"width":"500px","margin":"20px auto"}},[_c('vue-tel-input',{attrs:{"preferredCountries":['us', 'gb', 'ua'],"dropdownOptions":{ disabledDialCode: true }},on:{"input":_vm.onInput}})],1),_vm._v(" "),(_vm.phone.number)?_c('div',{staticStyle:{"color":"#e83e8c"}},[_c('span',[_vm._v("\n      Number:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.number))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Is valid:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.isValid))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Country:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.country))])])]):_vm._e()])}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('h1',[_vm._v("Telephone Input Vue")]),_vm._v(" "),_c('h2',{staticStyle:{"color":"#999"}},[_vm._v("made with ❤ by Steven.")]),_vm._v(" "),_c('div',{staticStyle:{"width":"500px","margin":"20px auto"}},[_c('vue-tel-input',{attrs:{"preferredCountries":['us', 'gb', 'ua'],"maxLen":5},on:{"onInput":_vm.onInput}})],1),_vm._v(" "),(_vm.phone.number)?_c('div',{staticStyle:{"color":"#e83e8c"}},[_c('span',[_vm._v("\n      Number:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.number))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Is valid:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.isValid))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Country:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.country))])])]):_vm._e()])}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

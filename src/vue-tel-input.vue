@@ -1,5 +1,5 @@
 <template>
-  <div class="vue-tel-input" :class="{ disabled: disabled }">
+  <div :class="['vue-tel-input', wrapperClasses, { disabled: disabled }]">
     <div
       class="dropdown"
       @click="toggleDropdown"
@@ -207,6 +207,10 @@ export default {
     name: {
       type: String,
       default: 'telephone',
+    },
+    wrapperClasses: {
+      type: String,
+      default: '',
     },
     inputClasses: {
       type: String,

@@ -5,7 +5,7 @@ import '../dist/vue-tel-input.css';
 
 import App from './App.vue';
 
-Vue.use(VueTelInput);
+Vue.component('vue-tel-input', VueTelInput);
 
 Vue.config.productionTip = false;
 

@@ -23,16 +23,8 @@ Checkout Demo at [Github pages](https://educationlink.github.io/vue-tel-input/).
     import 'vue-tel-input/dist/vue-tel-input.css';
     ```
 
-- Install as a global component:
-    ```javascript
-    import Vue from 'vue'
-    import VueTelInput from 'vue-tel-input'
-
-    Vue.use(VueTelInput)
-    ```
-
 - In your component:
-     ```js
+     ```html
      <template>
      ...
         <vue-tel-input v-model="phone"
@@ -43,7 +35,12 @@ Checkout Demo at [Github pages](https://educationlink.github.io/vue-tel-input/).
      ...
      <template>
      <script>
+     import VueTelInput from 'vue-tel-input';
+
      export default {
+       components: {
+         VueTelInput,
+       },
        data() {
          return {
            phone: '',

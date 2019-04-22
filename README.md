@@ -1,7 +1,7 @@
 # vue-tel-input
 International Telephone Input with Vue.
 
-Checkout Demo at [Github pages](https://educationlink.github.io/vue-tel-input/).
+Checkout [Demo](https://educationlink.github.io/vue-tel-input/) or [Playground](https://codesandbox.io/s/0yyyk45q7w?fontsize=14&module=%2Fsrc%2FApp.vue&moduleview=1).
 
 <p align="center">
 <img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
@@ -91,6 +91,8 @@ Checkout Demo at [Github pages](https://educationlink.github.io/vue-tel-input/).
 Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.io/vueformgenerator/content/fields/custom_fields.html)
 
 ### Props
+
+  Test all props on [CodeSandbox](https://codesandbox.io/s/0yyyk45q7w?fontsize=14&module=%2Fsrc%2FApp.vue&moduleview=1).
 
   | Property value | Type | Default value | Description |
   | -------------- | ---- | ------------- | ----------- |

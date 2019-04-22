@@ -27,11 +27,7 @@ Checkout Demo at [Github pages](https://educationlink.github.io/vue-tel-input/).
      ```html
      <template>
      ...
-        <vue-tel-input v-model="phone"
-                       @onInput="onInput"
-                       <!-- optional -->
-                       :preferredCountries="['us', 'gb', 'ua']">
-        </vue-tel-input>
+        <vue-tel-input v-model="phone"></vue-tel-input>
      ...
      <template>
      <script>
@@ -45,20 +41,6 @@ Checkout Demo at [Github pages](https://educationlink.github.io/vue-tel-input/).
          return {
            phone: '',
          };
-       },
-       methods: {
-         /**
-          * @param {string} number
-          * the phone number inputted by user, will be formatted along with country code
-          * // Ex: inputted: (AU) 0432 432 432
-          * // number = '+61432421546'
-          *
-          * @param {Boolean} isValid
-          * @param {string} country
-          */
-          onInput({ number, isValid, country }) {
-            console.log(number, isValid, country);
-          },
        },
      }
      </script>

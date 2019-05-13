@@ -34,8 +34,6 @@
       v-model="phone"
       type="tel"
       :placeholder="placeholder"
-      :state="state"
-      :formatter="format"
       :disabled="disabled"
       :required="required"
       :autocomplete="autocomplete"

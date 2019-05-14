@@ -42,6 +42,8 @@
       :maxlength="maxLen"
       @blur="onBlur"
       @input="onInput"
+      @keyup.enter="onEnter"
+      @keyup.space="onSpace"
     >
   </div>
 </template>
@@ -403,6 +405,12 @@ export default {
     },
     onBlur() {
       this.$emit('onBlur');
+    },
+     onEnter() {
+      this.$emit('onEnter');
+    },
+     onSpace() {
+      this.$emit('onSpace');
     },
     toggleDropdown() {
       if (this.disabled) {

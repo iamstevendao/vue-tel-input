@@ -153,6 +153,14 @@ $ yarn/npm dist
 
 ```
 
+## Typescript Support
+
+If you working with typescript will need declaration requirements.
+
+```bash
+npm install --save-dev @types/vue-tel-input
+```
+
 ## Contributors
 - [mikob](https://github.com/mikob) for super awesome work to [remove the bootstrap dependency](https://github.com/EducationLink/vue-tel-input/pull/13).
 - [kalcifield](https://github.com/kalcifield) for helping make the input [preload with a phone number](https://github.com/EducationLink/vue-tel-input/pull/8).

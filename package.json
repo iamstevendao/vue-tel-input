@@ -1,6 +1,6 @@
 {
   "name": "vue-tel-input",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "International Telephone Input with Vue",
   "author": "Steven Dao <iamstevendao@gmail.com>",
   "main": "dist/vue-tel-input.js",

@@ -231,7 +231,7 @@ export default {
   },
   mounted() {
     this.initializeCountry();
-    if (this.inputOptions && this.inputOptions.showDialCode && this.activeCountry) {
+    if (!this.phone && this.inputOptions && this.inputOptions.showDialCode && this.activeCountry) {
       this.phone = '+' + this.activeCountry.dialCode;
     }
     this.$emit('onValidate', this.response);

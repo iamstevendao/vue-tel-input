@@ -2,11 +2,11 @@
   <div :class="['vue-tel-input', wrapperClasses, { disabled: disabled }]">
     <div
       class="dropdown"
-      @click="toggleDropdown"
       v-click-outside="clickedOutside"
+      tabindex="0"
       :class="{ open: open }"
       @keydown="keyboardNav"
-      tabindex="0"
+      @click="toggleDropdown"
       @keydown.esc="reset"
     >
       <span class="selection">
@@ -406,11 +406,14 @@ export default {
     onBlur() {
       this.$emit('onBlur');
     },
-     onEnter() {
+    onEnter() {
       this.$emit('onEnter');
     },
-     onSpace() {
+    onSpace() {
       this.$emit('onSpace');
+    },
+    focus() {
+      this.$refs.input.focus();
     },
     toggleDropdown() {
       if (this.disabled) {

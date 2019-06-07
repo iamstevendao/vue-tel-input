@@ -140,7 +140,9 @@ ul {
 </style>
 
 <script>
-import { formatNumber, AsYouType, isValidNumber } from 'libphonenumber-js';
+import { 
+  formatNumber, AsYouType, isValidNumber, parsePhoneNumberFromString,
+} from 'libphonenumber-js';
 import allCountries from './assets/all-countries';
 import getCountry from './assets/default-country';
 
@@ -238,7 +240,7 @@ export default {
   },
   created() {
     if (this.value) {
-      this.phone = this.value
+      this.phone = this.value.trim();
     }
   },
   data() {
@@ -345,7 +347,17 @@ export default {
   methods: {
     initializeCountry() {
       /**
-       * 1. Use default country if passed from parent
+       * 1. If the phone included prefix (+12), try to get the country and set it
+       */
+      if (this.phone && this.phone[0] === '+') {
+        const parsedPhone = parsePhoneNumberFromString(this.phone);
+        if (parsedPhone && parsedPhone.country) {
+          this.activeCountry = parsedPhone.country;
+          return;
+        }
+      }
+      /**
+       * 2. Use default country if passed from parent
        */
       if (this.defaultCountry) {
         const defaultCountry = this.findCountry(this.defaultCountry);
@@ -355,11 +367,11 @@ export default {
         }
       }
       /**
-       * 2. Use the first country from preferred list (if available) or all countries list
+       * 3. Use the first country from preferred list (if available) or all countries list
        */
       this.activeCountry = this.findCountry(this.preferredCountries[0]) || this.filteredCountries[0];
       /**
-       * 3. Check if fetching country based on user's IP is allowed, set it as the default country
+       * 4. Check if fetching country based on user's IP is allowed, set it as the default country
        */
       if (!this.disabledFetchingCountry) {
         getCountry().then((res) => {

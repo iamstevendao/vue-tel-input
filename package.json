@@ -12,12 +12,10 @@
   },
   "scripts": {
     "dist": "poi build",
-    "dist:demo": "poi build ./demo/index.js --config ./demo/build.config.js --filename.css vue-tel-input.css --no-sourceMap --dist ./docs",
     "start": "yarn dev",
     "dev": "poi build ./demo/index.js --config ./demo/build.config.js --filename.css vue-tel-input.css --no-sourceMap --no-minimize --dist ./docs",
     "release": "rm -rf dist && yarn dist",
-    "demo": "yarn dist && yarn dev && yarn demo:open",
-    "demo:open": "open 'http://localhost:5000/'; serve ./docs/"
+    "demo": "yarn dist && yarn dev && serve ./docs/"
   },
   "files": [
     "dist/"

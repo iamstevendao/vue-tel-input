@@ -119,11 +119,11 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
 
   | Property value | Arguments | Description |
   | -------------- | --------- | ----------- |
-  | `onInput` | `Object` | Fires when the input changes with the argument is the object includes `{ number, isValid, country }` |
-  | `onValidate` | `Object` | Fires when the correctness of the phone number changes (from `true` to `false` or vice-versa) and when the component is mounted `{ number, isValid, country }` |
-  | `onBlur` |  | Fires on blur event |
-  | `onSpace` |  | Fires on keyup.space event |
-  | `onEnter` |  | Fires on keyup.enter event |
+  | `input` | `String`, `Object` | Fires when the input changes with the argument is the object includes `{ number, isValid, country }` |
+  | `validate` | `Object` | Fires when the correctness of the phone number changes (from `true` to `false` or vice-versa) and when the component is mounted `{ number, isValid, country }` |
+  | `blur` |  | Fires on blur event |
+  | `space` |  | Fires on keyup.space event |
+  | `enter` |  | Fires on keyup.enter event |
 
 ## Highlights & Credits
 - Vue app created by [vue-cli](https://github.com/vuejs/vue-cli).

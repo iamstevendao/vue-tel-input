@@ -234,7 +234,7 @@ export default {
     if (!this.phone && this.inputOptions && this.inputOptions.showDialCode && this.activeCountry) {
       this.phone = '+' + this.activeCountry.dialCode;
     }
-    this.$emit('onValidate', this.response);
+    this.$emit('validate', this.response);
   },
   created() {
     if (this.value) {
@@ -336,7 +336,7 @@ export default {
         // Otherwise format it
         this.phone = this.formattedResult;
       }
-      this.$emit('onValidate', this.response);
+      this.$emit('validate', this.response);
     },
     value() {
       this.phone = this.value;
@@ -393,24 +393,22 @@ export default {
       if (this.inputOptions && this.inputOptions.showDialCode && country) {
         this.phone = '+' + country.dialCode;
       }
-      this.$emit('onInput', this.response);
+      this.$emit('input', this.response.number, this.response);
     },
     onInput() {
       this.$refs.input.setCustomValidity(this.response.isValid ? '' : this.invalidMsg);
-      // Emit input event in case v-model is used in the parent
-      this.$emit('input', this.response.number);
-
-      // Emit the response, includes phone, validity and country
-      this.$emit('onInput', this.response);
+      // Returns response.number to assign it to v-model (if being used)
+      // Returns full response for cases @input is used and parent wants to return the whole response.
+      this.$emit('input', this.response.number, this.response);
     },
     onBlur() {
-      this.$emit('onBlur');
+      this.$emit('blur');
     },
     onEnter() {
-      this.$emit('onEnter');
+      this.$emit('enter');
     },
     onSpace() {
-      this.$emit('onSpace');
+      this.$emit('space');
     },
     focus() {
       this.$refs.input.focus();

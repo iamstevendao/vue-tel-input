@@ -22,7 +22,7 @@ webpackJsonp([1],{
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_presets_Users_stevend_coding_vue_vue_tel_input_node_modules_babel_preset_poi_index_js_jsx_vue_cacheDirectory_true_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(/*! !babel-loader?{"babelrc":false,"presets":[["/Users/stevend/coding/vue/vue-tel-input/node_modules/babel-preset-poi/index.js",{"jsx":"vue"}]],"cacheDirectory":true}!../node_modules/vue-loader/lib/selector?type=script&index=0!./App.vue */ 45);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_652e1d43_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(/*! !../node_modules/vue-loader/lib/template-compiler/index?{"id":"data-v-652e1d43","hasScoped":false,"buble":{"transforms":{}}}!../node_modules/vue-loader/lib/selector?type=template&index=0!./App.vue */ 104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_28a3f1fa_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(/*! !../node_modules/vue-loader/lib/template-compiler/index?{"id":"data-v-28a3f1fa","hasScoped":false,"buble":{"transforms":{}}}!../node_modules/vue-loader/lib/selector?type=template&index=0!./App.vue */ 104);
 var normalizeComponent = __webpack_require__(/*! ../node_modules/vue-loader/lib/component-normalizer */ 103)
 /* script */
 
@@ -39,7 +39,7 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_babelrc_false_presets_Users_stevend_coding_vue_vue_tel_input_node_modules_babel_preset_poi_index_js_jsx_vue_cacheDirectory_true_node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_652e1d43_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_28a3f1fa_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
@@ -53,14 +53,14 @@ var Component = normalizeComponent(
 
 /***/ 104:
 /*!***********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-652e1d43","hasScoped":false,"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./demo/App.vue ***!
+  !*** ./node_modules/vue-loader/lib/template-compiler?{"id":"data-v-28a3f1fa","hasScoped":false,"buble":{"transforms":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./demo/App.vue ***!
   \***********************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('h1',[_vm._v("Telephone Input Vue")]),_vm._v(" "),_c('h2',{staticStyle:{"color":"#999"}},[_vm._v("made with ❤ by Steven.")]),_vm._v(" "),_c('div',{staticStyle:{"width":"500px","margin":"20px auto"}},[_c('vue-tel-input',{attrs:{"preferredCountries":['us', 'gb', 'ua']},on:{"onInput":_vm.onInput}})],1),_vm._v(" "),(_vm.phone.number)?_c('div',{staticStyle:{"color":"#e83e8c"}},[_c('span',[_vm._v("\n      Number:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.number))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Is valid:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.isValid))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Country:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.country))])])]):_vm._e()])}
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"app"}},[_c('h1',[_vm._v("Telephone Input Vue")]),_vm._v(" "),_c('h2',{staticStyle:{"color":"#999"}},[_vm._v("made with ❤ by Steven.")]),_vm._v(" "),_c('div',{staticStyle:{"width":"500px","margin":"20px auto"}},[_c('vue-tel-input',{ref:"telInput",attrs:{"preferredCountries":['us', 'gb', 'ua']},on:{"input":_vm.onInput,"blur":function($event){_vm.phone.number = 1},"space":function($event){_vm.phone.number = 2},"enter":function($event){_vm.phone.number = 3}}})],1),_vm._v(" "),_c('vue-tel-input',{model:{value:(_vm.xxx),callback:function ($$v) {_vm.xxx=$$v},expression:"xxx"}}),_vm._v(" "),_c('a',{attrs:{"href":""},on:{"click":function($event){$event.preventDefault();_vm.$refs.telInput.focus()}}},[_vm._v("Focus")]),_vm._v(" "),(_vm.phone.number)?_c('div',{staticStyle:{"color":"#e83e8c"}},[_c('span',[_vm._v("\n      Number:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.number))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Is valid:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.isValid))]),_vm._v(", \n    ")]),_vm._v(" "),_c('span',[_vm._v("\n      Country:\n      "),_c('strong',[_vm._v(_vm._s(_vm.phone.country))])])]):_vm._e()],1)}
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -100,6 +100,13 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'app',
@@ -109,15 +116,23 @@ var esExports = { render: render, staticRenderFns: staticRenderFns }
         number: '',
         isValid: false,
         country: undefined
-      }
+      },
+      xxx: ''
     };
   },
 
+  watch: {
+    xxx: function xxx() {
+      console.log('xxx: ', this.xxx);
+    }
+  },
   methods: {
-    onInput: function onInput(_ref) {
+    onInput: function onInput(x, _ref) {
       var number = _ref.number,
           isValid = _ref.isValid,
           country = _ref.country;
+
+      console.log('----- k: ', x);
 
       this.phone.number = number;
       this.phone.isValid = isValid;
@@ -206,7 +221,7 @@ module.exports = function (e) {
       }return n;
     }return Array.from(e);
   }var a = n(6),
-      r = (n.n(a), n(7)),
+      o = (n.n(a), n(7)),
       s = n(8);t.a = { name: "vue-tel-input", props: { value: { type: String }, placeholder: { type: String, default: "Enter a phone number" }, disabledFetchingCountry: { type: Boolean, default: !1 }, disabled: { type: Boolean, default: !1 }, disabledFormatting: { type: Boolean, default: !1 }, invalidMsg: { default: "", type: String }, required: { type: Boolean, default: !1 }, defaultCountry: { type: String, default: "" }, enabledCountryCode: { type: Boolean, default: !1 }, enabledFlags: { type: Boolean, default: !0 }, preferredCountries: { type: Array, default: function _default() {
           return [];
         } }, onlyCountries: { type: Array, default: function _default() {
@@ -218,7 +233,7 @@ module.exports = function (e) {
         } }, inputOptions: { type: Object, default: function _default() {
           return {};
         } }, maxLen: { type: Number, default: 25 } }, mounted: function mounted() {
-      this.initializeCountry(), this.inputOptions && this.inputOptions.showDialCode && this.activeCountry && (this.phone = "+" + this.activeCountry.dialCode), this.$emit("onValidate", this.response);
+      this.initializeCountry(), !this.phone && this.inputOptions && this.inputOptions.showDialCode && this.activeCountry && (this.phone = "+" + this.activeCountry.dialCode), this.$emit("onValidate", this.response);
     }, created: function created() {
       this.value && (this.phone = this.value);
     }, data: function data() {
@@ -226,9 +241,9 @@ module.exports = function (e) {
     }, computed: { mode: function mode() {
         return this.phone ? "+" === this.phone[0] ? "code" : "0" === this.phone[0] ? "prefix" : "normal" : "";
       }, filteredCountries: function filteredCountries() {
-        var e = this;return this.onlyCountries.length ? this.getCountries(this.onlyCountries) : this.ignoredCountries.length ? r.a.filter(function (t) {
+        var e = this;return this.onlyCountries.length ? this.getCountries(this.onlyCountries) : this.ignoredCountries.length ? o.a.filter(function (t) {
           var n = t.iso2;return !e.ignoredCountries.includes(n.toUpperCase()) && !e.ignoredCountries.includes(n.toLowerCase());
-        }) : r.a;
+        }) : o.a;
       }, sortedCountries: function sortedCountries() {
         return [].concat(i(this.getCountries(this.preferredCountries).map(function (e) {
           return Object.assign({}, e, { preferred: !0 });
@@ -256,7 +271,7 @@ module.exports = function (e) {
           return e.findCountry(t);
         }).filter(Boolean);
       }, findCountry: function findCountry() {
-        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "";return r.a.find(function (t) {
+        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "";return o.a.find(function (t) {
           return t.iso2 === e.toUpperCase();
         });
       }, getItemClass: function getItemClass(e, t) {
@@ -266,9 +281,15 @@ module.exports = function (e) {
       }, choose: function choose(e) {
         this.activeCountry = e, this.inputOptions && this.inputOptions.showDialCode && e && (this.phone = "+" + e.dialCode), this.$emit("onInput", this.response);
       }, onInput: function onInput() {
-        this.$refs.input.setCustomValidity(this.response.isValid ? "" : this.invalidMsg), this.$emit("input", this.response.number), this.$emit("onInput", this.response);
+        this.$refs.input.setCustomValidity(this.response.isValid ? "" : this.invalidMsg), this.$emit("input", this.response.number, this.response), this.$emit("on-input", this.response);
       }, onBlur: function onBlur() {
-        this.$emit("onBlur");
+        this.$emit("blur");
+      }, onEnter: function onEnter() {
+        this.$emit("enter");
+      }, onSpace: function onSpace() {
+        this.$emit("space");
+      }, focus: function focus() {
+        this.$refs.input.focus();
       }, toggleDropdown: function toggleDropdown() {
         this.disabled || (this.open = !this.open);
       }, clickedOutside: function clickedOutside() {
@@ -284,7 +305,7 @@ module.exports = function (e) {
           }, 700);var a = this.sortedCountries.slice(this.preferredCountries.length).findIndex(function (e) {
             return e.name.toLowerCase().startsWith(t.typeToFindInput);
           });if (~a) {
-            this.selectedIndex = this.preferredCountries.length + a;var r = this.$refs.list.children[this.selectedIndex];(r.offsetTop < this.$refs.list.scrollTop || r.offsetTop + r.clientHeight > this.$refs.list.scrollTop + this.$refs.list.clientHeight) && (this.$refs.list.scrollTop = r.offsetTop - this.$refs.list.clientHeight / 2);
+            this.selectedIndex = this.preferredCountries.length + a;var o = this.$refs.list.children[this.selectedIndex];(o.offsetTop < this.$refs.list.scrollTop || o.offsetTop + o.clientHeight > this.$refs.list.scrollTop + this.$refs.list.clientHeight) && (this.$refs.list.scrollTop = o.offsetTop - this.$refs.list.clientHeight / 2);
           }
         }
       }, reset: function reset() {
@@ -295,9 +316,9 @@ module.exports = function (e) {
           if ("function" != typeof t.value) {
             var i = n.context.name,
                 a = "[Vue-click-outside:] provided expression " + t.expression + " is not a function, but has to be";i && (a += "Found in component " + i), console.warn(a);
-          }var r = t.modifiers.bubble,
+          }var o = t.modifiers.bubble,
               s = function s(n) {
-            (r || !e.contains(n.target) && e !== n.target) && t.value(n);
+            (o || !e.contains(n.target) && e !== n.target) && t.value(n);
           };e.__vueClickOutside__ = s, document.addEventListener("click", s);
         }, unbind: function unbind(e, t) {
           document.removeEventListener("click", e.__vueClickOutside__), e.__vueClickOutside__ = null;
@@ -309,22 +330,22 @@ module.exports = function (e) {
   function i(e) {
     n(3), n(4);
   }Object.defineProperty(t, "__esModule", { value: !0 });var a = n(0),
-      r = n(10),
+      o = n(10),
       s = n(5),
-      o = i,
-      u = s(a.a, r.a, !1, o, "data-v-656744fc", null);t.default = u.exports;
+      r = i,
+      u = s(a.a, o.a, !1, r, "data-v-36f23fbe", null);t.default = u.exports;
 }, function (e, t) {}, function (e, t) {}, function (e, t) {
-  e.exports = function (e, t, n, i, a, r) {
+  e.exports = function (e, t, n, i, a, o) {
     var s,
-        o = e = e || {},
-        u = _typeof(e.default);"object" !== u && "function" !== u || (s = e, o = e.default);var l = "function" == typeof o ? o.options : o;t && (l.render = t.render, l.staticRenderFns = t.staticRenderFns, l._compiled = !0), n && (l.functional = !0), a && (l._scopeId = a);var d;if (r ? (d = function d(e) {
-      e = e || this.$vnode && this.$vnode.ssrContext || this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext, e || "undefined" == typeof __VUE_SSR_CONTEXT__ || (e = __VUE_SSR_CONTEXT__), i && i.call(this, e), e && e._registeredComponents && e._registeredComponents.add(r);
+        r = e = e || {},
+        u = _typeof(e.default);"object" !== u && "function" !== u || (s = e, r = e.default);var l = "function" == typeof r ? r.options : r;t && (l.render = t.render, l.staticRenderFns = t.staticRenderFns, l._compiled = !0), n && (l.functional = !0), a && (l._scopeId = a);var d;if (o ? (d = function d(e) {
+      e = e || this.$vnode && this.$vnode.ssrContext || this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext, e || "undefined" == typeof __VUE_SSR_CONTEXT__ || (e = __VUE_SSR_CONTEXT__), i && i.call(this, e), e && e._registeredComponents && e._registeredComponents.add(o);
     }, l._ssrRegister = d) : i && (d = i), d) {
       var c = l.functional,
           h = c ? l.render : l.beforeCreate;c ? (l._injectStyles = d, l.render = function (e, t) {
         return d.call(t), h(e, t);
       }) : l.beforeCreate = h ? [].concat(h, d) : [d];
-    }return { esModule: s, exports: o, options: l };
+    }return { esModule: s, exports: r, options: l };
   };
 }, function (e, t) {
   e.exports = __webpack_require__(/*! libphonenumber-js */ 51);
@@ -337,13 +358,13 @@ module.exports = function (e) {
   "use strict";
   var i = n(9),
       a = n.n(i),
-      r = function r() {
+      o = function o() {
     return new Promise(function (e, t) {
       a()("https://ipinfo.io/json", function (n, i) {
         n && t(n), e(i && i.country);
       });
     });
-  };t.a = r;
+  };t.a = o;
 }, function (e, t) {
   e.exports = __webpack_require__(/*! get-json */ 59);
 }, function (e, t, n) {
@@ -351,20 +372,24 @@ module.exports = function (e) {
   var i = function i() {
     var e = this,
         t = e.$createElement,
-        n = e._self._c || t;return n("div", { class: ["vue-tel-input", e.wrapperClasses, { disabled: e.disabled }] }, [n("div", { directives: [{ name: "click-outside", rawName: "v-click-outside", value: e.clickedOutside, expression: "clickedOutside" }], staticClass: "dropdown", class: { open: e.open }, attrs: { tabindex: "0" }, on: { click: e.toggleDropdown, keydown: [e.keyboardNav, function (t) {
+        n = e._self._c || t;return n("div", { class: ["vue-tel-input", e.wrapperClasses, { disabled: e.disabled }] }, [n("div", { directives: [{ name: "click-outside", rawName: "v-click-outside", value: e.clickedOutside, expression: "clickedOutside" }], staticClass: "dropdown", class: { open: e.open }, attrs: { tabindex: "0" }, on: { keydown: [e.keyboardNav, function (t) {
           if (!("button" in t) && e._k(t.keyCode, "esc", 27, t.key)) return null;e.reset(t);
-        }] } }, [n("span", { staticClass: "selection" }, [e.enabledFlags ? n("div", { staticClass: "iti-flag", class: e.activeCountry.iso2.toLowerCase() }) : e._e(), e._v(" "), e.enabledCountryCode ? n("span", { staticClass: "country-code" }, [e._v("+" + e._s(e.activeCountry.dialCode))]) : e._e(), e._v(" "), n("span", { staticClass: "dropdown-arrow" }, [e._v(e._s(e.open ? "▲" : "▼"))])]), e._v(" "), n("ul", { directives: [{ name: "show", rawName: "v-show", value: e.open, expression: "open" }], ref: "list" }, e._l(e.sortedCountries, function (t, i) {
+        }], click: e.toggleDropdown } }, [n("span", { staticClass: "selection" }, [e.enabledFlags ? n("div", { staticClass: "iti-flag", class: e.activeCountry.iso2.toLowerCase() }) : e._e(), e._v(" "), e.enabledCountryCode ? n("span", { staticClass: "country-code" }, [e._v("+" + e._s(e.activeCountry.dialCode))]) : e._e(), e._v(" "), n("span", { staticClass: "dropdown-arrow" }, [e._v(e._s(e.open ? "▲" : "▼"))])]), e._v(" "), n("ul", { directives: [{ name: "show", rawName: "v-show", value: e.open, expression: "open" }], ref: "list" }, e._l(e.sortedCountries, function (t, i) {
       return n("li", { key: t.iso2 + (t.preferred ? "-preferred" : ""), staticClass: "dropdown-item", class: e.getItemClass(i, t.iso2), on: { click: function click(n) {
             e.choose(t);
           }, mousemove: function mousemove(t) {
             e.selectedIndex = i;
           } } }, [e.enabledFlags ? n("div", { staticClass: "iti-flag", class: t.iso2.toLowerCase() }) : e._e(), e._v(" "), n("strong", [e._v(e._s(t.name))]), e._v(" "), e.dropdownOptions && !e.dropdownOptions.disabledDialCode ? n("span", [e._v("+" + e._s(t.dialCode))]) : e._e()]);
-    }))]), e._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: e.phone, expression: "phone" }], ref: "input", class: e.inputClasses, attrs: { type: "tel", placeholder: e.placeholder, state: e.state, formatter: e.format, disabled: e.disabled, required: e.required, autocomplete: e.autocomplete, name: e.name, maxlength: e.maxLen }, domProps: { value: e.phone }, on: { blur: e.onBlur, input: [function (t) {
+    }))]), e._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: e.phone, expression: "phone" }], ref: "input", class: e.inputClasses, attrs: { type: "tel", placeholder: e.placeholder, disabled: e.disabled, required: e.required, autocomplete: e.autocomplete, name: e.name, maxlength: e.maxLen }, domProps: { value: e.phone }, on: { blur: e.onBlur, input: [function (t) {
           t.target.composing || (e.phone = t.target.value);
-        }, e.onInput] } })]);
+        }, e.onInput], keyup: [function (t) {
+          if (!("button" in t) && e._k(t.keyCode, "enter", 13, t.key)) return null;e.onEnter(t);
+        }, function (t) {
+          if (!("button" in t) && e._k(t.keyCode, "space", 32, t.key)) return null;e.onSpace(t);
+        }] } })]);
   },
       a = [],
-      r = { render: i, staticRenderFns: a };t.a = r;
+      o = { render: i, staticRenderFns: a };t.a = o;
 }]);
 
 /***/ }),

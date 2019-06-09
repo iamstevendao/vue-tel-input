@@ -502,7 +502,7 @@ export default {
         // Define Handler and cache it on the element
         var bubble = binding.modifiers.bubble;
         var handler = function (e) {
-          if (bubble || (!el.contains(e.target) && el !== e.target)) {
+          if (bubble || (!el.contains(e.path[0]) && el !== e.path[0])) {
             binding.value(e)
           }
         };

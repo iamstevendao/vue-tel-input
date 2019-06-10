@@ -305,7 +305,7 @@ module.exports = function (e) {
                 a = "[Vue-click-outside:] provided expression " + t.expression + " is not a function, but has to be";i && (a += "Found in component " + i), console.warn(a);
           }var r = t.modifiers.bubble,
               o = function o(n) {
-            (r || !e.contains(n.target) && e !== n.target) && t.value(n);
+            (r || !e.contains(n.path[0]) && e !== n.path[0]) && t.value(n);
           };e.__vueClickOutside__ = o, document.addEventListener("click", o);
         }, unbind: function unbind(e, t) {
           document.removeEventListener("click", e.__vueClickOutside__), e.__vueClickOutside__ = null;
@@ -320,7 +320,7 @@ module.exports = function (e) {
       r = n(10),
       o = n(5),
       s = i,
-      u = o(a.a, r.a, !1, s, "data-v-b1650a2a", null);t.default = u.exports;
+      u = o(a.a, r.a, !1, s, "data-v-39f5845d", null);t.default = u.exports;
 }, function (e, t) {}, function (e, t) {}, function (e, t) {
   e.exports = function (e, t, n, i, a, r) {
     var o,

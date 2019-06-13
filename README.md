@@ -112,8 +112,8 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `maxLen`| `Number` | `25` | Native input 'maxlength' attribute |
   | `wrapperClasses`| `String` | `''` | Custom classes for the wrapper |
   | `inputClasses`| `String` | `''` | Custom classes for the `input` |
-  | `dropdownOptions`| `Object` | `{ disabledDialCode: false }` | Options for dropdown, supporting `disabledDialCode` |
-  | `inputOptions`| `Object` | `{ showDialCode: false }` | Options for input, always show dial code in the input |
+  | `dropdownOptions`| `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
+  | `inputOptions`| `Object` | `{ showDialCode: false, tabindex: 0 }` | Options for input, always show dial code in the input, supporting `showDialCode` and `tabindex`|
 
 ### Events
 
@@ -164,5 +164,6 @@ npm install --save-dev @types/vue-tel-input
 ## Contributors
 - [mikob](https://github.com/mikob) for super awesome work to [remove the bootstrap dependency](https://github.com/EducationLink/vue-tel-input/pull/13).
 - [kalcifield](https://github.com/kalcifield) for helping make the input [preload with a phone number](https://github.com/EducationLink/vue-tel-input/pull/8).
+- [serbemas](https://github.com/serbemas) for [adding web components support](https://github.com/EducationLink/vue-tel-input/pull/92).
 
 made with &#x2764; by [Steven](https://github.com/iamstevendao).

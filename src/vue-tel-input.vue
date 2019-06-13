@@ -3,7 +3,7 @@
     <div
       class="dropdown"
       v-click-outside="clickedOutside"
-      tabindex="0"
+      :tabindex="dropdownOptions.tabindex ? dropdownOptions.tabindex : 0"
       :class="{ open: open }"
       @keydown="keyboardNav"
       @click="toggleDropdown"
@@ -44,6 +44,7 @@
       @input="onInput"
       @keyup.enter="onEnter"
       @keyup.space="onSpace"
+      :tabindex="inputOptions.tabindex ? inputOptions.tabindex : 0"
     >
   </div>
 </template>
@@ -140,7 +141,7 @@ ul {
 </style>
 
 <script>
-import { 
+import {
   formatNumber, AsYouType, isValidNumber, parsePhoneNumberFromString,
 } from 'libphonenumber-js';
 import allCountries from './assets/all-countries';

@@ -47,7 +47,7 @@ Checkout [Demo](https://educationlink.github.io/vue-tel-input/) or [Playground](
      ```
 
 ### Use as a custom field of [vue-form-generator](https://github.com/vue-generators/vue-form-generator)
-- Add a component with `vue-form-generator`'s abstractField
+- Add a component using `vue-form-generator`'s `abstractField` mixin
   ```js
   // tel-input.vue
   <template>
@@ -113,7 +113,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `wrapperClasses`| `String` | `''` | Custom classes for the wrapper |
   | `inputClasses`| `String` | `''` | Custom classes for the `input` |
   | `dropdownOptions`| `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
-  | `inputOptions`| `Object` | `{ showDialCode: false, tabindex: 0 }` | Options for input, always show dial code in the input, supporting `showDialCode` and `tabindex`|
+  | `inputOptions`| `Object` | `{ showDialCode: false, tabindex: 0 }` | Options for input, supporting `showDialCode` (always show dial code in the input) and `tabindex`|
 
 ### Events
 

@@ -110,8 +110,8 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `autocomplete`| `String` | `'on'` | Native input 'autocomplete' attribute |
   | `name`| `String` | `'telephone'` | Native input 'name' attribute |
   | `maxLen`| `Number` | `25` | Native input 'maxlength' attribute |
-  | `wrapperClasses`| `String` | `''` | Custom classes for the wrapper |
-  | `inputClasses`| `String` | `''` | Custom classes for the `input` |
+  | `wrapperClasses`| String &#124;&#124; Array &#124;&#124; Object | `''` | Custom classes for the wrapper |
+  | `inputClasses`| String &#124;&#124; Array &#124;&#124; Object | `''` | Custom classes for the `input` |
   | `dropdownOptions`| `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
   | `inputOptions`| `Object` | `{ showDialCode: false, tabindex: 0 }` | Options for input, supporting `showDialCode` (always show dial code in the input) and `tabindex`|
 

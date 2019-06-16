@@ -488,7 +488,7 @@ export default {
     },
   },
   directives: {
-    // Click-outside from BosNaufal: https://github.com/BosNaufal/vue-click-outside
+    // Click-outside by BosNaufal: https://github.com/BosNaufal/vue-click-outside
     'click-outside': {
       bind: function (el, binding, vNode) {
         // Provided expression must evaluate to a function.
@@ -503,7 +503,9 @@ export default {
         // Define Handler and cache it on the element
         var bubble = binding.modifiers.bubble;
         var handler = function (e) {
-          if (bubble || (!el.contains(e.path[0]) && el !== e.path[0])) {
+          // Fall back to composedPath if e.path is undefined
+          const path = e.path || (e.composedPath && e.composedPath());
+          if (bubble || (path.length && !el.contains(path[0]) && el !== path[0])) {
             binding.value(e)
           }
         };

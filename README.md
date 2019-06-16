@@ -165,5 +165,6 @@ npm install --save-dev @types/vue-tel-input
 - [mikob](https://github.com/mikob) for super awesome work to [remove the bootstrap dependency](https://github.com/EducationLink/vue-tel-input/pull/13).
 - [kalcifield](https://github.com/kalcifield) for helping make the input [preload with a phone number](https://github.com/EducationLink/vue-tel-input/pull/8).
 - [serbemas](https://github.com/serbemas) for [adding web components support](https://github.com/EducationLink/vue-tel-input/pull/92).
+...[more](https://github.com/EducationLink/vue-tel-input/graphs/contributors)
 
 made with &#x2764; by [Steven](https://github.com/iamstevendao).

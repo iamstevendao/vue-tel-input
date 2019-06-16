@@ -11,11 +11,8 @@
     "url": "https://github.com/EducationLink/vue-tel-input.git"
   },
   "scripts": {
-    "dist": "poi build",
-    "start": "yarn dev",
-    "dev": "poi build ./demo/index.js --config ./demo/build.config.js --filename.css vue-tel-input.css --no-sourceMap --no-minimize --dist ./docs",
-    "release": "rm -rf dist && yarn dist",
-    "demo": "yarn dist && yarn dev && serve ./docs/"
+    "dev": "poi",
+    "build": "poi build"
   },
   "files": [
     "dist/"
@@ -37,7 +34,6 @@
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.3.0",
     "eslint-plugin-import": "^2.7.0",
-    "poi": "^9.4.3",
-    "serve": "^6.3.1"
+    "poi": "^9.4.3"
   }
 }

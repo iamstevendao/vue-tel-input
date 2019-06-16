@@ -206,8 +206,8 @@ module.exports = function (e) {
       }return n;
     }return Array.from(e);
   }var a = n(6),
-      r = (n.n(a), n(7)),
-      o = n(8);t.a = { name: "vue-tel-input", props: { value: { type: String }, placeholder: { type: String, default: "Enter a phone number" }, disabledFetchingCountry: { type: Boolean, default: !1 }, disabled: { type: Boolean, default: !1 }, disabledFormatting: { type: Boolean, default: !1 }, invalidMsg: { default: "", type: String }, required: { type: Boolean, default: !1 }, defaultCountry: { type: String, default: "" }, enabledCountryCode: { type: Boolean, default: !1 }, enabledFlags: { type: Boolean, default: !0 }, preferredCountries: { type: Array, default: function _default() {
+      o = (n.n(a), n(7)),
+      r = n(8);t.a = { name: "vue-tel-input", props: { value: { type: String }, placeholder: { type: String, default: "Enter a phone number" }, disabledFetchingCountry: { type: Boolean, default: !1 }, disabled: { type: Boolean, default: !1 }, disabledFormatting: { type: Boolean, default: !1 }, invalidMsg: { default: "", type: String }, required: { type: Boolean, default: !1 }, defaultCountry: { type: String, default: "" }, enabledCountryCode: { type: Boolean, default: !1 }, enabledFlags: { type: Boolean, default: !0 }, preferredCountries: { type: Array, default: function _default() {
           return [];
         } }, onlyCountries: { type: Array, default: function _default() {
           return [];
@@ -226,9 +226,9 @@ module.exports = function (e) {
     }, computed: { mode: function mode() {
         return this.phone ? "+" === this.phone[0] ? "code" : "0" === this.phone[0] ? "prefix" : "normal" : "";
       }, filteredCountries: function filteredCountries() {
-        var e = this;return this.onlyCountries.length ? this.getCountries(this.onlyCountries) : this.ignoredCountries.length ? r.a.filter(function (t) {
+        var e = this;return this.onlyCountries.length ? this.getCountries(this.onlyCountries) : this.ignoredCountries.length ? o.a.filter(function (t) {
           var n = t.iso2;return !e.ignoredCountries.includes(n.toUpperCase()) && !e.ignoredCountries.includes(n.toLowerCase());
-        }) : r.a;
+        }) : o.a;
       }, sortedCountries: function sortedCountries() {
         return [].concat(i(this.getCountries(this.preferredCountries).map(function (e) {
           return Object.assign({}, e, { preferred: !0 });
@@ -250,7 +250,7 @@ module.exports = function (e) {
           var t = Object(a.parsePhoneNumberFromString)(this.phone);if (t && t.country) return void (this.activeCountry = t.country);
         }if (this.defaultCountry) {
           var n = this.findCountry(this.defaultCountry);if (n) return void (this.activeCountry = n);
-        }this.activeCountry = this.findCountry(this.preferredCountries[0]) || this.filteredCountries[0], this.disabledFetchingCountry || Object(o.a)().then(function (t) {
+        }this.activeCountry = this.findCountry(this.preferredCountries[0]) || this.filteredCountries[0], this.disabledFetchingCountry || Object(r.a)().then(function (t) {
           e.activeCountry = e.findCountry(t) || e.activeCountry;
         });
       }, getCountries: function getCountries() {
@@ -258,7 +258,7 @@ module.exports = function (e) {
           return e.findCountry(t);
         }).filter(Boolean);
       }, findCountry: function findCountry() {
-        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "";return r.a.find(function (t) {
+        var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "";return o.a.find(function (t) {
           return t.iso2 === e.toUpperCase();
         });
       }, getItemClass: function getItemClass(e, t) {
@@ -292,7 +292,7 @@ module.exports = function (e) {
           }, 700);var a = this.sortedCountries.slice(this.preferredCountries.length).findIndex(function (e) {
             return e.name.toLowerCase().startsWith(t.typeToFindInput);
           });if (~a) {
-            this.selectedIndex = this.preferredCountries.length + a;var r = this.$refs.list.children[this.selectedIndex];(r.offsetTop < this.$refs.list.scrollTop || r.offsetTop + r.clientHeight > this.$refs.list.scrollTop + this.$refs.list.clientHeight) && (this.$refs.list.scrollTop = r.offsetTop - this.$refs.list.clientHeight / 2);
+            this.selectedIndex = this.preferredCountries.length + a;var o = this.$refs.list.children[this.selectedIndex];(o.offsetTop < this.$refs.list.scrollTop || o.offsetTop + o.clientHeight > this.$refs.list.scrollTop + this.$refs.list.clientHeight) && (this.$refs.list.scrollTop = o.offsetTop - this.$refs.list.clientHeight / 2);
           }
         }
       }, reset: function reset() {
@@ -303,10 +303,10 @@ module.exports = function (e) {
           if ("function" != typeof t.value) {
             var i = n.context.name,
                 a = "[Vue-click-outside:] provided expression " + t.expression + " is not a function, but has to be";i && (a += "Found in component " + i), console.warn(a);
-          }var r = t.modifiers.bubble,
-              o = function o(n) {
-            (r || !e.contains(n.path[0]) && e !== n.path[0]) && t.value(n);
-          };e.__vueClickOutside__ = o, document.addEventListener("click", o);
+          }var o = t.modifiers.bubble,
+              r = function r(n) {
+            var i = n.path || n.composedPath && n.composedPath();(o || i.length && !e.contains(i[0]) && e !== i[0]) && t.value(n);
+          };e.__vueClickOutside__ = r, document.addEventListener("click", r);
         }, unbind: function unbind(e, t) {
           document.removeEventListener("click", e.__vueClickOutside__), e.__vueClickOutside__ = null;
         } } } };
@@ -317,22 +317,22 @@ module.exports = function (e) {
   function i(e) {
     n(3), n(4);
   }Object.defineProperty(t, "__esModule", { value: !0 });var a = n(0),
-      r = n(10),
-      o = n(5),
+      o = n(10),
+      r = n(5),
       s = i,
-      u = o(a.a, r.a, !1, s, "data-v-39f5845d", null);t.default = u.exports;
+      u = r(a.a, o.a, !1, s, "data-v-5572ae01", null);t.default = u.exports;
 }, function (e, t) {}, function (e, t) {}, function (e, t) {
-  e.exports = function (e, t, n, i, a, r) {
-    var o,
+  e.exports = function (e, t, n, i, a, o) {
+    var r,
         s = e = e || {},
-        u = _typeof(e.default);"object" !== u && "function" !== u || (o = e, s = e.default);var l = "function" == typeof s ? s.options : s;t && (l.render = t.render, l.staticRenderFns = t.staticRenderFns, l._compiled = !0), n && (l.functional = !0), a && (l._scopeId = a);var d;if (r ? (d = function d(e) {
-      e = e || this.$vnode && this.$vnode.ssrContext || this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext, e || "undefined" == typeof __VUE_SSR_CONTEXT__ || (e = __VUE_SSR_CONTEXT__), i && i.call(this, e), e && e._registeredComponents && e._registeredComponents.add(r);
+        u = _typeof(e.default);"object" !== u && "function" !== u || (r = e, s = e.default);var l = "function" == typeof s ? s.options : s;t && (l.render = t.render, l.staticRenderFns = t.staticRenderFns, l._compiled = !0), n && (l.functional = !0), a && (l._scopeId = a);var d;if (o ? (d = function d(e) {
+      e = e || this.$vnode && this.$vnode.ssrContext || this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext, e || "undefined" == typeof __VUE_SSR_CONTEXT__ || (e = __VUE_SSR_CONTEXT__), i && i.call(this, e), e && e._registeredComponents && e._registeredComponents.add(o);
     }, l._ssrRegister = d) : i && (d = i), d) {
       var c = l.functional,
-          h = c ? l.render : l.beforeCreate;c ? (l._injectStyles = d, l.render = function (e, t) {
-        return d.call(t), h(e, t);
-      }) : l.beforeCreate = h ? [].concat(h, d) : [d];
-    }return { esModule: o, exports: s, options: l };
+          p = c ? l.render : l.beforeCreate;c ? (l._injectStyles = d, l.render = function (e, t) {
+        return d.call(t), p(e, t);
+      }) : l.beforeCreate = p ? [].concat(p, d) : [d];
+    }return { esModule: r, exports: s, options: l };
   };
 }, function (e, t) {
   e.exports = __webpack_require__(/*! libphonenumber-js */ 66);
@@ -345,13 +345,13 @@ module.exports = function (e) {
   "use strict";
   var i = n(9),
       a = n.n(i),
-      r = function r() {
+      o = function o() {
     return new Promise(function (e, t) {
       a()("https://ipinfo.io/json", function (n, i) {
         n && t(n), e(i && i.country);
       });
     });
-  };t.a = r;
+  };t.a = o;
 }, function (e, t) {
   e.exports = __webpack_require__(/*! get-json */ 79);
 }, function (e, t, n) {
@@ -359,7 +359,7 @@ module.exports = function (e) {
   var i = function i() {
     var e = this,
         t = e.$createElement,
-        n = e._self._c || t;return n("div", { class: ["vue-tel-input", e.wrapperClasses, { disabled: e.disabled }] }, [n("div", { directives: [{ name: "click-outside", rawName: "v-click-outside", value: e.clickedOutside, expression: "clickedOutside" }], staticClass: "dropdown", class: { open: e.open }, attrs: { tabindex: "0" }, on: { keydown: [e.keyboardNav, function (t) {
+        n = e._self._c || t;return n("div", { class: ["vue-tel-input", e.wrapperClasses, { disabled: e.disabled }] }, [n("div", { directives: [{ name: "click-outside", rawName: "v-click-outside", value: e.clickedOutside, expression: "clickedOutside" }], staticClass: "dropdown", class: { open: e.open }, attrs: { tabindex: e.dropdownOptions && e.dropdownOptions.tabindex ? e.dropdownOptions.tabindex : 0 }, on: { keydown: [e.keyboardNav, function (t) {
           return "button" in t || !e._k(t.keyCode, "esc", 27, t.key, "Escape") ? e.reset(t) : null;
         }], click: e.toggleDropdown } }, [n("span", { staticClass: "selection" }, [e.enabledFlags ? n("div", { staticClass: "iti-flag", class: e.activeCountry.iso2.toLowerCase() }) : e._e(), e._v(" "), e.enabledCountryCode ? n("span", { staticClass: "country-code" }, [e._v("+" + e._s(e.activeCountry.dialCode))]) : e._e(), e._v(" "), n("span", { staticClass: "dropdown-arrow" }, [e._v(e._s(e.open ? "▲" : "▼"))])]), e._v(" "), n("ul", { directives: [{ name: "show", rawName: "v-show", value: e.open, expression: "open" }], ref: "list" }, e._l(e.sortedCountries, function (t, i) {
       return n("li", { key: t.iso2 + (t.preferred ? "-preferred" : ""), staticClass: "dropdown-item", class: e.getItemClass(i, t.iso2), on: { click: function click(n) {
@@ -367,7 +367,7 @@ module.exports = function (e) {
           }, mousemove: function mousemove(t) {
             e.selectedIndex = i;
           } } }, [e.enabledFlags ? n("div", { staticClass: "iti-flag", class: t.iso2.toLowerCase() }) : e._e(), e._v(" "), n("strong", [e._v(e._s(t.name))]), e._v(" "), e.dropdownOptions && !e.dropdownOptions.disabledDialCode ? n("span", [e._v("+" + e._s(t.dialCode))]) : e._e()]);
-    }))]), e._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: e.phone, expression: "phone" }], ref: "input", class: e.inputClasses, attrs: { type: "tel", placeholder: e.placeholder, disabled: e.disabled, required: e.required, autocomplete: e.autocomplete, name: e.name, maxlength: e.maxLen }, domProps: { value: e.phone }, on: { blur: e.onBlur, input: [function (t) {
+    }))]), e._v(" "), n("input", { directives: [{ name: "model", rawName: "v-model", value: e.phone, expression: "phone" }], ref: "input", class: e.inputClasses, attrs: { type: "tel", placeholder: e.placeholder, disabled: e.disabled, required: e.required, autocomplete: e.autocomplete, name: e.name, maxlength: e.maxLen, tabindex: e.inputOptions && e.inputOptions.tabindex ? e.inputOptions.tabindex : 0 }, domProps: { value: e.phone }, on: { blur: e.onBlur, input: [function (t) {
           t.target.composing || (e.phone = t.target.value);
         }, e.onInput], keyup: [function (t) {
           return "button" in t || !e._k(t.keyCode, "enter", 13, t.key, "Enter") ? e.onEnter(t) : null;
@@ -376,7 +376,7 @@ module.exports = function (e) {
         }] } })]);
   },
       a = [],
-      r = { render: i, staticRenderFns: a };t.a = r;
+      o = { render: i, staticRenderFns: a };t.a = o;
 }]);
 
 /***/ }),

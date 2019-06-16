@@ -238,6 +238,7 @@ export default {
       this.phone = '+' + this.activeCountry.dialCode;
     }
     this.$emit('validate', this.response);
+    this.$emit('onValidate', this.response); // Deprecated
   },
   created() {
     if (this.value) {
@@ -339,6 +340,7 @@ export default {
         // Otherwise format it
         this.phone = this.formattedResult;
       }
+      this.$emit('onValidate', this.response); // Deprecated
       this.$emit('validate', this.response);
     },
     value() {
@@ -407,21 +409,26 @@ export default {
         this.phone = '+' + country.dialCode;
       }
       this.$emit('input', this.response.number, this.response);
+      this.$emit('onInput', this.response); // Deprecated
     },
     onInput() {
       this.$refs.input.setCustomValidity(this.response.isValid ? '' : this.invalidMsg);
       // Returns response.number to assign it to v-model (if being used)
       // Returns full response for cases @input is used and parent wants to return the whole response.
       this.$emit('input', this.response.number, this.response);
+      this.$emit('onInput', this.response); // Deprecated
     },
     onBlur() {
       this.$emit('blur');
+      this.$emit('onBlur'); // Deprecated
     },
     onEnter() {
       this.$emit('enter');
+      this.$emit('onEnter'); // Deprecated
     },
     onSpace() {
       this.$emit('space');
+      this.$emit('onSpace'); // Deprecated
     },
     focus() {
       this.$refs.input.focus();

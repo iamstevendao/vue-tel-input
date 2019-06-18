@@ -345,6 +345,9 @@ export default {
     },
     value() {
       this.phone = this.value;
+      if(!this.phone.includes('+')) {
+        this.phone = `+${this.value}`;
+      }
     },
   },
   methods: {

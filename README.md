@@ -126,11 +126,9 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `enter` |  | Fires on keyup.enter event | `onEnter` deprecated |
 
 ## Highlights & Credits
-- Vue app created by [vue-cli](https://github.com/vuejs/vue-cli).
 - Telephone Number parsing, validation by [libphonenumber-js](https://catamphetamine.github.io/libphonenumber-js/).
 - Country Codes data from [intl-tel-input](https://github.com/jackocnr/intl-tel-input/blob/master/src/js/data.js).
-- Country Flags by [behdad/region-flags](https://github.com/behdad/region-flags).
-- User's Location by [get-json](https://www.npmjs.com/package/get-json) and [ipifo.io](https://ipinfo.io/json)
+- User's country by [ip2c.org](https://ip2c.org/s), request using [simple-get](https://www.npmjs.com/package/simple-get).
 
 ## Demo Usage
 

@@ -1,12 +1,19 @@
-import getJSON from 'get-json';
+const get = require('simple-get')
 
 const getCountry = function () {
   return new Promise((resolve, reject) => {
-    getJSON('https://ipinfo.io/json', (error, response) => {
+    get.concat('https://ip2c.org/s', (error, response, data) => {
+      // Response: 1;CD;COD;COUNTRY
       if (error) {
-        reject(error);
+        return reject(error);
       }
-      resolve(response && response.country);
+      const result = (data || '').toString();
+
+      if (!result || result[0] !== '1') {
+        return reject(new Error('unable to fetch the country'));
+      }
+
+      return resolve(result.substr(2, 2));
     });
   });
 };

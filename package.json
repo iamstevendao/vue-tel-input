@@ -26,8 +26,8 @@
     "telephone input"
   ],
   "dependencies": {
-    "get-json": "^1.0.0",
-    "libphonenumber-js": "^1.7.18"
+    "libphonenumber-js": "^1.7.18",
+    "simple-get": "^3.0.3"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

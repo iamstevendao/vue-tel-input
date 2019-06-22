@@ -212,11 +212,11 @@ export default {
       default: 'telephone',
     },
     wrapperClasses: {
-      type: String,
+      type: [String, Array, Object],
       default: '',
     },
     inputClasses: {
-      type: String,
+      type: [String, Array, Object],
       default: '',
     },
     dropdownOptions: {

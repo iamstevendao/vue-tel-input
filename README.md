@@ -110,8 +110,8 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `autocomplete`| `String` | `'on'` | Native input 'autocomplete' attribute |
   | `name`| `String` | `'telephone'` | Native input 'name' attribute |
   | `maxLen`| `Number` | `25` | Native input 'maxlength' attribute |
-  | `wrapperClasses`| `String` | `''` | Custom classes for the wrapper |
-  | `inputClasses`| `String` | `''` | Custom classes for the `input` |
+  | `wrapperClasses`| `String | Array | Object` | `''` | Custom classes for the wrapper |
+  | `inputClasses`| `String | Array | Object` | `''` | Custom classes for the `input` |
   | `dropdownOptions`| `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
   | `inputOptions`| `Object` | `{ showDialCode: false, tabindex: 0 }` | Options for input, supporting `showDialCode` (always show dial code in the input) and `tabindex`|
 
@@ -165,6 +165,7 @@ npm install --save-dev @types/vue-tel-input
 - [mikob](https://github.com/mikob) for super awesome work to [remove the bootstrap dependency](https://github.com/EducationLink/vue-tel-input/pull/13).
 - [kalcifield](https://github.com/kalcifield) for helping make the input [preload with a phone number](https://github.com/EducationLink/vue-tel-input/pull/8).
 - [serbemas](https://github.com/serbemas) for [adding web components support](https://github.com/EducationLink/vue-tel-input/pull/92).
+
 ...[more](https://github.com/EducationLink/vue-tel-input/graphs/contributors)
 
 made with &#x2764; by [Steven](https://github.com/iamstevendao).

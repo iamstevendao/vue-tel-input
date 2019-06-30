@@ -17,6 +17,7 @@ if (process.env.NODE_ENV === 'production') {
     dist: 'docs',
     clean: false,
     sourceMap: false,
+    homepage: 'vue-tel-input',
     minimize: false,
     html: {
       template: './demo/index.html',

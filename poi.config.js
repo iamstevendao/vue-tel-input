@@ -11,6 +11,17 @@ if (process.env.NODE_ENV === 'production') {
     html: false,
     format: 'cjs'
   });
+} else if (process.env.NODE_ENV === 'demo') {
+  Object.assign(config, {
+    entry: './demo/index.js',
+    dist: 'docs',
+    clean: false,
+    sourceMap: false,
+    minimize: false,
+    html: {
+      template: './demo/index.html',
+    },
+  });
 } else {
   Object.assign(config, {
     entry: './demo/index.js',

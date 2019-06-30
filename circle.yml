@@ -1,0 +1,31 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: cypress/base:8
+
+    branches:
+      ignore:
+        - gh-pages
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
+
+      - run:
+          name: Installing dependencies
+          command: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+            - ~/.cache
+          key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
+
+      - run:
+          name: Build demo
+          command: sh demo.sh

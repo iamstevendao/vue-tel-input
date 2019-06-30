@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'production') {
     dist: 'docs',
     clean: false,
     sourceMap: false,
-    homepage: '/',
+    homepage: '.',
     minimize: false,
     html: {
       template: './demo/index.html',

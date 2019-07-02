@@ -346,6 +346,14 @@ export default {
     value() {
       this.phone = this.value;
     },
+    open(isDropdownOpened) {
+      // Emit open and close events
+      if (isDropdownOpened) {
+        this.$emit('open');
+      } else {
+        this.$emit('close');
+      }
+    }
   },
   methods: {
     initializeCountry() {

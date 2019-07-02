@@ -124,6 +124,8 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `blur` |  | Fires on blur event | `onBlur` deprecated |
   | `space` |  | Fires on keyup.space event | `onSpace` deprecated |
   | `enter` |  | Fires on keyup.enter event | `onEnter` deprecated |
+  | `open` |  | Fires when the flags dropdown opens | |
+  | `close` |  | Fires when the flags dropdown closes | |
 
 ## Highlights & Credits
 - Telephone Number parsing, validation by [libphonenumber-js](https://catamphetamine.github.io/libphonenumber-js/).

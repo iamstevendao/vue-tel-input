@@ -107,13 +107,14 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `preferredCountries` | `Array` | `[]` | Preferred countries list, will be on top of the dropdown. ie `['AU', 'BR']` |
   | `onlyCountries` | `Array` | `[]` | List of countries will be shown on the dropdown. ie `['AU', 'BR']` |
   | `ignoredCountries` | `Array` | `[]` | List of countries will NOT be shown on the dropdown. ie `['AU', 'BR']` |
-  | `autocomplete`| `String` | `'on'` | Native input 'autocomplete' attribute |
-  | `name`| `String` | `'telephone'` | Native input 'name' attribute |
-  | `maxLen`| `Number` | `25` | Native input 'maxlength' attribute |
-  | `wrapperClasses`| `String | Array | Object` | `''` | Custom classes for the wrapper |
-  | `inputClasses`| `String | Array | Object` | `''` | Custom classes for the `input` |
-  | `dropdownOptions`| `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
-  | `inputOptions`| `Object` | `{ showDialCode: false, tabindex: 0 }` | Options for input, supporting `showDialCode` (always show dial code in the input) and `tabindex`|
+  | `autocomplete` | `String` | `'on'` | Native input 'autocomplete' attribute |
+  | `name` | `String` | `'telephone'` | Native input 'name' attribute |
+  | `maxLen` | `Number` | `25` | Native input 'maxlength' attribute |
+  | `wrapperClasses` | `String | Array | Object` | `''` | Custom classes for the wrapper |
+  | `inputClasses` | `String | Array | Object` | `''` | Custom classes for the `input` |
+  | `dropdownOptions` | `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
+  | `inputOptions` | `Object` | `{ showDialCode: false, tabindex: 0 }` | Options for input, supporting `showDialCode` (always show dial code in the input) and `tabindex`|
+  | `validCharactersOnly` | `Boolean` | `false` | Only allow valid characters in a phone number (will also verify in `mounted`, so phone number with invalid characters will be shown as an empty string) |
 
 ### Events
 

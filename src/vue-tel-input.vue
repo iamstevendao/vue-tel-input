@@ -231,6 +231,10 @@ export default {
       type: Number,
       default: 25,
     },
+    validCharactersOnly: {
+      type: Boolean,
+      default: false,
+    },
   },
   mounted() {
     this.initializeCountry();
@@ -353,7 +357,12 @@ export default {
       } else {
         this.$emit('close');
       }
-    }
+    },
+    phone(newValue, oldValue) {
+      if (this.validCharactersOnly && !this.testCharacters()) {
+        this.$nextTick(() => { this.phone = oldValue });
+      }
+    },
   },
   methods: {
     initializeCountry() {
@@ -419,7 +428,14 @@ export default {
       this.$emit('input', this.response.number, this.response);
       this.$emit('onInput', this.response); // Deprecated
     },
+    testCharacters() {
+      const re = /^[\(\)\-\+0-9\s]*$/;
+      return re.test(this.phone);
+    },
     onInput() {
+      if (this.validCharactersOnly && !this.testCharacters()) {
+        return;
+      }
       this.$refs.input.setCustomValidity(this.response.isValid ? '' : this.invalidMsg);
       // Returns response.number to assign it to v-model (if being used)
       // Returns full response for cases @input is used and parent wants to return the whole response.

@@ -1,6 +1,5 @@
 import Vue from 'vue';
-import VueTelInput from '../dist/vue-tel-input';
-import '../dist/vue-tel-input.css';
+import VueTelInput from '../src/vue-tel-input.vue';
 
 import App from './App.vue';
 

@@ -39,6 +39,7 @@
       :autocomplete="autocomplete"
       :name="name"
       :class="inputClasses"
+      :id="inputId"
       :maxlength="maxLen"
       @blur="onBlur"
       @input="onInput"
@@ -217,6 +218,10 @@ export default {
     },
     inputClasses: {
       type: [String, Array, Object],
+      default: '',
+    },
+    inputId: {
+      type: 'String',
       default: '',
     },
     dropdownOptions: {

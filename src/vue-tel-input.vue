@@ -221,7 +221,7 @@ export default {
       default: '',
     },
     inputId: {
-      type: 'String',
+      type: String,
       default: '',
     },
     dropdownOptions: {

@@ -112,6 +112,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `maxLen` | `Number` | `25` | Native input 'maxlength' attribute |
   | `wrapperClasses` | `String | Array | Object` | `''` | Custom classes for the wrapper |
   | `inputClasses` | `String | Array | Object` | `''` | Custom classes for the `input` |
+  | `inputId` | `String` | `''` | Custom 'id' for the `input` |
   | `dropdownOptions` | `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
   | `inputOptions` | `Object` | `{ showDialCode: false, tabindex: 0 }` | Options for input, supporting `showDialCode` (always show dial code in the input) and `tabindex`|
   | `validCharactersOnly` | `Boolean` | `false` | Only allow valid characters in a phone number (will also verify in `mounted`, so phone number with invalid characters will be shown as an empty string) |

@@ -1,4 +1,4 @@
-const get = require('simple-get')
+const get = require('simple-get');
 
 const getCountry = function () {
   return new Promise((resolve, reject) => {

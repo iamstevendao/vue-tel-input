@@ -1,0 +1,45 @@
+{
+  "cSpell.words": [
+    "dropdown",
+    "gmail",
+    "iamstevendao",
+    "keydown",
+    "keyup",
+    "maxlength",
+    "mousemove",
+    "nbsp",
+    "rgba",
+    "tabindex",
+    "typeof"
+  ],
+  "editor.formatOnSave": false,
+  "javascript.format.enable": false,
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.options": {
+    "extensions": [
+      ".html",
+      ".js",
+      ".vue",
+      ".jsx"
+    ]
+  },
+  "eslint.validate": [
+    {
+      "language": "html",
+      "autoFix": true
+    },
+    {
+      "language": "vue",
+      "autoFix": true
+    },
+    {
+      "language": "javascript",
+      "autoFix": true
+    },
+    {
+      "language": "javascriptreact",
+      "autoFix": true
+    }
+  ]
+}

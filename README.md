@@ -1,6 +1,8 @@
 # vue-tel-input
 International Telephone Input with Vue.
 
+[![](https://img.shields.io/npm/dm/vue-tel-input.svg)](https://www.npmjs.com/package/vue-tel-input) [![](https://img.shields.io/github/stars/educationlink/vue-tel-input.svg)](https://github.com/EducationLink/vue-tel-input)
+
 Checkout [Demo](https://educationlink.github.io/vue-tel-input/) or [Playground](https://codesandbox.io/s/0yyyk45q7w?fontsize=14&module=%2Fsrc%2FApp.vue&moduleview=1).
 
 <p align="center">

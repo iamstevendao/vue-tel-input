@@ -96,11 +96,11 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
 
   | Property value | Type | Default value | Description |
   | -------------- | ---- | ------------- | ----------- |
-  | `defaultCountry` | `string` | `''` | Default country, will override the country fetched from IP address of user |
-  | `disabledFetchingCountry` | `Boolean` | false | Disable fetching current country based on IP address of user |
+  | `defaultCountry` | `String` | `''` | Default country, will override the country fetched from IP address of user |
+  | `disabledFetchingCountry` | `Boolean` | `false` | Disable fetching current country based on IP address of user |
   | `disabled` | `Boolean` | `false` | Disable input field |
   | `disabledFormatting` | `Boolean` | `false` | Disable formatting the phone number in the input, the formatted result still be accessible by `formattedNumber` returned from `onInput` event |
-  | `placeholder` | `string` | Enter a phone number | Placeholder for the input |
+  | `placeholder` | `String` | Enter a phone number | Placeholder for the input |
   | `required` | `Boolean` | `false` | Required property for HTML5 required attribute |
   | `enabledCountryCode` | `Boolean` | `false` | Enable country code in the input |
   | `enabledFlags` | `Boolean` | `true` | Enable flags in the input |
@@ -110,8 +110,8 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `autocomplete` | `String` | `'on'` | Native input 'autocomplete' attribute |
   | `name` | `String` | `'telephone'` | Native input 'name' attribute |
   | `maxLen` | `Number` | `25` | Native input 'maxlength' attribute |
-  | `wrapperClasses` | `String | Array | Object` | `''` | Custom classes for the wrapper |
-  | `inputClasses` | `String | Array | Object` | `''` | Custom classes for the `input` |
+  | `wrapperClasses` | `String` &#124; `Array` &#124; `Object` | `''` | Custom classes for the wrapper |
+  | `inputClasses` | `String` &#124; `Array` &#124; `Object` | `''` | Custom classes for the `input` |
   | `inputId` | `String` | `''` | Custom 'id' for the `input` |
   | `dropdownOptions` | `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
   | `inputOptions` | `Object` | `{ showDialCode: false, tabindex: 0 }` | Options for input, supporting `showDialCode` (always show dial code in the input) and `tabindex`|
@@ -128,6 +128,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `enter` |  | Fires on keyup.enter event | `onEnter` deprecated |
   | `open` |  | Fires when the flags dropdown opens | |
   | `close` |  | Fires when the flags dropdown closes | |
+  | `country-changed` | `Object` | Fires when country changed (even for the first time) | Available from `v2.4.2` |
 
 ## Highlights & Credits
 - Telephone Number parsing, validation by [libphonenumber-js](https://catamphetamine.github.io/libphonenumber-js/).

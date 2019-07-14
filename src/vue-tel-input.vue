@@ -401,6 +401,11 @@ export default {
         this.$nextTick(() => { this.phone = oldValue; });
       }
     },
+    activeCountry(value) {
+      if (value && value.iso2) {
+        this.$emit('country-changed', value);
+      }
+    },
   },
   mounted() {
     this.initializeCountry();

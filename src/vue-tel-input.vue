@@ -522,6 +522,7 @@ export default {
     keyboardNav(e) {
       if (e.keyCode === 40) {
         // down arrow
+        e.preventDefault();
         this.open = true;
         if (this.selectedIndex === null) {
           this.selectedIndex = 0;
@@ -537,6 +538,7 @@ export default {
         }
       } else if (e.keyCode === 38) {
         // up arrow
+        e.preventDefault();
         this.open = true;
         if (this.selectedIndex === null) {
           this.selectedIndex = this.sortedCountries.length - 1;

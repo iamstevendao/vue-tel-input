@@ -406,7 +406,7 @@ export default {
         this.$emit('country-changed', value);
       }
     },
-
+  },
   mounted() {
     this.initializeCountry().then(() => {
       if (!this.phone

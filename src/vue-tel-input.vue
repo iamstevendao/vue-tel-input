@@ -17,7 +17,11 @@
         <span
           v-if="enabledCountryCode"
           class="country-code">+{{ activeCountry.dialCode }}</span>
-        <span class="dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
+        <slot
+          :open="open"
+          name="arrow-icon">
+          <span class="dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
+        </slot>
       </span>
       <ul
         v-show="open"

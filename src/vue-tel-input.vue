@@ -410,14 +410,18 @@ export default {
         this.$emit('country-changed', value);
       }
     },
-  },
+
   mounted() {
-    this.initializeCountry();
-    if (!this.phone && this.inputOptions && this.inputOptions.showDialCode && this.activeCountry) {
-      this.phone = `+${this.activeCountry.dialCode}`;
-    }
-    this.$emit('validate', this.response);
-    this.$emit('onValidate', this.response); // Deprecated
+    this.initializeCountry().then(() => {
+      if (!this.phone
+          && this.inputOptions
+          && this.inputOptions.showDialCode
+          && this.activeCountry) {
+        this.phone = `+${this.activeCountry.dialCode}`;
+      }
+      this.$emit('validate', this.response);
+      this.$emit('onValidate', this.response); // Deprecated
+    }).catch(console.error); // eslint-disable-line
   },
   created() {
     if (this.value) {
@@ -426,39 +430,45 @@ export default {
   },
   methods: {
     initializeCountry() {
-      /**
-       * 1. If the phone included prefix (+12), try to get the country and set it
-       */
-      if (this.phone && this.phone[0] === '+') {
-        const parsedPhone = parsePhoneNumberFromString(this.phone);
-        if (parsedPhone && parsedPhone.country) {
-          this.activeCountry = parsedPhone.country;
-          return;
+      return new Promise((resolve) => {
+        /**
+         * 1. If the phone included prefix (+12), try to get the country and set it
+         */
+        if (this.phone && this.phone[0] === '+') {
+          const parsedPhone = parsePhoneNumberFromString(this.phone);
+          if (parsedPhone && parsedPhone.country) {
+            this.activeCountry = parsedPhone.country;
+            resolve();
+            return;
+          }
         }
-      }
-      /**
-       * 2. Use default country if passed from parent
-       */
-      if (this.defaultCountry) {
-        const defaultCountry = this.findCountry(this.defaultCountry);
-        if (defaultCountry) {
-          this.activeCountry = defaultCountry;
-          return;
+        /**
+         * 2. Use default country if passed from parent
+         */
+        if (this.defaultCountry) {
+          const defaultCountry = this.findCountry(this.defaultCountry);
+          if (defaultCountry) {
+            this.activeCountry = defaultCountry;
+            resolve();
+            return;
+          }
         }
-      }
-      /**
-       * 3. Use the first country from preferred list (if available) or all countries list
-       */
-      this.activeCountry = this.findCountry(this.preferredCountries[0])
-        || this.filteredCountries[0];
-      /**
-       * 4. Check if fetching country based on user's IP is allowed, set it as the default country
-       */
-      if (!this.disabledFetchingCountry) {
-        getCountry().then((res) => {
-          this.activeCountry = this.findCountry(res) || this.activeCountry;
-        });
-      }
+        /**
+         * 3. Use the first country from preferred list (if available) or all countries list
+         */
+        this.activeCountry = this.findCountry(this.preferredCountries[0])
+            || this.filteredCountries[0];
+        /**
+         * 4. Check if fetching country based on user's IP is allowed, set it as the default country
+         */
+        if (!this.disabledFetchingCountry) {
+          getCountry().then((res) => {
+            this.activeCountry = this.findCountry(res) || this.activeCountry;
+          }).finally(resolve);
+        } else {
+          resolve();
+        }
+      });
     },
     /**
      * Get the list of countries from the list of iso2 code

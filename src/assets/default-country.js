@@ -1,21 +1,15 @@
-const get = require('simple-get');
-
-const getCountry = function () {
-  return new Promise((resolve, reject) => {
-    get.concat('https://ip2c.org/s', (error, response, data) => {
-      // Response: 1;CD;COD;COUNTRY
-      if (error) {
-        return reject(error);
-      }
-      const result = (data || '').toString();
+function getCountry() {
+  return fetch('https://ip2c.org/s')
+    .then(response => response.text())
+    .then((response) => {
+      const result = (response || '').toString();
 
       if (!result || result[0] !== '1') {
-        return reject(new Error('unable to fetch the country'));
+        throw new Error('unable to fetch the country');
       }
 
-      return resolve(result.substr(2, 2));
+      return result.substr(2, 2);
     });
-  });
-};
+}
 
 export default getCountry;

@@ -135,7 +135,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
 ## Highlights & Credits
 - Telephone Number parsing, validation by [libphonenumber-js](https://catamphetamine.github.io/libphonenumber-js/).
 - Country Codes data from [intl-tel-input](https://github.com/jackocnr/intl-tel-input/blob/master/src/js/data.js).
-- User's country by [ip2c.org](https://ip2c.org/s), request using [simple-get](https://www.npmjs.com/package/simple-get).
+- User's country by [ip2c.org](https://ip2c.org/s), request using [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
 ## Demo Usage
 

@@ -464,7 +464,10 @@ export default {
         if (!this.disabledFetchingCountry) {
           getCountry().then((res) => {
             this.activeCountry = this.findCountry(res) || this.activeCountry;
-          }).finally(resolve);
+          }).finally(resolve)
+            .catch((error) => {
+              console.warn(error);
+            });
         } else {
           resolve();
         }

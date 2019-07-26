@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <template v-if="!showPlayground">
-      <a href="https://www.npmjs.com/package/vue-tel-input"><img src="https://img.shields.io/npm/dm/vue-tel-input.svg"></a>
+      <a href="https://www.npmjs.com/package/vue-tel-input"><img src="https://img.shields.io/npm/dt/vue-tel-input.svg"></a>
       <a href="https://github.com/EducationLink/vue-tel-input"><img src="https://img.shields.io/github/stars/EducationLink/vue-tel-input.svg"></a>
       <h2 style="color: #999">made with &#x2764; by some <a
         style="color: inherit"

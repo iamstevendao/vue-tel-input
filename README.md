@@ -96,8 +96,8 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
 
   Test all props on [CodeSandbox](https://codesandbox.io/s/0yyyk45q7w?fontsize=14&module=%2Fsrc%2FApp.vue&moduleview=1).
 
-  | Property value | Type | Default value | Description |
-  | -------------- | ---- | ------------- | ----------- |
+  | Property | Type | Default value | Description |
+  | -------- | ---- | ------------- | ----------- |
   | `defaultCountry` | `String` | `''` | Default country, will override the country fetched from IP address of user |
   | `disabledFetchingCountry` | `Boolean` | `false` | Disable fetching current country based on IP address of user |
   | `disabled` | `Boolean` | `false` | Disable input field |
@@ -121,8 +121,8 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
 
 ### Events
 
-  | Property value | Arguments | Description | Notes |
-  | -------------- | --------- | ----------- | ----- |
+  | Event | Arguments | Description | Notes |
+  | ----- | --------- | ----------- | ----- |
   | `input` | `String`, `Object` | Fires when the input changes with the argument is the object includes `{ number, isValid, country }` | `onInput` deprecated |
   | `validate` | `Object` | Fires when the correctness of the phone number changes (from `true` to `false` or vice-versa) and when the component is mounted `{ number, isValid, country }` | `onValidate` deprecated |
   | `blur` |  | Fires on blur event | `onBlur` deprecated |
@@ -131,6 +131,11 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `open` |  | Fires when the flags dropdown opens | |
   | `close` |  | Fires when the flags dropdown closes | |
   | `country-changed` | `Object` | Fires when country changed (even for the first time) | Available from `v2.4.2` |
+
+### Slots
+  | Slot | Description | Notes |
+  | ---- | ----------- | ----- |
+  | `arrow-icon` | Replace the arrow next to the flag with a component of your choice | Available from [v2.4.3](https://github.com/EducationLink/vue-tel-input/releases/tag/v2.4.3) |
 
 ## Highlights & Credits
 - Telephone Number parsing, validation by [libphonenumber-js](https://catamphetamine.github.io/libphonenumber-js/).
@@ -147,7 +152,7 @@ $ yarn/npm install
 # compile demo for development
 $ yarn/npm dev
 
-# open Browser and start serve in demo
+# open Browser and start serving in demo
 $ yarn/npm demo:open
 
 # compile dist demo

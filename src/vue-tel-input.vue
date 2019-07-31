@@ -229,6 +229,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    allCountries: {
+      type: Array,
+      default: () => allCountries,
+    },
     defaultCountry: {
       // Default country code, ie: 'AU'
       // Will override the current country of user
@@ -322,11 +326,11 @@ export default {
       }
 
       if (this.ignoredCountries.length) {
-        return allCountries.filter(({ iso2 }) => !this.ignoredCountries.includes(iso2.toUpperCase())
+        return this.allCountries.filter(({ iso2 }) => !this.ignoredCountries.includes(iso2.toUpperCase())
           && !this.ignoredCountries.includes(iso2.toLowerCase()));
       }
 
-      return allCountries;
+      return this.allCountries;
     },
     sortedCountries() {
       // Sort the list countries: from preferred countries to all countries
@@ -482,7 +486,7 @@ export default {
         .filter(Boolean);
     },
     findCountry(iso = '') {
-      return allCountries.find(country => country.iso2 === iso.toUpperCase());
+      return this.allCountries.find(country => country.iso2 === iso.toUpperCase());
     },
     getItemClass(index, iso2) {
       const highlighted = this.selectedIndex === index;

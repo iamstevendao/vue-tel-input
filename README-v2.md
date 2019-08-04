@@ -5,6 +5,8 @@ International Telephone Input with Vue.
 
 Checkout [Demo](https://educationlink.github.io/vue-tel-input/) or [Playground](https://codesandbox.io/s/0yyyk45q7w?fontsize=14&module=%2Fsrc%2FApp.vue&moduleview=1).
 
+This is an old version. Check [this documentation](https://github.com/EducationLink/vue-tel-input/) for the newest documentation.
+
 <p align="center">
 <img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
 </p>

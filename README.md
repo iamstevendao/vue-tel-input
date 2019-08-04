@@ -5,6 +5,8 @@ International Telephone Input with Vue.
 
 Checkout [Demo](https://educationlink.github.io/vue-tel-input/) or [Playground](https://codesandbox.io/s/0yyyk45q7w?fontsize=14&module=%2Fsrc%2FApp.vue&moduleview=1).
 
+If you are using v2.x.x, check out this [documentation](https://github.com/EducationLink/vue-tel-input/blob/master/README-v2.md).
+
 <p align="center">
 <img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
 </p>
@@ -47,6 +49,9 @@ Checkout [Demo](https://educationlink.github.io/vue-tel-input/) or [Playground](
      ```
 
 ### Use as a custom field of [vue-form-generator](https://github.com/vue-generators/vue-form-generator)
+
+Check out the demo in [Codesanbox](https://codesandbox.io/s/vue-tel-input-with-vue-form-generator-q56jg).
+
 - Add a component using `vue-form-generator`'s `abstractField` mixin
   ```html
     <!-- tel-input.vue -->

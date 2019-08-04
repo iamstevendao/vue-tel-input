@@ -4,7 +4,7 @@
 set -e
 
 # build
-NODE_ENV=demo npm run build
+npm run demo
 
 # Copy circle CI configuration to prevent running from gh-pages
 cp circle.yml docs

@@ -16,29 +16,27 @@ Checkout [Demo](https://educationlink.github.io/vue-tel-input/) or [Playground](
   ```
 - **npm**:
   ```bash
-    npm i --save vue-tel-input
+    npm install vue-tel-input
   ```
 
 ## Usage
-- Import default `CSS` to your project:
+- Install the component:
     ```js
-    import 'vue-tel-input/dist/vue-tel-input.css';
+    import Vue from 'vue'
+    import VueTelInput from 'vue-tel-input'
+
+    Vue.use(VueTelInput)
     ```
 
 - In your component:
      ```html
      <template>
-     ...
-        <vue-tel-input v-model="phone"></vue-tel-input>
-     ...
+      ...
+      <vue-tel-input v-model="phone"></vue-tel-input>
+      ...
      <template>
      <script>
-     import VueTelInput from 'vue-tel-input';
-
      export default {
-       components: {
-         VueTelInput,
-       },
        data() {
          return {
            phone: '',
@@ -50,32 +48,26 @@ Checkout [Demo](https://educationlink.github.io/vue-tel-input/) or [Playground](
 
 ### Use as a custom field of [vue-form-generator](https://github.com/vue-generators/vue-form-generator)
 - Add a component using `vue-form-generator`'s `abstractField` mixin
-  ```js
-  // tel-input.vue
-  <template>
-    <vue-tel-input v-model="value"></vue-tel-input>
-  </template>
+  ```html
+    <!-- tel-input.vue -->
+    <template>
+      <vue-tel-input v-model="value"></vue-tel-input>
+    </template>
 
-  <script>
-  import VueTelInput from 'vue-tel-input'
-  import { abstractField } from 'vue-form-generator';
+    <script>
+    import { abstractField } from 'vue-form-generator';
 
-  export default {
-    name: 'TelephoneInput',
-    mixins: [abstractField],
-    components: {
-      VueTelInput,
-    },
-  };
-  </script>
+    export default {
+      name: 'TelephoneInput',
+      mixins: [abstractField],
+    };
+    </script>
   ```
 
 - Register the new field as a global component
   ```js
     import Vue from 'vue';
     import TelInput from '<path>/tel-input.vue';
-
-    import 'vue-tel-input/dist/vue-tel-input.css';
 
     Vue.component('field-tel-input', TelInput);
   ```

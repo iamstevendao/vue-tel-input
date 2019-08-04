@@ -3,16 +3,15 @@
 module.exports = {
   root: true,
   env: {
-    browser: true,
+    "node": true
   },
   extends: [
-    'airbnb-base',
-    'plugin:vue/recommended',
+    "plugin:vue/essential",
+    "@vue/airbnb"
   ],
   plugins: ['vue'],
   parserOptions: {
     parser: 'babel-eslint',
-    sourceType: 'module',
   },
   // add your custom rules here
   rules: {
@@ -21,7 +20,6 @@ module.exports = {
     'no-param-reassign': ['error', {
       props: true,
       ignorePropertyModificationsFor: [
-        'state', // for vuex state
         'el',
       ]
     }],

@@ -1,9 +1,8 @@
 {
   "name": "vue-tel-input",
-  "version": "2.5.0",
+  "version": "3.0.0",
   "description": "International Telephone Input with Vue",
   "author": "Steven Dao <iamstevendao@gmail.com>",
-  "main": "dist/vue-tel-input.js",
   "license": "MIT",
   "homepage": "https://educationlink.github.io/vue-tel-input/",
   "repository": {
@@ -11,29 +10,56 @@
     "url": "https://github.com/EducationLink/vue-tel-input.git"
   },
   "scripts": {
-    "dev": "poi",
-    "build": "poi build"
+    "dev": "vue-cli-service serve",
+    "demo": "vue-cli-service build",
+    "build": "set NODE_ENV=production && npm run build:browser && npm run build:es && npm run build:umd",
+    "build:browser": "rollup --config build/rollup.config.browser.js",
+    "build:es": "rollup --config build/rollup.config.es.js",
+    "build:umd": "rollup --config build/rollup.config.umd.js",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit"
   },
   "files": [
     "dist/"
   ],
-  "keywords": [
-    "vue",
-    "telephone",
-    "phone",
-    "vue-tel-input",
-    "phone input",
-    "telephone input"
-  ],
+  "main": "dist/vue-tel-input.umd.js",
+  "module": "dist/vue-tel-input.esm.js",
+  "unpkg": "dist/vue-tel-input.min.js",
   "dependencies": {
-    "libphonenumber-js": "^1.7.18"
+    "libphonenumber-js": "^1.7.22"
   },
   "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.1",
+    "@vue/cli-plugin-eslint": "^3.0.1",
+    "@vue/cli-plugin-unit-jest": "^3.0.1",
+    "@vue/cli-service": "^3.0.1",
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.9.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-vue": "^4.7.1",
-    "poi": "^9.6.13"
+    "babel-jest": "^23.6.0",
+    "core-js": "^2.6.5",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "lint-staged": "^8.1.5",
+    "rollup": "^1.10.0",
+    "rollup-plugin-analyzer": "^3.0.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-css-only": "^1.0.0",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-terser": "^4.0.4",
+    "rollup-plugin-vue": "^5.0.0",
+    "vue": "^2.6.10",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "gitHooks": {
+    "pre-commit": "lint-staged"
   }
 }

@@ -1,0 +1,6 @@
+{
+  "*.{js,vue}": [
+    "eslint --quiet --fix",
+    "git add"
+  ]
+}

@@ -36,7 +36,7 @@
     <input
       ref="input"
       v-model="phone"
-      :placeholder="placeholder"
+      :placeholder="parsedPlaceholder"
       :disabled="disabled"
       :required="required"
       :autocomplete="autocomplete"
@@ -284,18 +284,33 @@ export default {
       type: Boolean,
       default: false,
     },
+    dynamicPlaceholder: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       phone: '',
       activeCountry: { iso2: '' },
       open: false,
+      finishMounted: false,
       selectedIndex: null,
       typeToFindInput: '',
       typeToFindTimer: null,
     };
   },
   computed: {
+    parsedPlaceholder() {
+      if (!this.finishMounted) {
+        return '';
+      }
+      if (this.dynamicPlaceholder) {
+        const mode = this.mode || 'international';
+        return PhoneNumber.getExample(this.activeCountry.iso2, 'mobile').getNumber(mode);
+      }
+      return this.placeholder;
+    },
     parsedMode() {
       if (this.mode) {
         if (!['international', 'national'].includes(this.mode)) {
@@ -379,16 +394,21 @@ export default {
     },
   },
   mounted() {
-    this.initializeCountry().then(() => {
-      if (!this.phone
+    this.initializeCountry()
+      .then(() => {
+        if (!this.phone
         && this.inputOptions
         && this.inputOptions.showDialCode
-        && this.activeCountry) {
-        this.phone = `+${this.activeCountry.dialCode}`;
-      }
-      this.$emit('validate', this.phoneObject);
-      this.$emit('onValidate', this.phoneObject); // Deprecated
-    }).catch(console.error); // eslint-disable-line
+        && this.activeCountry.dialCode) {
+          this.phone = `+${this.activeCountry.dialCode}`;
+        }
+        this.$emit('validate', this.phoneObject);
+        this.$emit('onValidate', this.phoneObject); // Deprecated
+      })
+      .catch(console.error)
+      .finally(() => {
+        this.finishMounted = true;
+      });
   },
   created() {
     if (this.value) {

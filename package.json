@@ -58,5 +58,15 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
+  ],
+  "keywords": [
+    "vue",
+    "telephone",
+    "phone",
+    "vue-tel-input",
+    "phone input",
+    "telephone input",
+    "input",
+    "international phone"
   ]
 }

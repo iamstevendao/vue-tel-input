@@ -50,7 +50,7 @@ If you are using v2.x.x, check out this [documentation](https://github.com/Educa
 
 ### Use as a custom field of [vue-form-generator](https://github.com/vue-generators/vue-form-generator)
 
-Check out the demo in [Codesanbox](https://codesandbox.io/s/vue-tel-input-with-vue-form-generator-q56jg).
+Check out the setup in [Codesandbox](https://codesandbox.io/s/vue-tel-input-with-vue-form-generator-q56jg).
 
 - Add a component using `vue-form-generator`'s `abstractField` mixin
   ```html
@@ -99,7 +99,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `disabledFetchingCountry` | `Boolean` | `false` | Disable fetching current country based on IP address of user |
   | `disabled` | `Boolean` | `false` | Disable input field |
   | `disabledFormatting` | `Boolean` | `false` | Disable formatting the phone number in the input, the formatted result still be accessible by `formattedNumber` returned from `onInput` event |
-  | `placeholder` | `String` | Enter a phone number | Placeholder for the input |
+  | `placeholder` | `String` | `'Enter a phone number'` | Placeholder for the input |
   | `required` | `Boolean` | `false` | Required property for HTML5 required attribute |
   | `enabledCountryCode` | `Boolean` | `false` | Enable country code in the input |
   | `enabledFlags` | `Boolean` | `true` | Enable flags in the input |
@@ -115,6 +115,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `dropdownOptions` | `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
   | `inputOptions` | `Object` | `{ showDialCode: false, tabindex: 0 }` | Options for input, supporting `showDialCode` (always show dial code in the input) and `tabindex`|
   | `validCharactersOnly` | `Boolean` | `false` | Only allow valid characters in a phone number (will also verify in `mounted`, so phone number with invalid characters will be shown as an empty string) |
+  | `mode` | `String` | `''` | Format number to `'International'` (with + dial code) or `'National'` (with 0...) |
 
 ### Events
 
@@ -135,7 +136,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `arrow-icon` | Replace the arrow next to the flag with a component of your choice | Available from [v2.4.3](https://github.com/EducationLink/vue-tel-input/releases/tag/v2.4.3) |
 
 ## Highlights & Credits
-- Telephone Number parsing, validation by [libphonenumber-js](https://catamphetamine.github.io/libphonenumber-js/).
+- Telephone Number parsing, validation by [awesome-phonenumber](https://www.npmjs.com/package/awesome-phonenumber).
 - Country Codes data from [intl-tel-input](https://github.com/jackocnr/intl-tel-input/blob/master/src/js/data.js).
 - User's country by [ip2c.org](https://ip2c.org/s), request using [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 

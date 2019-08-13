@@ -21,7 +21,7 @@
         </span>
         <span>
           Is valid:
-          <strong>{{ phone.isValid }}</strong>,&nbsp;
+          <strong>{{ phone.valid }}</strong>,&nbsp;
         </span>
         <span>
           Country:
@@ -48,7 +48,7 @@
       <iframe
         src="https://codesandbox.io/embed/0yyyk45q7w?autoresize=1&fontsize=14&hidenavigation=1&module=%2Fsrc%2FApp.vue"
         title="Vue Template"
-        allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media"
+        allow="gyroscope; payment; ambient-light-sensor; encrypted-media"
         style="width:100%; height:80vh; border:0; border-radius: 4px; overflow:hidden;"
         sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"/>
     </div>
@@ -63,15 +63,15 @@ export default {
       showPlayground: false,
       phone: {
         number: '',
-        isValid: false,
+        valid: false,
         country: undefined,
       },
     };
   },
   methods: {
-    onInput(formattedNumber, { number, isValid, country }) {
-      this.phone.number = number;
-      this.phone.isValid = isValid;
+    onInput(formattedNumber, { number, valid, country }) {
+      this.phone.number = number.international;
+      this.phone.valid = valid;
       this.phone.country = country && country.name;
     },
   },

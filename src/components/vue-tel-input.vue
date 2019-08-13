@@ -146,9 +146,7 @@ ul {
 </style>
 
 <script>
-import {
-  formatNumber, AsYouType, isValidNumber, parsePhoneNumberFromString,
-} from 'libphonenumber-js';
+import PhoneNumber from 'awesome-phonenumber';
 import allCountries from '../assets/all-countries';
 import getCountry from '../assets/default-country';
 
@@ -207,6 +205,10 @@ export default {
     disabledFormatting: {
       type: Boolean,
       default: false,
+    },
+    mode: {
+      type: String,
+      default: '',
     },
     invalidMsg: {
       default: '',
@@ -294,17 +296,18 @@ export default {
     };
   },
   computed: {
-    mode() {
+    parsedMode() {
+      if (this.mode) {
+        if (!['international', 'national'].includes(this.mode)) {
+          console.error('Invalid value of prop "mode"');
+        } else {
+          return this.mode;
+        }
+      }
       if (!this.phone) {
-        return '';
+        return 'national';
       }
-      if (this.phone[0] === '+') {
-        return 'code';
-      }
-      if (this.phone[0] === '0') {
-        return 'prefix';
-      }
-      return 'normal';
+      return this.phone[0] === '+' ? 'international' : 'national';
     },
     filteredCountries() {
       // List countries after filtered
@@ -328,59 +331,23 @@ export default {
 
       return [...preferredCountries, ...this.filteredCountries];
     },
-    formattedResult() {
-      // Calculate phone number based on mode
-      if (!this.mode || !this.filteredCountries) {
-        return '';
-      }
-      let { phone } = this;
-      if (this.mode === 'code') {
-        // If user manually type the country code
-        const formatter = new AsYouType();// eslint-disable-line
-        formatter.input(this.phone);
-
-        // Find inputted country in the countries list
-        this.activeCountry = this.findCountry(formatter.country) || this.activeCountry;
-      } else if (this.mode === 'prefix') {
-        // Remove the first '0' if this is a '0' prefix number
-        // Ex: 0432421999
-        phone = this.phone.slice(1);
-      }
-      if (this.disabledFormatting) {
-        return this.phone;
-      }
-
-      return formatNumber(phone, this.activeCountry && this.activeCountry.iso2, 'International');
-    },
-    state() {
-      return isValidNumber(this.formattedResult, this.activeCountry && this.activeCountry.iso2);
-    },
-    response() {
-      // If it is a valid number, returns the formatted value
-      // Otherwise returns what it is
-      const response = {
-        number: this.state ? this.formattedResult : this.phone,
-        isValid: this.state,
+    phoneObject() {
+      const result = PhoneNumber(this.phone, this.activeCountry.iso2).toJSON();
+      Object.assign(result, {
+        isValid: result.valid,
         country: this.activeCountry,
-      };
-      // If formatting to the input is disabled, try to return the formatted value to its parent
-      if (this.disabledFormatting) {
-        Object.assign(response, {
-          formattedNumber: formatNumber(this.phone, this.activeCountry && this.activeCountry.iso2, 'International'),
-        });
-      }
-      return response;
+      });
+      return result;
     },
   },
   watch: {
-    state(value) {
-      if (value && this.mode !== 'prefix') {
-        // If mode is 'prefix', keep the number as user typed,
-        // Otherwise format it
-        this.phone = this.formattedResult;
+    // eslint-disable-next-line func-names
+    'phoneObject.valid': function (value) {
+      if (value) {
+        this.phone = this.phoneObject.number[this.parsedMode];
       }
-      this.$emit('onValidate', this.response); // Deprecated
-      this.$emit('validate', this.response);
+      this.$emit('validate', this.phoneObject);
+      this.$emit('onValidate', this.phoneObject); // Deprecated
     },
     value() {
       this.phone = this.value;
@@ -396,6 +363,13 @@ export default {
     phone(newValue, oldValue) {
       if (this.validCharactersOnly && !this.testCharacters()) {
         this.$nextTick(() => { this.phone = oldValue; });
+      } else if (newValue) {
+        if (newValue[0] === '+') {
+          const code = PhoneNumber(newValue).getRegionCode();
+          if (code) {
+            this.activeCountry = this.findCountry(code) || this.activeCountry;
+          }
+        }
       }
     },
     activeCountry(value) {
@@ -412,8 +386,8 @@ export default {
         && this.activeCountry) {
         this.phone = `+${this.activeCountry.dialCode}`;
       }
-      this.$emit('validate', this.response);
-      this.$emit('onValidate', this.response); // Deprecated
+      this.$emit('validate', this.phoneObject);
+      this.$emit('onValidate', this.phoneObject); // Deprecated
     }).catch(console.error); // eslint-disable-line
   },
   created() {
@@ -428,9 +402,9 @@ export default {
          * 1. If the phone included prefix (+12), try to get the country and set it
          */
         if (this.phone && this.phone[0] === '+') {
-          const parsedPhone = parsePhoneNumberFromString(this.phone);
-          if (parsedPhone && parsedPhone.country) {
-            this.activeCountry = parsedPhone.country;
+          const activeCountry = PhoneNumber(this.phone).getRegionCode();
+          if (activeCountry) {
+            this.activeCountry = activeCountry;
             resolve();
             return;
           }
@@ -492,8 +466,12 @@ export default {
       if (this.inputOptions && this.inputOptions.showDialCode && country) {
         this.phone = `+${country.dialCode}`;
       }
-      this.$emit('input', this.response.number, this.response);
-      this.$emit('onInput', this.response); // Deprecated
+      if (this.phone && this.phone[0] === '+') {
+        this.phone = PhoneNumber(this.phoneObject.number.national, this.activeCountry.iso2)
+          .getNumber('international');
+      }
+      this.$emit('input', this.phoneObject.number[this.parsedMode], this.phoneObject);
+      this.$emit('onInput', this.phoneObject); // Deprecated
     },
     testCharacters() {
       const re = /^[()-+0-9\s]*$/;
@@ -503,12 +481,12 @@ export default {
       if (this.validCharactersOnly && !this.testCharacters()) {
         return;
       }
-      this.$refs.input.setCustomValidity(this.response.isValid ? '' : this.invalidMsg);
+      this.$refs.input.setCustomValidity(this.phoneObject.valid ? '' : this.invalidMsg);
       // Returns response.number to assign it to v-model (if being used)
       // Returns full response for cases @input is used
       // and parent wants to return the whole response.
-      this.$emit('input', this.response.number, this.response);
-      this.$emit('onInput', this.response); // Deprecated
+      this.$emit('input', this.phoneObject.number[this.parsedMode], this.phoneObject);
+      this.$emit('onInput', this.phoneObject); // Deprecated
     },
     onBlur() {
       this.$emit('blur');

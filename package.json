@@ -26,7 +26,7 @@
   "module": "dist/vue-tel-input.esm.js",
   "unpkg": "dist/vue-tel-input.min.js",
   "dependencies": {
-    "libphonenumber-js": "^1.7.22"
+    "awesome-phonenumber": "^2.15.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.1",

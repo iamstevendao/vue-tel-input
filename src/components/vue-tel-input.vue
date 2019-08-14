@@ -499,7 +499,7 @@ export default {
       this.$emit('onInput', this.phoneObject); // Deprecated
     },
     testCharacters() {
-      const re = /^[()-+0-9\s]*$/;
+      const re = /^[()\-+0-9\s]*$/;
       return re.test(this.phone);
     },
     onInput() {

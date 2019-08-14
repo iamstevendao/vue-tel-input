@@ -482,13 +482,18 @@ export default {
       };
     },
     choose(country) {
-      this.activeCountry = country;
-      if (this.inputOptions && this.inputOptions.showDialCode && country) {
-        this.phone = `+${country.dialCode}`;
-      }
-      if (this.phone && this.phone[0] === '+') {
+      this.activeCountry = country || this.activeCountry || {};
+
+      if (this.phone
+        && this.phone[0] === '+'
+        && this.activeCountry.iso2
+        && this.phoneObject.number.national) {
+        // Attach the current phone number with the newly selected country
         this.phone = PhoneNumber(this.phoneObject.number.national, this.activeCountry.iso2)
           .getNumber('international');
+      } else if (this.inputOptions && this.inputOptions.showDialCode && country) {
+        // Reset phone if the showDialCode is set
+        this.phone = `+${country.dialCode}`;
       }
       this.$emit('input', this.phoneObject.number[this.parsedMode], this.phoneObject);
       this.$emit('onInput', this.phoneObject); // Deprecated

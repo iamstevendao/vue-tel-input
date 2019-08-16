@@ -6,6 +6,8 @@ export function install(Vue) {
   Vue.component('vue-tel-input', VueTelInput);
 }
 
+export { VueTelInput };
+
 const plugin = {
   install,
 };

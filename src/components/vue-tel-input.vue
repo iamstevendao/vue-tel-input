@@ -150,6 +150,18 @@ import PhoneNumber from 'awesome-phonenumber';
 import allCountries from '../assets/all-countries';
 import getCountry from '../assets/default-country';
 
+// Polyfill for Event.path in IE 11: https://stackoverflow.com/a/46093727
+function getParents(node, memo) {
+  const parsedMemo = memo || [];
+  const { parentNode } = node;
+
+  if (!parentNode) {
+    return parsedMemo;
+  }
+
+  return getParents(parentNode, parsedMemo.concat(parentNode));
+}
+
 export default {
   name: 'VueTelInput',
   directives: {
@@ -169,7 +181,9 @@ export default {
         const { bubble } = binding.modifiers;
         const handler = (e) => {
           // Fall back to composedPath if e.path is undefined
-          const path = e.path || (e.composedPath && e.composedPath());
+          const path = e.path
+            || (e.composedPath ? e.composedPath() : false)
+            || getParents(e.target);
           if (bubble || (path.length && !el.contains(path[0]) && el !== path[0])) {
             binding.value(e);
           }

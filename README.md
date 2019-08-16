@@ -48,6 +48,28 @@ If you are using v2.x.x, check out this [documentation](https://github.com/Educa
      </script>
      ```
 
+### Use inside the Single File Component
+  ```html
+   <template>
+    ...
+    <vue-tel-input v-model="phone"></vue-tel-input>
+    ...
+   <template>
+   <script>
+   import { VueTelInput } from 'vue-tel-input'
+
+   export default {
+     components: { 'vue-tel-input': VueTelInput },
+
+     data() {
+       return {
+         phone: '',
+       };
+     },
+   }
+   </script>
+  ```
+
 ### Use as a custom field of [vue-form-generator](https://github.com/vue-generators/vue-form-generator)
 
 Check out the setup in [Codesandbox](https://codesandbox.io/s/vue-tel-input-with-vue-form-generator-q56jg).

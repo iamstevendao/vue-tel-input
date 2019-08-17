@@ -3,7 +3,7 @@ International Telephone Input with Vue.
 
 [![](https://img.shields.io/npm/dt/vue-tel-input.svg)](https://www.npmjs.com/package/vue-tel-input) [![](https://img.shields.io/github/stars/educationlink/vue-tel-input.svg)](https://github.com/EducationLink/vue-tel-input)
 
-Checkout [Demo](https://educationlink.github.io/vue-tel-input/) or [Playground](https://codesandbox.io/s/0yyyk45q7w?fontsize=14&module=%2Fsrc%2FApp.vue&moduleview=1).
+Checkout [Demo](https://educationlink.github.io/vue-tel-input/).
 
 If you are using v2.x.x, check out this [documentation](https://github.com/EducationLink/vue-tel-input/blob/master/README-v2.md).
 
@@ -11,46 +11,90 @@ If you are using v2.x.x, check out this [documentation](https://github.com/Educa
 <img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
 </p>
 
+## Getting started
+- Install the plugin:
+
+  ```
+  npm install vue-tel-input
+  ```
+
+- Add the plugin into your app:
+
+  ```javascript
+  import Vue from 'vue'
+  import VueTelInput from 'vue-tel-input'
+
+  Vue.use(VueTelInput)
+  ```
+
+  [More info on installation](#installation)
+
+- Use the `vue-tel-input` component:
+
+  ```html
+  <template>
+    <vue-tel-input v-model="phone"></vue-tel-input>
+  <template>
+  ```
+
 ## Installation
-- **yarn**:
-  ```bash
-    yarn add vue-tel-input
-  ```
-- **npm**:
-  ```bash
-    npm install vue-tel-input
-  ```
+### npm
+```bash
+  npm install vue-tel-input
+```
 
-## Usage
-- Install the component:
-    ```js
-    import Vue from 'vue'
-    import VueTelInput from 'vue-tel-input'
+Install the plugin into Vue:
 
-    Vue.use(VueTelInput)
-    ```
+```javascript
+import Vue from 'vue'
+import VueTelInput from 'vue-tel-input'
 
-- In your component:
-     ```html
-     <template>
-      ...
-      <vue-tel-input v-model="phone"></vue-tel-input>
-      ...
-     <template>
-     <script>
-     export default {
-       data() {
-         return {
-           phone: '',
-         };
-       },
-     }
-     </script>
-     ```
+Vue.use(VueTelInput)
+```
+
+Or use the component directly:
+
+```html
+<!-- your-component.vue-->
+<template>
+  <vue-tel-input v-model="value"></vue-tel-input>
+</template>
+<script>
+import { VueTelInput } from 'vue-tel-input'
+
+export default {
+  components: {
+    VueTelInput,
+  },
+};
+</script>
+```
+
+### Browser
+
+Include [vue-tel-input](/dist/vue-tel-input.min.js) in the page.
+
+```html
+<script src="https://unpkg.com/vue-tel-input"></script>
+```
+
+**If Vue is detected in the Page, the plugin is installed automatically.**
+
+Manually install the plugin into Vue:
+
+```javascript
+Vue.use(VueTelInput)
+```
+
+Or use the component directly:
+
+```javascript
+Vue.component('vue-tel-input', VueTelInput.VueTelInput)
+```
 
 ### Use as a custom field of [vue-form-generator](https://github.com/vue-generators/vue-form-generator)
 
-Check out the setup in [Codesandbox](https://codesandbox.io/s/vue-tel-input-with-vue-form-generator-q56jg).
+Check out the setup in [CodeSandbox](https://codesandbox.io/s/vue-tel-input-with-vue-form-generator-q56jg).
 
 - Add a component using `vue-form-generator`'s `abstractField` mixin
   ```html
@@ -141,30 +185,9 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
 - Country Codes data from [intl-tel-input](https://github.com/jackocnr/intl-tel-input/blob/master/src/js/data.js).
 - User's country by [ip2c.org](https://ip2c.org/s), request using [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
-## Demo Usage
-
-```bash
-
-# install dependencies
-$ yarn/npm install
-
-# compile demo for development
-$ yarn/npm dev
-
-# open Browser and start serving in demo
-$ yarn/npm demo:open
-
-# compile dist demo
-$ yarn/npm dist:demo
-
-# compile dist
-$ yarn/npm dist
-
-```
-
 ## Typescript Support
 
-If you working with typescript will need declaration requirements.
+If you work with typescript you will need declaration requirements.
 
 ```bash
 npm install --save-dev @types/vue-tel-input

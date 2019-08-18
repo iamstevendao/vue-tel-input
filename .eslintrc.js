@@ -3,11 +3,11 @@
 module.exports = {
   root: true,
   env: {
-    "node": true
+    'node': true,
   },
   extends: [
-    "plugin:vue/essential",
-    "@vue/airbnb"
+    'plugin:vue/essential',
+    '@vue/airbnb',
   ],
   plugins: ['vue'],
   parserOptions: {
@@ -23,6 +23,10 @@ module.exports = {
         'el',
       ]
     }],
+    'no-console': [
+      'error',
+      { allow: ['warn', 'error'] },
+    ],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-underscore-dangle': [
@@ -33,5 +37,5 @@ module.exports = {
         ]
       }
     ],
-  }
+  },
 }

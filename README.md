@@ -49,8 +49,9 @@ Install the plugin into Vue:
 import Vue from 'vue'
 import VueTelInput from 'vue-tel-input'
 
-Vue.use(VueTelInput)
+Vue.use(VueTelInput, [globalOptions = {}]) // Define default global options here (optional)
 ```
+> View all available options in [Props](#props).
 
 Or use the component directly:
 

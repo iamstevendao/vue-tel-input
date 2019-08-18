@@ -147,8 +147,15 @@ ul {
 
 <script>
 import PhoneNumber from 'awesome-phonenumber';
-import allCountries from '../assets/all-countries';
-import getCountry from '../assets/default-country';
+import utils, { getCountry } from '../utils';
+
+function getDefault(key) {
+  const value = utils.options[key];
+  if (typeof value === 'undefined') {
+    return utils.options[key];
+  }
+  return value;
+}
 
 // Polyfill for Event.path in IE 11: https://stackoverflow.com/a/46093727
 function getParents(node, memo) {
@@ -206,101 +213,101 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Enter a phone number',
+      default: () => getDefault('placeholder'),
     },
     disabledFetchingCountry: {
       type: Boolean,
-      default: false,
+      default: () => getDefault('disabledFetchingCountry'),
     },
     disabled: {
       type: Boolean,
-      default: false,
+      default: () => getDefault('disabled'),
     },
     disabledFormatting: {
       type: Boolean,
-      default: false,
+      default: () => getDefault('disabledFormatting'),
     },
     mode: {
       type: String,
-      default: '',
+      default: () => getDefault('mode'),
     },
     invalidMsg: {
-      default: '',
       type: String,
+      default: () => getDefault('invalidMsg'),
     },
     required: {
       type: Boolean,
-      default: false,
+      default: () => getDefault('required'),
     },
     allCountries: {
       type: Array,
-      default: () => allCountries,
+      default: () => getDefault('allCountries'),
     },
     defaultCountry: {
       // Default country code, ie: 'AU'
       // Will override the current country of user
       type: String,
-      default: '',
+      default: () => getDefault('defaultCountry'),
     },
     enabledCountryCode: {
       type: Boolean,
-      default: false,
+      default: () => getDefault('enabledCountryCode'),
     },
     enabledFlags: {
       type: Boolean,
-      default: true,
+      default: () => getDefault('enabledFlags'),
     },
     preferredCountries: {
       type: Array,
-      default: () => [],
+      default: () => getDefault('preferredCountries'),
     },
     onlyCountries: {
       type: Array,
-      default: () => [],
+      default: () => getDefault('onlyCountries'),
     },
     ignoredCountries: {
       type: Array,
-      default: () => [],
+      default: () => getDefault('ignoredCountries'),
     },
     autocomplete: {
       type: String,
-      default: 'on',
+      default: () => getDefault('autocomplete'),
     },
     name: {
       type: String,
-      default: 'telephone',
+      default: () => getDefault('name'),
     },
     wrapperClasses: {
       type: [String, Array, Object],
-      default: '',
+      default: () => getDefault('wrapperClasses'),
     },
     inputClasses: {
       type: [String, Array, Object],
-      default: '',
+      default: () => getDefault('inputClasses'),
     },
     inputId: {
       type: String,
-      default: '',
+      default: () => getDefault('inputId'),
     },
     dropdownOptions: {
       type: Object,
-      default: () => ({}),
+      default: () => getDefault('dropdownOptions'),
     },
     inputOptions: {
       type: Object,
-      default: () => ({}),
+      default: () => getDefault('inputOptions'),
     },
     maxLen: {
       type: Number,
-      default: 25,
+      default: () => getDefault('maxLen'),
     },
     validCharactersOnly: {
       type: Boolean,
-      default: false,
+      default: () => getDefault('validCharactersOnly'),
     },
     dynamicPlaceholder: {
       type: Boolean,
-      default: false,
+      default: () => getDefault('dynamicPlaceholder'),
     },
   },
   data() {

@@ -22,7 +22,7 @@
           :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
           :class="getItemClass(index, pb.iso2)"
           class="dropdown-item"
-          @click="choose(pb)"
+          @click="choose(pb, true)"
           @mousemove="selectedIndex = index"
         >
           <div v-if="enabledFlags" :class="pb.iso2.toLowerCase()" class="iti-flag" />
@@ -354,7 +354,7 @@ export default {
         if (this.phone && this.phone[0] === '+') {
           const activeCountry = PhoneNumber(this.phone).getRegionCode();
           if (activeCountry) {
-            this.activeCountry = activeCountry;
+            this.choose(activeCountry);
             resolve();
             return;
           }
@@ -365,27 +365,36 @@ export default {
         if (this.defaultCountry) {
           const defaultCountry = this.findCountry(this.defaultCountry);
           if (defaultCountry) {
-            this.activeCountry = defaultCountry;
+            this.choose(defaultCountry);
             resolve();
             return;
           }
         }
-        /**
-         * 3. Use the first country from preferred list (if available) or all countries list
-         */
-        this.activeCountry = this.findCountry(this.preferredCountries[0])
+        const fallbackCountry = this.findCountry(this.preferredCountries[0])
           || this.filteredCountries[0];
         /**
-         * 4. Check if fetching country based on user's IP is allowed, set it as the default country
+         * 3. Check if fetching country based on user's IP is allowed, set it as the default country
          */
         if (!this.disabledFetchingCountry) {
-          getCountry().then((res) => {
-            this.activeCountry = this.findCountry(res) || this.activeCountry;
-          }).finally(resolve)
+          getCountry()
+            .then((res) => {
+              this.activeCountry = this.findCountry(res) || this.activeCountry;
+            })
             .catch((error) => {
               console.warn(error);
+              /**
+               * 4. Use the first country from preferred list (if available) or all countries list
+               */
+              this.choose(fallbackCountry);
+            })
+            .finally(() => {
+              resolve();
             });
         } else {
+          /**
+           * 4. Use the first country from preferred list (if available) or all countries list
+           */
+          this.choose(fallbackCountry);
           resolve();
         }
       });
@@ -411,9 +420,8 @@ export default {
         preferred,
       };
     },
-    choose(country) {
+    choose(country, toEmitInputEvent = false) {
       this.activeCountry = country || this.activeCountry || {};
-
       if (this.phone
         && this.phone[0] === '+'
         && this.activeCountry.iso2
@@ -425,8 +433,10 @@ export default {
         // Reset phone if the showDialCode is set
         this.phone = `+${country.dialCode}`;
       }
-      this.$emit('input', this.phoneObject.number[this.parsedMode], this.phoneObject);
-      this.$emit('onInput', this.phoneObject); // Deprecated
+      if (toEmitInputEvent) {
+        this.$emit('input', this.phoneObject.number[this.parsedMode], this.phoneObject);
+        this.$emit('onInput', this.phoneObject); // Deprecated
+      }
     },
     testCharacters() {
       const re = /^[()\-+0-9\s]*$/;

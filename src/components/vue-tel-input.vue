@@ -251,9 +251,15 @@ export default {
         }
       }
       if (!this.phone) {
-        return 'national';
+        return 'input';
       }
-      return this.phone[0] === '+' ? 'international' : 'national';
+      if (this.phone[0] === '+') {
+        return 'international';
+      }
+      if (!this.phoneObject || !this.phoneObject.isValid) {
+        return 'input';
+      }
+      return 'national';
     },
     filteredCountries() {
       // List countries after filtered

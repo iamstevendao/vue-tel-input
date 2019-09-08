@@ -160,7 +160,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `dropdownOptions` | `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
   | `inputOptions` | `Object` | `{ showDialCode: false, tabindex: 0 }` | Options for input, supporting `showDialCode` (always show dial code in the input) and `tabindex`|
   | `validCharactersOnly` | `Boolean` | `false` | Only allow valid characters in a phone number (will also verify in `mounted`, so phone number with invalid characters will be shown as an empty string) |
-  | `mode` | `String` | `''` | Format number to `'International'` (with + dial code) or `'National'` (with 0...), available from [v3.1.1](https://github.com/EducationLink/vue-tel-input/releases/tag/v3.1.1) |
+  | `mode` | `String` | `''` | Format number to `'international'` (with + dial code) or `'national'` (with 0...), available from [v3.1.1](https://github.com/EducationLink/vue-tel-input/releases/tag/v3.1.1) |
   | `dynamicPlaceholder` | `Boolean` | `false` | Placeholder as a sample phone number in the current country, available from [v3.1.1](https://github.com/EducationLink/vue-tel-input/releases/tag/v3.1.1) |
 
 ### Events

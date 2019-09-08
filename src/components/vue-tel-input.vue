@@ -445,7 +445,7 @@ export default {
         this.phone = `+${country.dialCode}`;
       }
       if (toEmitInputEvent) {
-        this.$emit('input', this.phoneObject.number[this.parsedMode], this.phoneObject);
+        this.$emit('input', this.phoneObject.number[this.parsedMode] || '', this.phoneObject);
         this.$emit('onInput', this.phoneObject); // Deprecated
       }
     },
@@ -461,7 +461,7 @@ export default {
       // Returns response.number to assign it to v-model (if being used)
       // Returns full response for cases @input is used
       // and parent wants to return the whole response.
-      this.$emit('input', this.phoneObject.number[this.parsedMode], this.phoneObject);
+      this.$emit('input', this.phoneObject.number[this.parsedMode] || '', this.phoneObject);
       this.$emit('onInput', this.phoneObject); // Deprecated
 
       // Keep the current cursor position just in case the input reformatted

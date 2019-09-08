@@ -56,7 +56,7 @@
 
 <script>
 import PhoneNumber from 'awesome-phonenumber';
-import utils, { getCountry } from '../utils';
+import utils, { getCountry, setCaretPosition } from '../utils';
 
 function getDefault(key) {
   const value = utils.options[key];
@@ -228,6 +228,7 @@ export default {
       selectedIndex: null,
       typeToFindInput: '',
       typeToFindTimer: null,
+      cursorPosition: 0,
     };
   },
   computed: {
@@ -315,6 +316,10 @@ export default {
             this.activeCountry = this.findCountry(code) || this.activeCountry;
           }
         }
+      }
+      // Reset the cursor to current position if it's not the last character.
+      if (this.cursorPosition < oldValue.length) {
+        this.$nextTick(() => { setCaretPosition(this.$refs.input, this.cursorPosition); });
       }
     },
     activeCountry(value) {
@@ -442,7 +447,7 @@ export default {
       const re = /^[()\-+0-9\s]*$/;
       return re.test(this.phone);
     },
-    onInput() {
+    onInput(e) {
       if (this.validCharactersOnly && !this.testCharacters()) {
         return;
       }
@@ -452,6 +457,12 @@ export default {
       // and parent wants to return the whole response.
       this.$emit('input', this.phoneObject.number[this.parsedMode], this.phoneObject);
       this.$emit('onInput', this.phoneObject); // Deprecated
+
+      // Keep the current cursor position just in case the input reformatted
+      // and it gets moved to the last character.
+      if (e && e.target) {
+        this.cursorPosition = e.target.selectionStart;
+      }
     },
     onBlur() {
       this.$emit('blur');

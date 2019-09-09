@@ -250,16 +250,10 @@ export default {
           return this.mode;
         }
       }
-      if (!this.phone) {
-        return 'input';
+      if (!this.phone || this.phone[0] !== '+') {
+        return 'national';
       }
-      if (this.phone[0] === '+') {
-        return 'international';
-      }
-      if (!this.phoneObject || !this.phoneObject.isValid) {
-        return 'input';
-      }
-      return 'national';
+      return 'international';
     },
     filteredCountries() {
       // List countries after filtered
@@ -291,12 +285,19 @@ export default {
       });
       return result;
     },
+    phoneText() {
+      let key = 'input';
+      if (this.phoneObject.valid) {
+        key = this.parsedMode;
+      }
+      return this.phoneObject.number[key] || '';
+    },
   },
   watch: {
     // eslint-disable-next-line func-names
     'phoneObject.valid': function (value) {
       if (value) {
-        this.phone = this.phoneObject.number[this.parsedMode];
+        this.phone = this.phoneText;
       }
       this.$emit('validate', this.phoneObject);
       this.$emit('onValidate', this.phoneObject); // Deprecated
@@ -445,7 +446,7 @@ export default {
         this.phone = `+${country.dialCode}`;
       }
       if (toEmitInputEvent) {
-        this.$emit('input', this.phoneObject.number[this.parsedMode] || '', this.phoneObject);
+        this.$emit('input', this.phoneText, this.phoneObject);
         this.$emit('onInput', this.phoneObject); // Deprecated
       }
     },
@@ -461,7 +462,7 @@ export default {
       // Returns response.number to assign it to v-model (if being used)
       // Returns full response for cases @input is used
       // and parent wants to return the whole response.
-      this.$emit('input', this.phoneObject.number[this.parsedMode] || '', this.phoneObject);
+      this.$emit('input', this.phoneText, this.phoneObject);
       this.$emit('onInput', this.phoneObject); // Deprecated
 
       // Keep the current cursor position just in case the input reformatted

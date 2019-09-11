@@ -46,6 +46,7 @@ export const defaultOptions = {
   preferredCountries: [],
   onlyCountries: [],
   ignoredCountries: [],
+  autofocus: false,
   autocomplete: 'on',
   name: 'telephone',
   wrapperClasses: '',

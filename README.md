@@ -152,6 +152,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `onlyCountries` | `Array` | `[]` | List of countries will be shown on the dropdown. ie `['AU', 'BR']` |
   | `ignoredCountries` | `Array` | `[]` | List of countries will NOT be shown on the dropdown. ie `['AU', 'BR']` |
   | `autocomplete` | `String` | `'on'` | Native input 'autocomplete' attribute |
+  | `autofocus` | `Boolean` | `false` | Native input 'autofocus' attribute |
   | `name` | `String` | `'telephone'` | Native input 'name' attribute |
   | `maxLen` | `Number` | `25` | Native input 'maxlength' attribute |
   | `wrapperClasses` | `String` &#124; `Array` &#124; `Object` | `''` | Custom classes for the wrapper |

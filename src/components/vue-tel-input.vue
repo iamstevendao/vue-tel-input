@@ -40,6 +40,7 @@
       :disabled="disabled"
       :required="required"
       :autocomplete="autocomplete"
+      :autofocus="autofocus"
       :name="name"
       :class="inputClasses"
       :id="inputId"
@@ -181,6 +182,10 @@ export default {
     autocomplete: {
       type: String,
       default: () => getDefault('autocomplete'),
+    },
+    autofocus: {
+      type: String,
+      default: () => getDefault('autofocus'),
     },
     name: {
       type: String,

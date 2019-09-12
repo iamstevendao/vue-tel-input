@@ -184,7 +184,7 @@ export default {
       default: () => getDefault('autocomplete'),
     },
     autofocus: {
-      type: String,
+      type: Boolean,
       default: () => getDefault('autofocus'),
     },
     name: {

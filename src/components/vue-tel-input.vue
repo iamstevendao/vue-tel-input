@@ -438,7 +438,14 @@ export default {
       };
     },
     choose(country, toEmitInputEvent = false) {
-      this.activeCountry = country || this.activeCountry || {};
+      let parsedCountry = country;
+      if (typeof parsedCountry === 'string') {
+        parsedCountry = this.findCountry(parsedCountry);
+      }
+      if (!parsedCountry) {
+        return;
+      }
+      this.activeCountry = parsedCountry || this.activeCountry || {};
       if (this.phone
         && this.phone[0] === '+'
         && this.activeCountry.iso2
@@ -446,9 +453,9 @@ export default {
         // Attach the current phone number with the newly selected country
         this.phone = PhoneNumber(this.phoneObject.number.national, this.activeCountry.iso2)
           .getNumber('international');
-      } else if (this.inputOptions && this.inputOptions.showDialCode && country) {
+      } else if (this.inputOptions && this.inputOptions.showDialCode && parsedCountry) {
         // Reset phone if the showDialCode is set
-        this.phone = `+${country.dialCode}`;
+        this.phone = `+${parsedCountry.dialCode}`;
       }
       if (toEmitInputEvent) {
         this.$emit('input', this.phoneText, this.phoneObject);

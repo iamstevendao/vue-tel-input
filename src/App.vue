@@ -34,7 +34,7 @@
       View
       <span style="font-size: 15px;">
         [<a href="https://github.com/EducationLink/vue-tel-input">github</a>,
-        <a href="https://github.com/EducationLink/vue-tel-input/releases">changelogs</a>,
+        <a href="https://github.com/EducationLink/vue-tel-input/releases">changelog</a>,
         <a href="https://www.npmjs.com/package/vue-tel-input">npm</a>,
         <a
           href=""

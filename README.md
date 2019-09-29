@@ -3,13 +3,31 @@ International Telephone Input with Vue.
 
 [![](https://img.shields.io/npm/dt/vue-tel-input.svg)](https://www.npmjs.com/package/vue-tel-input) [![](https://img.shields.io/github/stars/educationlink/vue-tel-input.svg)](https://github.com/EducationLink/vue-tel-input)
 
-Checkout [Demo](https://educationlink.github.io/vue-tel-input/).
-
 If you are using v2.x.x, check out this [documentation](https://github.com/EducationLink/vue-tel-input/blob/master/README-v2.md).
 
 <p align="center">
 <img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
 </p>
+
+**Useful Links**
+
+- [Live Demo](https://educationlink.github.io/vue-tel-input/)
+- [Changelog](https://github.com/EducationLink/vue-tel-input/releases)
+- [Documentation for `v2.x.x`](https://github.com/EducationLink/vue-tel-input/blob/master/README-v2.md)
+
+**Table of Contents**
+
+- [Getting started](#getting-started)
+- [Installation](#installation)
+  - [npm](#npm)
+  - [Browser](#browser)
+  - [Use as a custom field of `vue-form-generator`](#use-as-a-custom-field-of-vue-form-generator)
+- [Usage](#usage)
+  - [Props](#props)
+  - [Events](#events)
+  - [Slots](#slots)
+- [Typescript Support](#typescript-support)
+- [Credits & Contributors](#credits-&-contributors)
 
 ## Getting started
 - Install the plugin:
@@ -134,35 +152,37 @@ Check out the setup in [CodeSandbox](https://codesandbox.io/s/vue-tel-input-with
   ```
 Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.io/vueformgenerator/content/fields/custom_fields.html)
 
+## Usage
+
 ### Props
 
   Test all props on [CodeSandbox](https://codesandbox.io/s/0yyyk45q7w?fontsize=14&module=%2Fsrc%2FApp.vue&moduleview=1).
 
   | Property | Type | Default value | Description |
   | -------- | ---- | ------------- | ----------- |
-  | `defaultCountry` | `String` | `''` | Default country, will override the country fetched from IP address of user |
-  | `disabledFetchingCountry` | `Boolean` | `false` | Disable fetching current country based on IP address of user |
-  | `disabled` | `Boolean` | `false` | Disable input field |
-  | `disabledFormatting` | `Boolean` | `false` | Disable formatting the phone number in the input, the formatted result still be accessible by `formattedNumber` returned from `onInput` event |
-  | `placeholder` | `String` | `'Enter a phone number'` | Placeholder for the input |
-  | `required` | `Boolean` | `false` | Required property for HTML5 required attribute |
-  | `enabledCountryCode` | `Boolean` | `false` | Enable country code in the input |
-  | `enabledFlags` | `Boolean` | `true` | Enable flags in the input |
-  | `preferredCountries` | `Array` | `[]` | Preferred countries list, will be on top of the dropdown. ie `['AU', 'BR']` |
-  | `onlyCountries` | `Array` | `[]` | List of countries will be shown on the dropdown. ie `['AU', 'BR']` |
-  | `ignoredCountries` | `Array` | `[]` | List of countries will NOT be shown on the dropdown. ie `['AU', 'BR']` |
   | `autocomplete` | `String` | `'on'` | Native input 'autocomplete' attribute |
   | `autofocus` | `Boolean` | `false` | Native input 'autofocus' attribute |
-  | `name` | `String` | `'telephone'` | Native input 'name' attribute |
-  | `maxLen` | `Number` | `25` | Native input 'maxlength' attribute |
-  | `wrapperClasses` | `String` &#124; `Array` &#124; `Object` | `''` | Custom classes for the wrapper |
+  | `defaultCountry` | `String` | `''` | Default country, will override the country fetched from IP address of user |
+  | `disabled` | `Boolean` | `false` | Disable input field |
+  | `disabledFetchingCountry` | `Boolean` | `false` | Disable fetching current country based on IP address of user |
+  | `disabledFormatting` | `Boolean` | `false` | Disable formatting the phone number in the input, the formatted result still be accessible by `formattedNumber` returned from `onInput` event |
+  | `dropdownOptions` | `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
+  | `dynamicPlaceholder` | `Boolean` | `false` | Placeholder as a sample phone number in the current country, available from [v3.1.1](https://github.com/EducationLink/vue-tel-input/releases/tag/v3.1.1) |
+  | `enabledCountryCode` | `Boolean` | `false` | Enable country code in the input |
+  | `enabledFlags` | `Boolean` | `true` | Enable flags in the input |
+  | `ignoredCountries` | `Array` | `[]` | List of countries will NOT be shown on the dropdown. ie `['AU', 'BR']` |
   | `inputClasses` | `String` &#124; `Array` &#124; `Object` | `''` | Custom classes for the `input` |
   | `inputId` | `String` | `''` | Custom 'id' for the `input` |
-  | `dropdownOptions` | `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
   | `inputOptions` | `Object` | `{ showDialCode: false, tabindex: 0 }` | Options for input, supporting `showDialCode` (always show dial code in the input) and `tabindex`|
-  | `validCharactersOnly` | `Boolean` | `false` | Only allow valid characters in a phone number (will also verify in `mounted`, so phone number with invalid characters will be shown as an empty string) |
+  | `maxLen` | `Number` | `25` | Native input 'maxlength' attribute |
   | `mode` | `String` | `''` | Format number to `'international'` (with + dial code) or `'national'` (with 0...), available from [v3.1.1](https://github.com/EducationLink/vue-tel-input/releases/tag/v3.1.1) |
-  | `dynamicPlaceholder` | `Boolean` | `false` | Placeholder as a sample phone number in the current country, available from [v3.1.1](https://github.com/EducationLink/vue-tel-input/releases/tag/v3.1.1) |
+  | `name` | `String` | `'telephone'` | Native input 'name' attribute |
+  | `onlyCountries` | `Array` | `[]` | List of countries will be shown on the dropdown. ie `['AU', 'BR']` |
+  | `placeholder` | `String` | `'Enter a phone number'` | Placeholder for the input |
+  | `preferredCountries` | `Array` | `[]` | Preferred countries list, will be on top of the dropdown. ie `['AU', 'BR']` |
+  | `required` | `Boolean` | `false` | Required property for HTML5 required attribute |
+  | `validCharactersOnly` | `Boolean` | `false` | Only allow valid characters in a phone number (will also verify in `mounted`, so phone number with invalid characters will be shown as an empty string) |
+  | `wrapperClasses` | `String` &#124; `Array` &#124; `Object` | `''` | Custom classes for the wrapper |
 
 ### Events
 
@@ -182,11 +202,6 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | ---- | ----------- | ----- |
   | `arrow-icon` | Replace the arrow next to the flag with a component of your choice | Available from [v2.4.3](https://github.com/EducationLink/vue-tel-input/releases/tag/v2.4.3) |
 
-## Highlights & Credits
-- Telephone Number parsing, validation by [awesome-phonenumber](https://www.npmjs.com/package/awesome-phonenumber).
-- Country Codes data from [intl-tel-input](https://github.com/jackocnr/intl-tel-input/blob/master/src/js/data.js).
-- User's country by [ip2c.org](https://ip2c.org/s), request using [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
-
 ## Typescript Support
 
 If you work with typescript you will need declaration requirements.
@@ -195,7 +210,14 @@ If you work with typescript you will need declaration requirements.
 npm install --save-dev @types/vue-tel-input
 ```
 
-## Contributors
+## Credits & Contributors
+
+**Credits**
+- Telephone Number parsing, validation by [awesome-phonenumber](https://www.npmjs.com/package/awesome-phonenumber).
+- Country Codes data from [intl-tel-input](https://github.com/jackocnr/intl-tel-input/blob/master/src/js/data.js).
+- User's country by [ip2c.org](https://ip2c.org/s), request using [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+
+**Contributors**
 - [mikob](https://github.com/mikob) for super awesome work to [remove the bootstrap dependency](https://github.com/EducationLink/vue-tel-input/pull/13).
 - [kalcifield](https://github.com/kalcifield) for helping make the input [preload with a phone number](https://github.com/EducationLink/vue-tel-input/pull/8).
 - [serbemas](https://github.com/serbemas) for [adding web components support](https://github.com/EducationLink/vue-tel-input/pull/92).

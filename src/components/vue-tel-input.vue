@@ -14,7 +14,7 @@
           +{{ activeCountry.dialCode }}
         </span>
         <slot :open="open" name="arrow-icon">
-          <span class="vti_dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
+          <span class="vti__dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
         </slot>
       </span>
       <ul ref="list" class="vti__dropdown-list" v-show="open">
@@ -37,8 +37,8 @@
     <input
       ref="input"
       type="tel"
-      v-model="phone"
       class="vti__input"
+      v-model="phone"
       :placeholder="parsedPlaceholder"
       :disabled="disabled"
       :required="required"

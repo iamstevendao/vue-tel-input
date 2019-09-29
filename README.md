@@ -3,8 +3,6 @@ International Telephone Input with Vue.
 
 [![](https://img.shields.io/npm/dt/vue-tel-input.svg)](https://www.npmjs.com/package/vue-tel-input) [![](https://img.shields.io/github/stars/educationlink/vue-tel-input.svg)](https://github.com/EducationLink/vue-tel-input)
 
-If you are using v2.x.x, check out this [documentation](https://github.com/EducationLink/vue-tel-input/blob/master/README-v2.md).
-
 <p align="center">
 <img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
 </p>

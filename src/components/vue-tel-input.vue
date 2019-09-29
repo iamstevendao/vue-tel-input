@@ -3,39 +3,42 @@
     <div
       v-click-outside="clickedOutside"
       :tabindex="dropdownOptions && dropdownOptions.tabindex ? dropdownOptions.tabindex : 0"
-      :class="{ open: open }"
-      class="dropdown"
+      :class="['vti__dropdown', { open: open }]"
       @keydown="keyboardNav"
       @click="toggleDropdown"
       @keydown.esc="reset"
     >
-      <span class="selection">
-        <div v-if="enabledFlags" :class="activeCountry.iso2.toLowerCase()" class="iti-flag" />
-        <span v-if="enabledCountryCode" class="country-code">+{{ activeCountry.dialCode }}</span>
+      <span class="vti__selection">
+        <div v-if="enabledFlags" :class="['vti__flag', activeCountry.iso2.toLowerCase()]" />
+        <span v-if="enabledCountryCode" class="vti__country-code">
+          +{{ activeCountry.dialCode }}
+        </span>
         <slot :open="open" name="arrow-icon">
-          <span class="dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
+          <span class="vti_dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
         </slot>
       </span>
-      <ul v-show="open" ref="list">
+      <ul ref="list" class="vti__dropdown-list" v-show="open">
         <li
           v-for="(pb, index) in sortedCountries"
+          class="vti__dropdown-item"
           :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
           :class="getItemClass(index, pb.iso2)"
-          class="dropdown-item"
           @click="choose(pb, true)"
           @mousemove="selectedIndex = index"
         >
-          <div v-if="enabledFlags" :class="pb.iso2.toLowerCase()" class="iti-flag" />
+          <div v-if="enabledFlags" :class="['vti__flag', pb.iso2.toLowerCase()]" />
           <strong>{{ pb.name }}</strong>
-          <span v-if="dropdownOptions && !dropdownOptions.disabledDialCode"
-            >+{{ pb.dialCode }}</span
-          >
+          <span v-if="dropdownOptions && !dropdownOptions.disabledDialCode">
+            +{{ pb.dialCode }}
+          </span>
         </li>
       </ul>
     </div>
     <input
       ref="input"
+      type="tel"
       v-model="phone"
+      class="vti__input"
       :placeholder="parsedPlaceholder"
       :disabled="disabled"
       :required="required"
@@ -46,7 +49,6 @@
       :id="inputId"
       :maxlength="maxLen"
       :tabindex="inputOptions && inputOptions.tabindex ? inputOptions.tabindex : 0"
-      type="tel"
       @blur="onBlur"
       @input="onInput"
       @keyup.enter="onEnter"
@@ -344,9 +346,9 @@ export default {
     this.initializeCountry()
       .then(() => {
         if (!this.phone
-        && this.inputOptions
-        && this.inputOptions.showDialCode
-        && this.activeCountry.dialCode) {
+          && this.inputOptions
+          && this.inputOptions.showDialCode
+          && this.activeCountry.dialCode) {
           this.phone = `+${this.activeCountry.dialCode}`;
         }
         this.$emit('validate', this.phoneObject);
@@ -575,41 +577,54 @@ export default {
 </script>
 
 <style src="../assets/sprite.css"></style>
-<style scoped>
-li.last-preferred {
-  border-bottom: 1px solid #cacaca;
-}
-.iti-flag {
-  margin-right: 5px;
-  margin-left: 5px;
-}
-.dropdown-item .iti-flag {
-  display: inline-block;
-  margin-right: 5px;
-}
-.selection {
-  font-size: 0.8em;
-  display: flex;
-  align-items: center;
-}
+<style>
 .vue-tel-input {
   border-radius: 3px;
   display: flex;
   border: 1px solid #bbb;
   text-align: left;
 }
+.vue-tel-input.disabled .selection,
+.vue-tel-input.disabled .dropdown,
+.vue-tel-input.disabled input {
+  cursor: no-drop;
+}
 .vue-tel-input:focus-within {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
   border-color: #66afe9;
 }
-input {
-  border: none;
-  border-radius: 0 2px 2px 0;
-  width: 100%;
-  outline: none;
-  padding-left: 7px;
+.vti__dropdown {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  position: relative;
+  padding: 7px;
+  cursor: pointer;
 }
-ul {
+.vti__dropdown.show {
+  max-height: 300px;
+  overflow: scroll;
+}
+.vti__dropdown.open {
+  background-color: #f3f3f3;
+}
+.vti__dropdown:hover {
+  background-color: #f3f3f3;
+}
+.vti__selection {
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+}
+.vti__selection .vti__country-code {
+  color: #666;
+}
+.vti__flag {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.vti__dropdown-list {
   z-index: 1;
   padding: 0;
   margin: 0;
@@ -624,43 +639,30 @@ ul {
   border: 1px solid #ccc;
   width: 390px;
 }
-.dropdown {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  position: relative;
-  padding: 7px;
-  cursor: pointer;
-}
-.dropdown.open {
-  background-color: #f3f3f3;
-}
-.dropdown:hover {
-  background-color: #f3f3f3;
-}
-.country-code {
-  color: #666;
-}
-.dropdown-arrow {
+.vti__dropdown-arrow {
   transform: scaleY(0.5);
   display: inline-block;
   color: #666;
 }
-.dropdown-item {
+.vti__dropdown-item {
   cursor: pointer;
   padding: 4px 15px;
 }
-.dropdown-item.highlighted {
+.vti__dropdown-item.highlighted {
   background-color: #f3f3f3;
 }
-.dropdown-menu.show {
-  max-height: 300px;
-  overflow: scroll;
+.vti__dropdown-item.last-preferred {
+  border-bottom: 1px solid #cacaca;
 }
-.vue-tel-input.disabled .selection,
-.vue-tel-input.disabled .dropdown,
-.vue-tel-input.disabled input {
-  cursor: no-drop;
+.vti__dropdown-item .vti__flag {
+  display: inline-block;
+  margin-right: 5px;
+}
+.vti__input {
+  border: none;
+  border-radius: 0 2px 2px 0;
+  width: 100%;
+  outline: none;
+  padding-left: 7px;
 }
 </style>

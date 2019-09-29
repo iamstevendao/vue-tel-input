@@ -13,16 +13,15 @@
         <span v-if="enabledCountryCode" class="vti__country-code">
           +{{ activeCountry.dialCode }}
         </span>
-        <slot :open="open" name="arrow-icon">
+        <slot name="arrow-icon" :open="open">
           <span class="vti__dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
         </slot>
       </span>
       <ul ref="list" class="vti__dropdown-list" v-show="open">
         <li
           v-for="(pb, index) in sortedCountries"
-          class="vti__dropdown-item"
           :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
-          :class="getItemClass(index, pb.iso2)"
+          :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
           @click="choose(pb, true)"
           @mousemove="selectedIndex = index"
         >
@@ -37,7 +36,6 @@
     <input
       ref="input"
       type="tel"
-      class="vti__input"
       v-model="phone"
       :placeholder="parsedPlaceholder"
       :disabled="disabled"
@@ -45,7 +43,7 @@
       :autocomplete="autocomplete"
       :autofocus="autofocus"
       :name="name"
-      :class="inputClasses"
+      :class="['vti__input', inputClasses]"
       :id="inputId"
       :maxlength="maxLen"
       :tabindex="inputOptions && inputOptions.tabindex ? inputOptions.tabindex : 0"

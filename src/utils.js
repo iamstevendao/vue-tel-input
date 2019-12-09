@@ -56,6 +56,7 @@ export const defaultOptions = {
   inputOptions: {},
   maxLen: 25,
   validCharactersOnly: false,
+  customValidate: false,
   dynamicPlaceholder: false,
 };
 

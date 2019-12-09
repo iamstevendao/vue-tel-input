@@ -219,6 +219,10 @@ export default {
       type: Boolean,
       default: () => getDefault('validCharactersOnly'),
     },
+    customValidate: {
+      type: [Boolean, RegExp],
+      default: () => getDefault('customValidate'),
+    },
     dynamicPlaceholder: {
       type: Boolean,
       default: () => getDefault('dynamicPlaceholder'),
@@ -319,7 +323,9 @@ export default {
       }
     },
     phone(newValue, oldValue) {
-      if (this.validCharactersOnly && !this.testCharacters()) {
+      const isValidCharactersOnly = this.validCharactersOnly && !this.testCharacters();
+      const isCustomValidate = this.customValidate && !this.testCustomValidate();
+      if (isValidCharactersOnly || isCustomValidate) {
         this.$nextTick(() => { this.phone = oldValue; });
       } else if (newValue) {
         if (newValue[0] === '+') {
@@ -466,8 +472,14 @@ export default {
       const re = /^[()\-+0-9\s]*$/;
       return re.test(this.phone);
     },
+    testCustomValidate() {
+      return this.customValidate instanceof RegExp ? this.customValidate.test(this.phone) : false;
+    },
     onInput(e) {
       if (this.validCharactersOnly && !this.testCharacters()) {
+        return;
+      }
+      if (this.customValidate && !this.testCustomValidate()) {
         return;
       }
       this.$refs.input.setCustomValidity(this.phoneObject.valid ? '' : this.invalidMsg);

@@ -35,7 +35,6 @@ export const defaultOptions = {
   placeholder: 'Enter a phone number',
   disabledFetchingCountry: false,
   disabled: false,
-  disabledFormatting: false,
   mode: '',
   invalidMsg: '',
   required: false,

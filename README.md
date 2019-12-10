@@ -181,6 +181,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `required` | `Boolean` | `false` | Required property for HTML5 required attribute |
   | `validCharactersOnly` | `Boolean` | `false` | Only allow valid characters in a phone number (will also verify in `mounted`, so phone number with invalid characters will be shown as an empty string) |
   | `wrapperClasses` | `String` &#124; `Array` &#124; `Object` | `''` | Custom classes for the wrapper |
+  | `customValidate` | `Boolean` &#124; `RegExp` | `false` | Custom validation RegExp for input, available from [v4.1.0](https://github.com/EducationLink/vue-tel-input/releases/tag/v4.1.0) |
 
 ### Events
 

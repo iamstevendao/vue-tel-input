@@ -9,7 +9,7 @@
       <div style="width: 500px; margin: 20px auto;">
         <vue-tel-input
           :preferred-countries="['us', 'gb', 'ua']"
-          :custom-validate="/^[0-9]*$/"
+          :valid-characters-only="true"
           @input="onInput"/>
       </div>
       <div

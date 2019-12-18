@@ -133,10 +133,6 @@ export default {
       type: Boolean,
       default: () => getDefault('disabled'),
     },
-    disabledFormatting: {
-      type: Boolean,
-      default: () => getDefault('disabledFormatting'),
-    },
     mode: {
       type: String,
       default: () => getDefault('mode'),
@@ -252,6 +248,9 @@ export default {
       return this.placeholder;
     },
     parsedMode() {
+      if (this.customValidate) {
+        return 'input';
+      }
       if (this.mode) {
         if (!['international', 'national'].includes(this.mode)) {
           console.error('Invalid value of prop "mode"');

@@ -48,6 +48,7 @@
       :maxlength="maxLen"
       :tabindex="inputOptions && inputOptions.tabindex ? inputOptions.tabindex : 0"
       @blur="onBlur"
+      @focus="onFocus"
       @input="onInput"
       @keyup.enter="onEnter"
       @keyup.space="onSpace"
@@ -497,6 +498,9 @@ export default {
     onBlur() {
       this.$emit('blur');
       this.$emit('onBlur'); // Deprecated
+    },
+    onFocus() {
+      this.$emit('focus');
     },
     onEnter() {
       this.$emit('enter');

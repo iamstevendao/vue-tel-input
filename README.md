@@ -189,6 +189,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `input` | `String`, `Object` | Fires when the input changes with the argument is the object includes `{ number, isValid, country }` | `onInput` deprecated |
   | `validate` | `Object` | Fires when the correctness of the phone number changes (from `true` to `false` or vice-versa) and when the component is mounted `{ number, isValid, country }` | `onValidate` deprecated |
   | `blur` |  | Fires on blur event | `onBlur` deprecated |
+  | `focus` |  | Fires on focus event | |
   | `space` |  | Fires on keyup.space event | `onSpace` deprecated |
   | `enter` |  | Fires on keyup.enter event | `onEnter` deprecated |
   | `open` |  | Fires when the flags dropdown opens | |

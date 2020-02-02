@@ -17,7 +17,7 @@
           <span class="vti__dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
         </slot>
       </span>
-      <ul ref="list" class="vti__dropdown-list" v-show="open">
+      <ul ref="list" class="vti__dropdown-list" v-show="open" :class="dropdownOpenDirection">
         <li
           v-for="(pb, index) in sortedCountries"
           :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
@@ -235,6 +235,7 @@ export default {
       typeToFindInput: '',
       typeToFindTimer: null,
       cursorPosition: 0,
+      dropdownOpenDirection: 'below',
     };
   },
   computed: {
@@ -317,6 +318,7 @@ export default {
     open(isDropdownOpened) {
       // Emit open and close events
       if (isDropdownOpened) {
+        this.setDropdownPosition();
         this.$emit('open');
       } else {
         this.$emit('close');
@@ -585,6 +587,15 @@ export default {
       this.selectedIndex = this.sortedCountries.map(c => c.iso2).indexOf(this.activeCountry.iso2);
       this.open = false;
     },
+    setDropdownPosition() {
+      const spaceBelow = window.innerHeight - this.$el.getBoundingClientRect().bottom;
+      const hasEnoughSpaceBelow = spaceBelow > 200;
+      if (hasEnoughSpaceBelow) {
+        this.dropdownOpenDirection = 'below';
+      } else {
+        this.dropdownOpenDirection = 'above';
+      }
+    },
   },
 };
 </script>
@@ -646,11 +657,17 @@ export default {
   max-height: 200px;
   overflow-y: scroll;
   position: absolute;
-  top: 33px;
   left: -1px;
   background-color: #fff;
   border: 1px solid #ccc;
   width: 390px;
+}
+.vti__dropdown-list.below {
+  top: 33px;
+}
+.vti__dropdown-list.above {
+  top: auto;
+  bottom: 100%;
 }
 .vti__dropdown-arrow {
   transform: scaleY(0.5);

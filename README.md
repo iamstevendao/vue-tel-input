@@ -161,6 +161,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `autocomplete` | `String` | `'on'` | Native input 'autocomplete' attribute |
   | `autofocus` | `Boolean` | `false` | Native input 'autofocus' attribute |
   | `defaultCountry` | `String` | `''` | Default country, will override the country fetched from IP address of user |
+  | `defaultCountryByDialCode` | `String` | `''` | Default country by dial code, will override the country fetched from IP address of user |
   | `disabled` | `Boolean` | `false` | Disable input field |
   | `disabledFetchingCountry` | `Boolean` | `false` | Disable fetching current country based on IP address of user |
   | `dropdownOptions` | `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 

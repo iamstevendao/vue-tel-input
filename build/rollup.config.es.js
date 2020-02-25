@@ -6,9 +6,6 @@ const config = Object.assign({}, base, {
     file: 'dist/vue-tel-input.esm.js',
     format: 'es',
   },
-  external: [
-    'libphonenumber-js',
-  ],
 });
 
 export default config;

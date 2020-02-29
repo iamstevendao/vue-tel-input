@@ -9,5 +9,5 @@ Vue.config.productionTip = false;
 Vue.component('vue-tel-input', VueTelInput);
 
 new Vue({
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');

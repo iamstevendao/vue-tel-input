@@ -2,7 +2,7 @@ import allCountries from './assets/all-countries';
 
 export function getCountry() {
   return fetch('https://ip2c.org/s')
-    .then(response => response.text())
+    .then((response) => response.text())
     .then((response) => {
       const result = (response || '').toString();
 

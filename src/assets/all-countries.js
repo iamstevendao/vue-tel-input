@@ -1263,7 +1263,7 @@ const allCountries = [
   ],
 ];
 
-export default allCountries.map(country => ({
+export default allCountries.map((country) => ({
   name: country[0],
   iso2: country[1].toUpperCase(),
   dialCode: country[2],

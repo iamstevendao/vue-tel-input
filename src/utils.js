@@ -40,6 +40,7 @@ export const defaultOptions = {
   required: false,
   allCountries,
   defaultCountry: '',
+  defaultCountryByDialCode: '',
   enabledCountryCode: false,
   enabledFlags: true,
   preferredCountries: [],

@@ -156,6 +156,12 @@ export default {
       type: String,
       default: () => getDefault('defaultCountry'),
     },
+    defaultCountryByDialCode: {
+      // Default country by dial code, ie: '44'
+      // Will override the current country of user
+      type: String,
+      default: () => getDefault('defaultCountryByDialCode'),
+    },
     enabledCountryCode: {
       type: Boolean,
       default: () => getDefault('enabledCountryCode'),
@@ -394,6 +400,13 @@ export default {
             resolve();
             return;
           }
+        } else if (this.defaultCountryByDialCode) {
+          const defaultCountry = this.findCountryByDialCode(this.defaultCountryByDialCode);
+          if (defaultCountry) {
+            this.choose(defaultCountry);
+            resolve();
+            return;
+          }
         }
         const fallbackCountry = this.findCountry(this.preferredCountries[0])
           || this.filteredCountries[0];
@@ -434,6 +447,9 @@ export default {
     },
     findCountry(iso = '') {
       return this.allCountries.find((country) => country.iso2 === iso.toUpperCase());
+    },
+    findCountryByDialCode(dialCode = '') {
+      return this.allCountries.find(country => country.dialCode === dialCode);
     },
     getItemClass(index, iso2) {
       const highlighted = this.selectedIndex === index;

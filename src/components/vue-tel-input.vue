@@ -283,7 +283,7 @@ export default {
     sortedCountries() {
       // Sort the list countries: from preferred countries to all countries
       const preferredCountries = this.getCountries(this.preferredCountries)
-        .map(country => ({ ...country, preferred: true }));
+        .map((country) => ({ ...country, preferred: true }));
 
       return [...preferredCountries, ...this.filteredCountries];
     },
@@ -429,16 +429,16 @@ export default {
      */
     getCountries(list = []) {
       return list
-        .map(countryCode => this.findCountry(countryCode))
+        .map((countryCode) => this.findCountry(countryCode))
         .filter(Boolean);
     },
     findCountry(iso = '') {
-      return this.allCountries.find(country => country.iso2 === iso.toUpperCase());
+      return this.allCountries.find((country) => country.iso2 === iso.toUpperCase());
     },
     getItemClass(index, iso2) {
       const highlighted = this.selectedIndex === index;
       const lastPreferred = index === this.preferredCountries.length - 1;
-      const preferred = this.preferredCountries.some(c => c.toUpperCase() === iso2);
+      const preferred = this.preferredCountries.some((c) => c.toUpperCase() === iso2);
       return {
         highlighted,
         'last-preferred': lastPreferred,
@@ -570,7 +570,7 @@ export default {
         // don't include preferred countries so we jump to the right place in the alphabet
         const typedCountryI = this.sortedCountries
           .slice(this.preferredCountries.length)
-          .findIndex(c => c.name.toLowerCase().startsWith(this.typeToFindInput));
+          .findIndex((c) => c.name.toLowerCase().startsWith(this.typeToFindInput));
         if (typedCountryI >= 0) {
           this.selectedIndex = this.preferredCountries.length + typedCountryI;
           const selEle = this.$refs.list.children[this.selectedIndex];
@@ -584,7 +584,7 @@ export default {
       }
     },
     reset() {
-      this.selectedIndex = this.sortedCountries.map(c => c.iso2).indexOf(this.activeCountry.iso2);
+      this.selectedIndex = this.sortedCountries.map((c) => c.iso2).indexOf(this.activeCountry.iso2);
       this.open = false;
     },
     setDropdownPosition() {

@@ -457,9 +457,9 @@ export default {
       if (this.phone
         && this.phone[0] === '+'
         && this.activeCountry.iso2
-        && this.phoneObject.number.national) {
+        && this.phoneObject.number.significant) {
         // Attach the current phone number with the newly selected country
-        this.phone = PhoneNumber(this.phoneObject.number.national, this.activeCountry.iso2)
+        this.phone = PhoneNumber(this.phoneObject.number.significant, this.activeCountry.iso2)
           .getNumber('international');
       } else if (this.inputOptions && this.inputOptions.showDialCode && parsedCountry) {
         // Reset phone if the showDialCode is set

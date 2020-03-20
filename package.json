@@ -12,10 +12,10 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "demo": "vue-cli-service build",
-    "build": "set NODE_ENV=production && npm run build:browser && npm run build:es && npm run build:umd",
-    "build:browser": "rollup --config build/rollup.config.browser.js",
-    "build:es": "rollup --config build/rollup.config.es.js",
-    "build:umd": "rollup --config build/rollup.config.umd.js",
+    "build": "npm run build:browser && npm run build:es && npm run build:umd",
+    "build:browser": "cross-env NODE_ENV=production rollup --config build/rollup.config.browser.js",
+    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.es.js",
+    "build:umd": "cross-env NODE_ENV=production rollup --config build/rollup.config.umd.js",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
@@ -42,6 +42,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^23.6.0",
+    "cross-env": "^7.0.2",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.1.2",
     "lint-staged": "^8.1.5",

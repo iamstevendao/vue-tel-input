@@ -122,59 +122,9 @@ export default {
       type: String,
       default: '',
     },
-    placeholder: {
-      type: String,
-      default: () => getDefault('placeholder'),
-    },
-    disabledFetchingCountry: {
-      type: Boolean,
-      default: () => getDefault('disabledFetchingCountry'),
-    },
-    disabled: {
-      type: Boolean,
-      default: () => getDefault('disabled'),
-    },
-    mode: {
-      type: String,
-      default: () => getDefault('mode'),
-    },
-    invalidMsg: {
-      type: String,
-      default: () => getDefault('invalidMsg'),
-    },
-    required: {
-      type: Boolean,
-      default: () => getDefault('required'),
-    },
     allCountries: {
       type: Array,
       default: () => getDefault('allCountries'),
-    },
-    defaultCountry: {
-      // Default country code, ie: 'AU'
-      // Will override the current country of user
-      type: String,
-      default: () => getDefault('defaultCountry'),
-    },
-    enabledCountryCode: {
-      type: Boolean,
-      default: () => getDefault('enabledCountryCode'),
-    },
-    enabledFlags: {
-      type: Boolean,
-      default: () => getDefault('enabledFlags'),
-    },
-    preferredCountries: {
-      type: Array,
-      default: () => getDefault('preferredCountries'),
-    },
-    onlyCountries: {
-      type: Array,
-      default: () => getDefault('onlyCountries'),
-    },
-    ignoredCountries: {
-      type: Array,
-      default: () => getDefault('ignoredCountries'),
     },
     autocomplete: {
       type: String,
@@ -184,13 +134,43 @@ export default {
       type: Boolean,
       default: () => getDefault('autofocus'),
     },
-    name: {
-      type: String,
-      default: () => getDefault('name'),
+    customValidate: {
+      type: [Boolean, RegExp],
+      default: () => getDefault('customValidate'),
     },
-    wrapperClasses: {
-      type: [String, Array, Object],
-      default: () => getDefault('wrapperClasses'),
+    defaultCountry: {
+      // Default country code, ie: 'AU'
+      // Will override the current country of user
+      type: String,
+      default: () => getDefault('defaultCountry'),
+    },
+    disabled: {
+      type: Boolean,
+      default: () => getDefault('disabled'),
+    },
+    disabledFetchingCountry: {
+      type: Boolean,
+      default: () => getDefault('disabledFetchingCountry'),
+    },
+    dropdownOptions: {
+      type: Object,
+      default: () => getDefault('dropdownOptions'),
+    },
+    dynamicPlaceholder: {
+      type: Boolean,
+      default: () => getDefault('dynamicPlaceholder'),
+    },
+    enabledCountryCode: {
+      type: Boolean,
+      default: () => getDefault('enabledCountryCode'),
+    },
+    enabledFlags: {
+      type: Boolean,
+      default: () => getDefault('enabledFlags'),
+    },
+    ignoredCountries: {
+      type: Array,
+      default: () => getDefault('ignoredCountries'),
     },
     inputClasses: {
       type: [String, Array, Object],
@@ -200,29 +180,49 @@ export default {
       type: String,
       default: () => getDefault('inputId'),
     },
-    dropdownOptions: {
-      type: Object,
-      default: () => getDefault('dropdownOptions'),
-    },
     inputOptions: {
       type: Object,
       default: () => getDefault('inputOptions'),
+    },
+    invalidMsg: {
+      type: String,
+      default: () => getDefault('invalidMsg'),
     },
     maxLen: {
       type: Number,
       default: () => getDefault('maxLen'),
     },
+    name: {
+      type: String,
+      default: () => getDefault('name'),
+    },
+    mode: {
+      type: String,
+      default: () => getDefault('mode'),
+    },
+    onlyCountries: {
+      type: Array,
+      default: () => getDefault('onlyCountries'),
+    },
+    placeholder: {
+      type: String,
+      default: () => getDefault('placeholder'),
+    },
+    preferredCountries: {
+      type: Array,
+      default: () => getDefault('preferredCountries'),
+    },
+    required: {
+      type: Boolean,
+      default: () => getDefault('required'),
+    },
     validCharactersOnly: {
       type: Boolean,
       default: () => getDefault('validCharactersOnly'),
     },
-    customValidate: {
-      type: [Boolean, RegExp],
-      default: () => getDefault('customValidate'),
-    },
-    dynamicPlaceholder: {
-      type: Boolean,
-      default: () => getDefault('dynamicPlaceholder'),
+    wrapperClasses: {
+      type: [String, Array, Object],
+      default: () => getDefault('wrapperClasses'),
     },
   },
   data() {

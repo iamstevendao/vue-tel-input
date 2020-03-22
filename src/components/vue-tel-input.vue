@@ -2,8 +2,8 @@
   <div :class="['vue-tel-input', wrapperClasses, { disabled: disabled }]">
     <div
       v-click-outside="clickedOutside"
-      :tabindex="dropdownOptions && dropdownOptions.tabindex ? dropdownOptions.tabindex : 0"
       :class="['vti__dropdown', { open: open }]"
+      :tabindex="dropdownOptions && dropdownOptions.tabindex ? dropdownOptions.tabindex : 0"
       @keydown="keyboardNav"
       @click="toggleDropdown"
       @keydown.esc="reset"
@@ -20,8 +20,8 @@
       <ul ref="list" class="vti__dropdown-list" v-show="open" :class="dropdownOpenDirection">
         <li
           v-for="(pb, index) in sortedCountries"
-          :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
           :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
+          :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
           @click="choose(pb, true)"
           @mousemove="selectedIndex = index"
         >
@@ -37,15 +37,16 @@
       ref="input"
       type="tel"
       v-model="phone"
-      :placeholder="parsedPlaceholder"
-      :disabled="disabled"
-      :required="required"
       :autocomplete="autocomplete"
       :autofocus="autofocus"
-      :name="name"
       :class="['vti__input', inputClasses]"
+      :disabled="disabled"
       :id="inputId"
       :maxlength="maxLen"
+      :name="name"
+      :placeholder="parsedPlaceholder"
+      :readonly="readonly"
+      :required="required"
       :tabindex="inputOptions && inputOptions.tabindex ? inputOptions.tabindex : 0"
       @blur="onBlur"
       @focus="onFocus"
@@ -211,6 +212,10 @@ export default {
     preferredCountries: {
       type: Array,
       default: () => getDefault('preferredCountries'),
+    },
+    readonly: {
+      type: Boolean,
+      default: () => getDefault('readonly'),
     },
     required: {
       type: Boolean,

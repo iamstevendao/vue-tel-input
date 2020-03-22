@@ -54,6 +54,7 @@ export const defaultOptions = {
   onlyCountries: [],
   placeholder: 'Enter a phone number',
   preferredCountries: [],
+  readonly: false,
   required: false,
   validCharactersOnly: false,
   wrapperClasses: '',

@@ -268,7 +268,9 @@ export default {
     filteredCountries() {
       // List countries after filtered
       if (this.onlyCountries.length) {
-        return this.getCountries(this.onlyCountries);
+        return this.onlyCountries
+          .map((iso) => this.allCountries.find((c) => c.iso2 === iso.toUpperCase()))
+          .filter(Boolean);
       }
 
       if (this.ignoredCountries.length) {
@@ -433,7 +435,7 @@ export default {
         .filter(Boolean);
     },
     findCountry(iso = '') {
-      return this.allCountries.find((country) => country.iso2 === iso.toUpperCase());
+      return this.filteredCountries.find((country) => country.iso2 === iso.toUpperCase());
     },
     getItemClass(index, iso2) {
       const highlighted = this.selectedIndex === index;

@@ -8,6 +8,7 @@ module.exports = {
   extends: [
     'plugin:vue/essential',
     '@vue/airbnb',
+    'plugin:jest/recommended',
   ],
   plugins: ['vue'],
   parserOptions: {
@@ -37,5 +38,6 @@ module.exports = {
         ]
       }
     ],
+    'jest/prefer-to-have-length': 'warn',
   },
 }

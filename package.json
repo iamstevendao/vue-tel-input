@@ -42,6 +42,7 @@
     "babel-jest": "^23.6.0",
     "core-js": "^3.6.4",
     "eslint": "^6.7.2",
+    "eslint-plugin-jest": "^22.15.1",
     "eslint-plugin-vue": "^6.1.2",
     "lint-staged": "^8.1.5",
     "rollup": "^1.10.0",

@@ -1,5 +1,11 @@
 module.exports = {
   presets: [
-    '@vue/app',
-  ],
+    [
+      '@vue/cli-plugin-babel/preset',
+      {
+        absoluteRuntime: false,
+        version: require('@babel/runtime/package.json').version
+      }
+    ]
+  ]
 };

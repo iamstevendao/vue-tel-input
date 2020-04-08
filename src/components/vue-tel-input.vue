@@ -521,7 +521,7 @@ export default {
       } else if (e.keyCode === 13) {
         // enter key
         if (this.selectedIndex !== null) {
-          this.choose(this.sortedCountries[this.selectedIndex]);
+          this.choose(this.sortedCountries[this.selectedIndex], true);
         }
         this.open = !this.open;
       } else {

@@ -329,9 +329,15 @@ export default {
         this.finishMounted = true;
       });
   },
-  created() {
+  async created() {
     if (this.value) {
       this.phone = this.value.trim();
+    }
+    // import sprite.css only if enabledFlags prop is set to true.
+    // In almost all cases this prop won't be changed once component is created.
+    // Hence it is safe keeping it under created. This saves almost 114 KB of file.
+    if (this.enabledFlags) {
+      await import('../assets/sprite.css');
     }
   },
   methods: {
@@ -564,7 +570,6 @@ export default {
 };
 </script>
 
-<style src="../assets/sprite.css"></style>
 <style>
 .vue-tel-input {
   border-radius: 3px;

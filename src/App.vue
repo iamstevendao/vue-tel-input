@@ -12,6 +12,9 @@
           :valid-characters-only="true"
           @input="onInput"/>
       </div>
+      <div style="width: 500px; margin: 20px auto;">
+        <vue-tel-select :input-numbers="['+385912345678', '+33778899887']"/>
+      </div>
       <div
         v-if="phone.number"
         style="color: #e83e8c">

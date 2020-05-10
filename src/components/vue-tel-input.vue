@@ -230,9 +230,8 @@ export default {
     filteredCountries() {
       // List countries after filtered
       if (this.onlyCountries.length) {
-        return this.onlyCountries
-          .map((iso) => this.allCountries.find((c) => c.iso2 === iso.toUpperCase()))
-          .filter(Boolean);
+        return this.allCountries
+          .filter(({ iso2 }) => this.onlyCountries.some((c) => c.toUpperCase() === iso2));
       }
 
       if (this.ignoredCountries.length) {

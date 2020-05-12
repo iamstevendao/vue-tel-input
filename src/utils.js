@@ -39,7 +39,9 @@ export const defaultOptions = {
   defaultCountry: '',
   disabled: false,
   disabledFetchingCountry: false,
-  dropdownOptions: {},
+  dropdownOptions: {
+    disabledDropdown: false,
+  },
   dynamicPlaceholder: false,
   enabledCountryCode: false,
   enabledFlags: true,

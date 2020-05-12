@@ -606,6 +606,8 @@ export default {
 }
 .vti__dropdown.disabled {
   cursor: no-drop;
+  background-color: #f3f3f3;
+  pointer-events: none;
 }
 .vti__selection {
   font-size: 0.8em;

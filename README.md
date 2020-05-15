@@ -163,7 +163,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `defaultCountry` | `String` | `''` | Default country, will override the country fetched from IP address of user |
   | `disabled` | `Boolean` | `false` | Disable input field |
   | `disabledFetchingCountry` | `Boolean` | `false` | Disable fetching current country based on IP address of user |
-  | `dropdownOptions` | `Object` | `{ disabledDialCode: false, tabindex: 0 }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
+  | `dropdownOptions` | `Object` | `{ disabledDialCode: false, tabindex: 0, disabledDropdown: false }` | Options for dropdown, supporting `disabledDialCode` and `tabindex`| 
   | `dynamicPlaceholder` | `Boolean` | `false` | Placeholder as a sample phone number in the current country, available from [v3.1.1](https://github.com/EducationLink/vue-tel-input/releases/tag/v3.1.1) |
   | `enabledCountryCode` | `Boolean` | `false` | Enable country code in the input |
   | `enabledFlags` | `Boolean` | `true` | Enable flags in the input |

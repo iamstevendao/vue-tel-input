@@ -1,5 +1,5 @@
 import { terser } from 'rollup-plugin-terser';
-import resolve from 'rollup-plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
 import base from './rollup.config.base';
 
 const config = Object.assign({}, base, {

@@ -1,3 +1,5 @@
+import 'regenerator-runtime';
+
 import { shallowMount } from '@vue/test-utils';
 import VueTelInput from './vue-tel-input.vue';
 import * as utils from '../utils';

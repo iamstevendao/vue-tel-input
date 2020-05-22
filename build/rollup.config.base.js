@@ -9,7 +9,6 @@ const config = require('../package.json');
 
 export default {
   input: 'src/index.js',
-  inlineDynamicImports: true,
   plugins: [
     vue({
       css: true,

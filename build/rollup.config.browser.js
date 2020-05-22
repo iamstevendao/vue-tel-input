@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import base from './rollup.config.base';
 
 const config = Object.assign({}, base, {
+  inlineDynamicImports: true,
   output: {
     exports: 'named',
     name: 'VueTelInput',

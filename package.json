@@ -27,7 +27,7 @@
   "unpkg": "dist/vue-tel-input.min.js",
   "dependencies": {
     "@babel/runtime": "^7.8.4",
-    "awesome-phonenumber": "^2.15.0",
+    "awesome-phonenumber": "^2.32.0",
     "core-js": "^3.6.4"
   },
   "devDependencies": {

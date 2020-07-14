@@ -14,7 +14,6 @@ export default {
       css: true,
     }),
     babel({
-      exclude: 'node_modules/**',
       runtimeHelpers: true,
       extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.vue'],
     }),

@@ -5,10 +5,12 @@ const config = Object.assign({}, base, {
   output: {
     exports: 'named',
     name: 'vue-tel-input',
-    file: 'dist/vue-tel-input.umd.js',
+    : 'dist/vue-tel-input.umd.js',
     format: 'umd',
   },
 });
+
+config.plugins.push(terser());
 
 config.plugins.push(
   resolve({

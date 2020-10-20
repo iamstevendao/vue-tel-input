@@ -324,7 +324,7 @@ export default {
         this.$emit('onValidate', this.phoneObject); // Deprecated
       })
       .catch(console.error)
-      .finally(() => {
+      .then(() => {
         this.finishMounted = true;
       });
   },
@@ -375,7 +375,7 @@ export default {
                */
               this.choose(fallbackCountry);
             })
-            .finally(() => {
+            .then(() => {
               resolve();
             });
         } else {

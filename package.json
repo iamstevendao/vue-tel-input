@@ -1,6 +1,6 @@
 {
   "name": "vue-tel-input",
-  "version": "4.4.2",
+  "version": "5.0.0",
   "description": "International Telephone Input with Vue",
   "author": "Steven Dao <iamstevendao@gmail.com>",
   "license": "MIT",
@@ -10,14 +10,10 @@
     "url": "https://github.com/EducationLink/vue-tel-input.git"
   },
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "demo": "vue-cli-service build",
-    "build": "npm run build:browser && npm run build:es && npm run build:umd",
-    "build:browser": "cross-env NODE_ENV=production rollup --config build/rollup.config.browser.js",
-    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.es.js",
-    "build:umd": "cross-env NODE_ENV=production rollup --config build/rollup.config.umd.js",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --target lib src/index.js",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint"
   },
   "files": [
     "dist/"
@@ -26,39 +22,27 @@
   "module": "dist/vue-tel-input.esm.js",
   "unpkg": "dist/vue-tel-input.min.js",
   "dependencies": {
-    "@babel/runtime": "^7.8.4",
-    "awesome-phonenumber": "^2.39.0",
-    "core-js": "^3.6.4"
+    "core-js": "^3.6.5",
+    "libphonenumber-js": "^1.9.6",
+    "vue": "^2.6.11"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.6.0",
-    "@vue/cli-plugin-babel": "~4.2.2",
-    "@vue/cli-plugin-eslint": "~4.2.2",
-    "@vue/cli-plugin-unit-jest": "~4.2.2",
-    "@vue/cli-service": "~4.2.2",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-airbnb": "^5.0.2",
-    "@vue/test-utils": "1.0.0-beta.29",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.0.3",
-    "babel-jest": "^23.6.0",
-    "cross-env": "^7.0.2",
+    "@vue/test-utils": "^1.0.3",
+    "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^22.15.1",
-    "eslint-plugin-vue": "^6.1.2",
-    "lint-staged": "^8.1.5",
-    "rollup": "^1.10.0",
-    "rollup-plugin-analyzer": "^3.0.0",
-    "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-commonjs": "^9.3.4",
-    "rollup-plugin-css-only": "^1.0.0",
-    "rollup-plugin-node-resolve": "^4.2.3",
-    "rollup-plugin-postcss": "^2.0.3",
-    "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-terser": "^4.0.4",
-    "rollup-plugin-vue": "^5.0.0",
-    "vue": "^2.6.10",
-    "vue-template-compiler": "^2.6.10"
+    "eslint-plugin-vue": "^6.2.2",
+    "lint-staged": "^9.5.0",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
   },
   "browserslist": [
     "> 1%",

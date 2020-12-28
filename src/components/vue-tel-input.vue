@@ -34,9 +34,9 @@
       </ul>
     </div>
     <input
+      v-model="phone"
       ref="input"
       type="tel"
-      v-model="phone"
       :autocomplete="autocomplete"
       :autofocus="autofocus"
       :class="['vti__input', inputClasses]"
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import PhoneNumber from 'awesome-phonenumber';
+import { getExampleNumber, parsePhoneNumberFromString } from 'libphonenumber-js';
 import utils, { getCountry, setCaretPosition } from '../utils';
 import clickOutside from '../directives/click-outside';
 
@@ -207,7 +207,7 @@ export default {
       }
       if (this.dynamicPlaceholder) {
         const mode = this.mode || 'international';
-        return PhoneNumber.getExample(this.activeCountry.iso2, 'mobile').getNumber(mode);
+        return getExampleNumber(this.activeCountry.iso2, 'mobile').format(mode.toUpperCase());
       }
       return this.placeholder;
     },
@@ -251,16 +251,21 @@ export default {
       return [...preferredCountries, ...this.filteredCountries];
     },
     phoneObject() {
-      const result = PhoneNumber(this.phone, this.activeCountry.iso2).toJSON();
+      const result = parsePhoneNumberFromString(this.phone, this.activeCountry.iso2);
+
+      if (!result) {
+        return result;
+      }
+
       Object.assign(result, {
-        isValid: result.valid,
+        isValid: result.isValid(),
         country: this.activeCountry,
       });
       return result;
     },
     phoneText() {
       let key = 'input';
-      if (this.phoneObject.valid) {
+      if (this.phoneObject.isValid) {
         key = this.parsedMode;
       }
       return this.phoneObject.number[key] || '';
@@ -268,12 +273,11 @@ export default {
   },
   watch: {
     // eslint-disable-next-line func-names
-    'phoneObject.valid': function (value) {
+    'phoneObject.isValid': function (value) {
       if (value) {
         this.phone = this.phoneText;
       }
       this.$emit('validate', this.phoneObject);
-      this.$emit('onValidate', this.phoneObject); // Deprecated
     },
     value() {
       this.phone = this.value;
@@ -294,7 +298,7 @@ export default {
         this.$nextTick(() => { this.phone = oldValue; });
       } else if (newValue) {
         if (newValue[0] === '+') {
-          const code = PhoneNumber(newValue).getRegionCode();
+          const code = parsePhoneNumberFromString(newValue).countryCallingCode;
           if (code) {
             this.activeCountry = this.findCountry(code) || this.activeCountry;
           }
@@ -312,6 +316,9 @@ export default {
     },
   },
   mounted() {
+    if (this.value) {
+      this.phone = this.value.trim();
+    }
     this.initializeCountry()
       .then(() => {
         if (!this.phone
@@ -321,17 +328,11 @@ export default {
           this.phone = `+${this.activeCountry.dialCode}`;
         }
         this.$emit('validate', this.phoneObject);
-        this.$emit('onValidate', this.phoneObject); // Deprecated
       })
       .catch(console.error)
       .then(() => {
         this.finishMounted = true;
       });
-  },
-  created() {
-    if (this.value) {
-      this.phone = this.value.trim();
-    }
   },
   methods: {
     initializeCountry() {
@@ -340,7 +341,7 @@ export default {
          * 1. If the phone included prefix (+12), try to get the country and set it
          */
         if (this.phone && this.phone[0] === '+') {
-          const activeCountry = PhoneNumber(this.phone).getRegionCode();
+          const activeCountry = parsePhoneNumberFromString(this.phone).countryCallingCode;
           if (activeCountry) {
             this.choose(activeCountry);
             resolve();
@@ -422,15 +423,17 @@ export default {
         && this.activeCountry.iso2
         && this.phoneObject.number.national) {
         // Attach the current phone number with the newly selected country
-        this.phone = PhoneNumber(this.phoneObject.number.national, this.activeCountry.iso2)
-          .getNumber('international');
+        this.phone = parsePhoneNumberFromString(
+          this.phoneObject.number.national,
+          this.activeCountry.iso2,
+        )
+          .formatInternational();
       } else if (this.inputOptions && this.inputOptions.showDialCode && parsedCountry) {
         // Reset phone if the showDialCode is set
         this.phone = `+${parsedCountry.dialCode}`;
       }
       if (toEmitInputEvent) {
         this.$emit('input', this.phoneText, this.phoneObject);
-        this.$emit('onInput', this.phoneObject); // Deprecated
       }
     },
     testCharacters() {
@@ -452,7 +455,6 @@ export default {
       // Returns full response for cases @input is used
       // and parent wants to return the whole response.
       this.$emit('input', this.phoneText, this.phoneObject);
-      this.$emit('onInput', this.phoneObject); // Deprecated
 
       // Keep the current cursor position just in case the input reformatted
       // and it gets moved to the last character.
@@ -462,18 +464,15 @@ export default {
     },
     onBlur() {
       this.$emit('blur');
-      this.$emit('onBlur'); // Deprecated
     },
     onFocus() {
       this.$emit('focus');
     },
     onEnter() {
       this.$emit('enter');
-      this.$emit('onEnter'); // Deprecated
     },
     onSpace() {
       this.$emit('space');
-      this.$emit('onSpace'); // Deprecated
     },
     focus() {
       this.$refs.input.focus();

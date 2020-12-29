@@ -16,12 +16,14 @@ export function getCountry() {
 
 // Credits: http://blog.vishalon.net/index.php/javascript-getting-and-setting-caret-position-in-textarea/
 export function setCaretPosition(ctrl, pos) {
+  console.log('----- FUNCTION setCaretPosition:', pos);
+
   // Modern browsers
   if (ctrl.setSelectionRange) {
     ctrl.focus();
     ctrl.setSelectionRange(pos, pos);
 
-  // IE8 and below
+    // IE8 and below
   } else if (ctrl.createTextRange) {
     const range = ctrl.createTextRange();
     range.collapse(true);
@@ -35,6 +37,7 @@ export const defaultOptions = {
   allCountries,
   autocomplete: 'on',
   autofocus: false,
+  autoFormat: true,
   customValidate: false,
   defaultCountry: '',
   disabled: false,
@@ -49,7 +52,7 @@ export const defaultOptions = {
   inputOptions: {},
   invalidMsg: '',
   maxLen: 25,
-  mode: '',
+  mode: 'auto',
   name: 'telephone',
   onlyCountries: [],
   placeholder: 'Enter a phone number',

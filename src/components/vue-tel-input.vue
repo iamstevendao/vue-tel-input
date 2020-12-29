@@ -9,7 +9,7 @@
       @keydown.esc="reset"
     >
       <span class="vti__selection">
-        <div v-if="enabledFlags" :class="['vti__flag', activeCountry.iso2.toLowerCase()]" />
+        <div v-if="enabledFlags" :class="['vti__flag', activeCountryCode.toLowerCase()]" />
         <span v-if="enabledCountryCode" class="vti__country-code">
           +{{ activeCountry.dialCode }}
         </span>
@@ -22,7 +22,7 @@
           v-for="(pb, index) in sortedCountries"
           :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
           :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
-          @click="choose(pb, true)"
+          @click="choose(pb)"
           @mousemove="selectedIndex = index"
         >
           <div v-if="enabledFlags" :class="['vti__flag', pb.iso2.toLowerCase()]" />
@@ -91,6 +91,10 @@ export default {
     autofocus: {
       type: Boolean,
       default: () => getDefault('autofocus'),
+    },
+    autoFormat: {
+      type: Boolean,
+      default: () => getDefault('autoFormat'),
     },
     customValidate: {
       type: [Boolean, RegExp],
@@ -190,7 +194,7 @@ export default {
   data() {
     return {
       phone: '',
-      activeCountry: { iso2: '' },
+      activeCountryCode: '',
       open: false,
       finishMounted: false,
       selectedIndex: null,
@@ -201,31 +205,31 @@ export default {
     };
   },
   computed: {
+    activeCountry() {
+      return this.findCountry(this.activeCountryCode);
+    },
     parsedPlaceholder() {
       if (!this.finishMounted) {
         return '';
       }
       if (this.dynamicPlaceholder) {
         const mode = this.mode || 'international';
-        return getExampleNumber(this.activeCountry.iso2, 'mobile').format(mode.toUpperCase());
+        return getExampleNumber(this.activeCountryCode, 'mobile').format(mode.toUpperCase());
       }
       return this.placeholder;
     },
     parsedMode() {
-      if (this.customValidate) {
-        return 'input';
-      }
-      if (this.mode) {
-        if (!['international', 'national'].includes(this.mode)) {
-          console.error('Invalid value of prop "mode"');
-        } else {
-          return this.mode;
+      if (this.mode === 'auto') {
+        if (!this.phone || this.phone[0] !== '+') {
+          return 'national';
         }
+        return 'international';
       }
-      if (!this.phone || this.phone[0] !== '+') {
-        return 'national';
+      if (!['international', 'national'].includes(this.mode)) {
+        console.error('Invalid value of prop "mode"');
+        return 'international';
       }
-      return 'international';
+      return this.mode;
     },
     filteredCountries() {
       // List countries after filtered
@@ -251,36 +255,66 @@ export default {
       return [...preferredCountries, ...this.filteredCountries];
     },
     phoneObject() {
-      const result = parsePhoneNumberFromString(this.phone, this.activeCountry.iso2);
-
-      if (!result) {
-        return result;
+      let result;
+      if (this.phone?.[0] === '+') {
+        result = parsePhoneNumberFromString(this.phone) || {};
+      } else {
+        result = parsePhoneNumberFromString(this.phone, this.activeCountryCode) || {};
       }
+      console.log('----- COMPUTED phoneObject:', this.phone, this.activeCountryCode, result);
 
       Object.assign(result, {
-        isValid: result.isValid(),
+        countryCode: result.country,
+        valid: result.isValid?.(),
         country: this.activeCountry,
+        formatted: result.format?.(this.parsedMode.toUpperCase()),
       });
+
       return result;
-    },
-    phoneText() {
-      let key = 'input';
-      if (this.phoneObject.isValid) {
-        key = this.parsedMode;
-      }
-      return this.phoneObject.number[key] || '';
     },
   },
   watch: {
-    // eslint-disable-next-line func-names
-    'phoneObject.isValid': function (value) {
-      if (value) {
-        this.phone = this.phoneText;
+    activeCountry(value, oldValue) {
+      console.log('----- WATCH activeCountry:', value);
+
+      if (!value && oldValue?.iso2) {
+        this.activeCountryCode = oldValue.iso2;
+        return;
       }
+      if (value?.iso2) {
+        this.$emit('country-changed', value);
+      }
+    },
+    'phoneObject.countryCode': function (value) {
+      this.activeCountryCode = value;
+    },
+    'phoneObject.valid': function () {
       this.$emit('validate', this.phoneObject);
     },
-    value() {
-      this.phone = this.value;
+    'phoneObject.formatted': function (value, oldValue = '') {
+      console.log('----- WATCH phoneObject.formatted', value);
+
+      if (!this.autoFormat || this.customValidate) {
+        return;
+      }
+      // this.phone = value;
+      this.$emit('input', value, this.phoneObject);
+      // Reset the cursor to current position if it's not the last character.
+      if (this.cursorPosition < oldValue.length) {
+        this.$nextTick(() => { setCaretPosition(this.$refs.input, this.cursorPosition); });
+      }
+    },
+    value(value, oldValue) {
+      console.log('----- WATCH value', value, '-', oldValue);
+      if (!this.testCharacters()) {
+        this.$nextTick(() => { this.phone = oldValue; });
+      } else {
+        this.phone = value;
+      }
+      // Reset the cursor to current position if it's not the last character.
+      if (this.cursorPosition < oldValue.length) {
+        this.$nextTick(() => { setCaretPosition(this.$refs.input, this.cursorPosition); });
+      }
     },
     open(isDropdownOpened) {
       // Emit open and close events
@@ -291,29 +325,6 @@ export default {
         this.$emit('close');
       }
     },
-    phone(newValue, oldValue) {
-      const isValidCharactersOnly = this.validCharactersOnly && !this.testCharacters();
-      const isCustomValidate = this.customValidate && !this.testCustomValidate();
-      if (isValidCharactersOnly || isCustomValidate) {
-        this.$nextTick(() => { this.phone = oldValue; });
-      } else if (newValue) {
-        if (newValue[0] === '+') {
-          const code = parsePhoneNumberFromString(newValue).countryCallingCode;
-          if (code) {
-            this.activeCountry = this.findCountry(code) || this.activeCountry;
-          }
-        }
-      }
-      // Reset the cursor to current position if it's not the last character.
-      if (this.cursorPosition < oldValue.length) {
-        this.$nextTick(() => { setCaretPosition(this.$refs.input, this.cursorPosition); });
-      }
-    },
-    activeCountry(value) {
-      if (value && value.iso2) {
-        this.$emit('country-changed', value);
-      }
-    },
   },
   mounted() {
     if (this.value) {
@@ -322,10 +333,9 @@ export default {
     this.initializeCountry()
       .then(() => {
         if (!this.phone
-          && this.inputOptions
-          && this.inputOptions.showDialCode
-          && this.activeCountry.dialCode) {
-          this.phone = `+${this.activeCountry.dialCode}`;
+          && this.inputOptions?.showDialCode
+          && this.activeCountryCode) {
+          this.phone = `+${this.activeCountryCode}`;
         }
         this.$emit('validate', this.phoneObject);
       })
@@ -335,22 +345,25 @@ export default {
       });
   },
   methods: {
+    onInputChanged(value) { // TODO: REMOVE
+      if (value[0] === '+') {
+        const code = parsePhoneNumberFromString(value).country;
+        if (code) {
+          this.activeCountry = this.findCountry(code) || this.activeCountry;
+        }
+      }
+    },
     initializeCountry() {
       return new Promise((resolve) => {
         /**
-         * 1. If the phone included prefix (+12), try to get the country and set it
+         * 1. If the phone included prefix (i.e. +12), try to get the country and set it
          */
-        if (this.phone && this.phone[0] === '+') {
-          const activeCountry = parsePhoneNumberFromString(this.phone).countryCallingCode;
-          if (activeCountry) {
-            this.choose(activeCountry);
-            resolve();
-            return;
-          }
+        if (this.phone?.[0] === '+') {
+          return;
         }
         /**
-         * 2. Use default country if passed from parent
-         */
+       * 2. Use default country if passed from parent
+       */
         if (this.defaultCountry) {
           const defaultCountry = this.findCountry(this.defaultCountry);
           if (defaultCountry) {
@@ -362,18 +375,18 @@ export default {
         const fallbackCountry = this.findCountry(this.preferredCountries[0])
           || this.filteredCountries[0];
         /**
-         * 3. Check if fetching country based on user's IP is allowed, set it as the default country
-         */
+       * 3. Check if fetching country based on user's IP is allowed, set it as the default country
+       */
         if (!this.disabledFetchingCountry) {
           getCountry()
             .then((res) => {
-              this.activeCountry = this.findCountry(res) || this.activeCountry;
+              this.activeCountryCode = res || this.activeCountry;
             })
             .catch((error) => {
               console.warn(error);
               /**
-               * 4. Use the first country from preferred list (if available) or all countries list
-               */
+             * 4. Use the first country from preferred list (if available) or all countries list
+             */
               this.choose(fallbackCountry);
             })
             .then(() => {
@@ -389,8 +402,8 @@ export default {
       });
     },
     /**
-     * Get the list of countries from the list of iso2 code
-     */
+   * Get the list of countries from the list of iso2 code
+   */
     getCountries(list = []) {
       return list
         .map((countryCode) => this.findCountry(countryCode))
@@ -409,52 +422,62 @@ export default {
         preferred,
       };
     },
-    choose(country, toEmitInputEvent = false) {
+    choose(country) {
+      console.log('----- METHOD choose: ', country);
+
       let parsedCountry = country;
       if (typeof parsedCountry === 'string') {
         parsedCountry = this.findCountry(parsedCountry);
       }
+
+      console.log('----- parsedCountry:', parsedCountry);
+
       if (!parsedCountry) {
         return;
       }
-      this.activeCountry = parsedCountry || this.activeCountry || {};
-      if (this.phone
-        && this.phone[0] === '+'
-        && this.activeCountry.iso2
-        && this.phoneObject.number.national) {
+      if (this.phone?.[0] === '+'
+        && parsedCountry.iso2
+        && this.phoneObject.nationalNumber) {
+        console.log('----- come here:', this.phoneObject.nationalNumber, parsedCountry.iso2);
+
         // Attach the current phone number with the newly selected country
         this.phone = parsePhoneNumberFromString(
-          this.phoneObject.number.national,
-          this.activeCountry.iso2,
+          this.phoneObject.nationalNumber,
+          parsedCountry.iso2,
         )
           .formatInternational();
-      } else if (this.inputOptions && this.inputOptions.showDialCode && parsedCountry) {
+        return;
+      }
+
+      if (this.inputOptions?.showDialCode && parsedCountry) {
         // Reset phone if the showDialCode is set
         this.phone = `+${parsedCountry.dialCode}`;
       }
-      if (toEmitInputEvent) {
-        this.$emit('input', this.phoneText, this.phoneObject);
-      }
     },
     testCharacters() {
-      const re = /^[()\-+0-9\s]*$/;
-      return re.test(this.phone);
+      if (this.validCharactersOnly) {
+        const re = /^[()\-+0-9\s]*$/;
+        return re.test(this.phone);
+      }
+      if (this.customValidate) {
+        return this.customValidate instanceof RegExp ? this.customValidate.test(this.phone) : false;
+      }
+      return true;
     },
     testCustomValidate() {
       return this.customValidate instanceof RegExp ? this.customValidate.test(this.phone) : false;
     },
     onInput(e) {
-      if (this.validCharactersOnly && !this.testCharacters()) {
-        return;
-      }
-      if (this.customValidate && !this.testCustomValidate()) {
+      console.log('----- METHOD onInput');
+
+      if (!this.testCharacters()) {
         return;
       }
       this.$refs.input.setCustomValidity(this.phoneObject.valid ? '' : this.invalidMsg);
       // Returns response.number to assign it to v-model (if being used)
       // Returns full response for cases @input is used
       // and parent wants to return the whole response.
-      this.$emit('input', this.phoneText, this.phoneObject);
+      this.$emit('input', this.phone, this.phoneObject);
 
       // Keep the current cursor position just in case the input reformatted
       // and it gets moved to the last character.
@@ -519,7 +542,7 @@ export default {
       } else if (e.keyCode === 13) {
         // enter key
         if (this.selectedIndex !== null) {
-          this.choose(this.sortedCountries[this.selectedIndex], true);
+          this.choose(this.sortedCountries[this.selectedIndex]);
         }
         this.open = !this.open;
       } else {
@@ -546,7 +569,7 @@ export default {
       }
     },
     reset() {
-      this.selectedIndex = this.sortedCountries.map((c) => c.iso2).indexOf(this.activeCountry.iso2);
+      this.selectedIndex = this.sortedCountries.map((c) => c.iso2).indexOf(this.activeCountryCode);
       this.open = false;
     },
     setDropdownPosition() {

@@ -10,8 +10,9 @@
     "url": "https://github.com/EducationLink/vue-tel-input.git"
   },
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vuepress dev docs",
     "build": "vue-cli-service build --target lib src/index.js",
+    "docs:build": "vuepress build docs",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
@@ -24,7 +25,8 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "libphonenumber-js": "^1.9.6",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vuetify": "^2.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -39,7 +41,8 @@
     "eslint-plugin-jest": "^22.15.1",
     "eslint-plugin-vue": "^6.2.2",
     "lint-staged": "^9.5.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.7.1"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

@@ -172,7 +172,7 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
   | `inputId` | `String` | `''` | Custom 'id' for the `input` |
   | `inputOptions` | `Object` | `{ showDialCode: false, tabindex: 0 }` | Options for input, supporting `showDialCode` (always show dial code in the input) and `tabindex`|
   | `maxLen` | `Number` | `25` | Native input 'maxlength' attribute |
-  | `mode` | `String` | `''` | Format number to `'international'` (with + dial code) or `'national'` (with 0...), available from [v3.1.1](https://github.com/EducationLink/vue-tel-input/releases/tag/v3.1.1) |
+  | `mode` | `String` | `'auto'` | Format number to `'international'` (with + dial code) or `'national'` (with 0...), available from [v3.1.1](https://github.com/EducationLink/vue-tel-input/releases/tag/v3.1.1) |
   | `name` | `String` | `'telephone'` | Native input 'name' attribute |
   | `onlyCountries` | `Array` | `[]` | List of countries will be shown on the dropdown. ie `['AU', 'BR']` |
   | `placeholder` | `String` | `'Enter a phone number'` | Placeholder for the input |

@@ -24,8 +24,9 @@ module.exports = {
         'el',
       ]
     }],
+    'func-names': 'off',
     'no-console': [
-      'error',
+      'warn',
       { allow: ['warn', 'error'] },
     ],
     // allow debugger during development

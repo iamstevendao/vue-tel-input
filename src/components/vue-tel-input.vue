@@ -209,9 +209,6 @@ export default {
       return this.findCountry(this.activeCountryCode);
     },
     parsedPlaceholder() {
-      if (!this.finishMounted) {
-        return '';
-      }
       if (this.dynamicPlaceholder) {
         const mode = this.mode || 'international';
         return getExampleNumber(this.activeCountryCode, 'mobile').format(mode.toUpperCase());
@@ -261,16 +258,21 @@ export default {
       } else {
         result = parsePhoneNumberFromString(this.phone, this.activeCountryCode) || {};
       }
+
+      const {
+        metadata,
+        ...phoneObject
+      } = result;
       console.log('----- COMPUTED phoneObject:', this.phone, this.activeCountryCode, result);
 
-      Object.assign(result, {
+      Object.assign(phoneObject, {
         countryCode: result.country,
         valid: result.isValid?.(),
         country: this.activeCountry,
         formatted: result.format?.(this.parsedMode.toUpperCase()),
       });
 
-      return result;
+      return phoneObject;
     },
   },
   watch: {
@@ -291,7 +293,7 @@ export default {
     'phoneObject.valid': function () {
       this.$emit('validate', this.phoneObject);
     },
-    'phoneObject.formatted': function (value, oldValue = '') {
+    'phoneObject.formatted': function (value) {
       console.log('----- WATCH phoneObject.formatted', value);
 
       if (!this.autoFormat || this.customValidate) {
@@ -300,9 +302,9 @@ export default {
       // this.phone = value;
       this.$emit('input', value, this.phoneObject);
       // Reset the cursor to current position if it's not the last character.
-      if (this.cursorPosition < oldValue.length) {
-        this.$nextTick(() => { setCaretPosition(this.$refs.input, this.cursorPosition); });
-      }
+      console.log('----- value:', value);
+
+      setCaretPosition(this.$refs.input, value?.length);
     },
     value(value, oldValue) {
       console.log('----- WATCH value', value, '-', oldValue);

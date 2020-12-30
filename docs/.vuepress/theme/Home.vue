@@ -1,55 +1,70 @@
 <template>
   <v-app>
-    <h1>International Telephone Input with Vue</h1>
-
-    <a href="https://www.npmjs.com/package/vue-tel-input"
-      ><img src="https://img.shields.io/npm/dt/vue-tel-input.svg" /></a
-    >&nbsp;
-    <a href="https://github.com/EducationLink/vue-tel-input"
-      ><img src="https://img.shields.io/github/stars/EducationLink/vue-tel-input.svg"
-    /></a>
-    <h2 style="color: #999">
-      made with &#x2764; by some
-      <a
-        style="color: inherit"
-        href="https://github.com/EducationLink/vue-tel-input/graphs/contributors"
-        >awesome humans</a
-      >.
-    </h2>
-    <div style="width: 500px; margin: 20px auto">
-      <vue-tel-input v-model="phoneModel" v-bind="options" @input="onInput" />
-    </div>
-    <div v-if="phone.number" style="color: #e83e8c">
-      <span>
-        Number:
-        <strong>{{ phone.number }}</strong
-        >,&nbsp;
-      </span>
-      <span>
-        Is valid:
-        <strong>{{ phone.valid }}</strong
-        >,&nbsp;
-      </span>
-      <span>
-        Country:
-        <strong>{{ phone.country }}</strong>
-      </span>
-    </div>
-    <v-form class="vfg">
-      <v-container>
-        <v-layout wrap="wrap">
-          <v-flex v-for="field in fields" :key="field.model" :class="field.containerClasses">
-            <component
-              v-bind="field.bind"
-              v-model="options[field.model]"
-              :is="field.type"
-              :label="field.label"
-            >
-            </component>
-          </v-flex>
-        </v-layout>
+    <v-main>
+      <v-container class="text-center pt-10">
+        <h1>International Telephone Input with Vue</h1>
+        <div class="mt-1">
+          <a href="https://www.npmjs.com/package/vue-tel-input"
+            ><img src="https://img.shields.io/npm/dt/vue-tel-input.svg" /></a
+          >&nbsp;
+          <a href="https://github.com/EducationLink/vue-tel-input"
+            ><img src="https://img.shields.io/github/stars/EducationLink/vue-tel-input.svg"
+          /></a>
+        </div>
+        <h2 class="mt-1 grey--text">
+          made with &#x2764; by some
+          <a
+            style="color: inherit"
+            href="https://github.com/EducationLink/vue-tel-input/graphs/contributors"
+            >awesome humans</a
+          >.
+        </h2>
+        <div style="width: 500px; margin: 20px auto">
+          <vue-tel-input v-model="phoneModel" v-bind="options" @input="onInput" />
+        </div>
+        <div v-if="phoneObject.formatted" style="color: #e83e8c" class="mb-5">
+          <span>
+            Formatted:
+            <strong>{{ phoneObject.formatted }}</strong
+            >,&nbsp;
+          </span>
+          <span>
+            Is valid:
+            <strong>{{ phoneObject.valid }}</strong
+            >,&nbsp;
+          </span>
+          <span>
+            Country:
+            <strong>{{ phoneObject.country.name }}</strong>
+          </span>
+        </div>
+        <v-btn raised small plain elevation="0" @click="showOptions = !showOptions">
+          <span>{{ showOptions ? "Hide" : "Show" }} options</span>
+        </v-btn>
       </v-container>
-    </v-form>
+      <v-row v-if="showOptions">
+        <v-col class="col-sm-8">
+          <v-form class="vfg">
+            <v-container>
+              <v-layout wrap="wrap">
+                <v-flex v-for="field in fields" :key="field.model" :class="field.containerClasses">
+                  <component
+                    v-bind="field.bind"
+                    v-model="options[field.model]"
+                    :is="field.type"
+                    :label="field.label"
+                  >
+                  </component>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-form>
+        </v-col>
+        <v-col class="col-sm-4">
+          <pre>{{ JSON.stringify(this.phoneObject, null, 2) }}</pre>
+        </v-col>
+      </v-row>
+    </v-main>
   </v-app>
 </template>
 
@@ -73,8 +88,9 @@ export default {
   data() {
     return {
       phoneModel: '+61432421546',
-      phone: {
-        number: '',
+      showOptions: false,
+      phoneObject: {
+        formatted: '',
         valid: false,
         country: undefined,
       },
@@ -91,10 +107,10 @@ export default {
     };
   },
   methods: {
-    onInput(formattedNumber, { formatted, valid, country }) {
-      this.phone.number = formatted;
-      this.phone.valid = valid;
-      this.phone.country = country && country.name;
+    onInput(formattedNumber, phoneObject) {
+      console.log('----- phoneObject:', phoneObject);
+
+      this.phoneObject = phoneObject;
     },
   },
 };
@@ -103,12 +119,14 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap");
 
-body {
+.v-application {
   font-family: "Nunito Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+.v-application ol,
+.v-application ul {
+  padding-left: unset;
 }
 </style>

@@ -2,8 +2,8 @@ module.exports = {
   locales: {
     '/': {
       lang: 'en-US',
-      title: 'Component Library 🥂',
-      description: 'Documentation site for the Vue component library plugin'
+      title: 'Vue Tel Input',
+      description: 'Documentation site for the Vue Tel Input plugin'
     }
   },
   themeConfig: {

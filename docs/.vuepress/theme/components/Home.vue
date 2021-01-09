@@ -10,7 +10,7 @@
           ><img src="https://img.shields.io/github/stars/EducationLink/vue-tel-input.svg"
         /></a>
       </div>
-      <span style="color: #999999">
+      <span style="color: #999999; font-size: 1.5rem">
         made with &#x2764; by some
         <a
           style="color: inherit"
@@ -40,31 +40,54 @@
       </div>
     </header>
 
-    <div class="text-center pt-10">
-      <div raised small plain elevation="0" @click="showOptions = !showOptions">
+    <div style="text-align: center; margin-top: 20px">
+      <button v-on:click="showOptions = !showOptions">
         <span>{{ showOptions ? "Hide" : "Show" }} options</span>
-      </div>
+      </button>
     </div>
 
-    <Content class="theme-default-content custom" />
-
-    <div v-if="data.footer" class="footer">
-      {{ data.footer }}
+    <div v-if="showOptions" class="options">
+      <div class="form">
+        <div v-for="field in fields" :key="field.model" :class="field.containerClasses">
+          <form-input
+            v-bind="field.bind"
+            :model="options"
+            :modelName="field.model"
+            :label="field.label"
+            :type="field.type"
+          />
+        </div>
+      </div>
+      <div class="results">
+        <pre>{{ JSON.stringify(this.phoneObject, null, 2) }}</pre>
+      </div>
     </div>
   </main>
 </template>
 
 <script>
 import NavLink from '@theme/components/NavLink.vue';
+import FormInput from './FormInput.vue';
 import { allProps, defaultOptions } from '../../../../src/utils';
+
+function getFormConfig(field) {
+  if (field.type.name === 'Boolean') {
+    return { type: 'checkbox' };
+  }
+  if (field.type.name === 'String') {
+    if (field.options?.length) {
+      return { type: 'select', bind: { items: field.options } };
+    }
+    return { type: 'input' };
+  }
+}
 
 export default {
   name: 'Home',
 
-  components: { NavLink },
+  components: { NavLink, FormInput },
   data() {
     return {
-
       phoneModel: '+61432421546',
       showOptions: false,
       phoneObject: {
@@ -80,6 +103,7 @@ export default {
         .map((prop) => ({
           model: prop.name,
           label: prop.name,
+          ...getFormConfig(prop),
         })),
     };
   },
@@ -119,6 +143,20 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+
+  .options {
+    display: flex;
+
+    .form {
+      flex: 3;
+    }
+
+    .results {
+      flex: 1;
+      background-color: whitesmoke;
+      padding: 20px;
+    }
+  }
 
   .hero {
     text-align: center;

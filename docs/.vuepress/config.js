@@ -8,7 +8,6 @@ module.exports = {
   },
   themeConfig: {
     repoLabel: 'Contribute!',
-    // git repo here... gitlab, github
     repo: '',
     docsDir: 'docs',
     editLinks: true,
@@ -28,17 +27,34 @@ module.exports = {
           }
         },
         nav: [
-          { text: 'Getting Started', link: '/guide' },
-          { text: 'Components', link: '/components/' },
-          // external link to git repo...again
-          { text: 'GitHub', link: '' }
+          { text: 'Documentation', link: '/documentation/' },
+          { text: 'GitHub', link: 'https://github.com/EducationLink/vue-tel-input' }
         ],
         sidebar: {
-          '/components/': [
+          '/documentation/': [
             {
-              title: 'Components',
+              title: 'Guide',
               collapsable: false,
-              children: ['standard-component']
+              children: [
+                'getting-started',
+                'installation'
+              ]
+            },
+            {
+              title: 'Usage',
+              collapsable: false,
+              children: [
+                'component-reference',
+                'custom-form-of-vue-form-generator'
+              ]
+            },
+            {
+              title: 'Others',
+              collapsable: false,
+              children: [
+                'typescript-support',
+                'credits'
+              ]
             }
           ]
         }

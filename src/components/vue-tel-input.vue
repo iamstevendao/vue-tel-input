@@ -347,14 +347,6 @@ export default {
       });
   },
   methods: {
-    onInputChanged(value) { // TODO: REMOVE
-      if (value[0] === '+') {
-        const code = parsePhoneNumberFromString(value).country;
-        if (code) {
-          this.activeCountry = this.findCountry(code) || this.activeCountry;
-        }
-      }
-    },
     initializeCountry() {
       return new Promise((resolve) => {
         /**

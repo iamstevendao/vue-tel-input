@@ -41,9 +41,13 @@
     </header>
 
     <div style="text-align: center; margin-top: 20px">
-      <button v-on:click="showOptions = !showOptions">
+      <a
+        style="color: #999999"
+        href="https://github.com/EducationLink/vue-tel-input/graphs/contributors"
+        @click.prevent="showOptions = !showOptions"
+      >
         <span>{{ showOptions ? "Hide" : "Show" }} options</span>
-      </button>
+      </a>
     </div>
 
     <div v-if="showOptions" class="options">

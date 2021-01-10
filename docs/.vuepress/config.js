@@ -3,17 +3,14 @@ module.exports = {
     '/': {
       lang: 'en-US',
       title: 'Vue Tel Input',
-      description: 'Documentation site for the Vue Tel Input plugin'
+      description: 'Documentation site for Vue Tel Input'
     }
   },
   themeConfig: {
-    repoLabel: 'Contribute!',
     repo: '',
     docsDir: 'docs',
-    editLinks: true,
-    docsBranch: 'dev',
-    editLinkText: 'Help us improve this page!',
     search: false,
+    displayAllHeaders: true,
     locales: {
       '/': {
         label: 'English',
@@ -28,6 +25,7 @@ module.exports = {
         },
         nav: [
           { text: 'Documentation', link: '/documentation/' },
+          { text: 'Changelog', link: 'https://github.com/EducationLink/vue-tel-input/releases' },
           { text: 'GitHub', link: 'https://github.com/EducationLink/vue-tel-input' }
         ],
         sidebar: {

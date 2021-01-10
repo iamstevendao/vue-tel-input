@@ -263,13 +263,19 @@ export default {
         metadata,
         ...phoneObject
       } = result;
-      console.log('----- COMPUTED phoneObject:', this.phone, this.activeCountryCode, result);
+
+      const valid = result.isValid?.();
+      let formatted = this.phone;
+
+      if (valid) {
+        formatted = result.format?.(this.parsedMode.toUpperCase());
+      }
 
       Object.assign(phoneObject, {
         countryCode: result.country,
-        valid: result.isValid?.(),
+        valid,
         country: this.activeCountry,
-        formatted: result.format?.(this.parsedMode.toUpperCase()),
+        formatted,
       });
 
       return phoneObject;
@@ -277,8 +283,6 @@ export default {
   },
   watch: {
     activeCountry(value, oldValue) {
-      console.log('----- WATCH activeCountry:', value);
-
       if (!value && oldValue?.iso2) {
         this.activeCountryCode = oldValue.iso2;
         return;
@@ -294,28 +298,17 @@ export default {
       this.$emit('validate', this.phoneObject);
     },
     'phoneObject.formatted': function (value) {
-      console.log('----- WATCH phoneObject.formatted', value);
-
       if (!this.autoFormat || this.customValidate) {
         return;
       }
       // this.phone = value;
       this.$emit('input', value, this.phoneObject);
-      // Reset the cursor to current position if it's not the last character.
-      console.log('----- value:', value);
-
-      setCaretPosition(this.$refs.input, value?.length);
     },
     value(value, oldValue) {
-      console.log('----- WATCH value', value, '-', oldValue);
       if (!this.testCharacters()) {
         this.$nextTick(() => { this.phone = oldValue; });
       } else {
         this.phone = value;
-      }
-      // Reset the cursor to current position if it's not the last character.
-      if (this.cursorPosition < oldValue.length) {
-        this.$nextTick(() => { setCaretPosition(this.$refs.input, this.cursorPosition); });
       }
     },
     open(isDropdownOpened) {
@@ -417,14 +410,10 @@ export default {
       };
     },
     choose(country) {
-      console.log('----- METHOD choose: ', country);
-
       let parsedCountry = country;
       if (typeof parsedCountry === 'string') {
         parsedCountry = this.findCountry(parsedCountry);
       }
-
-      console.log('----- parsedCountry:', parsedCountry);
 
       if (!parsedCountry) {
         return;
@@ -432,8 +421,6 @@ export default {
       if (this.phone?.[0] === '+'
         && parsedCountry.iso2
         && this.phoneObject.nationalNumber) {
-        console.log('----- come here:', this.phoneObject.nationalNumber, parsedCountry.iso2);
-
         // Attach the current phone number with the newly selected country
         this.phone = parsePhoneNumberFromString(
           this.phoneObject.nationalNumber,
@@ -462,8 +449,6 @@ export default {
       return this.customValidate instanceof RegExp ? this.customValidate.test(this.phone) : false;
     },
     onInput(e) {
-      console.log('----- METHOD onInput');
-
       if (!this.testCharacters()) {
         return;
       }
@@ -483,6 +468,7 @@ export default {
       this.$emit('blur');
     },
     onFocus() {
+      setCaretPosition(this.$refs.input, this.phone.length);
       this.$emit('focus');
     },
     onEnter() {

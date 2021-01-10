@@ -16,8 +16,6 @@ export function getCountry() {
 
 // Credits: http://blog.vishalon.net/index.php/javascript-getting-and-setting-caret-position-in-textarea/
 export function setCaretPosition(ctrl, pos) {
-  console.log('----- FUNCTION setCaretPosition:', pos);
-
   // Modern browsers
   if (ctrl.setSelectionRange) {
     ctrl.focus();

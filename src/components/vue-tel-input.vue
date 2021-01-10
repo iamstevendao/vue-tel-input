@@ -349,8 +349,8 @@ export default {
           return;
         }
         /**
-       * 2. Use default country if passed from parent
-       */
+         * 2. Use default country if passed from parent
+         */
         if (this.defaultCountry) {
           const defaultCountry = this.findCountry(this.defaultCountry);
           if (defaultCountry) {
@@ -362,8 +362,8 @@ export default {
         const fallbackCountry = this.findCountry(this.preferredCountries[0])
           || this.filteredCountries[0];
         /**
-       * 3. Check if fetching country based on user's IP is allowed, set it as the default country
-       */
+         * 3. Check if fetching country based on user's IP is allowed, set it as the default country
+         */
         if (!this.disabledFetchingCountry) {
           getCountry()
             .then((res) => {

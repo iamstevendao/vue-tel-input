@@ -70,7 +70,6 @@
 </template>
 
 <script>
-import NavLink from '@theme/components/NavLink.vue';
 import FormInput from './FormInput.vue';
 import { allProps, defaultOptions } from '../../../../src/utils';
 
@@ -88,11 +87,10 @@ function getFormConfig(field) {
 
 export default {
   name: 'Home',
-
-  components: { NavLink, FormInput },
+  components: { FormInput },
   data() {
     return {
-      phoneModel: '+61432421546',
+      phoneModel: '+61423765987',
       showOptions: false,
       phoneObject: {
         formatted: '',
@@ -116,19 +114,9 @@ export default {
     data() {
       return this.$page.frontmatter;
     },
-
-    actionLink() {
-      return {
-        link: this.data.actionLink,
-        text: this.data.actionText
-      }
-    }
   },
   methods: {
-
     onInput(formattedNumber, phoneObject) {
-      console.log('----- phoneObject:', phoneObject);
-
       this.phoneObject = phoneObject;
     },
   },

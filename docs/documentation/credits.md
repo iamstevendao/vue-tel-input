@@ -1,7 +1,7 @@
 # Credits & Contributors
 
 **Credits**
-- Telephone Number parsing, validation by [awesome-phonenumber](https://www.npmjs.com/package/awesome-phonenumber).
+- Telephone Number parsing, validation by [libphonenumber-js](https://www.npmjs.com/package/libphonenumber-js).
 - Country Codes data from [intl-tel-input](https://github.com/jackocnr/intl-tel-input/blob/master/src/js/data.js).
 - User's country by [ip2c.org](https://ip2c.org/s), request using [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 

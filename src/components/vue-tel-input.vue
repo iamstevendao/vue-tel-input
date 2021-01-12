@@ -36,7 +36,7 @@
     <input
       v-model="phone"
       ref="input"
-      type="tel"
+      :type="type"
       :autocomplete="autocomplete"
       :autofocus="autofocus"
       :class="['vti__input', inputClasses]"
@@ -181,6 +181,10 @@ export default {
     required: {
       type: Boolean,
       default: () => getDefault('required'),
+    },
+    type: {
+      type: String,
+      default: () => getDefault('tel'),
     },
     validCharactersOnly: {
       type: Boolean,

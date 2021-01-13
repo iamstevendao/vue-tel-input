@@ -9,6 +9,7 @@ Install the plugin into Vue:
 ```javascript
 import Vue from 'vue'
 import VueTelInput from 'vue-tel-input'
+import 'vue-tel-input/dist/vue-tel-input.css'
 
 Vue.use(VueTelInput, [globalOptions = {}]) // Define default global options here (optional)
 ```
@@ -23,6 +24,7 @@ Or use the component directly:
 </template>
 <script>
 import { VueTelInput } from 'vue-tel-input'
+import 'vue-tel-input/dist/vue-tel-input.css'
 
 export default {
   components: {
@@ -79,6 +81,7 @@ Check out the setup in [CodeSandbox](https://codesandbox.io/s/vue-tel-input-with
   ```js
     import Vue from 'vue';
     import TelInput from '<path>/tel-input.vue';
+    import 'vue-tel-input/dist/vue-tel-input.css'
 
     Vue.component('field-tel-input', TelInput);
   ```

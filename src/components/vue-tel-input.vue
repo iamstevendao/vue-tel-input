@@ -421,6 +421,7 @@ export default {
       if (this.phone?.[0] === '+'
         && parsedCountry.iso2
         && this.phoneObject.nationalNumber) {
+        this.activeCountryCode = parsedCountry.iso2;
         // Attach the current phone number with the newly selected country
         this.phone = parsePhoneNumberFromString(
           this.phoneObject.nationalNumber,

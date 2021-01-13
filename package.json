@@ -19,9 +19,9 @@
   "files": [
     "dist/"
   ],
-  "main": "dist/vue-tel-input.umd.js",
-  "module": "dist/vue-tel-input.esm.js",
-  "unpkg": "dist/vue-tel-input.min.js",
+  "main": "dist/vue-tel-input.umd.min.js",
+  "unpkg": "dist/vue-tel-input.umd.min.js",
+  "jsdelivr": "dist/vue-tel-input.umd.min.js",
   "dependencies": {
     "core-js": "^3.6.5",
     "libphonenumber-js": "^1.9.6",

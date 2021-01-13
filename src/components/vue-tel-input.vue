@@ -184,7 +184,7 @@ export default {
     },
     type: {
       type: String,
-      default: () => getDefault('tel'),
+      default: () => getDefault('type'),
     },
     validCharactersOnly: {
       type: Boolean,

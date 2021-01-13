@@ -12,7 +12,7 @@ import VueTelInput from 'vue-tel-input'
 
 Vue.use(VueTelInput, [globalOptions = {}]) // Define default global options here (optional)
 ```
-> View all available options in [Props](#props).
+> View all available options in [Props](https://educationlink.github.io/vue-tel-input/documentation/component-reference.html).
 
 Or use the component directly:
 

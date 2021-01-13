@@ -32,6 +32,8 @@ export default {
   },
 };
 </script>
+
+<style src="vue-tel-input/dist/vue-tel-input.css"></style>
 ```
 
 ## Browser

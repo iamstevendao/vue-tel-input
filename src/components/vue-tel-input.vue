@@ -36,7 +36,7 @@
     <input
       v-model="phone"
       ref="input"
-      type="tel"
+      :type="type"
       :autocomplete="autocomplete"
       :autofocus="autofocus"
       :class="['vti__input', inputClasses]"
@@ -181,6 +181,10 @@ export default {
     required: {
       type: Boolean,
       default: () => getDefault('required'),
+    },
+    type: {
+      type: String,
+      default: () => getDefault('type'),
     },
     validCharactersOnly: {
       type: Boolean,
@@ -439,7 +443,12 @@ export default {
       if (this.inputOptions?.showDialCode && parsedCountry) {
         // Reset phone if the showDialCode is set
         this.phone = `+${parsedCountry.dialCode}`;
+        return;
       }
+
+      // update value, even if international mode is NOT used
+      this.activeCountryCode = parsedCountry.iso2;
+      this.$emit('input', this.phone, this.phoneObject);
     },
     testCharacters() {
       if (this.validCharactersOnly) {

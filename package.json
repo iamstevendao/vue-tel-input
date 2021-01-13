@@ -14,7 +14,8 @@
     "build": "vue-cli-service build --target lib src/index.js",
     "docs:build": "vuepress build docs",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "dist/"

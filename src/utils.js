@@ -128,6 +128,9 @@ export const allProps = [
     name: 'required', default: false, type: Boolean, description: '', inDemo: false,
   },
   {
+    name: 'type', default: 'tel', type: String, description: '', inDemo: false,
+  },
+  {
     name: 'validCharactersOnly', default: false, type: Boolean, description: '', inDemo: true,
   },
   {

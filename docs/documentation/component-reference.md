@@ -8,6 +8,7 @@
   | -------- | ---- | ------------- | ----------- |
   | `autocomplete` | `String` | `'on'` | Native input `autocomplete` attribute |
   | `autofocus` | `Boolean` | `false` | Native input `autofocus` attribute |
+  | `customValidate` | `Boolean` &#124; `RegExp` | `false` | Custom validation RegExp for input |
   | `defaultCountry` | `String` | `''` | Default country, will override the country fetched from IP address of user |
   | `disabled` | `Boolean` | `false` | Disable `vue-tel-input`, including the input & flag dropdown |
   | `disabledFetchingCountry` | `Boolean` | `false` | Disable fetching current country based on IP address of user |
@@ -26,9 +27,9 @@
   | `placeholder` | `String` | `'Enter a phone number'` | Placeholder for the input |
   | `preferredCountries` | `Array` | `[]` | Preferred countries list, will be on top of the dropdown |
   | `required` | `Boolean` | `false` | Native input `required` attribute |
+  | `type` | `String` | `tel` | Native input `type` attribute |
   | `validCharactersOnly` | `Boolean` | `false` | Only allow valid characters in a phone number (will also verify in `mounted`, so phone number with invalid characters will be shown as an empty string) |
   | `wrapperClasses` | `String` &#124; `Array` &#124; `Object` | `''` | Custom classes for the wrapper |
-  | `customValidate` | `Boolean` &#124; `RegExp` | `false` | Custom validation RegExp for input |
 
 ## Events
 

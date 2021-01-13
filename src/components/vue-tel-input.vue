@@ -200,7 +200,6 @@ export default {
       selectedIndex: null,
       typeToFindInput: '',
       typeToFindTimer: null,
-      cursorPosition: 0,
       dropdownOpenDirection: 'below',
     };
   },
@@ -449,7 +448,7 @@ export default {
     testCustomValidate() {
       return this.customValidate instanceof RegExp ? this.customValidate.test(this.phone) : false;
     },
-    onInput(e) {
+    onInput() {
       if (!this.testCharacters()) {
         return;
       }
@@ -458,12 +457,6 @@ export default {
       // Returns full response for cases @input is used
       // and parent wants to return the whole response.
       this.$emit('input', this.phone, this.phoneObject);
-
-      // Keep the current cursor position just in case the input reformatted
-      // and it gets moved to the last character.
-      if (e && e.target) {
-        this.cursorPosition = e.target.selectionStart;
-      }
     },
     onBlur() {
       this.$emit('blur');

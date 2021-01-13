@@ -300,8 +300,14 @@ export default {
       if (!this.autoFormat || this.customValidate) {
         return;
       }
-      // this.phone = value;
       this.$emit('input', value, this.phoneObject);
+
+      this.$nextTick(() => {
+        // In case `v-model` is not set, we need to update the `phone` to be new formatted value
+        if (value && !this.value) {
+          this.phone = value;
+        }
+      });
     },
     value(value, oldValue) {
       if (!this.testCharacters()) {

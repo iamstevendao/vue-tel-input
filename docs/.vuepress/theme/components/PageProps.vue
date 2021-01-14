@@ -3,8 +3,7 @@
     <slot name="top" />
 
     <div class="theme-default-content">
-      <h1 id="component-reference">Component Reference</h1>
-      <h2 id="props">Props</h2>
+      <Content />
       <table>
         <thead>
           <tr>
@@ -36,7 +35,6 @@
           </tr>
         </tbody>
       </table>
-      <Content />
     </div>
     <PageEdit />
 

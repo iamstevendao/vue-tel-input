@@ -43,7 +43,9 @@ module.exports = {
               title: 'Usage',
               collapsable: false,
               children: [
-                'component-reference',
+                'props',
+                'events',
+                'slots',
                 'custom-form-of-vue-form-generator'
               ]
             },

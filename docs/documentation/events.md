@@ -1,8 +1,4 @@
----
-layout: LayoutProps
----
-
-## Events
+# Events
 
   | Event | Arguments | Description |
   | ----- | --------- | ----------- |
@@ -16,7 +12,3 @@ layout: LayoutProps
   | `close` |  | Fires when the flags dropdown closes |
   | `country-changed` | `Object` | Fires when country changed (even for the first time) |
 
-## Slots
-  | Slot | Description |
-  | ---- | ----------- |
-  | `arrow-icon` | Replace the arrow next to the flag with a component of your choice |

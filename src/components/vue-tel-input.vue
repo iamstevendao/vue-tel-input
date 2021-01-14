@@ -3,14 +3,17 @@
     <div
       v-click-outside="clickedOutside"
       :class="['vti__dropdown', { open: open }]"
-      :tabindex="dropdownOptions && dropdownOptions.tabindex ? dropdownOptions.tabindex : 0"
+      :tabindex="dropdownOptions.tabindex"
       @keydown="keyboardNav"
       @click="toggleDropdown"
       @keydown.esc="reset"
     >
       <span class="vti__selection">
-        <div v-if="enabledFlags" :class="['vti__flag', activeCountryCode.toLowerCase()]" />
-        <span v-if="enabledCountryCode" class="vti__country-code">
+        <div
+          v-if="dropdownOptions.enabledFlags"
+          :class="['vti__flag', activeCountryCode.toLowerCase()]"
+        />
+        <span v-if="dropdownOptions.enabledCountryCode" class="vti__country-code">
           +{{ activeCountry.dialCode }}
         </span>
         <slot name="arrow-icon" :open="open">
@@ -25,29 +28,27 @@
           @click="choose(pb)"
           @mousemove="selectedIndex = index"
         >
-          <div v-if="enabledFlags" :class="['vti__flag', pb.iso2.toLowerCase()]" />
+          <div v-if="dropdownOptions.enabledFlags" :class="['vti__flag', pb.iso2.toLowerCase()]" />
           <strong>{{ pb.name }}</strong>
-          <span v-if="dropdownOptions && !dropdownOptions.disabledDialCode">
-            +{{ pb.dialCode }}
-          </span>
+          <span v-if="!dropdownOptions.disabledDialCode"> +{{ pb.dialCode }} </span>
         </li>
       </ul>
     </div>
     <input
       v-model="phone"
       ref="input"
-      :type="type"
-      :autocomplete="autocomplete"
-      :autofocus="autofocus"
-      :class="['vti__input', inputClasses]"
+      :type="inputOptions.type"
+      :autocomplete="inputOptions.autocomplete"
+      :autofocus="inputOptions.autofocus"
+      :class="['vti__input', inputOptions.styleClasses]"
       :disabled="disabled"
-      :id="inputId"
-      :maxlength="maxLen"
-      :name="name"
+      :id="inputOptions.id"
+      :maxlength="inputOptions.maxlength"
+      :name="inputOptions.name"
       :placeholder="parsedPlaceholder"
-      :readonly="readonly"
-      :required="required"
-      :tabindex="inputOptions && inputOptions.tabindex ? inputOptions.tabindex : 0"
+      :readonly="inputOptions.readonly"
+      :required="inputOptions.required"
+      :tabindex="inputOptions.tabindex"
       @blur="onBlur"
       @focus="onFocus"
       @input="onInput"
@@ -84,14 +85,6 @@ export default {
       type: Array,
       default: () => getDefault('allCountries'),
     },
-    autocomplete: {
-      type: String,
-      default: () => getDefault('autocomplete'),
-    },
-    autofocus: {
-      type: Boolean,
-      default: () => getDefault('autofocus'),
-    },
     autoFormat: {
       type: Boolean,
       default: () => getDefault('autoFormat'),
@@ -118,29 +111,9 @@ export default {
       type: Object,
       default: () => getDefault('dropdownOptions'),
     },
-    dynamicPlaceholder: {
-      type: Boolean,
-      default: () => getDefault('dynamicPlaceholder'),
-    },
-    enabledCountryCode: {
-      type: Boolean,
-      default: () => getDefault('enabledCountryCode'),
-    },
-    enabledFlags: {
-      type: Boolean,
-      default: () => getDefault('enabledFlags'),
-    },
     ignoredCountries: {
       type: Array,
       default: () => getDefault('ignoredCountries'),
-    },
-    inputClasses: {
-      type: [String, Array, Object],
-      default: () => getDefault('inputClasses'),
-    },
-    inputId: {
-      type: String,
-      default: () => getDefault('inputId'),
     },
     inputOptions: {
       type: Object,
@@ -150,14 +123,6 @@ export default {
       type: String,
       default: () => getDefault('invalidMsg'),
     },
-    maxLen: {
-      type: Number,
-      default: () => getDefault('maxLen'),
-    },
-    name: {
-      type: String,
-      default: () => getDefault('name'),
-    },
     mode: {
       type: String,
       default: () => getDefault('mode'),
@@ -166,25 +131,9 @@ export default {
       type: Array,
       default: () => getDefault('onlyCountries'),
     },
-    placeholder: {
-      type: String,
-      default: () => getDefault('placeholder'),
-    },
     preferredCountries: {
       type: Array,
       default: () => getDefault('preferredCountries'),
-    },
-    readonly: {
-      type: Boolean,
-      default: () => getDefault('readonly'),
-    },
-    required: {
-      type: Boolean,
-      default: () => getDefault('required'),
-    },
-    type: {
-      type: String,
-      default: () => getDefault('type'),
     },
     validCharactersOnly: {
       type: Boolean,
@@ -212,11 +161,11 @@ export default {
       return this.findCountry(this.activeCountryCode);
     },
     parsedPlaceholder() {
-      if (this.dynamicPlaceholder) {
+      if (this.inputOptions.dynamicPlaceholder) {
         const mode = this.mode || 'international';
         return getExampleNumber(this.activeCountryCode, 'mobile').format(mode.toUpperCase());
       }
-      return this.placeholder;
+      return this.inputOptions.placeholder;
     },
     parsedMode() {
       if (this.mode === 'auto') {
@@ -361,28 +310,24 @@ export default {
          * 2. Use default country if passed from parent
          */
         if (this.defaultCountry) {
-          const defaultCountry = this.findCountry(this.defaultCountry);
-          if (defaultCountry) {
-            this.choose(defaultCountry);
-            resolve();
-            return;
-          }
+          this.choose(this.defaultCountry);
+          return;
         }
-        const fallbackCountry = this.findCountry(this.preferredCountries[0])
-          || this.filteredCountries[0];
+
+        const fallbackCountry = this.preferredCountries[0] || this.filteredCountries[0];
         /**
          * 3. Check if fetching country based on user's IP is allowed, set it as the default country
          */
         if (!this.disabledFetchingCountry) {
           getCountry()
             .then((res) => {
-              this.activeCountryCode = res || this.activeCountry;
+              this.choose(res || this.activeCountryCode);
             })
             .catch((error) => {
               console.warn(error);
               /**
-             * 4. Use the first country from preferred list (if available) or all countries list
-             */
+               * 4. Use the first country from preferred list (if available) or all countries list
+               */
               this.choose(fallbackCountry);
             })
             .then(() => {

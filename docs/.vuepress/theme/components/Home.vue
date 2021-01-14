@@ -35,7 +35,7 @@
         </span>
         <span>
           Country:
-          <strong>{{ phoneObject.country.name }}</strong>
+          <strong>{{ phoneObject.country && phoneObject.country.name }}</strong>
         </span>
       </div>
     </header>

@@ -140,7 +140,7 @@ export const allProps = [
     default: false,
     type: Boolean,
     description: 'Placeholder as a sample phone number in the current country',
-    inDemo: true,
+    inDemo: false,
   },
   {
     name: 'inputOptions.id',

@@ -140,18 +140,6 @@ describe('Props', () => {
 
       expect(wrapper.find('.vti__dropdown-item .vti__flag').exists()).toBeFalsy();
     });
-    // it(':dynamicPlaceholder generates a random number as placeholder', () => {
-    //   const wrapper = shallowMount(VueTelInput, {
-    //     propsData: {
-    //       dropdownOptions: {
-    //         dynamicPlaceholder: true,
-    //       },
-    //       defaultCountry: 'au',
-    //     },
-    //   });
-    //   wrapper.vm.finishMounted = true;
-    //   expect(wrapper.find('.vti__input').attributes('placeholder')).toContain('+61');
-    // });
   });
   describe(':ignoredCountries', () => {
     it('hides countries from the list', () => {
@@ -201,6 +189,18 @@ describe('Props', () => {
       });
 
       expect(wrapper.find('.vti__input').classes()).toContain('test');
+    });
+    it('.dynamicPlaceholder generates a random number as placeholder', async () => {
+      const wrapper = shallowMount(VueTelInput, {
+        propsData: {
+          inputOptions: { dynamicPlaceholder: true },
+          defaultCountry: 'au',
+        },
+      });
+      await new Promise((res) => setTimeout(() => {
+        expect(wrapper.find('.vti__input').attributes('placeholder')).toContain('+61 ');
+        res();
+      }, 2000));
     });
   });
   describe(':invalid-msg', () => {

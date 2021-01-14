@@ -52,10 +52,28 @@
 
     <div v-if="showOptions" class="options">
       <div class="form">
-        <div v-for="field in fields" :key="field.model" :class="field.containerClasses">
+        <div v-for="field in otherFields" :key="field.model" :class="field.containerClasses">
           <form-input
             v-bind="field.bind"
             :model="options"
+            :modelName="field.model"
+            :label="field.label"
+            :type="field.type"
+          />
+        </div>
+        <div v-for="field in inputFields" :key="field.model" :class="field.containerClasses">
+          <form-input
+            v-bind="field.bind"
+            :model="options.inputOptions"
+            :modelName="field.model"
+            :label="field.label"
+            :type="field.type"
+          />
+        </div>
+        <div v-for="field in dropdownFields" :key="field.model" :class="field.containerClasses">
+          <form-input
+            v-bind="field.bind"
+            :model="options.dropdownOptions"
             :modelName="field.model"
             :label="field.label"
             :type="field.type"
@@ -109,10 +127,29 @@ export default {
         })),
     };
   },
-
   computed: {
     data() {
       return this.$page.frontmatter;
+    },
+    inputFields() {
+      return this.fields
+        .filter(({ model }) => model.includes('inputOptions'))
+        .map((field) => ({
+          ...field,
+          model: field.model.split('.')[1],
+        }));
+    },
+    dropdownFields() {
+      return this.fields
+        .filter(({ model }) => model.includes('dropdownOptions'))
+        .map((field) => ({
+          ...field,
+          model: field.model.split('.')[1],
+        }));
+    },
+    otherFields() {
+      return this.fields
+        .filter(({ model }) => !model.includes('dropdownOptions') && !model.includes('inputOptions'));
     },
   },
   methods: {

@@ -10,10 +10,10 @@
     >
       <span class="vti__selection">
         <div
-          v-if="dropdownOptions.enabledFlags"
+          v-if="dropdownOptions.showFlags"
           :class="['vti__flag', activeCountryCode.toLowerCase()]"
         />
-        <span v-if="dropdownOptions.enabledCountryCode" class="vti__country-code">
+        <span v-if="dropdownOptions.showDialCodeInSelection" class="vti__country-code">
           +{{ activeCountry.dialCode }}
         </span>
         <slot name="arrow-icon" :open="open">
@@ -28,9 +28,9 @@
           @click="choose(pb)"
           @mousemove="selectedIndex = index"
         >
-          <div v-if="dropdownOptions.enabledFlags" :class="['vti__flag', pb.iso2.toLowerCase()]" />
+          <div v-if="dropdownOptions.showFlags" :class="['vti__flag', pb.iso2.toLowerCase()]" />
           <strong>{{ pb.name }}</strong>
-          <span v-if="!dropdownOptions.disabledDialCode"> +{{ pb.dialCode }} </span>
+          <span v-if="dropdownOptions.showDialCodeInList"> +{{ pb.dialCode }} </span>
         </li>
       </ul>
     </div>

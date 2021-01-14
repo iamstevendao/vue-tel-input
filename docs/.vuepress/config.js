@@ -52,7 +52,9 @@ module.exports = {
               collapsable: false,
               children: [
                 'typescript-support',
-                'credits'
+                'v3',
+                'v2',
+                'credits',
               ]
             }
           ]

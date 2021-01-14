@@ -71,6 +71,18 @@ function getDefault(key) {
   return value;
 }
 
+let examples = null;
+const getExamples = () => new Promise(
+  (resolve) => (
+    examples
+      ? resolve(examples)
+      : import('libphonenumber-js/examples.mobile.json')
+        .then((results) => {
+          examples = results; resolve(results);
+        })
+  ),
+);
+
 export default {
   name: 'VueTelInput',
   directives: {
@@ -154,18 +166,12 @@ export default {
       typeToFindInput: '',
       typeToFindTimer: null,
       dropdownOpenDirection: 'below',
+      parsedPlaceholder: this.placeholder,
     };
   },
   computed: {
     activeCountry() {
       return this.findCountry(this.activeCountryCode);
-    },
-    parsedPlaceholder() {
-      if (this.inputOptions.dynamicPlaceholder) {
-        const mode = this.mode || 'international';
-        return getExampleNumber(this.activeCountryCode, 'mobile').format(mode.toUpperCase());
-      }
-      return this.inputOptions.placeholder;
     },
     parsedMode() {
       if (this.mode === 'auto') {
@@ -241,6 +247,7 @@ export default {
       }
       if (value?.iso2) {
         this.$emit('country-changed', value);
+        this.resetPlaceholder();
       }
     },
     'phoneObject.countryCode': function (value) {
@@ -261,6 +268,9 @@ export default {
           this.phone = value;
         }
       });
+    },
+    finishMounted() {
+      this.resetPlaceholder();
     },
     value(value, oldValue) {
       if (!this.testCharacters()) {
@@ -298,12 +308,26 @@ export default {
       });
   },
   methods: {
+    resetPlaceholder() {
+      if (!this.inputOptions.dynamicPlaceholder) {
+        return;
+      }
+      getExamples()
+        .then((results) => {
+          examples = results;
+          const mode = (!this.mode || this.mode === 'auto') ? 'international' : this.mode;
+          const number = getExampleNumber(this.activeCountryCode.toUpperCase(), results);
+          this.parsedPlaceholder = number?.format(mode.toUpperCase()) || this.placeholder;
+        })
+        .catch(console.error);
+    },
     initializeCountry() {
       return new Promise((resolve) => {
         /**
-         * 1. If the phone included prefix (i.e. +12), try to get the country and set it
-         */
+           * 1. If the phone included prefix (i.e. +12), try to get the country and set it
+           */
         if (this.phone?.[0] === '+') {
+          resolve();
           return;
         }
         /**
@@ -311,6 +335,7 @@ export default {
          */
         if (this.defaultCountry) {
           this.choose(this.defaultCountry);
+          resolve();
           return;
         }
 
@@ -335,8 +360,8 @@ export default {
             });
         } else {
           /**
-           * 4. Use the first country from preferred list (if available) or all countries list
-           */
+             * 4. Use the first country from preferred list (if available) or all countries list
+             */
           this.choose(fallbackCountry);
           resolve();
         }

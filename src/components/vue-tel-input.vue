@@ -103,9 +103,9 @@ export default {
       type: Boolean,
       default: () => getDefault('disabled'),
     },
-    disabledFetchingCountry: {
+    autoDefaultCountry: {
       type: Boolean,
-      default: () => getDefault('disabledFetchingCountry'),
+      default: () => getDefault('autoDefaultCountry'),
     },
     dropdownOptions: {
       type: Object,
@@ -318,7 +318,7 @@ export default {
         /**
          * 3. Check if fetching country based on user's IP is allowed, set it as the default country
          */
-        if (!this.disabledFetchingCountry) {
+        if (this.autoDefaultCountry) {
           getCountry()
             .then((res) => {
               this.choose(res || this.activeCountryCode);

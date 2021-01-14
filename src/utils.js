@@ -68,10 +68,10 @@ export const allProps = [
     inDemo: false,
   },
   {
-    name: 'disabledFetchingCountry',
-    default: false,
+    name: 'autoDefaultCountry',
+    default: true,
     type: Boolean,
-    description: 'Disable fetching current country based on IP address of user',
+    description: 'To fetch default country based on IP address of user',
     inDemo: true,
   },
   {

@@ -14,7 +14,7 @@
           :class="['vti__flag', activeCountryCode.toLowerCase()]"
         />
         <span v-if="dropdownOptions.showDialCodeInSelection" class="vti__country-code">
-          +{{ activeCountry.dialCode }}
+          +{{ activeCountry && activeCountry.dialCode }}
         </span>
         <slot name="arrow-icon" :open="open">
           <span class="vti__dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
@@ -397,11 +397,13 @@ export default {
     },
     testCharacters() {
       if (this.validCharactersOnly) {
-        const re = /^[()\-+0-9\s]*$/;
-        return re.test(this.phone);
+        const result = /^[()\-+0-9\s]*$/.test(this.phone);
+        if (!result) {
+          return false;
+        }
       }
       if (this.customValidate) {
-        return this.customValidate instanceof RegExp ? this.customValidate.test(this.phone) : false;
+        return this.testCustomValidate();
       }
       return true;
     },

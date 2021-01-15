@@ -248,7 +248,7 @@ export default {
       }
       if (value?.iso2) {
         this.$emit('country-changed', value);
-        this.resetPlaceholder();
+        // this.resetPlaceholder();
       }
     },
     'phoneObject.countryCode': function (value) {
@@ -270,9 +270,9 @@ export default {
         }
       });
     },
-    finishMounted() {
-      this.resetPlaceholder();
-    },
+    // finishMounted() {
+    //   this.resetPlaceholder();
+    // },
     value(value, oldValue) {
       if (!this.testCharacters()) {
         this.$nextTick(() => { this.phone = oldValue; });

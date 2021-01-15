@@ -48,6 +48,7 @@ Install the plugin into Vue:
 ```javascript
 import Vue from 'vue'
 import VueTelInput from 'vue-tel-input'
+import 'vue-tel-input/dist/vue-tel-input.css'
 
 Vue.use(VueTelInput, [globalOptions = {}]) // Define default global options here (optional)
 ```
@@ -68,6 +69,8 @@ export default {
     VueTelInput,
   },
 };
+
+<style src="vue-tel-input/dist/vue-tel-input.css"></style>
 </script>
 ```
 
@@ -77,6 +80,7 @@ Include [vue-tel-input](/dist/vue-tel-input.min.js) in the page.
 
 ```html
 <script src="https://unpkg.com/vue-tel-input"></script>
+<link rel="stylesheet" href="https://unpkg.com/vue-tel-input/dist/vue-tel-input.css">
 ```
 
 **If Vue is detected in the Page, the plugin is installed automatically.**

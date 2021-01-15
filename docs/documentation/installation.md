@@ -41,6 +41,7 @@ Include [vue-tel-input](/dist/vue-tel-input.min.js) in the page.
 
 ```html
 <script src="https://unpkg.com/vue-tel-input"></script>
+<link rel="stylesheet" href="https://unpkg.com/vue-tel-input/dist/vue-tel-input.css">
 ```
 
 **If Vue is detected in the Page, the plugin is installed automatically.**
@@ -82,7 +83,7 @@ Check out the setup in [CodeSandbox](https://codesandbox.io/s/vue-tel-input-with
   ```js
     import Vue from 'vue';
     import TelInput from '<path>/tel-input.vue';
-    import 'vue-tel-input/dist/vue-tel-input.css'
+    import 'vue-tel-input/dist/vue-tel-input.css';
 
     Vue.component('field-tel-input', TelInput);
   ```

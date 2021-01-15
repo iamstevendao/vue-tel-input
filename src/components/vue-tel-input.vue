@@ -78,7 +78,10 @@ const getExamples = () => new Promise(
       ? resolve(examples)
       : import('libphonenumber-js/examples.mobile.json')
         .then((results) => {
-          examples = results; resolve(results);
+          console.log('----- results promise:', results);
+
+          examples = results;
+          resolve(results);
         })
   ),
 );
@@ -166,7 +169,7 @@ export default {
       typeToFindInput: '',
       typeToFindTimer: null,
       dropdownOpenDirection: 'below',
-      parsedPlaceholder: this.placeholder,
+      parsedPlaceholder: this.inputOptions.placeholder,
     };
   },
   computed: {
@@ -309,14 +312,22 @@ export default {
   },
   methods: {
     resetPlaceholder() {
+      console.log('----- this.parsedPlaceholder:', this.parsedPlaceholder);
+
+      console.log('----- this.inputOptions.dynamicPlaceholder:', this.inputOptions.dynamicPlaceholder);
+
       if (!this.inputOptions.dynamicPlaceholder) {
         return;
       }
       getExamples()
         .then((results) => {
+          console.log('----- results:', results);
+
           examples = results;
           const mode = (!this.mode || this.mode === 'auto') ? 'international' : this.mode;
           const number = getExampleNumber(this.activeCountryCode.toUpperCase(), results);
+          console.log('----- number:', number);
+
           this.parsedPlaceholder = number?.format(mode.toUpperCase()) || this.placeholder;
         })
         .catch(console.error);

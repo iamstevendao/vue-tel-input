@@ -5,9 +5,28 @@ export function install(Vue, customOptions = {}) {
   if (install.installed) return;
   install.installed = true;
 
+  const {
+    dropdownOptions: customDropdownOptions,
+    inputOptions: customInputOptions,
+    ...otherCustomOptions
+  } = customOptions;
+  const {
+    dropdownOptions: defaultDropdownOptions,
+    inputOptions: defaultInputOptions,
+    ...otherDefaultOptions
+  } = defaultOptions;
+
   utils.options = {
-    ...defaultOptions,
-    ...customOptions,
+    inputOptions: {
+      ...defaultInputOptions,
+      ...customInputOptions,
+    },
+    dropdownOptions: {
+      ...defaultDropdownOptions,
+      ...customDropdownOptions,
+    },
+    ...otherDefaultOptions,
+    ...otherCustomOptions,
   };
 
   Vue.component('vue-tel-input', VueTelInput);

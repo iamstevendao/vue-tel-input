@@ -1,8 +1,8 @@
 // enhanceApp.js
 
-import VueTelInput from '../../src/components/vue-tel-input.vue';
+import VueTelInput from '../../src/index.js';
 
 export default ({ Vue, options }) => {
-  Vue.component('vue-tel-input', VueTelInput);
+  Vue.use(VueTelInput);
   Vue.config.productionTip = false;
 }

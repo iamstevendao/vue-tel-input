@@ -236,11 +236,11 @@ describe('Props', () => {
   describe(':validCharactersOnly', () => {
     // TODO
   });
-  describe(':wrapperClasses', () => {
+  describe(':styleClasses', () => {
     it('sets classes along side with .vue-tel-input', () => {
       const wrapper = shallowMount(VueTelInput, {
         propsData: {
-          wrapperClasses: ['test'],
+          styleClasses: ['test'],
         },
       });
 

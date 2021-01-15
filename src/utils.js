@@ -235,18 +235,18 @@ export const allProps = [
     inDemo: false,
   },
   {
+    name: 'styleClasses',
+    default: '',
+    type: [String, Array, Object],
+    description: 'Custom classes for the wrapper',
+    inDemo: false,
+  },
+  {
     name: 'validCharactersOnly',
     default: false,
     type: Boolean,
     description: 'Only allow valid characters in a phone number (will also verify in <code>mounted</code>, so phone number with invalid characters will be shown as an empty string)',
     inDemo: true,
-  },
-  {
-    name: 'wrapperClasses',
-    default: '',
-    type: [String, Array, Object],
-    description: 'Custom classes for the wrapper',
-    inDemo: false,
   },
 ];
 

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['vue-tel-input', wrapperClasses, { disabled: disabled }]">
+  <div :class="['vue-tel-input', styleClasses, { disabled: disabled }]">
     <div
       v-click-outside="clickedOutside"
       :class="['vti__dropdown', { open: open }]"
@@ -151,9 +151,9 @@ export default {
       type: Boolean,
       default: () => getDefault('validCharactersOnly'),
     },
-    wrapperClasses: {
+    styleClasses: {
       type: [String, Array, Object],
-      default: () => getDefault('wrapperClasses'),
+      default: () => getDefault('styleClasses'),
     },
   },
   data() {

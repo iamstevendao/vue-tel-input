@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { getExampleNumber, parsePhoneNumberFromString } from 'libphonenumber-js';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import utils, { getCountry, setCaretPosition } from '../utils';
 import clickOutside from '../directives/click-outside';
 
@@ -71,20 +71,18 @@ function getDefault(key) {
   return value;
 }
 
-let examples = null;
-const getExamples = () => new Promise(
-  (resolve) => (
-    examples
-      ? resolve(examples)
-      : import('libphonenumber-js/examples.mobile.json')
-        .then((results) => {
-          console.log('----- results promise:', results);
-
-          examples = results;
-          resolve(results);
-        })
-  ),
-);
+// let examples = null;
+// const getExamples = () => new Promise(
+//   (resolve) => (
+//     examples
+//       ? resolve(examples)
+//       : import('libphonenumber-js/examples.mobile.json')
+//         .then((results) => {
+//           examples = results;
+//           resolve(results);
+//         })
+//   ),
+// );
 
 export default {
   name: 'VueTelInput',
@@ -311,27 +309,19 @@ export default {
       });
   },
   methods: {
-    resetPlaceholder() {
-      console.log('----- this.parsedPlaceholder:', this.parsedPlaceholder);
-
-      console.log('----- this.inputOptions.dynamicPlaceholder:', this.inputOptions.dynamicPlaceholder);
-
-      if (!this.inputOptions.dynamicPlaceholder) {
-        return;
-      }
-      getExamples()
-        .then((results) => {
-          console.log('----- results:', results);
-
-          examples = results;
-          const mode = (!this.mode || this.mode === 'auto') ? 'international' : this.mode;
-          const number = getExampleNumber(this.activeCountryCode.toUpperCase(), results);
-          console.log('----- number:', number);
-
-          this.parsedPlaceholder = number?.format(mode.toUpperCase()) || this.placeholder;
-        })
-        .catch(console.error);
-    },
+    // resetPlaceholder() {
+    //   if (!this.inputOptions.dynamicPlaceholder) {
+    //     return;
+    //   }
+    //   getExamples()
+    //     .then((results) => {
+    //       examples = results;
+    //       const mode = (!this.mode || this.mode === 'auto') ? 'international' : this.mode;
+    //       const number = getExampleNumber(this.activeCountryCode.toUpperCase(), results);
+    //       this.parsedPlaceholder = number?.format(mode.toUpperCase()) || this.placeholder;
+    //     })
+    //     .catch(console.error);
+    // },
     initializeCountry() {
       return new Promise((resolve) => {
         /**

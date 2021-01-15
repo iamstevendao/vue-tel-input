@@ -135,13 +135,13 @@ export const allProps = [
     description: 'Native input <code>autofocus</code> attribute',
     inDemo: false,
   },
-  {
-    name: 'inputOptions.dynamicPlaceholder',
-    default: false,
-    type: Boolean,
-    description: 'Placeholder as a sample phone number in the current country',
-    inDemo: false,
-  },
+  // {
+  //   name: 'inputOptions.dynamicPlaceholder',
+  //   default: false,
+  //   type: Boolean,
+  //   description: 'Placeholder as a sample phone number in the current country',
+  //   inDemo: false,
+  // },
   {
     name: 'inputOptions.id',
     default: '',

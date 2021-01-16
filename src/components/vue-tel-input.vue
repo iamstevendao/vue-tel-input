@@ -275,7 +275,7 @@ export default {
     // },
     value(value, oldValue) {
       if (!this.testCharacters()) {
-        this.$nextTick(() => { this.phone = oldValue; });
+        this.$nextTick(() => { this.phone = oldValue; this.onInput(); });
       } else {
         this.phone = value;
       }
@@ -294,6 +294,9 @@ export default {
     if (this.value) {
       this.phone = this.value.trim();
     }
+
+    this.cleanInvalidCharacters();
+
     this.initializeCountry()
       .then(() => {
         if (!this.phone
@@ -369,8 +372,8 @@ export default {
       });
     },
     /**
-   * Get the list of countries from the list of iso2 code
-   */
+     * Get the list of countries from the list of iso2 code
+     */
     getCountries(list = []) {
       return list
         .map((countryCode) => this.findCountry(countryCode))
@@ -421,6 +424,22 @@ export default {
       this.activeCountryCode = parsedCountry.iso2;
       this.$emit('input', this.phone, this.phoneObject);
     },
+    cleanInvalidCharacters() {
+      const currentPhone = this.phone;
+      if (this.validCharactersOnly) {
+        const results = this.phone.match(/[()\-+0-9\s]*/g);
+        this.phone = results.join('');
+      }
+
+      if (this.customValidate && this.customValidate instanceof RegExp) {
+        const results = this.phone.match(this.customValidate);
+        this.phone = results.join('');
+      }
+
+      if (currentPhone !== this.phone) {
+        this.$emit('input', this.phone, this.phoneObject);
+      }
+    },
     testCharacters() {
       if (this.validCharactersOnly) {
         const result = /^[()\-+0-9\s]*$/.test(this.phone);
@@ -437,9 +456,6 @@ export default {
       return this.customValidate instanceof RegExp ? this.customValidate.test(this.phone) : false;
     },
     onInput() {
-      if (!this.testCharacters()) {
-        return;
-      }
       this.$refs.input.setCustomValidity(this.phoneObject.valid ? '' : this.invalidMsg);
       // Returns response.number to assign it to v-model (if being used)
       // Returns full response for cases @input is used

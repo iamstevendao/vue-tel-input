@@ -117,6 +117,7 @@ export default {
       },
       options: {
         ...defaultOptions,
+        validCharactersOnly: true,
       },
       fields: allProps
         .filter(({ inDemo }) => inDemo)

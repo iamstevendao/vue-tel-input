@@ -35,18 +35,18 @@ describe('Props', () => {
       expect(wrapper.find('.vti__selection > .vti__flag').classes()).toContain('au');
     });
   });
-  describe(':customValidate', () => {
-    it('tests custom validation on type', () => {
-      const wrapper = shallowMount(VueTelInput, {
-        propsData: {
-          customValidate: new RegExp('^[()-+0-9s]*$'),
-        },
-      });
-      wrapper.vm.testCustomValidate = jest.fn();
-      wrapper.vm.onInput();
-      expect(wrapper.vm.testCustomValidate).toHaveBeenCalledTimes(1);
-    });
-  });
+  // describe(':customValidate', () => {
+  //   it('tests custom validation on type', () => {
+  //     const wrapper = shallowMount(VueTelInput, {
+  //       propsData: {
+  //         customValidate: new RegExp('^[()-+0-9s]*$'),
+  //       },
+  //     });
+  //     wrapper.vm.testCustomValidate = jest.fn();
+  //     wrapper.vm.onInput();
+  //     expect(wrapper.vm.testCustomValidate).toHaveBeenCalledTimes(1);
+  //   });
+  // });
   describe(':defaultCountry', () => {
     it('shows correct default country', async () => {
       const wrapper = shallowMount(VueTelInput, {

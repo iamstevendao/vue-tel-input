@@ -51,7 +51,7 @@ import Vue from 'vue'
 import VueTelInput from 'vue-tel-input'
 import 'vue-tel-input/dist/vue-tel-input.css'
 
-Vue.use(VueTelInput, [globalOptions = {}]) // Define default global options here (optional)
+Vue.use(VueTelInput, options) // Define default global options here (optional)
 ```
 > View all available options in [Props](https://educationlink.github.io/vue-tel-input/documentation/component-reference.html).
 
@@ -77,25 +77,17 @@ export default {
 
 ### Browser
 
-Include [vue-tel-input](/dist/vue-tel-input.min.js) in the page.
-
 ```html
 <script src="https://unpkg.com/vue-tel-input"></script>
 <link rel="stylesheet" href="https://unpkg.com/vue-tel-input/dist/vue-tel-input.css">
 ```
 
-**If Vue is detected in the Page, the plugin is installed automatically.**
+** If Vue is detected in the Page, the plugin is installed automatically.**
 
-Manually install the plugin into Vue:
+** Otherwise, manually install the plugin into Vue:
 
-```javascript
-Vue.use(VueTelInput)
-```
-
-Or use the component directly:
-
-```javascript
-Vue.component('vue-tel-input', VueTelInput.VueTelInput)
+```js
+Vue.use(window['vue-tel-input']);
 ```
 
 ### Use as a custom field of [vue-form-generator](https://github.com/vue-generators/vue-form-generator)

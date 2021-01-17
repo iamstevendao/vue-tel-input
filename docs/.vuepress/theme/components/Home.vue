@@ -1,6 +1,7 @@
 <template>
   <main class="home" :aria-labelledby="data.heroText !== null ? 'main-title' : null">
     <header class="hero">
+      <img :src="$withBase('hero.png')" alt="vue-tel-input" />
       <h1>International Telephone Input with Vue</h1>
       <div>
         <a href="https://www.npmjs.com/package/vue-tel-input"
@@ -191,6 +192,13 @@ export default {
   .hero {
     text-align: center;
 
+    > img {
+      max-width: 100%;
+      max-height: 140px;
+      display: block;
+      margin: 1.5rem auto;
+    }
+
     a {
       text-decoration: underline;
     }
@@ -235,6 +243,11 @@ export default {
     .hero {
       .description {
         font-size: 1.2rem;
+      }
+
+      > img {
+        max-height: 120px;
+        margin: 1.2rem auto;
       }
 
       .action-button {

@@ -273,6 +273,9 @@ export default {
     // finishMounted() {
     //   this.resetPlaceholder();
     // },
+    'inputOptions.placeholder': function () {
+      this.resetPlaceholder();
+    },
     value(value, oldValue) {
       if (!this.testCharacters()) {
         this.$nextTick(() => { this.phone = oldValue; this.onInput(); });
@@ -312,19 +315,21 @@ export default {
       });
   },
   methods: {
-    // resetPlaceholder() {
-    //   if (!this.inputOptions.dynamicPlaceholder) {
-    //     return;
-    //   }
-    //   getExamples()
-    //     .then((results) => {
-    //       examples = results;
-    //       const mode = (!this.mode || this.mode === 'auto') ? 'international' : this.mode;
-    //       const number = getExampleNumber(this.activeCountryCode.toUpperCase(), results);
-    //       this.parsedPlaceholder = number?.format(mode.toUpperCase()) || this.placeholder;
-    //     })
-    //     .catch(console.error);
-    // },
+    resetPlaceholder() {
+      this.parsedPlaceholder = this.inputOptions.placeholder;
+      // TODO: Fix dynamicPlaceholder
+      // if (!this.inputOptions.dynamicPlaceholder) {
+      //   return result;
+      // }
+      // getExamples()
+      //   .then((results) => {
+      //     examples = results;
+      //     const mode = (!this.mode || this.mode === 'auto') ? 'international' : this.mode;
+      //     const number = getExampleNumber(this.activeCountryCode.toUpperCase(), results);
+      //     this.parsedPlaceholder = number?.format(mode.toUpperCase()) || this.placeholder;
+      //   })
+      //   .catch(console.error);
+    },
     initializeCountry() {
       return new Promise((resolve) => {
         /**

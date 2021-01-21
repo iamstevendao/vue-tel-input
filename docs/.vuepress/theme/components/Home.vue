@@ -80,6 +80,12 @@
             :type="field.type"
           />
         </div>
+        <a
+          style="color: #999999"
+          href="https://educationlink.github.io/vue-tel-input/documentation/props.html"
+        >
+          <span>...more</span>
+        </a>
       </div>
       <div class="results">
         <pre>{{ JSON.stringify(this.phoneObject, null, 2) }}</pre>

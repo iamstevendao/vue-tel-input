@@ -223,11 +223,19 @@ export default {
         ...phoneObject
       } = result;
 
-      const valid = result.isValid?.();
+      let valid = result.isValid?.();
       let formatted = this.phone;
 
       if (valid) {
         formatted = result.format?.(this.parsedMode.toUpperCase());
+      }
+
+      if (result.country && (this.ignoredCountries.length || this.onlyCountries.length)) {
+        const isCountryInFilteredList = this.filteredCountries.filter(
+          (obj) => obj.iso2 === result.country,
+        ).length;
+
+        if (!isCountryInFilteredList) { valid = false; }
       }
 
       Object.assign(phoneObject, {

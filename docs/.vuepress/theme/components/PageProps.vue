@@ -4,37 +4,26 @@
 
     <div class="theme-default-content">
       <Content />
-      <table>
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Type</th>
-            <th>Default value</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="prop in allProps">
-            <td>
-              <code>{{ prop.name }}</code>
-            </td>
-            <td v-html="getType(prop.type)"></td>
-            <td>
-              <span v-if="prop.name === 'allCountries'"
-                >All countries, see
-                <a
-                  target="_blank"
-                  href="https://github.com/EducationLink/vue-tel-input/blob/master/src/assets/all-countries.js"
-                >
-                  <code>allCountries.js</code>
-                </a>
-              </span>
-              <code v-else-if="typeof prop.default !== 'undefined'">{{ getDefault(prop) }}</code>
-            </td>
-            <td v-html="prop.description"></td>
-          </tr>
-        </tbody>
-      </table>
+      <template v-for="prop in allProps">
+        <h3>{{ prop.name }}</h3>
+        <ul>
+          <li>Type: <span v-html="getType(prop.type)"></span></li>
+          <li>
+            Default:
+            <span v-if="prop.name === 'allCountries'"
+              >An array of all countries, see
+              <a
+                target="_blank"
+                href="https://github.com/EducationLink/vue-tel-input/blob/master/src/assets/all-countries.js"
+              >
+                <code>allCountries.js</code>
+              </a>
+            </span>
+            <code v-else-if="typeof prop.default !== 'undefined'">{{ getDefault(prop) }}</code>
+          </li>
+        </ul>
+        <p v-html="prop.description"></p>
+      </template>
     </div>
     <PageEdit />
 

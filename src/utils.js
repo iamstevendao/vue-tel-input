@@ -36,7 +36,7 @@ export const allProps = [
     name: 'allCountries',
     type: Array,
     default: allCountries,
-    description: 'All countries passed to <code>libphonenumber-js</code>, can be overridden by this prop',
+    description: 'All countries that are used in <code>libphonenumber-js</code>, can be overridden by this prop',
     inDemo: false,
   },
   {
@@ -77,7 +77,7 @@ export const allProps = [
   {
     name: 'dropdownOptions',
     type: Object,
-    description: 'Options for dropdown',
+    description: 'Options for dropdown, see below',
     inDemo: false,
   },
   {
@@ -118,7 +118,7 @@ export const allProps = [
   {
     name: 'inputOptions',
     type: Object,
-    description: 'Options for input',
+    description: 'Options for input, see below',
     inDemo: false,
   },
   {
@@ -216,7 +216,7 @@ export const allProps = [
     name: 'mode',
     default: 'auto',
     type: String,
-    description: 'Format number to <code>\'international\'</code> (with + dial code) or <code>\'national\'</code> (with 0...)',
+    description: 'Allowed values: <code>\'auto\'</code> (Default set by phone),  <code>\'international\'</code> (Format number with the dial code i.e. + 61), <code>\'national\'</code> (Format number without dial code i.e. 0321232)',
     inDemo: true,
     options: ['auto', 'national', 'international'],
   },

@@ -72,7 +72,7 @@ export const allProps = [
     default: true,
     type: Boolean,
     description: 'To fetch default country based on IP address of user',
-    inDemo: true,
+    inDemo: false,
   },
   {
     name: 'dropdownOptions',
@@ -168,7 +168,7 @@ export const allProps = [
     default: 'Enter a phone number',
     type: String,
     description: 'Placeholder for the input',
-    inDemo: true,
+    inDemo: false,
   },
   {
     name: 'inputOptions.readonly',
@@ -246,7 +246,7 @@ export const allProps = [
     default: false,
     type: Boolean,
     description: 'Only allow valid characters in a phone number (will also verify in <code>mounted</code>, so phone number with invalid characters will be shown as an empty string)',
-    inDemo: true,
+    inDemo: false,
   },
 ];
 

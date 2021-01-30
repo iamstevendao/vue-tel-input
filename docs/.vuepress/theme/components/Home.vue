@@ -62,19 +62,19 @@
             :type="field.type"
           />
         </div>
-        <div v-for="field in inputFields" :key="field.model" :class="field.containerClasses">
+        <div v-for="field in dropdownFields" :key="field.model" :class="field.containerClasses">
           <form-input
             v-bind="field.bind"
-            :model="options.inputOptions"
+            :model="options.dropdownOptions"
             :modelName="field.model"
             :label="field.label"
             :type="field.type"
           />
         </div>
-        <div v-for="field in dropdownFields" :key="field.model" :class="field.containerClasses">
+        <div v-for="field in inputFields" :key="field.model" :class="field.containerClasses">
           <form-input
             v-bind="field.bind"
-            :model="options.dropdownOptions"
+            :model="options.inputOptions"
             :modelName="field.model"
             :label="field.label"
             :type="field.type"
@@ -104,7 +104,7 @@ function getFormConfig(field) {
   }
   if (field.type.name === 'String') {
     if (field.options?.length) {
-      return { type: 'select', bind: { items: field.options } };
+      return { type: 'radio', bind: { items: field.options } };
     }
     return { type: 'input' };
   }
@@ -183,6 +183,7 @@ export default {
 
   .options {
     display: flex;
+    margin-top: 20px;
 
     .form {
       flex: 3;

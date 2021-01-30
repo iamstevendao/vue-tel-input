@@ -3,7 +3,7 @@
     <header class="hero">
       <img :src="$withBase('hero.png')" alt="vue-tel-input" />
       <h1>International Telephone Input with Vue</h1>
-      <div>
+      <div style="margin-bottom: 10px">
         <a href="https://www.npmjs.com/package/vue-tel-input"
           ><img src="https://img.shields.io/npm/dt/vue-tel-input.svg" /></a
         >&nbsp;
@@ -58,6 +58,7 @@
             v-bind="field.bind"
             :model="options"
             :modelName="field.model"
+            :description="field.description"
             :label="field.label"
             :type="field.type"
           />
@@ -66,26 +67,20 @@
           <form-input
             v-bind="field.bind"
             :model="options.dropdownOptions"
+            :description="field.description"
             :modelName="field.model"
             :label="field.label"
             :type="field.type"
           />
         </div>
-        <div v-for="field in inputFields" :key="field.model" :class="field.containerClasses">
-          <form-input
-            v-bind="field.bind"
-            :model="options.inputOptions"
-            :modelName="field.model"
-            :label="field.label"
-            :type="field.type"
-          />
+        <div style="margin-top: 15px">
+          <a
+            style="color: #999999"
+            href="https://educationlink.github.io/vue-tel-input/documentation/props.html"
+          >
+            <span>...more</span>
+          </a>
         </div>
-        <a
-          style="color: #999999"
-          href="https://educationlink.github.io/vue-tel-input/documentation/props.html"
-        >
-          <span>...more</span>
-        </a>
       </div>
       <div class="results">
         <pre>{{ JSON.stringify(this.phoneObject, null, 2) }}</pre>
@@ -115,7 +110,7 @@ export default {
   components: { FormInput },
   data() {
     return {
-      phoneModel: '+61423765987',
+      phoneModel: '',
       showOptions: false,
       phoneObject: {
         formatted: '',
@@ -131,6 +126,7 @@ export default {
         .map((prop) => ({
           model: prop.name,
           label: prop.name,
+          description: prop.description,
           ...getFormConfig(prop),
         })),
     };
@@ -138,14 +134,6 @@ export default {
   computed: {
     data() {
       return this.$page.frontmatter;
-    },
-    inputFields() {
-      return this.fields
-        .filter(({ model }) => model.includes('inputOptions'))
-        .map((field) => ({
-          ...field,
-          model: field.model.split('.')[1],
-        }));
     },
     dropdownFields() {
       return this.fields
@@ -157,7 +145,7 @@ export default {
     },
     otherFields() {
       return this.fields
-        .filter(({ model }) => !model.includes('dropdownOptions') && !model.includes('inputOptions'));
+        .filter(({ model }) => !model.includes('dropdownOptions'));
     },
   },
   methods: {
@@ -201,7 +189,7 @@ export default {
 
     > img {
       max-width: 100%;
-      max-height: 140px;
+      max-height: 100px;
       display: block;
       margin: 1.5rem auto;
     }
@@ -253,7 +241,7 @@ export default {
       }
 
       > img {
-        max-height: 120px;
+        max-height: 80px;
         margin: 1.2rem auto;
       }
 

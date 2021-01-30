@@ -261,7 +261,7 @@ export default {
       if (!this.autoFormat || this.customValidate) {
         return;
       }
-      this.$emit('input', value, this.phoneObject);
+      this.emitInput(value);
 
       this.$nextTick(() => {
         // In case `v-model` is not set, we need to update the `phone` to be new formatted value
@@ -427,7 +427,7 @@ export default {
 
       // update value, even if international mode is NOT used
       this.activeCountryCode = parsedCountry.iso2;
-      this.$emit('input', this.phone, this.phoneObject);
+      this.emitInput(this.phone);
     },
     cleanInvalidCharacters() {
       const currentPhone = this.phone;
@@ -442,7 +442,7 @@ export default {
       }
 
       if (currentPhone !== this.phone) {
-        this.$emit('input', this.phone, this.phoneObject);
+        this.emitInput(this.phone);
       }
     },
     testCharacters() {
@@ -465,7 +465,10 @@ export default {
       // Returns response.number to assign it to v-model (if being used)
       // Returns full response for cases @input is used
       // and parent wants to return the whole response.
-      this.$emit('input', this.phone, this.phoneObject);
+      this.emitInput(this.phone);
+    },
+    emitInput(value) {
+      this.$emit('input', value, this.phoneObject, this.$refs.input);
     },
     onBlur() {
       this.$emit('blur');

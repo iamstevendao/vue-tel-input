@@ -67,6 +67,7 @@ input[type='checkbox'] {
   float: left;
   margin-left: 40px;
   padding: 5px;
+  width: 50%;
   max-width: 180px;
 
   label {

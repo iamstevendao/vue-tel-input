@@ -231,11 +231,10 @@ export default {
       }
 
       if (result.country && (this.ignoredCountries.length || this.onlyCountries.length)) {
-        const isCountryInFilteredList = this.filteredCountries.filter(
-          (obj) => obj.iso2 === result.country,
-        ).length;
-
-        if (!isCountryInFilteredList) { valid = false; }
+        if (!this.findCountry(result.country)) {
+          valid = false;
+          Object.assign(result, { country: null });
+        }
       }
 
       Object.assign(phoneObject, {

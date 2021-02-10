@@ -13,7 +13,7 @@ import 'vue-tel-input/dist/vue-tel-input.css'
 
 Vue.use(VueTelInput, options) // Define default global options here (optional)
 ```
-> View all available options in [Props](https://educationlink.github.io/vue-tel-input/documentation/props.html).
+> View all available options in [Props](./props).
 
 Or use the component directly:
 

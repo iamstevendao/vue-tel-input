@@ -15,7 +15,7 @@
   Vue.use(VueTelInput)
   ```
 
-  [More info on installation](/installation)
+  [More info on installation](/documentation/installation)
 
 - Use the `vue-tel-input` component:
 

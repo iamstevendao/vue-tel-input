@@ -10,9 +10,7 @@
 // [
 //    Country name,
 //    iso2 code,
-//    International dial code,
-//    Order (if >1 country with same dial code),
-//    Area codes
+//    International dial code
 // ]
 const allCountries = [
   [
@@ -74,7 +72,6 @@ const allCountries = [
     'Australia',
     'au',
     '61',
-    0,
   ],
   [
     'Austria (Österreich)',
@@ -200,8 +197,6 @@ const allCountries = [
     'Canada',
     'ca',
     '1',
-    1,
-    ['204', '226', '236', '249', '250', '289', '306', '343', '365', '387', '403', '416', '418', '431', '437', '438', '450', '506', '514', '519', '548', '579', '581', '587', '604', '613', '639', '647', '672', '705', '709', '742', '778', '780', '782', '807', '819', '825', '867', '873', '902', '905'],
   ],
   [
     'Cape Verde (Kabu Verdi)',
@@ -212,7 +207,6 @@ const allCountries = [
     'Caribbean Netherlands',
     'bq',
     '599',
-    1,
   ],
   [
     'Cayman Islands',
@@ -243,13 +237,11 @@ const allCountries = [
     'Christmas Island',
     'cx',
     '61',
-    2,
   ],
   [
     'Cocos (Keeling) Islands',
     'cc',
     '61',
-    1,
   ],
   [
     'Colombia',
@@ -300,7 +292,6 @@ const allCountries = [
     'Curaçao',
     'cw',
     '599',
-    0,
   ],
   [
     'Cyprus (Κύπρος)',
@@ -331,8 +322,6 @@ const allCountries = [
     'Dominican Republic (República Dominicana)',
     'do',
     '1',
-    2,
-    ['809', '829', '849'],
   ],
   [
     'Ecuador',
@@ -388,7 +377,6 @@ const allCountries = [
     'Finland (Suomi)',
     'fi',
     '358',
-    0,
   ],
   [
     'France',
@@ -454,7 +442,6 @@ const allCountries = [
     'Guadeloupe',
     'gp',
     '590',
-    0,
   ],
   [
     'Guam',
@@ -541,7 +528,6 @@ const allCountries = [
     'Isle of Man',
     'im',
     '44',
-    2,
   ],
   [
     'Israel (‫ישראל‬‎)',
@@ -552,7 +538,6 @@ const allCountries = [
     'Italy (Italia)',
     'it',
     '39',
-    0,
   ],
   [
     'Jamaica',
@@ -568,7 +553,6 @@ const allCountries = [
     'Jersey',
     'je',
     '44',
-    3,
   ],
   [
     'Jordan (‫الأردن‬‎)',
@@ -579,7 +563,6 @@ const allCountries = [
     'Kazakhstan (Казахстан)',
     'kz',
     '7',
-    1,
   ],
   [
     'Kenya',
@@ -715,7 +698,6 @@ const allCountries = [
     'Mayotte',
     'yt',
     '262',
-    1,
   ],
   [
     'Mexico (México)',
@@ -756,7 +738,6 @@ const allCountries = [
     'Morocco (‫المغرب‬‎)',
     'ma',
     '212',
-    0,
   ],
   [
     'Mozambique (Moçambique)',
@@ -837,7 +818,6 @@ const allCountries = [
     'Norway (Norge)',
     'no',
     '47',
-    0,
   ],
   [
     'Oman (‫عُمان‬‎)',
@@ -898,8 +878,6 @@ const allCountries = [
     'Puerto Rico',
     'pr',
     '1',
-    3,
-    ['787', '939'],
   ],
   [
     'Qatar (‫قطر‬‎)',
@@ -910,7 +888,6 @@ const allCountries = [
     'Réunion (La Réunion)',
     're',
     '262',
-    0,
   ],
   [
     'Romania (România)',
@@ -921,7 +898,6 @@ const allCountries = [
     'Russia (Россия)',
     'ru',
     '7',
-    0,
   ],
   [
     'Rwanda',
@@ -932,7 +908,6 @@ const allCountries = [
     'Saint Barthélemy',
     'bl',
     '590',
-    1,
   ],
   [
     'Saint Helena',
@@ -953,7 +928,6 @@ const allCountries = [
     'Saint Martin (Saint-Martin (partie française))',
     'mf',
     '590',
-    2,
   ],
   [
     'Saint Pierre and Miquelon (Saint-Pierre-et-Miquelon)',
@@ -1074,7 +1048,6 @@ const allCountries = [
     'Svalbard and Jan Mayen',
     'sj',
     '47',
-    1,
   ],
   [
     'Swaziland',
@@ -1190,13 +1163,11 @@ const allCountries = [
     'United Kingdom',
     'gb',
     '44',
-    0,
   ],
   [
     'United States',
     'us',
     '1',
-    0,
   ],
   [
     'Uruguay',
@@ -1217,7 +1188,6 @@ const allCountries = [
     'Vatican City (Città del Vaticano)',
     'va',
     '39',
-    1,
   ],
   [
     'Venezuela',
@@ -1238,7 +1208,6 @@ const allCountries = [
     'Western Sahara (‫الصحراء الغربية‬‎)',
     'eh',
     '212',
-    1,
   ],
   [
     'Yemen (‫اليمن‬‎)',
@@ -1259,14 +1228,11 @@ const allCountries = [
     'Åland Islands',
     'ax',
     '358',
-    1,
   ],
 ];
 
-export default allCountries.map((country) => ({
-  name: country[0],
-  iso2: country[1].toUpperCase(),
-  dialCode: country[2],
-  priority: country[3] || 0,
-  areaCodes: country[4] || null,
+export default allCountries.map(([name, iso2, dialCode]) => ({
+  name,
+  iso2: iso2.toUpperCase(),
+  dialCode,
 }));

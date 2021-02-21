@@ -34,6 +34,15 @@ export default {
 
 <style src="vue-tel-input/dist/vue-tel-input.css"></style>
 ```
+::: tip
+Instead of importing the extracted css file, you can also import separate css files:
+
+```javascript
+// import 'vue-tel-input/dist/vue-tel-input.css'
+import 'vue-tel-input/dist/css/sprite.css' // Flags styles
+import 'vue-tel-input/dist/css/component.css' // Component styles
+```
+:::
 
 ## Browser
 

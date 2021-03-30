@@ -109,7 +109,7 @@ export default {
     defaultCountry: {
       // Default country code, ie: 'AU'
       // Will override the current country of user
-      type: String,
+      type: [String, Number],
       default: () => getDefault('defaultCountry'),
     },
     disabled: {
@@ -350,9 +350,19 @@ export default {
          * 2. Use default country if passed from parent
          */
         if (this.defaultCountry) {
-          this.choose(this.defaultCountry);
-          resolve();
-          return;
+          if (typeof this.defaultCountry === 'string') {
+            this.choose(this.defaultCountry);
+            resolve();
+            return;
+          }
+          if (typeof this.defaultCountry === 'number') {
+            const country = this.findCountryByDialCode(this.defaultCountry);
+            if (country) {
+              this.choose(country.iso2);
+              resolve();
+              return;
+            }
+          }
         }
 
         const fallbackCountry = this.preferredCountries[0] || this.filteredCountries[0];
@@ -393,6 +403,9 @@ export default {
     },
     findCountry(iso = '') {
       return this.filteredCountries.find((country) => country.iso2 === iso.toUpperCase());
+    },
+    findCountryByDialCode(dialCode) {
+      return this.filteredCountries.find((country) => Number(country.dialCode) === dialCode);
     },
     getItemClass(index, iso2) {
       const highlighted = this.selectedIndex === index;

@@ -55,6 +55,7 @@
       @keyup.enter="onEnter"
       @keyup.space="onSpace"
     />
+    <slot name="icon-right" />
   </div>
 </template>
 

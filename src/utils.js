@@ -56,8 +56,8 @@ export const allProps = [
   {
     name: 'defaultCountry',
     default: '',
-    type: String,
-    description: 'Default country, will override the country fetched from IP address of user',
+    type: [String, Number],
+    description: 'Default country (by iso2 or dialCode), will override the country fetched from IP address of user',
     inDemo: false,
   },
   {

@@ -58,6 +58,17 @@ describe('Props', () => {
       expect(wrapper.find('.vti__selection > .vti__flag').classes()).toContain('au');
     });
   });
+  describe(':defaultCountryByDialCode', () => {
+    it('shows correct default country by dial code', async () => {
+      const wrapper = shallowMount(VueTelInput, {
+        propsData: {
+          defaultCountry: 48,
+        },
+      });
+      await Vue.nextTick();
+      expect(wrapper.find('.vti__selection > .vti__flag').classes()).toContain('pl');
+    });
+  });
   describe(':disabled', () => {
     it('adds disabled class to component', () => {
       const wrapper = shallowMount(VueTelInput, {

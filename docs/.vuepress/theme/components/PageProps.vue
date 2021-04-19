@@ -14,7 +14,7 @@
               >An array of all countries, see
               <a
                 target="_blank"
-                href="https://github.com/EducationLink/vue-tel-input/blob/master/src/assets/all-countries.js"
+                href="https://github.com/iamstevendao/vue-tel-input/blob/master/src/assets/all-countries.js"
               >
                 <code>allCountries.js</code>
               </a>

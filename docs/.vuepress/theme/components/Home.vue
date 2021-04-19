@@ -7,15 +7,15 @@
         <a href="https://www.npmjs.com/package/vue-tel-input"
           ><img src="https://img.shields.io/npm/dt/vue-tel-input.svg" /></a
         >&nbsp;
-        <a href="https://github.com/EducationLink/vue-tel-input"
-          ><img src="https://img.shields.io/github/stars/EducationLink/vue-tel-input.svg"
+        <a href="https://github.com/iamstevendao/vue-tel-input"
+          ><img src="https://img.shields.io/github/stars/iamstevendao/vue-tel-input.svg"
         /></a>
       </div>
       <span style="color: #999999; font-size: 1.5rem">
         made with &#x2764; by some
         <a
           style="color: inherit"
-          href="https://github.com/EducationLink/vue-tel-input/graphs/contributors"
+          href="https://github.com/iamstevendao/vue-tel-input/graphs/contributors"
           >awesome humans</a
         >.
       </span>
@@ -44,7 +44,7 @@
     <div style="text-align: center; margin-top: 20px">
       <a
         style="color: #999999"
-        href="https://github.com/EducationLink/vue-tel-input/graphs/contributors"
+        href="https://github.com/iamstevendao/vue-tel-input/graphs/contributors"
         @click.prevent="showOptions = !showOptions"
       >
         <span>{{ showOptions ? "Hide" : "Show" }} options</span>
@@ -76,7 +76,7 @@
         <div style="margin-top: 15px">
           <a
             style="color: #999999"
-            href="https://educationlink.github.io/vue-tel-input/documentation/props.html"
+            href="https://iamstevendao.github.io/vue-tel-input/documentation/props.html"
           >
             <span>...more</span>
           </a>

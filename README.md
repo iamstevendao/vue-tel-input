@@ -1,7 +1,7 @@
 # vue-tel-input
 International Telephone Input with Vue.
 
-[![](https://img.shields.io/npm/dt/vue-tel-input.svg)](https://www.npmjs.com/package/vue-tel-input) [![](https://img.shields.io/github/stars/educationlink/vue-tel-input.svg)](https://github.com/EducationLink/vue-tel-input)
+[![](https://img.shields.io/npm/dt/vue-tel-input.svg)](https://www.npmjs.com/package/vue-tel-input) [![](https://img.shields.io/github/stars/iamstevendao/vue-tel-input.svg)](https://github.com/iamstevendao/vue-tel-input)
 
 <p align="center">
 <img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
@@ -9,7 +9,7 @@ International Telephone Input with Vue.
 
 ## Documentation and live demo
 
-[Visit the website](https://educationlink.github.io/vue-tel-input/)
+[Visit the website](https://iamstevendao.github.io/vue-tel-input/)
 
 ## Getting started
 - Install the plugin:
@@ -53,7 +53,7 @@ import 'vue-tel-input/dist/vue-tel-input.css'
 
 Vue.use(VueTelInput, options) // Define default global options here (optional)
 ```
-> View all available options in [Props](https://educationlink.github.io/vue-tel-input/documentation/props.html).
+> View all available options in [Props](https://iamstevendao.github.io/vue-tel-input/documentation/props.html).
 
 Or use the component directly:
 
@@ -131,11 +131,11 @@ Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.i
 
 
 ## Changelog
-[Go to Github Releases](https://github.com/EducationLink/vue-tel-input/releases)
+[Go to Github Releases](https://github.com/iamstevendao/vue-tel-input/releases)
 
 ## License
 
-Copyright (c) 2018 EducationLink.
-Released under the [MIT License](https://github.com/EducationLink/vue-tel-input/blob/master/LICENSE).
+Copyright (c) 2018 Steven Dao.
+Released under the [MIT License](https://github.com/iamstevendao/vue-tel-input/blob/master/LICENSE).
 
 made with &#x2764; by [Steven](https://github.com/iamstevendao).

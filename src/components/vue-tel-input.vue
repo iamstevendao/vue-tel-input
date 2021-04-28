@@ -20,7 +20,7 @@
           <span class="vti__dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
         </slot>
       </span>
-      <ul ref="list" class="vti__dropdown-list" v-show="open" :class="dropdownOpenDirection">
+      <ul ref="list" class="vti__dropdown-list" v-if="open" v-once :class="dropdownOpenDirection">
         <li
           v-for="(pb, index) in sortedCountries"
           :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"

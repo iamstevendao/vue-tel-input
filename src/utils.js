@@ -102,6 +102,13 @@ export const allProps = [
     inDemo: true,
   },
   {
+    name: 'dropdownOptions.hideSelection',
+    default: false,
+    type: Boolean,
+    description: 'Hide the select button from the list',
+    inDemo: true,
+  },
+  {
     name: 'dropdownOptions.tabindex',
     default: 0,
     type: Number,

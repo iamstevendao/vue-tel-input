@@ -129,6 +129,29 @@ Vue.use(window['vue-tel-input']);
   ```
 Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.io/vueformgenerator/content/fields/custom_fields.html)
 
+### Component lazy loading
+
+Since the library is about 200kb of JavaScript and 100kb of CSS in order to improve initial page loading time you might consider importing it asyncronosly only when user navigates to the page where the library is actually needed. The technique is called [Lazy Load](https://webpack.js.org/guides/lazy-loading/) and you can use it in some modern bundlers like Webpack and Rollup.
+
+```vue
+<!-- your-component.vue-->
+<template>
+  <vue-tel-input v-model="value"></vue-tel-input>
+</template>
+<script>
+const VueTelInput = () => Promise.all([
+  import(/* webpackChunkName: "chunk-vue-tel-input" */ 'vue-tel-input'),
+  import(/* webpackChunkName: "chunk-vue-tel-input" */ 'vue-tel-input/dist/vue-tel-input.css'),
+]).then(([{ VueTelInput }]) => VueTelInput)
+
+export default {
+  components: {
+    VueTelInput,
+  },
+};
+</script>
+```
+As you see, we do use Vue SFC `<style></style>` tag here to import component's css as it would result in CSS going to the main/vendors bundle instead of being downloaded on demand.
 
 ## Changelog
 [Go to Github Releases](https://github.com/iamstevendao/vue-tel-input/releases)

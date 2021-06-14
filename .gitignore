@@ -3,3 +3,5 @@ node_modules/
 npm-debug.log
 yarn-error.log
 .idea/
+/docs/.vuepress/.temp/
+/docs/.vuepress/.cache/

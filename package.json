@@ -26,24 +26,24 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "libphonenumber-js": "^1.9.6",
-    "vue": "^2.6.11"
+    "vue": "^3.1.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-unit-jest": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.1.1",
     "@vue/eslint-config-airbnb": "^5.0.2",
-    "@vue/test-utils": "^1.0.3",
+    "@vue/test-utils": "^2.0.0-rc.6",
     "babel-eslint": "^10.1.0",
     "copy-webpack-plugin": "^5.1.2",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^22.15.1",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-vue": "^7.11.1",
     "lint-staged": "^9.5.0",
-    "vue-template-compiler": "^2.6.11",
-    "vuepress": "^1.7.1"
+    "vuepress": "^2.0.0-beta.18"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

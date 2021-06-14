@@ -1,6 +1,6 @@
 # Installation
 
-## npm
+### npm
 
 ```bash
 npm install vue-tel-input
@@ -49,7 +49,7 @@ import 'vue-tel-input/dist/css/component.css'; // Component styles
 
 :::
 
-## Browser
+### Browser
 
 ```html
 <script src="https://unpkg.com/vue-tel-input"></script>
@@ -97,6 +97,7 @@ Check out the setup in [CodeSandbox](https://codesandbox.io/s/vue-tel-input-with
   ```
 
 - Now it can be used as `tel-input` in schema of `vue-form-generator`
+
   ```js
   var schema: {
     fields: [
@@ -108,4 +109,5 @@ Check out the setup in [CodeSandbox](https://codesandbox.io/s/vue-tel-input-with
     ],
   };
   ```
+
   Read more on `vue-form-generator`'s [instruction page](https://icebob.gitbooks.io/vueformgenerator/content/fields/custom_fields.html)

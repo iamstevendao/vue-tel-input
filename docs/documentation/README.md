@@ -2,18 +2,18 @@
 
 - Install the plugin:
 
-  ```
+  ```sh
   npm install vue-tel-input
   ```
 
 - Add the plugin into your app:
 
   ```javascript
-  import Vue from 'vue'
-  import VueTelInput from 'vue-tel-input'
-  import 'vue-tel-input/dist/vue-tel-input.css'
+  import Vue from 'vue';
+  import VueTelInput from 'vue-tel-input';
+  import 'vue-tel-input/dist/vue-tel-input.css';
 
-  Vue.use(VueTelInput)
+  Vue.use(VueTelInput);
   ```
 
   [More info on installation](/vue-tel-input/documentation/installation)
@@ -23,5 +23,6 @@
   ```html
   <template>
     <vue-tel-input v-model="phone"></vue-tel-input>
-  <template>
+    <template></template
+  ></template>
   ```

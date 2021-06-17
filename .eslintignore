@@ -1,5 +1,6 @@
 /build/
 /config/
 /dist/
+/dist-es7/
 /*.js
 /test/unit/coverage/

@@ -11,7 +11,7 @@
   },
   "scripts": {
     "serve": "vuepress dev docs",
-    "build": "vue-cli-service build --target lib src/index.js",
+    "build": "vue-cli-service build --target lib src/index.js --dest dist-es7",
     "docs:build": "vuepress build docs",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",

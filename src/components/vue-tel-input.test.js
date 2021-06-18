@@ -233,16 +233,14 @@ describe('Props', () => {
     });
   });
   describe(':preferredCountries', () => {
-    it('are highlighted and be on top of the dropdown', async () => {
+    it('are highlighted and be on top of the dropdown', () => {
       const wrapper = shallowMount(VueTelInput, {
         propsData: {
           preferredCountries: ['AU'],
         },
       });
 
-      await Vue.nextTick();
       expect(wrapper.vm.sortedCountries[0].iso2).toBe('AU');
-      console.log(wrapper.html());
       expect(wrapper.find('.vti__dropdown-item > .vti__flag.au').element.parentElement.getAttribute('class')).toContain('preferred');
     });
   });

@@ -28,6 +28,11 @@ describe('Props', () => {
           allCountries: [{ iso2: 'AU' }],
           autoDefaultCountry: false,
         },
+        data() {
+          return {
+            open: true,
+          };
+        },
       });
       await Vue.nextTick();
       expect(wrapper.vm.sortedCountries).toHaveLength(1);
@@ -226,6 +231,11 @@ describe('Props', () => {
         propsData: {
           onlyCountries: ['AU'],
         },
+        data() {
+          return {
+            open: true,
+          };
+        },
       });
 
       expect(wrapper.findAll('.vti__dropdown-item')).toHaveLength(1);
@@ -237,6 +247,11 @@ describe('Props', () => {
       const wrapper = shallowMount(VueTelInput, {
         propsData: {
           preferredCountries: ['AU'],
+        },
+        data() {
+          return {
+            open: true,
+          };
         },
       });
 

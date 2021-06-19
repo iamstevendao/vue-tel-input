@@ -3,5 +3,8 @@ node_modules/
 npm-debug.log
 yarn-error.log
 .idea/
+docs/.vuepress/.dist/
 docs/.vuepress/.cache/
 docs/.vuepress/.temp/
+dist/
+dist-modern/

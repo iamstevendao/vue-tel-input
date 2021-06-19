@@ -1,0 +1,12 @@
+{
+  "name": "vue-tel-input-docs",
+  "private": true,
+  "description": "The documentation of vue-tel-input",
+  "scripts": {
+    "serve": "vuepress dev .",
+    "build": "vuepress build ."
+  },
+  "dependencies": {
+    "vuepress": "^1.8.2"
+  }
+}

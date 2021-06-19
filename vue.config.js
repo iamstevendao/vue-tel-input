@@ -5,10 +5,12 @@ module.exports = {
   lintOnSave: true,
   configureWebpack: {
     plugins: [
-      new CopyPlugin([
-        { from: path.resolve(__dirname, 'src/assets/component.css'), to: 'css/' },
-        { from: path.resolve(__dirname, 'src/assets/sprite.css'), to: 'css/' },
-      ])
+      new CopyPlugin({
+        patterns: [
+          { from: path.resolve(__dirname, 'src/assets/component.css'), to: 'css/' },
+          { from: path.resolve(__dirname, 'src/assets/sprite.css'), to: 'css/' },
+        ]
+      })
     ]
   },
 }

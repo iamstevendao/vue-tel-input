@@ -12,7 +12,7 @@ module.exports = {
   ],
   plugins: ['vue'],
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@babel/eslint-parser',
   },
   // add your custom rules here
   rules: {

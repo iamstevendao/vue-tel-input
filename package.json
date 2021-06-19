@@ -10,48 +10,48 @@
     "url": "https://github.com/iamstevendao/vue-tel-input.git"
   },
   "scripts": {
-    "serve": "vuepress dev docs",
-    "build": "vue-cli-service build --target lib src/index.js",
-    "docs:build": "vuepress build docs",
+    "serve": "cd docs && npm run serve",
+    "build": "vue-cli-service build --target lib src/index.js --dest dist",
+    "build:modern": "MODERN=true vue-cli-service build --target lib src/index.js --dest dist-modern",
+    "docs:build": "cd docs && npm run build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "prepublishOnly": "npm run build"
+    "lint:fix": "vue-cli-service lint --fix",
+    "prepublishOnly": "npm run build && npm run build:modern",
+    "postinstall": "cd docs && npm ci --prefer-offline"
   },
   "files": [
-    "dist/"
+    "dist/",
+    "dist-modern/"
   ],
   "main": "dist/vue-tel-input.umd.min.js",
   "unpkg": "dist/vue-tel-input.umd.min.js",
   "jsdelivr": "dist/vue-tel-input.umd.min.js",
   "dependencies": {
-    "core-js": "^3.6.5",
+    "core-js": "^3.14.0",
     "libphonenumber-js": "^1.9.6",
-    "vue": "^2.6.11"
+    "vue": "^2.6.14"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-unit-jest": "~4.5.0",
-    "@vue/cli-service": "^4.5.13",
-    "@vue/eslint-config-airbnb": "^5.0.2",
-    "@vue/test-utils": "^1.0.3",
-    "babel-eslint": "^10.1.0",
-    "copy-webpack-plugin": "^5.1.2",
-    "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jest": "^22.15.1",
-    "eslint-plugin-vue": "^6.2.2",
-    "lint-staged": "^9.5.0",
-    "vue-template-compiler": "^2.6.11",
-    "vuepress": "^1.8.2"
+    "@babel/eslint-parser": "^7.14.5",
+    "@vue/cli-plugin-babel": "~5.0.0-beta.2",
+    "@vue/cli-plugin-eslint": "~5.0.0-beta.2",
+    "@vue/cli-plugin-unit-jest": "~5.0.0-beta.2",
+    "@vue/cli-service": "~5.0.0-beta.2",
+    "@vue/eslint-config-airbnb": "^5.3.0",
+    "@vue/test-utils": "^1.2.1",
+    "copy-webpack-plugin": "^9.0.0",
+    "eslint": "^7.26.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-vue": "^7.11.1",
+    "lint-staged": "^11.0.0",
+    "vue-jest": "^4.0.1",
+    "vue-template-compiler": "^2.6.14"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ],
   "keywords": [
     "vue",
     "telephone",

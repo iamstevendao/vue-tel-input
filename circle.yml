@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cypress/base:8
+      - image: cypress/base:10
 
     branches:
       ignore:
@@ -14,7 +14,7 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
+            - v1-dependencies-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
 
       - run:
           name: Installing dependencies

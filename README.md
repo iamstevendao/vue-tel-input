@@ -1,20 +1,28 @@
+<p align="center">
+<img width="100px" alt="In-action GIF" src="https://iamstevendao.github.io/vue-tel-input/hero.png"/>
+</p>
+
 # vue-tel-input
 
 International Telephone Input with Vue.
 
-[![](https://img.shields.io/npm/dt/vue-tel-input.svg)](https://www.npmjs.com/package/vue-tel-input) [![](https://img.shields.io/github/stars/iamstevendao/vue-tel-input.svg)](https://github.com/iamstevendao/vue-tel-input)
+[![npm](https://img.shields.io/npm/dt/vue-tel-input.svg)](https://www.npmjs.com/package/vue-tel-input) [![stars](https://img.shields.io/github/stars/iamstevendao/vue-tel-input.svg)](https://github.com/iamstevendao/vue-tel-input)
 
 <p align="center">
 <img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
 </p>
 
-## Documentation and live demo
+## Documentation and Demo
 
 [Visit the website](https://iamstevendao.github.io/vue-tel-input/)
 
-### Vue 3 Support
+## Vue 3 Support
 
 `vue-tel-input@next`: [Guide](https://iamstevendao.github.io/vue-tel-input/documentation/next.html)
+
+## Changelog
+
+[Go to Github Releases](https://github.com/iamstevendao/vue-tel-input/releases)
 
 ## Getting started
 
@@ -91,7 +99,7 @@ Or use the component directly:
 <link rel="stylesheet" href="https://unpkg.com/vue-tel-input/dist/vue-tel-input.css" />
 ```
 
-** If Vue is detected in the Page, the plugin is installed automatically.**
+**If Vue is detected in the Page, the plugin is installed automatically.**
 
 \*\* Otherwise, manually install the plugin into Vue:
 
@@ -146,7 +154,7 @@ Vue.use(window['vue-tel-input']);
 
 ### Component lazy loading
 
-Since the library is about 200kb of JavaScript and 100kb of CSS in order to improve initial page loading time you might consider importing it asyncronosly only when user navigates to the page where the library is actually needed. The technique is called [Lazy Load](https://webpack.js.org/guides/lazy-loading/) and you can use it in some modern bundlers like Webpack and Rollup.
+Since the library is about 200kb of JavaScript and 100kb of CSS in order to improve initial page loading time you might consider importing it asynchronously only when user navigates to the page where the library is actually needed. The technique is called [Lazy Load](https://webpack.js.org/guides/lazy-loading/) and you can use it in some modern bundlers like Webpack and Rollup.
 
 ```html
 <!-- your-component.vue-->
@@ -170,9 +178,32 @@ Since the library is about 200kb of JavaScript and 100kb of CSS in order to impr
 
 As you see, we do use Vue SFC `<style></style>` tag here to import component's css as it would result in CSS going to the main/vendors bundle instead of being downloaded on demand.
 
-## Changelog
+## Development
 
-[Go to Github Releases](https://github.com/iamstevendao/vue-tel-input/releases)
+Clone the project
+
+```bash
+  git clone https://github.com/iamstevendao/vue-tel-input.git
+```
+
+Go to the project directory
+
+```bash
+  cd vue-tel-input
+```
+
+Install dependencies
+
+```bash
+  npm install
+  cd docs && npm ci
+```
+
+Start the server
+
+```bash
+  npm run serve
+```
 
 ## License
 

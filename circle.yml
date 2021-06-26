@@ -27,5 +27,9 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "circle.yml" }}
 
       - run:
+          name: Installing docs dependencies
+          command: cd docs && npm ci --prefer-offline && cd ..
+
+      - run:
           name: Build demo
           command: sh demo.sh

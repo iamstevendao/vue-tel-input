@@ -17,8 +17,7 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "lint:fix": "vue-cli-service lint --fix",
-    "prepublishOnly": "npm run build && npm run build:modern",
-    "postinstall": "cd docs && npm ci --prefer-offline"
+    "prepublishOnly": "npm run build && npm run build:modern"
   },
   "files": [
     "dist/",

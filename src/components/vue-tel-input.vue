@@ -49,6 +49,7 @@
       :readonly="inputOptions.readonly"
       :required="inputOptions.required"
       :tabindex="inputOptions.tabindex"
+      :aria-describedby="inputOptions['aria-describedby']"
       @blur="onBlur"
       @focus="onFocus"
       @input="onInput"

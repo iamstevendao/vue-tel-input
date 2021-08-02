@@ -263,7 +263,7 @@ export default {
       }
     },
     'phoneObject.countryCode': function (value) {
-      this.activeCountryCode = value;
+      this.activeCountryCode = value || '';
     },
     'phoneObject.valid': function () {
       this.$emit('validate', this.phoneObject);
@@ -289,7 +289,10 @@ export default {
     },
     value(value, oldValue) {
       if (!this.testCharacters()) {
-        this.$nextTick(() => { this.phone = oldValue; this.onInput(); });
+        this.$nextTick(() => {
+          this.phone = oldValue;
+          this.onInput();
+        });
       } else {
         this.phone = value;
       }
@@ -344,8 +347,8 @@ export default {
     initializeCountry() {
       return new Promise((resolve) => {
         /**
-           * 1. If the phone included prefix (i.e. +12), try to get the country and set it
-           */
+         * 1. If the phone included prefix (i.e. +12), try to get the country and set it
+         */
         if (this.phone?.[0] === '+') {
           resolve();
           return;
@@ -390,8 +393,8 @@ export default {
             });
         } else {
           /**
-             * 4. Use the first country from preferred list (if available) or all countries list
-             */
+           * 4. Use the first country from preferred list (if available) or all countries list
+           */
           this.choose(fallbackCountry);
           resolve();
         }
@@ -450,7 +453,7 @@ export default {
       }
 
       // update value, even if international mode is NOT used
-      this.activeCountryCode = parsedCountry.iso2;
+      this.activeCountryCode = parsedCountry.iso2 || '';
       this.emitInput(this.phone);
     },
     cleanInvalidCharacters() {

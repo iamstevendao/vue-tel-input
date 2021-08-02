@@ -29,6 +29,11 @@
 .vti__dropdown.open {
   background-color: #f3f3f3;
 }
+.vti__dropdown.disabled {
+  cursor: no-drop;
+  outline: none;
+  background-color: #f3f3f3;
+}
 .vti__dropdown:hover {
   background-color: #f3f3f3;
 }

@@ -81,6 +81,13 @@ export const allProps = [
     inDemo: false,
   },
   {
+    name: 'dropdownOptions.disabled',
+    default: false,
+    type: Boolean,
+    description: 'Disable dropdown',
+    inDemo: false,
+  },
+  {
     name: 'dropdownOptions.showDialCodeInList',
     default: true,
     type: Boolean,

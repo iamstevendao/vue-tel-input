@@ -2,7 +2,7 @@
   <div :class="['vue-tel-input', styleClasses, { disabled: disabled }]">
     <div
       v-click-outside="clickedOutside"
-      :class="['vti__dropdown', { open: open }]"
+      :class="['vti__dropdown', { open: open, disabled: dropdownOptions.disabled }]"
       :tabindex="dropdownOptions.tabindex"
       @keydown="keyboardNav"
       @click="toggleDropdown"
@@ -512,7 +512,7 @@ export default {
       this.$refs.input.focus();
     },
     toggleDropdown() {
-      if (this.disabled) {
+      if (this.disabled || this.dropdownOptions.disabled) {
         return;
       }
       this.open = !this.open;

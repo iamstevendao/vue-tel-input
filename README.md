@@ -1,5 +1,5 @@
 <p align="center">
-<img width="100px" alt="In-action GIF" src="https://iamstevendao.github.io/vue-tel-input/hero.png"/>
+<img width="100" alt="vue-tel-input-logo" src="https://iamstevendao.github.io/vue-tel-input/hero.png"/>
 </p>
 
 # vue-tel-input
@@ -9,7 +9,7 @@ International Telephone Input with Vue.
 [![npm](https://img.shields.io/npm/dt/vue-tel-input.svg)](https://www.npmjs.com/package/vue-tel-input) [![stars](https://img.shields.io/github/stars/iamstevendao/vue-tel-input.svg)](https://github.com/iamstevendao/vue-tel-input)
 
 <p align="center">
-<img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
+<img width="600" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
 </p>
 
 ## Documentation and Demo

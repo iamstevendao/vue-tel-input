@@ -275,7 +275,7 @@ export default {
 
       this.$nextTick(() => {
         // In case `v-model` is not set, we need to update the `phone` to be new formatted value
-        if (value && !this.value) {
+        if (value && !this.modelValue) {
           this.phone = value;
         }
       });
@@ -304,8 +304,8 @@ export default {
     },
   },
   mounted() {
-    if (this.value) {
-      this.phone = this.value.trim();
+    if (this.modelValue) {
+      this.phone = this.modelValue.trim();
     }
 
     this.cleanInvalidCharacters();

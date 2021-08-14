@@ -143,6 +143,13 @@ export const allProps = [
   //   inDemo: false,
   // },
   {
+    name: 'inputOptions.aria-describedby',
+    default: '',
+    type: String,
+    description: 'Native input <code>aria-describedby</code> attribute',
+    inDemo: false,
+  },
+  {
     name: 'inputOptions.id',
     default: '',
     type: String,

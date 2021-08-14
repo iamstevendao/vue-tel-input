@@ -51,6 +51,7 @@
       :required="inputOptions.required"
       :tabindex="inputOptions.tabindex"
       :value="modelValue"
+      :aria-describedby="inputOptions['aria-describedby']"
       @blur="onBlur"
       @focus="onFocus"
       @input="onInput"

@@ -449,6 +449,7 @@ export default {
       if (this.inputOptions?.showDialCode && parsedCountry) {
         // Reset phone if the showDialCode is set
         this.phone = `+${parsedCountry.dialCode}`;
+        this.activeCountryCode = parsedCountry.iso2 || '';
         return;
       }
 

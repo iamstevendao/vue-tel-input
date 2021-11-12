@@ -178,6 +178,13 @@ export const allProps = [
     inDemo: false,
   },
   {
+    name: 'inputOptions.showDialCode',
+    default: false,
+    type: Boolean,
+    description: 'Show dial code in input',
+    inDemo: false,
+  },
+  {
     name: 'inputOptions.placeholder',
     default: 'Enter a phone number',
     type: String,

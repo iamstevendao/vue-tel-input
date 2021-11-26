@@ -21,11 +21,11 @@
         </slot>
       </span>
       <ul v-if="open" ref="list" class="vti__dropdown-list" :class="dropdownOpenDirection">
-        <input 
-          v-if="isSearchable" 
-          class="vti__input vti__search_box" 
-          placeholder="Search by country name or country code" 
-          type='text' 
+        <input
+          v-if="isSearchable"
+          class="vti__input vti__search_box"
+          placeholder="Search by country name or country code"
+          type='text'
           v-model="searchQuery">
         <li
           v-for="(pb, index) in sortedCountries"
@@ -166,7 +166,7 @@ export default {
     },
     isSearchable: {
       type: Boolean,
-      default: () => '',
+      default: true,
     },
   },
   data() {
@@ -221,14 +221,13 @@ export default {
       const preferredCountries = this.getCountries(this.preferredCountries)
         .map((country) => ({ ...country, preferred: true }));
       const countriesList = [...preferredCountries, ...this.filteredCountries];
-      let queryResult = []
-      countriesList.forEach(c => {
-        if((new RegExp(this.searchQuery, 'i')).test(c.name) || 
-            (new RegExp(this.searchQuery, 'i')).test(c.iso2) || 
-            (new RegExp(this.searchQuery, 'i')).test(c.dialCode)
-          )
-          queryResult.push(c)
-      })
+      const queryResult = [];
+      countriesList.forEach((c) => {
+        if ((new RegExp(this.searchQuery, 'i')).test(c.name)
+            || (new RegExp(this.searchQuery, 'i')).test(c.iso2)
+            || (new RegExp(this.searchQuery, 'i')).test(c.dialCode)
+        ) queryResult.push(c);
+      });
       return queryResult;
     },
     phoneObject() {
@@ -532,8 +531,7 @@ export default {
       this.$refs.input.focus();
     },
     toggleDropdown(e) {
-      console.log(e)
-      if (this.disabled || this.dropdownOptions.disabled || e.path[0].type=='text') {
+      if (this.disabled || this.dropdownOptions.disabled || e.path[0].type === 'text') {
         return;
       }
       this.searchQuery = '';

@@ -87,9 +87,9 @@ Or use the component directly:
       VueTelInput,
     },
   };
-
-  <style src="vue-tel-input/dist/vue-tel-input.css"></style>;
 </script>
+
+<style src="vue-tel-input/dist/vue-tel-input.css"></style>
 ```
 
 ### Browser

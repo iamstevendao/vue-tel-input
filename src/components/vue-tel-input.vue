@@ -166,7 +166,7 @@ export default {
     },
     isSearchable: {
       type: Boolean,
-      default: true,
+      default: () => getDefault('isSearchable'),
     },
   },
   data() {

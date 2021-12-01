@@ -1,39 +1,21 @@
 <template>
   <div :class="['vue-tel-input', styleClasses, { disabled: disabled }]">
-    <div
-      v-click-outside="clickedOutside"
-      :class="['vti__dropdown', { open: open, disabled: dropdownOptions.disabled }]"
+    <select
+      class="vti__dropdown"
+      :disabled="dropdownOptions.disabled"
       :tabindex="dropdownOptions.tabindex"
-      @keydown="keyboardNav"
-      @click="toggleDropdown"
       @keydown.esc="reset"
     >
-      <span class="vti__selection">
-        <div
-          v-if="dropdownOptions.showFlags"
-          :class="['vti__flag', activeCountryCode.toLowerCase()]"
-        />
-        <span v-if="dropdownOptions.showDialCodeInSelection" class="vti__country-code">
-          +{{ activeCountry && activeCountry.dialCode }}
-        </span>
-        <slot name="arrow-icon" :open="open">
-          <span class="vti__dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
-        </slot>
-      </span>
-      <ul v-if="open" ref="list" class="vti__dropdown-list" :class="dropdownOpenDirection">
-        <li
-          v-for="(pb, index) in sortedCountries"
-          :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
-          :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
-          @click="choose(pb)"
-          @mousemove="selectedIndex = index"
-        >
-          <div v-if="dropdownOptions.showFlags" :class="['vti__flag', pb.iso2.toLowerCase()]" />
-          <strong>{{ pb.name }}</strong>
-          <span v-if="dropdownOptions.showDialCodeInList"> +{{ pb.dialCode }} </span>
-        </li>
-      </ul>
-    </div>
+      <option
+        v-for="(pb, index) in sortedCountries"
+        @click="choose(pb)"
+        @mousemove="selectedIndex = index"
+      >
+      {{ dropdownOptions.showFlags ? getFlagEmoji(pb.iso2) : '' }}
+      {{ pb.name }}
+      {{ dropdownOptions.showDialCodeInList ? `[+${pb.dialCode}]` : '' }}
+      </option>
+    </select>
     <input
       v-model="phone"
       ref="input"
@@ -63,7 +45,6 @@
 <script>
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import utils, { getCountry, setCaretPosition } from '../utils';
-import clickOutside from '../directives/click-outside';
 
 function getDefault(key) {
   const value = utils.options[key];
@@ -88,9 +69,6 @@ function getDefault(key) {
 
 export default {
   name: 'VueTelInput',
-  directives: {
-    clickOutside,
-  },
   props: {
     value: {
       type: String,
@@ -406,21 +384,18 @@ export default {
         .map((countryCode) => this.findCountry(countryCode))
         .filter(Boolean);
     },
+    getFlagEmoji(iso) {
+      const codePoints = iso
+        .toUpperCase()
+        .split('')
+        .map(char =>  127397 + char.charCodeAt());
+      return String.fromCodePoint(...codePoints);
+    },
     findCountry(iso = '') {
       return this.filteredCountries.find((country) => country.iso2 === iso.toUpperCase());
     },
     findCountryByDialCode(dialCode) {
       return this.filteredCountries.find((country) => Number(country.dialCode) === dialCode);
-    },
-    getItemClass(index, iso2) {
-      const highlighted = this.selectedIndex === index;
-      const lastPreferred = index === this.preferredCountries.length - 1;
-      const preferred = this.preferredCountries.some((c) => c.toUpperCase() === iso2);
-      return {
-        highlighted,
-        'last-preferred': lastPreferred,
-        preferred,
-      };
     },
     choose(country) {
       let parsedCountry = country;
@@ -512,90 +487,12 @@ export default {
     focus() {
       this.$refs.input.focus();
     },
-    toggleDropdown() {
-      if (this.disabled || this.dropdownOptions.disabled) {
-        return;
-      }
-      this.open = !this.open;
-    },
-    clickedOutside() {
-      this.open = false;
-    },
-    keyboardNav(e) {
-      if (e.keyCode === 40) {
-        // down arrow
-        e.preventDefault();
-        this.open = true;
-        if (this.selectedIndex === null) {
-          this.selectedIndex = 0;
-        } else {
-          this.selectedIndex = Math.min(this.sortedCountries.length - 1, this.selectedIndex + 1);
-        }
-        const selEle = this.$refs.list.children[this.selectedIndex];
-        if (selEle.offsetTop + selEle.clientHeight
-          > this.$refs.list.scrollTop + this.$refs.list.clientHeight) {
-          this.$refs.list.scrollTop = selEle.offsetTop
-            - this.$refs.list.clientHeight
-            + selEle.clientHeight;
-        }
-      } else if (e.keyCode === 38) {
-        // up arrow
-        e.preventDefault();
-        this.open = true;
-        if (this.selectedIndex === null) {
-          this.selectedIndex = this.sortedCountries.length - 1;
-        } else {
-          this.selectedIndex = Math.max(0, this.selectedIndex - 1);
-        }
-        const selEle = this.$refs.list.children[this.selectedIndex];
-        if (selEle.offsetTop < this.$refs.list.scrollTop) {
-          this.$refs.list.scrollTop = selEle.offsetTop;
-        }
-      } else if (e.keyCode === 13) {
-        // enter key
-        if (this.selectedIndex !== null) {
-          this.choose(this.sortedCountries[this.selectedIndex]);
-        }
-        this.open = !this.open;
-      } else {
-        // typing a country's name
-        this.typeToFindInput += e.key;
-        clearTimeout(this.typeToFindTimer);
-        this.typeToFindTimer = setTimeout(() => {
-          this.typeToFindInput = '';
-        }, 700);
-        // don't include preferred countries so we jump to the right place in the alphabet
-        const typedCountryI = this.sortedCountries
-          .slice(this.preferredCountries.length)
-          .findIndex((c) => c.name.toLowerCase().startsWith(this.typeToFindInput));
-        if (typedCountryI >= 0) {
-          this.selectedIndex = this.preferredCountries.length + typedCountryI;
-          const selEle = this.$refs.list.children[this.selectedIndex];
-          const needToScrollTop = selEle.offsetTop < this.$refs.list.scrollTop;
-          const needToScrollBottom = selEle.offsetTop + selEle.clientHeight
-            > this.$refs.list.scrollTop + this.$refs.list.clientHeight;
-          if (needToScrollTop || needToScrollBottom) {
-            this.$refs.list.scrollTop = selEle.offsetTop - this.$refs.list.clientHeight / 2;
-          }
-        }
-      }
-    },
     reset() {
       this.selectedIndex = this.sortedCountries.map((c) => c.iso2).indexOf(this.activeCountryCode);
       this.open = false;
-    },
-    setDropdownPosition() {
-      const spaceBelow = window.innerHeight - this.$el.getBoundingClientRect().bottom;
-      const hasEnoughSpaceBelow = spaceBelow > 200;
-      if (hasEnoughSpaceBelow) {
-        this.dropdownOpenDirection = 'below';
-      } else {
-        this.dropdownOpenDirection = 'above';
-      }
     },
   },
 };
 </script>
 
-<style src="../assets/sprite.css"></style>
 <style src="../assets/component.css"></style>

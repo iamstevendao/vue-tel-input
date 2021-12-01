@@ -9,7 +9,7 @@
       @keydown.esc="reset"
     >
       <span class="vti__selection">
-        <div
+        <span
           v-if="dropdownOptions.showFlags"
           :class="['vti__flag', activeCountryCode.toLowerCase()]"
         />
@@ -29,7 +29,7 @@
           @click="choose(pb)"
           @mousemove="selectedIndex = index"
         >
-          <div v-if="dropdownOptions.showFlags" :class="['vti__flag', pb.iso2.toLowerCase()]" />
+          <span v-if="dropdownOptions.showFlags" :class="['vti__flag', pb.iso2.toLowerCase()]" />
           <strong>{{ pb.name }}</strong>
           <span v-if="dropdownOptions.showDialCodeInList"> +{{ pb.dialCode }} </span>
         </li>

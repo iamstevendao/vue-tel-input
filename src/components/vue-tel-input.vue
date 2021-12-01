@@ -9,7 +9,7 @@
       @keydown.esc="reset"
     >
       <span class="vti__selection">
-        <div
+        <span
           v-if="dropdownOptions.showFlags"
           :class="['vti__flag', activeCountryCode.toLowerCase()]"
         />

@@ -2,11 +2,17 @@
   <div :class="['vue-tel-input', styleClasses, { disabled: disabled }]">
     <div
       v-click-outside="clickedOutside"
+      aria-label="Country Code Selector"
+      aria-haspopup="listbox"
+      :aria-expanded="open"
+      role="button"
       :class="['vti__dropdown', { open: open, disabled: dropdownOptions.disabled }]"
       :tabindex="dropdownOptions.tabindex"
       @keydown="keyboardNav"
       @click="toggleDropdown"
+      @keydown.space="toggleDropdown"
       @keydown.esc="reset"
+      @keydown.tab="reset"
     >
       <span class="vti__selection">
         <span
@@ -20,20 +26,29 @@
           <span class="vti__dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
         </slot>
       </span>
-      <ul v-if="open" ref="list" class="vti__dropdown-list" :class="dropdownOpenDirection">
+      <ul
+        v-if="open"
+        ref="list"
+        class="vti__dropdown-list"
+        :class="dropdownOpenDirection"
+        role="listbox"
+      >
         <input
           v-if="dropdownOptions.showSearchBox"
           class="vti__input vti__search_box"
-          placeholder="Search by country name or country code"
+          aria-label="Search by country name or country code"
+          :placeholder="sortedCountries[0].name"
           type="text"
           v-model="searchQuery"
         />
         <li
           v-for="(pb, index) in sortedCountries"
+          role="option"
           :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
           :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
           @click="choose(pb)"
           @mousemove="selectedIndex = index"
+          :aria-selected="activeCountryCode === pb.iso2 && !pb.preferred"
         >
           <span
             v-if="dropdownOptions.showFlags"
@@ -449,6 +464,7 @@ export default {
       if (!parsedCountry) {
         return;
       }
+
       if (this.phone?.[0] === '+'
         && parsedCountry.iso2
         && this.phoneObject.nationalNumber) {

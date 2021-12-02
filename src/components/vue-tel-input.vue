@@ -35,7 +35,6 @@
       >
         <li
           v-for="(pb, index) in sortedCountries"
-          v-once
           :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
           :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
           role="option"

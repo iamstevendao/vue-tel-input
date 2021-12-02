@@ -269,6 +269,13 @@ export const allProps = [
     description: 'Only allow valid characters in a phone number (will also verify in <code>mounted</code>, so phone number with invalid characters will be shown as an empty string)',
     inDemo: false,
   },
+  {
+    name: 'isSearchable',
+    default: true,
+    type: Boolean,
+    description: 'Search country by name, iso2 or dialCode',
+    inDemo: false,
+  },
 ];
 
 export const defaultOptions = [...allProps]

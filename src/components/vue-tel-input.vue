@@ -4,9 +4,15 @@
       v-click-outside="clickedOutside"
       :class="['vti__dropdown', { open: open, disabled: dropdownOptions.disabled }]"
       :tabindex="dropdownOptions.tabindex"
+      role="button"
+      aria-label="Change Country"
+      aria-haspopup="listbox"
+      :aria-expanded="open"
       @keydown="keyboardNav"
       @click="toggleDropdown"
+      @keydown.space="toggleDropdown"
       @keydown.esc="reset"
+      @keydown.tab="reset"
     >
       <span class="vti__selection">
         <span
@@ -20,16 +26,28 @@
           <span class="vti__dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
         </slot>
       </span>
-      <ul ref="list" class="vti__dropdown-list" v-if="open" :class="dropdownOpenDirection">
+      <ul
+        ref="list"
+        class="vti__dropdown-list"
+        role="listbox"
+        v-if="open"
+        :class="dropdownOpenDirection"
+      >
         <li
           v-for="(pb, index) in sortedCountries"
           v-once
           :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
           :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
+          role="option"
+          tabindex="-1"
+          aria-selected="false"
           @click="choose(pb)"
           @mousemove="selectedIndex = index"
         >
-          <span v-if="dropdownOptions.showFlags" :class="['vti__flag', pb.iso2.toLowerCase()]"></span>
+          <span
+            v-if="dropdownOptions.showFlags"
+            :class="['vti__flag', pb.iso2.toLowerCase()]"
+          ></span>
           <strong>{{ pb.name }}</strong>
           <span v-if="dropdownOptions.showDialCodeInList"> +{{ pb.dialCode }} </span>
         </li>
@@ -532,9 +550,12 @@ export default {
         if (this.selectedIndex === null) {
           this.selectedIndex = 0;
         } else {
+          this.$refs.list.children[this.selectedIndex].setAttribute('aria-selected', 'false');
           this.selectedIndex = Math.min(this.sortedCountries.length - 1, this.selectedIndex + 1);
         }
         const selEle = this.$refs.list.children[this.selectedIndex];
+        selEle.focus();
+        selEle.setAttribute('aria-selected', 'true');
         if (selEle.offsetTop + selEle.clientHeight
           > this.$refs.list.scrollTop + this.$refs.list.clientHeight) {
           this.$refs.list.scrollTop = selEle.offsetTop
@@ -548,9 +569,12 @@ export default {
         if (this.selectedIndex === null) {
           this.selectedIndex = this.sortedCountries.length - 1;
         } else {
+          this.$refs.list.children[this.selectedIndex].setAttribute('aria-selected', 'false');
           this.selectedIndex = Math.max(0, this.selectedIndex - 1);
         }
         const selEle = this.$refs.list.children[this.selectedIndex];
+        selEle.focus();
+        selEle.setAttribute('aria-selected', 'true');
         if (selEle.offsetTop < this.$refs.list.scrollTop) {
           this.$refs.list.scrollTop = selEle.offsetTop;
         }

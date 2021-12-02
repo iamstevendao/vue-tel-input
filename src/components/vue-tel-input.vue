@@ -5,7 +5,7 @@
       :class="['vti__dropdown', { open: open, disabled: dropdownOptions.disabled }]"
       :tabindex="dropdownOptions.tabindex"
       role="button"
-      aria-label="Change Country"
+      aria-label="Country Code Selector"
       aria-haspopup="listbox"
       :aria-expanded="open"
       @keydown="keyboardNav"

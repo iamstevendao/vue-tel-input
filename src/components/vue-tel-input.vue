@@ -2,12 +2,12 @@
   <div :class="['vue-tel-input', styleClasses, { disabled: disabled }]">
     <div
       v-click-outside="clickedOutside"
-      :class="['vti__dropdown', { open: open, disabled: dropdownOptions.disabled }]"
-      :tabindex="dropdownOptions.tabindex"
-      role="button"
       aria-label="Country Code Selector"
       aria-haspopup="listbox"
       :aria-expanded="open"
+      role="button"
+      :class="['vti__dropdown', { open: open, disabled: dropdownOptions.disabled }]"
+      :tabindex="dropdownOptions.tabindex"
       @keydown="keyboardNav"
       @click="toggleDropdown"
       @keydown.space="toggleDropdown"
@@ -27,21 +27,21 @@
         </slot>
       </span>
       <ul
+        v-if="open"
         ref="list"
         class="vti__dropdown-list"
-        role="listbox"
-        v-if="open"
         :class="dropdownOpenDirection"
+        role="listbox"
       >
         <li
           v-for="(pb, index) in sortedCountries"
+          role="option"
           :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
           :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
-          role="option"
           tabindex="-1"
-          :aria-selected="activeCountryCode === pb.iso2 && !pb.preferred"
           @click="choose(pb)"
           @mousemove="selectedIndex = index"
+          :aria-selected="activeCountryCode === pb.iso2 && !pb.preferred"
         >
           <span
             v-if="dropdownOptions.showFlags"

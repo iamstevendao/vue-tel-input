@@ -46,6 +46,7 @@
           role="option"
           :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
           :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
+          tabindex="-1"
           @click="choose(pb)"
           @mousemove="selectedIndex = index"
           :aria-selected="activeCountryCode === pb.iso2 && !pb.preferred"
@@ -567,6 +568,7 @@ export default {
           this.selectedIndex = Math.min(this.sortedCountries.length - 1, this.selectedIndex + 1);
         }
         const selEle = this.$refs.list.children[this.selectedIndex];
+        selEle.focus();
         if (selEle.offsetTop + selEle.clientHeight
           > this.$refs.list.scrollTop + this.$refs.list.clientHeight) {
           this.$refs.list.scrollTop = selEle.offsetTop
@@ -583,6 +585,7 @@ export default {
           this.selectedIndex = Math.max(0, this.selectedIndex - 1);
         }
         const selEle = this.$refs.list.children[this.selectedIndex];
+        selEle.focus();
         if (selEle.offsetTop < this.$refs.list.scrollTop) {
           this.$refs.list.scrollTop = selEle.offsetTop;
         }

@@ -109,6 +109,13 @@ export const allProps = [
     inDemo: true,
   },
   {
+    name: 'dropdownOptions.showSearchBox',
+    default: false,
+    type: Boolean,
+    description: 'Show country search box',
+    inDemo: true,
+  },
+  {
     name: 'dropdownOptions.tabindex',
     default: 0,
     type: Number,

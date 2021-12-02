@@ -21,6 +21,13 @@
         </slot>
       </span>
       <ul v-if="open" ref="list" class="vti__dropdown-list" :class="dropdownOpenDirection">
+        <input
+          v-if="dropdownOptions.showSearchBox"
+          class="vti__input vti__search_box"
+          placeholder="Search by country name or country code"
+          type="text"
+          v-model="searchQuery"
+        />
         <li
           v-for="(pb, index) in sortedCountries"
           :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
@@ -173,6 +180,7 @@ export default {
       typeToFindTimer: null,
       dropdownOpenDirection: 'below',
       parsedPlaceholder: this.inputOptions.placeholder,
+      searchQuery: '',
     };
   },
   computed: {
@@ -212,8 +220,15 @@ export default {
       // Sort the list countries: from preferred countries to all countries
       const preferredCountries = this.getCountries(this.preferredCountries)
         .map((country) => ({ ...country, preferred: true }));
-
-      return [...preferredCountries, ...this.filteredCountries];
+      const countriesList = [...preferredCountries, ...this.filteredCountries];
+      if (!this.dropdownOptions.showSearchBox) {
+        return countriesList;
+      }
+      return countriesList.filter(
+        (c) => (new RegExp(this.searchQuery, 'i')).test(c.name)
+          || (new RegExp(this.searchQuery, 'i')).test(c.iso2)
+          || (new RegExp(this.searchQuery, 'i')).test(c.dialCode),
+      );
     },
     phoneObject() {
       let result;
@@ -515,10 +530,11 @@ export default {
     focus() {
       this.$refs.input.focus();
     },
-    toggleDropdown() {
-      if (this.disabled || this.dropdownOptions.disabled) {
+    toggleDropdown(e) {
+      if (this.disabled || this.dropdownOptions.disabled || e?.path?.[0]?.type === 'text') {
         return;
       }
+      this.searchQuery = '';
       this.open = !this.open;
     },
     clickedOutside() {

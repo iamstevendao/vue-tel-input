@@ -39,7 +39,7 @@
           :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
           role="option"
           tabindex="-1"
-          aria-selected="false"
+          :aria-selected="activeCountryCode === pb.iso2 && !pb.preferred"
           @click="choose(pb)"
           @mousemove="selectedIndex = index"
         >
@@ -549,12 +549,10 @@ export default {
         if (this.selectedIndex === null) {
           this.selectedIndex = 0;
         } else {
-          this.$refs.list.children[this.selectedIndex].setAttribute('aria-selected', 'false');
           this.selectedIndex = Math.min(this.sortedCountries.length - 1, this.selectedIndex + 1);
         }
         const selEle = this.$refs.list.children[this.selectedIndex];
         selEle.focus();
-        selEle.setAttribute('aria-selected', 'true');
         if (selEle.offsetTop + selEle.clientHeight
           > this.$refs.list.scrollTop + this.$refs.list.clientHeight) {
           this.$refs.list.scrollTop = selEle.offsetTop
@@ -568,12 +566,10 @@ export default {
         if (this.selectedIndex === null) {
           this.selectedIndex = this.sortedCountries.length - 1;
         } else {
-          this.$refs.list.children[this.selectedIndex].setAttribute('aria-selected', 'false');
           this.selectedIndex = Math.max(0, this.selectedIndex - 1);
         }
         const selEle = this.$refs.list.children[this.selectedIndex];
         selEle.focus();
-        selEle.setAttribute('aria-selected', 'true');
         if (selEle.offsetTop < this.$refs.list.scrollTop) {
           this.$refs.list.scrollTop = selEle.offsetTop;
         }

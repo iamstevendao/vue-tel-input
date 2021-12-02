@@ -109,6 +109,13 @@ export const allProps = [
     inDemo: true,
   },
   {
+    name: 'dropdownOptions.showSearchBox',
+    default: false,
+    type: Boolean,
+    description: 'Show country search box',
+    inDemo: true,
+  },
+  {
     name: 'dropdownOptions.tabindex',
     default: 0,
     type: Number,
@@ -267,13 +274,6 @@ export const allProps = [
     default: false,
     type: Boolean,
     description: 'Only allow valid characters in a phone number (will also verify in <code>mounted</code>, so phone number with invalid characters will be shown as an empty string)',
-    inDemo: false,
-  },
-  {
-    name: 'isSearchable',
-    default: true,
-    type: Boolean,
-    description: 'Search country by name, iso2 or dialCode',
     inDemo: false,
   },
 ];

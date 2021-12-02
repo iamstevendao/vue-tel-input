@@ -22,11 +22,12 @@
       </span>
       <ul v-if="open" ref="list" class="vti__dropdown-list" :class="dropdownOpenDirection">
         <input
-          v-if="isSearchable"
+          v-if="dropdownOptions.showSearchBox"
           class="vti__input vti__search_box"
           placeholder="Search by country name or country code"
-          type='text'
-          v-model="searchQuery">
+          type="text"
+          v-model="searchQuery"
+        />
         <li
           v-for="(pb, index) in sortedCountries"
           :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
@@ -164,10 +165,6 @@ export default {
       type: [String, Array, Object],
       default: () => getDefault('styleClasses'),
     },
-    isSearchable: {
-      type: Boolean,
-      default: () => getDefault('isSearchable'),
-    },
   },
   data() {
     return {
@@ -221,14 +218,14 @@ export default {
       const preferredCountries = this.getCountries(this.preferredCountries)
         .map((country) => ({ ...country, preferred: true }));
       const countriesList = [...preferredCountries, ...this.filteredCountries];
-      const queryResult = [];
-      countriesList.forEach((c) => {
-        if ((new RegExp(this.searchQuery, 'i')).test(c.name)
-            || (new RegExp(this.searchQuery, 'i')).test(c.iso2)
-            || (new RegExp(this.searchQuery, 'i')).test(c.dialCode)
-        ) queryResult.push(c);
-      });
-      return queryResult;
+      if (!this.dropdownOptions.showSearchBox) {
+        return countriesList;
+      }
+      return countriesList.filter(
+        (c) => (new RegExp(this.searchQuery, 'i')).test(c.name)
+          || (new RegExp(this.searchQuery, 'i')).test(c.iso2)
+          || (new RegExp(this.searchQuery, 'i')).test(c.dialCode),
+      );
     },
     phoneObject() {
       let result;
@@ -531,7 +528,7 @@ export default {
       this.$refs.input.focus();
     },
     toggleDropdown(e) {
-      if (this.disabled || this.dropdownOptions.disabled || e.path[0].type === 'text') {
+      if (this.disabled || this.dropdownOptions.disabled || e?.path?.[0]?.type === 'text') {
         return;
       }
       this.searchQuery = '';

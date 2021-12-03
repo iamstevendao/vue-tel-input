@@ -2,17 +2,23 @@
   <div :class="['vue-tel-input', styleClasses, { disabled: disabled }]">
     <div
       v-click-outside="clickedOutside"
+      aria-label="Country Code Selector"
+      aria-haspopup="listbox"
+      :aria-expanded="open"
+      role="button"
       :class="['vti__dropdown', { open: open, disabled: dropdownOptions.disabled }]"
       :tabindex="dropdownOptions.tabindex"
       @keydown="keyboardNav"
       @click="toggleDropdown"
+      @keydown.space="toggleDropdown"
       @keydown.esc="reset"
+      @keydown.tab="reset"
     >
       <span class="vti__selection">
-        <div
+        <span
           v-if="dropdownOptions.showFlags"
           :class="['vti__flag', activeCountryCode.toLowerCase()]"
-        />
+        ></span>
         <span v-if="dropdownOptions.showDialCodeInSelection" class="vti__country-code">
           +{{ activeCountry && activeCountry.dialCode }}
         </span>
@@ -20,22 +26,35 @@
           <span class="vti__dropdown-arrow">{{ open ? "▲" : "▼" }}</span>
         </slot>
       </span>
-      <ul v-if="open" ref="list" class="vti__dropdown-list" :class="dropdownOpenDirection">
+      <ul
+        v-if="open"
+        ref="list"
+        class="vti__dropdown-list"
+        :class="dropdownOpenDirection"
+        role="listbox"
+      >
         <input
           v-if="dropdownOptions.showSearchBox"
           class="vti__input vti__search_box"
-          placeholder="Search by country name or country code"
+          aria-label="Search by country name or country code"
+          :placeholder="sortedCountries[0].name"
           type="text"
           v-model="searchQuery"
         />
         <li
           v-for="(pb, index) in sortedCountries"
+          role="option"
           :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
           :key="pb.iso2 + (pb.preferred ? '-preferred' : '')"
+          tabindex="-1"
           @click="choose(pb)"
           @mousemove="selectedIndex = index"
+          :aria-selected="activeCountryCode === pb.iso2 && !pb.preferred"
         >
-          <div v-if="dropdownOptions.showFlags" :class="['vti__flag', pb.iso2.toLowerCase()]" />
+          <span
+            v-if="dropdownOptions.showFlags"
+            :class="['vti__flag', pb.iso2.toLowerCase()]"
+          ></span>
           <strong>{{ pb.name }}</strong>
           <span v-if="dropdownOptions.showDialCodeInList"> +{{ pb.dialCode }} </span>
         </li>
@@ -446,6 +465,7 @@ export default {
       if (!parsedCountry) {
         return;
       }
+
       if (this.phone?.[0] === '+'
         && parsedCountry.iso2
         && this.phoneObject.nationalNumber) {
@@ -548,6 +568,7 @@ export default {
           this.selectedIndex = Math.min(this.sortedCountries.length - 1, this.selectedIndex + 1);
         }
         const selEle = this.$refs.list.children[this.selectedIndex];
+        selEle.focus();
         if (selEle.offsetTop + selEle.clientHeight
           > this.$refs.list.scrollTop + this.$refs.list.clientHeight) {
           this.$refs.list.scrollTop = selEle.offsetTop
@@ -564,6 +585,7 @@ export default {
           this.selectedIndex = Math.max(0, this.selectedIndex - 1);
         }
         const selEle = this.$refs.list.children[this.selectedIndex];
+        selEle.focus();
         if (selEle.offsetTop < this.$refs.list.scrollTop) {
           this.$refs.list.scrollTop = selEle.offsetTop;
         }

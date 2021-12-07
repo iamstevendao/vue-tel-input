@@ -30,6 +30,7 @@
         v-if="open"
         ref="list"
         class="vti__dropdown-list"
+        :style="{ width: dropdownOptions.width }"
         :class="dropdownOpenDirection"
         role="listbox"
       >

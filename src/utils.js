@@ -123,6 +123,12 @@ export const allProps = [
     inDemo: false,
   },
   {
+    name: 'dropdownOptions.width',
+    default: '390px',
+    type: String,
+    description: 'Specifiy dropdown width',
+  },
+  {
     name: 'ignoredCountries',
     default: [],
     type: Array,

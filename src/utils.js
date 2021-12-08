@@ -126,7 +126,7 @@ export const allProps = [
     name: 'dropdownOptions.width',
     default: '390px',
     type: String,
-    description: 'Specifiy dropdown width',
+    description: 'Specify dropdown width',
   },
   {
     name: 'ignoredCountries',

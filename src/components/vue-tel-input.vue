@@ -52,10 +52,12 @@
           @mousemove="selectedIndex = index"
           :aria-selected="activeCountryCode === pb.iso2 && !pb.preferred"
         >
-          <span
-            v-if="dropdownOptions.showFlags"
-            :class="['vti__flag', pb.iso2.toLowerCase()]"
-          ></span>
+          <div class="vti__flag-wrapper">
+            <span
+              v-if="dropdownOptions.showFlags"
+              :class="['vti__flag', pb.iso2.toLowerCase()]"
+            />
+          </div>
           <strong>{{ pb.name }}</strong>
           <span v-if="dropdownOptions.showDialCodeInList"> +{{ pb.dialCode }} </span>
         </li>

@@ -45,6 +45,11 @@
 .vti__selection .vti__country-code {
   color: #666;
 }
+.vti__flag-wrapper {
+  display: inline-block;
+  width: 30px;
+  text-align: center;
+}
 .vti__flag {
   margin-right: 5px;
   margin-left: 5px;

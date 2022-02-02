@@ -38,7 +38,7 @@
           v-if="dropdownOptions.showSearchBox"
           class="vti__input vti__search_box"
           aria-label="Search by country name or country code"
-          :placeholder="sortedCountries[0].name"
+          :placeholder="sortedCountries.length ? sortedCountries[0].name : ''"
           type="text"
           v-model="searchQuery"
         />

@@ -41,6 +41,7 @@
           :placeholder="sortedCountries.length ? sortedCountries[0].name : ''"
           type="text"
           v-model="searchQuery"
+          @click.stop
         />
         <li
           v-for="(pb, index) in sortedCountries"

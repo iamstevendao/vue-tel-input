@@ -9,3 +9,4 @@ docs/.vuepress/.temp/
 dist/
 dist-modern/
 Icon?
+.browserslistrc

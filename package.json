@@ -11,8 +11,8 @@
   },
   "scripts": {
     "serve": "cd docs && npm run serve",
-    "build": "vue-cli-service build --target lib src/index.js --dest dist",
-    "build:modern": "MODERN=true vue-cli-service build --target lib src/index.js --dest dist-modern",
+    "build": "cp .browserslistrc.legacy .browserslistrc && vue-cli-service build --target lib src/index.js --dest dist",
+    "build:modern": "cp .browserslistrc.modern .browserslistrc && MODERN=true vue-cli-service build --target lib src/index.js --dest dist-modern",
     "docs:build": "cd docs && npm run build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",

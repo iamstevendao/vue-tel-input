@@ -304,7 +304,7 @@ export default {
     'inputOptions.placeholder': function () {
       this.resetPlaceholder();
     },
-    value(value, oldValue) {
+    modelValue(value, oldValue) {
       if (!this.testCharacters()) {
         this.$nextTick(() => {
           this.phone = oldValue;

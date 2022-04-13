@@ -176,7 +176,7 @@ Since the library is about 200kb of JavaScript and 100kb of CSS in order to impr
 </script>
 ```
 
-As you see, we do use Vue SFC `<style></style>` tag here to import component's css as it would result in CSS going to the main/vendors bundle instead of being downloaded on demand.
+As you see, we don't use Vue SFC `<style></style>` tag here to import component's css as it would result in CSS going to the main/vendors bundle instead of being downloaded on demand.
 
 ## Development
 

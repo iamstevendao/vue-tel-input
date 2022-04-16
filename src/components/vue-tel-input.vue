@@ -251,11 +251,19 @@ export default {
       );
     },
     phoneObject() {
+      if (!this.finishMounted) {
+        return {};
+      }
+
       let result;
       if (this.phone?.[0] === '+') {
         result = parsePhoneNumberFromString(this.phone) || {};
       } else {
         result = parsePhoneNumberFromString(this.phone, this.activeCountryCode) || {};
+      }
+
+      if (this.inputOptions.showDialCode && this.phone?.[0] !== '+') {
+        Object.assign(result, { country: '--' });
       }
 
       const {
@@ -273,7 +281,7 @@ export default {
       if (result.country && (this.ignoredCountries.length || this.onlyCountries.length)) {
         if (!this.findCountry(result.country)) {
           valid = false;
-          Object.assign(result, { country: null });
+          Object.assign(result, { country: '--' });
         }
       }
 
@@ -289,7 +297,7 @@ export default {
   },
   watch: {
     activeCountry(value, oldValue) {
-      if (!value && oldValue?.iso2) {
+      if (!value && oldValue?.iso2 && !this.inputOptions.showDialCode) {
         this.activeCountryCode = oldValue.iso2;
         return;
       }
@@ -299,6 +307,9 @@ export default {
       }
     },
     'phoneObject.countryCode': function (value) {
+      if (!value) {
+        return;
+      }
       this.activeCountryCode = value || '';
     },
     'phoneObject.valid': function () {

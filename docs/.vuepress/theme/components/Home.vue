@@ -63,6 +63,16 @@
             :type="field.type"
           />
         </div>
+        <div v-for="field in inputFields" :key="field.model" :class="field.containerClasses">
+          <form-input
+            v-bind="field.bind"
+            :model="options.inputOptions"
+            :description="field.description"
+            :modelName="field.model"
+            :label="field.label"
+            :type="field.type"
+          />
+        </div>
         <div v-for="field in dropdownFields" :key="field.model" :class="field.containerClasses">
           <form-input
             v-bind="field.bind"
@@ -119,6 +129,11 @@ export default {
       },
       options: {
         ...defaultOptions,
+        inputOptions: {
+          ...defaultOptions.inputOptions,
+          showDialCode: true,
+        },
+        mode: 'international',
         validCharactersOnly: true,
       },
       fields: allProps
@@ -143,9 +158,17 @@ export default {
           model: field.model.split('.')[1],
         }));
     },
+    inputFields() {
+      return this.fields
+        .filter(({ model }) => model.includes('inputOptions'))
+        .map((field) => ({
+          ...field,
+          model: field.model.split('.')[1],
+        }));
+    },
     otherFields() {
       return this.fields
-        .filter(({ model }) => !model.includes('dropdownOptions'));
+        .filter(({ model }) => !model.includes('dropdownOptions') && !model.includes('inputOptions'));
     },
   },
   methods: {

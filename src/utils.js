@@ -195,7 +195,7 @@ export const allProps = [
     default: false,
     type: Boolean,
     description: 'Show dial code in input',
-    inDemo: false,
+    inDemo: true,
   },
   {
     name: 'inputOptions.placeholder',

@@ -156,6 +156,16 @@ describe('Props', () => {
 
       expect(wrapper.find('.vti__dropdown-item .vti__flag').exists()).toBeFalsy();
     });
+    it('.hideSelection hide the select button from the list', () => {
+      const wrapper = shallowMount(VueTelInput, {
+        propsData: {
+          dropdownOptions: {
+            hideSelection: true,
+          },
+        },
+      });
+      expect(wrapper.find('.vti__selection').exists()).toBeFalsy();
+    });
   });
   describe(':ignoredCountries', () => {
     it('hides countries from the list', () => {

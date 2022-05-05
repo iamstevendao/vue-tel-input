@@ -14,7 +14,7 @@
       @keydown.esc="reset"
       @keydown.tab="reset"
     >
-      <span class="vti__selection">
+      <span class="vti__selection" v-if="!dropdownOptions.hideSelection">
         <span
           v-if="dropdownOptions.showFlags"
           :class="['vti__flag', activeCountryCode.toLowerCase()]"

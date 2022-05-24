@@ -27,7 +27,7 @@
         </slot>
       </span>
       <ul
-        v-if="open"
+        v-show="open"
         ref="list"
         class="vti__dropdown-list"
         :style="{ width: dropdownOptions.width }"

@@ -7,7 +7,9 @@ set -e
 npm run docs:build
 
 # Copy circle CI configuration to prevent running from gh-pages
+# Copy CNAME for custom domain
 cp circle.yml docs/.vuepress/dist
+cp CNAME docs/.vuepress/dist
 
 # navigate into the build output directory
 cd docs/.vuepress/dist

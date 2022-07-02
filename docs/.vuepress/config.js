@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/vue-tel-input/',
+  base: '/',
   locales: {
     '/': {
       lang: 'en-US',

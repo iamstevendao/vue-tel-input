@@ -1,59 +1,51 @@
 {
   "name": "vue-tel-input",
-  "version": "6.0.0-beta.7",
+  "version": "6.0.0",
   "description": "International Telephone Input with Vue",
   "author": "Steven Dao <iamstevendao@gmail.com>",
   "license": "MIT",
-  "homepage": "https://iamstevendao.github.io/vue-tel-input/",
+  "homepage": "https://vue-tel-input.iamstevendao.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/iamstevendao/vue-tel-input.git"
   },
+  "main": "dist/vue-tel-input.cjs.js",
+  "module": "dist/vue-tel-input.es.js",
+  "unpkg": "dist/vue-tel-input.cjs.js",
+  "browser": "dist/vue-tel-input.iife.js",
   "scripts": {
-    "serve": "vuepress dev docs",
-    "build": "vue-cli-service build --target lib src/index.js",
-    "docs:build": "vuepress build docs",
-    "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint",
-    "prepublishOnly": "npm run build"
+    "dev": "vite",
+    "build": "run-p type-check build-only",
+    "preview": "vite preview --port 4173",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --noEmit",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
   },
-  "files": [
-    "dist/"
-  ],
-  "main": "dist/vue-tel-input.umd.min.js",
-  "unpkg": "dist/vue-tel-input.umd.min.js",
-  "jsdelivr": "dist/vue-tel-input.umd.min.js",
   "dependencies": {
-    "core-js": "^3.6.5",
-    "libphonenumber-js": "^1.9.6"
+    "libphonenumber-js": "^1.10.7"
   },
   "peerDependencies": {
-    "vue": "^3.1.1"
+    "vue": "^3.2.37"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-unit-jest": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.1.1",
-    "@vue/eslint-config-airbnb": "^5.0.2",
-    "@vue/test-utils": "^2.0.0-rc.6",
-    "babel-eslint": "^10.1.0",
-    "copy-webpack-plugin": "^5.1.2",
-    "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jest": "^22.15.1",
-    "eslint-plugin-vue": "^7.11.1",
-    "lint-staged": "^9.5.0",
-    "vuepress": "^2.0.0-beta.18"
+    "@rushstack/eslint-patch": "^1.1.0",
+    "@types/node": "^16.11.41",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vue/eslint-config-typescript": "^11.0.0",
+    "@vue/tsconfig": "^0.1.3",
+    "eslint": "^8.5.0",
+    "eslint-plugin-vue": "^9.0.0",
+    "npm-run-all": "^4.1.5",
+    "rollup-plugin-copy": "^3.4.0",
+    "typescript": "~4.7.4",
+    "vite": "^2.9.12",
+    "vite-plugin-static-copy": "^0.6.1",
+    "vitepress": "^1.0.0-alpha.4",
+    "vue-tsc": "^0.38.1"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ],
   "keywords": [
     "vue",
     "telephone",

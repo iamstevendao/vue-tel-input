@@ -4,16 +4,17 @@
   "description": "International Telephone Input with Vue",
   "author": "Steven Dao <iamstevendao@gmail.com>",
   "license": "MIT",
-  "homepage": "https://iamstevendao.github.io/vue-tel-input/",
+  "homepage": "https://vue-tel-input.iamstevendao.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/iamstevendao/vue-tel-input.git"
   },
   "scripts": {
-    "serve": "cd docs && npm run serve",
+    "dev": "vuepress dev docs",
     "build": "cp .browserslistrc.legacy .browserslistrc && vue-cli-service build --target lib src/index.js --dest dist",
     "build:modern": "cp .browserslistrc.modern .browserslistrc && MODERN=true vue-cli-service build --target lib src/index.js --dest dist-modern",
-    "docs:build": "cd docs && npm run build",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "lint:fix": "vue-cli-service lint --fix",
@@ -28,7 +29,9 @@
   "jsdelivr": "dist/vue-tel-input.umd.min.js",
   "dependencies": {
     "core-js": "^3.14.0",
-    "libphonenumber-js": "^1.9.6",
+    "libphonenumber-js": "^1.9.6"
+  },
+  "peerDependencies": {
     "vue": "^2.6.14"
   },
   "devDependencies": {
@@ -46,7 +49,10 @@
     "eslint-plugin-vue": "^7.20.0",
     "lint-staged": "^11.2.3",
     "vue-jest": "^4.0.1",
-    "vue-template-compiler": "^2.6.14"
+    "vue-template-compiler": "^2.6.14",
+    "vue-server-renderer": "2.6.14",
+    "vuepress": "1.8.2",
+    "webpack": "^4.8.1"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

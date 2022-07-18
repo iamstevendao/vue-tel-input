@@ -12,7 +12,6 @@
   "main": "dist/vue-tel-input.cjs.js",
   "module": "dist/vue-tel-input.es.js",
   "unpkg": "dist/vue-tel-input.cjs.js",
-  "browser": "dist/vue-tel-input.iife.js",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",

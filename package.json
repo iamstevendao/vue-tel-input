@@ -29,7 +29,7 @@
   "jsdelivr": "dist/vue-tel-input.umd.min.js",
   "dependencies": {
     "core-js": "^3.14.0",
-    "libphonenumber-js": "^1.9.6"
+    "libphonenumber-js": "^1.10.12"
   },
   "peerDependencies": {
     "vue": "^2.6.14"

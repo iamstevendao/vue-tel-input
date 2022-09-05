@@ -24,7 +24,7 @@
     "docs:serve": "vitepress serve docs"
   },
   "dependencies": {
-    "libphonenumber-js": "^1.10.7"
+    "libphonenumber-js": "^1.10.12"
   },
   "peerDependencies": {
     "vue": "^3.2.37"

@@ -32,14 +32,14 @@
     "libphonenumber-js": "^1.10.12"
   },
   "peerDependencies": {
-    "vue": "^2.6.14"
+    "vue": "^2.7.10"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.15.8",
-    "@vue/cli-plugin-babel": "~5.0.0-beta.2",
-    "@vue/cli-plugin-eslint": "~5.0.0-beta.2",
-    "@vue/cli-plugin-unit-jest": "~5.0.0-beta.2",
-    "@vue/cli-service": "~5.0.0-beta.2",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-plugin-unit-jest": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
     "@vue/eslint-config-airbnb": "^5.3.0",
     "@vue/test-utils": "^1.2.2",
     "copy-webpack-plugin": "^9.0.1",
@@ -49,10 +49,10 @@
     "eslint-plugin-vue": "^7.20.0",
     "lint-staged": "^11.2.3",
     "vue-jest": "^4.0.1",
-    "vue-template-compiler": "^2.6.14",
-    "vue-server-renderer": "2.6.14",
+    "vue-template-compiler": "^2.7.10",
+    "vue-server-renderer": "^2.7.10",
     "vuepress": "1.8.2",
-    "webpack": "^4.8.1"
+    "webpack": "^5.1.0"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

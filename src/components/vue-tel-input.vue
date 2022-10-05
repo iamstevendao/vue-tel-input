@@ -103,19 +103,6 @@ function getDefault(key) {
   return value;
 }
 
-// let examples = null;
-// const getExamples = () => new Promise(
-//   (resolve) => (
-//     examples
-//       ? resolve(examples)
-//       : import('libphonenumber-js/examples.mobile.json')
-//         .then((results) => {
-//           examples = results;
-//           resolve(results);
-//         })
-//   ),
-// );
-
 export default {
   name: 'VueTelInput',
   directives: {
@@ -328,9 +315,6 @@ export default {
         }
       });
     },
-    // finishMounted() {
-    //   this.resetPlaceholder();
-    // },
     'inputOptions.placeholder': function () {
       this.resetPlaceholder();
     },
@@ -379,17 +363,6 @@ export default {
     resetPlaceholder() {
       this.parsedPlaceholder = this.inputOptions.placeholder;
       // TODO: Fix dynamicPlaceholder
-      // if (!this.inputOptions.dynamicPlaceholder) {
-      //   return result;
-      // }
-      // getExamples()
-      //   .then((results) => {
-      //     examples = results;
-      //     const mode = (!this.mode || this.mode === 'auto') ? 'international' : this.mode;
-      //     const number = getExampleNumber(this.activeCountryCode.toUpperCase(), results);
-      //     this.parsedPlaceholder = number?.format(mode.toUpperCase()) || this.placeholder;
-      //   })
-      //   .catch(console.error);
     },
     initializeCountry() {
       return new Promise((resolve) => {

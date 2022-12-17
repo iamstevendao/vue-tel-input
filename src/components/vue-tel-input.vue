@@ -1,6 +1,7 @@
 <template>
   <div :class="['vue-tel-input', styleClasses, { disabled: disabled }]">
     <div
+      v-if="dropdownOptions.show"
       v-click-outside="clickedOutside"
       aria-label="Country Code Selector"
       aria-haspopup="listbox"

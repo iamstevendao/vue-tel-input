@@ -81,6 +81,13 @@ export const allProps = [
     inDemo: false,
   },
   {
+    name: 'dropdownOptions.show',
+    default: true,
+    type: Boolean,
+    description: 'Show dropdown',
+    inDemo: false,
+  },
+  {
     name: 'dropdownOptions.disabled',
     default: false,
     type: Boolean,

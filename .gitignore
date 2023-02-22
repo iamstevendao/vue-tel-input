@@ -6,7 +6,5 @@ yarn-error.log
 docs/.vuepress/.dist/
 docs/.vuepress/.cache/
 docs/.vuepress/.temp/
-dist/
-dist-modern/
 Icon?
 .browserslistrc

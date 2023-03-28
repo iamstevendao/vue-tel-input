@@ -12,24 +12,43 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "cp .browserslistrc.legacy .browserslistrc && vue-cli-service build --target lib src/index.js --dest dist",
-    "build:modern": "cp .browserslistrc.modern .browserslistrc && MODERN=true vue-cli-service build --target lib src/index.js --dest dist-modern",
+    "build:modern": "cp .browserslistrc.modern .browserslistrc && MODERN=true vue-cli-service build --target lib src/index.js --dest dist/modern",
+    "build:max": "cp .browserslistrc.modern .browserslistrc && MODERN=true vue-cli-service build --target lib src/index.max.js --dest dist/max",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "lint:fix": "vue-cli-service lint --fix",
-    "prepublishOnly": "npm run build && npm run build:modern"
+    "prepublishOnly": "npm run build && npm run build:modern && npm run build:max"
   },
   "files": [
     "dist/",
-    "dist-modern/"
+    "dist/modern/",
+    "dist/max/"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/vue-tel-input.esm.js",
+      "require": "./dist/vue-tel-input.common.js",
+      "default": "./dist/vue-tel-input.umd.min.js"
+    },
+    "./max": {
+      "import": "./dist/max/vue-tel-input.esm.js",
+      "require": "./dist/max/vue-tel-input.common.js",
+      "default": "./dist/max/vue-tel-input.umd.min.js"
+    },
+    "./modern": {
+      "import": "./dist/modern/vue-tel-input.esm.js",
+      "require": "./dist/modern/vue-tel-input.common.js",
+      "default": "./dist/modern/vue-tel-input.umd.min.js"
+    }
+  },
   "main": "dist/vue-tel-input.umd.min.js",
   "unpkg": "dist/vue-tel-input.umd.min.js",
   "jsdelivr": "dist/vue-tel-input.umd.min.js",
   "dependencies": {
     "core-js": "^3.14.0",
-    "libphonenumber-js": "^1.10.12"
+    "libphonenumber-js": "^1.10.24"
   },
   "peerDependencies": {
     "vue": "^2.7.10"
@@ -49,8 +68,8 @@
     "eslint-plugin-vue": "^7.20.0",
     "lint-staged": "^11.2.3",
     "vue-jest": "^4.0.1",
-    "vue-template-compiler": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
+    "vue-template-compiler": "^2.7.10",
     "vuepress": "1.8.2",
     "webpack": "^5.1.0"
   },

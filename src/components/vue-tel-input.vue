@@ -33,6 +33,15 @@
         :class="dropdownOpenDirection"
         role="listbox"
       >
+        <input
+            v-if="dropdownOptions.showSearchBox"
+            class="vti__input vti__search_box"
+            aria-label="Search by country name or country code"
+            :placeholder="sortedCountries.length ? sortedCountries[0].name : ''"
+            type="text"
+            v-model="searchQuery"
+            @click.stop
+          />
         <li
           v-for="(pb, index) in sortedCountries"
           role="option"
@@ -189,6 +198,7 @@ export default {
       typeToFindTimer: null,
       dropdownOpenDirection: 'below',
       parsedPlaceholder: this.inputOptions.placeholder,
+      searchQuery: '',
     };
   },
   computed: {
@@ -229,7 +239,15 @@ export default {
       const preferredCountries = this.getCountries(this.preferredCountries)
         .map((country) => ({ ...country, preferred: true }));
 
-      return [...preferredCountries, ...this.filteredCountries];
+      const countriesList = [...preferredCountries, ...this.filteredCountries];
+      if (!this.dropdownOptions.showSearchBox) {
+        return countriesList;
+      }
+      return countriesList.filter(
+        (c) => (new RegExp(this.searchQuery, 'i')).test(c.name)
+          || (new RegExp(this.searchQuery, 'i')).test(c.iso2)
+          || (new RegExp(this.searchQuery, 'i')).test(c.dialCode),
+      );
     },
     phoneObject() {
       let result;
@@ -536,6 +554,7 @@ export default {
       if (this.disabled || this.dropdownOptions.disabled) {
         return;
       }
+      this.searchQuery = '';
       this.open = !this.open;
     },
     clickedOutside() {

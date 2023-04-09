@@ -1,67 +1,29 @@
-import { fileURLToPath, URL } from 'url';
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import path from 'path';
-import { viteStaticCopy } from 'vite-plugin-static-copy'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { resolve } from 'path'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command }) => {
-  if (command === 'serve') {
-    return {
-      plugins: [
-        vue(),
-      ],
-      resolve: {
-        alias: {
-          '@': fileURLToPath(new URL('./src', import.meta.url))
-        }
-      },
-      build: {
-        rollupOptions: {
-          input: { app: './examples/module/index.html' },
-        }
-      },
-      server: {
-        open: '/examples/module/',
-      }
-    }
-  }
-
-  return {
-    plugins: [
-      vue(),
-      viteStaticCopy({
-        targets: [
-          { src: 'src/assets/component.css', dest: 'css' },
-          { src: 'src/assets/sprite.css', dest: 'css' },
-        ]
-      }),
-    ],
-    resolve: {
-      alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url))
-      }
+export default defineConfig({
+  plugins: [vue()],
+  build: {
+    lib: {
+      // Could also be a dictionary or array of multiple entry points
+      entry: resolve(__dirname, 'src/index.js'),
+      name: 'VueTelInput',
+      // the proper extensions will be added
+      fileName: 'vue-tel-input',
     },
-    build: {
-      lib: {
-        formats: ['es', 'cjs', 'iife'],
-        entry: path.resolve(__dirname, 'src/index.js'),
-        name: 'VueTelInput',
-        fileName: (format) => `vue-tel-input.${format}.js`
-      },
-      rollupOptions: {
-        external: ['vue'],
-        output: {
-          exports: 'named',
-          globals: {
-            vue: 'Vue'
-          },
-          assetFileNames: (assetInfo) => {
-            if (assetInfo.name === 'style.css') return 'vue-tel-input.css';
-            return assetInfo.name;
-          },
+    rollupOptions: {
+      // make sure to externalize deps that shouldn't be bundled
+      // into your library
+      external: ['vue'],
+      output: {
+        // Provide global variables to use in the UMD build
+        // for externalized deps
+        globals: {
+          vue: 'Vue',
         },
-      }
+      },
     },
-  };
+  },
 })

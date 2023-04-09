@@ -1,16 +1,28 @@
+<p align="center">
+<img width="100" alt="vue-tel-input-logo" src="https://vue-tel-input.iamstevendao.com/hero.png"/>
+</p>
+
 # vue-tel-input
 
 International Telephone Input with Vue.
 
-[![](https://img.shields.io/npm/dt/vue-tel-input.svg)](https://www.npmjs.com/package/vue-tel-input) [![](https://img.shields.io/github/stars/iamstevendao/vue-tel-input.svg)](https://github.com/iamstevendao/vue-tel-input)
+[![npm](https://img.shields.io/npm/dt/vue-tel-input.svg)](https://www.npmjs.com/package/vue-tel-input) [![stars](https://img.shields.io/github/stars/iamstevendao/vue-tel-input.svg)](https://github.com/iamstevendao/vue-tel-input)
 
 <p align="center">
-<img width="600px" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
+<img width="600" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
 </p>
 
-## Documentation and live demo
+## Documentation and Demo
 
-[Visit the website](https://iamstevendao.github.io/vue-tel-input/)
+[Visit the website](https://vue-tel-input.iamstevendao.com/)
+
+## Vue 2 Support
+
+`vue-tel-input@legacy`: [Guide](https://vue-tel-input.iamstevendao.com/guide/legacy.html)
+
+## Changelog
+
+[Go to Github Releases](https://github.com/iamstevendao/vue-tel-input/releases)
 
 ## Getting started
 
@@ -23,11 +35,13 @@ International Telephone Input with Vue.
 - Add the plugin into your app:
 
   ```javascript
-  import Vue from 'vue'
-  import VueTelInput from 'vue-tel-input'
-  import 'vue-tel-input/dist/vue-tel-input.css'
+  import Vue from 'vue';
+  import VueTelInput from 'vue-tel-input';
+  import 'vue-tel-input/dist/vue-tel-input.css';
 
-  Vue.use(VueTelInput)
+  const app = createApp(App);
+  app.use(VueTelInput);
+  app.mount('#app');
   ```
 
   [More info on installation](#installation)
@@ -37,7 +51,7 @@ International Telephone Input with Vue.
   ```html
   <template>
     <vue-tel-input v-model="phone"></vue-tel-input>
-  <template>
+  </template>
   ```
 
 ## Installation
@@ -51,32 +65,47 @@ International Telephone Input with Vue.
 Install the plugin into Vue:
 
 ```javascript
-import Vue from 'vue'
-import VueTelInput from 'vue-tel-input'
-import 'vue-tel-input/dist/vue-tel-input.css'
+import { createApp } from 'vue';
+import App from './App.vue';
+import VueTelInput from 'vue-tel-input';
+import 'vue-tel-input/dist/vue-tel-input.css';
 
-Vue.use(VueTelInput, options) // Define default global options here (optional)
+const globalOptions = {
+  mode: 'auto',
+};
+
+const app = createApp(App);
+app.use(VueTelInput, globalOptions); // Define default global options here (optional)
+app.mount('#app');
 ```
 
-> View all available options in [Props](https://iamstevendao.github.io/vue-tel-input/documentation/props.html).
+> View all available options in [Props](https://vue-tel-input.iamstevendao.com/usage/props.html).
 
 Or use the component directly:
 
 ```html
-<!-- your-component.vue-->
 <template>
-  <vue-tel-input v-model="value"></vue-tel-input>
+  <vue-tel-input v-model="phone" mode="international"></vue-tel-input>
 </template>
+
 <script>
-import { VueTelInput } from 'vue-tel-input'
+  import { ref } from 'vue';
+  import { VueTelInput } from 'vue-tel-input';
+  import 'vue-tel-input/dist/vue-tel-input.css';
 
-export default {
-  components: {
-    VueTelInput,
-  },
-};
+  export default {
+    components: {
+      VueTelInput,
+    },
 
-<style src="vue-tel-input/dist/vue-tel-input.css"></style>
+    setup() {
+      const phone = ref(null);
+
+      return {
+        value,
+      };
+    },
+  };
 </script>
 ```
 
@@ -84,20 +113,42 @@ export default {
 
 ```html
 <script src="https://unpkg.com/vue-tel-input"></script>
-<link rel="stylesheet" href="https://unpkg.com/vue-tel-input/dist/vue-tel-input.css">
+<link rel="stylesheet" href="https://unpkg.com/vue-tel-input/dist/vue-tel-input.css" />
 ```
 
 **If Vue is detected in the Page, the plugin is installed automatically.**
 
-** Otherwise, manually install the plugin into Vue:
+\*\* Otherwise, manually install the plugin into Vue:
 
 ```js
-Vue.use(window['vue-tel-input']);
+app.use(window['vue-tel-input']);
 ```
 
-## Changelog
+### Component lazy loading
 
-[Go to Github Releases](https://github.com/iamstevendao/vue-tel-input/releases)
+Since the library is about 200kb of JavaScript and 100kb of CSS in order to improve initial page loading time you might consider importing it asynchronously only when user navigates to the page where the library is actually needed. The technique is called [Lazy Load](https://webpack.js.org/guides/lazy-loading/) and you can use it in some modern bundlers like Webpack and Rollup.
+
+```html
+<!-- your-component.vue-->
+<template>
+  <vue-tel-input v-model="value"></vue-tel-input>
+</template>
+<script>
+  const VueTelInput = () =>
+    Promise.all([
+      import(/* webpackChunkName: "chunk-vue-tel-input" */ 'vue-tel-input'),
+      import(/* webpackChunkName: "chunk-vue-tel-input" */ 'vue-tel-input/dist/vue-tel-input.css'),
+    ]).then(([{ VueTelInput }]) => VueTelInput);
+
+  export default {
+    components: {
+      VueTelInput,
+    },
+  };
+</script>
+```
+
+As you see, we don't use Vue SFC `<style></style>` tag here to import component's css as it would result in CSS going to the main/vendors bundle instead of being downloaded on demand.
 
 ## Development
 
@@ -107,11 +158,10 @@ Clone the project
   git clone https://github.com/iamstevendao/vue-tel-input.git
 ```
 
-Go to the project directory & checkout the `next` branch
+Go to the project directory
 
 ```bash
   cd vue-tel-input
-  git checkout next origin/next
 ```
 
 Install dependencies
@@ -120,23 +170,10 @@ Install dependencies
   npm install
 ```
 
-Build the project
-
-```bash
-  npm run build
-```
-
-Start the es build example
+Start the server
 
 ```bash
   npm run dev
-```
-
-Start the browser build example
-
-```bash
-  npx http-server -p 8080
-  # 127.0.0.1:8080/examples/browser.html
 ```
 
 ## License

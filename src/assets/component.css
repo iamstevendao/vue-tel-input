@@ -96,3 +96,9 @@
   outline: none;
   padding-left: 7px;
 }
+.vti__search_box {
+  border: 1px solid #ccc;
+  width: 94%;
+  padding: 7px;
+  margin: 2px 2px;
+}

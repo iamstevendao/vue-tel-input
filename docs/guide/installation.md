@@ -12,7 +12,7 @@ Install the plugin into Vue:
 import { createApp } from 'vue';
 import App from './App.vue';
 import VueTelInput from 'vue-tel-input';
-import 'vue-tel-input/dist/vue-tel-input.css';
+import 'vue-tel-input/vue-tel-input.css';
 
 const globalOptions = {
   mode: 'auto',
@@ -35,7 +35,7 @@ Or use the component directly:
 <script>
   import { ref } from 'vue';
   import { VueTelInput } from 'vue-tel-input';
-  import 'vue-tel-input/dist/vue-tel-input.css';
+  import 'vue-tel-input/vue-tel-input.css';
 
   export default {
     components: {
@@ -51,13 +51,4 @@ Or use the component directly:
     },
   };
 </script>
-```
-
-::: tip
-Instead of importing the extracted css file, you can also import separate css files:
-
-```javascript
-// import 'vue-tel-input/dist/vue-tel-input.css'
-import 'vue-tel-input/dist/css/sprite.css'; // Flags styles
-import 'vue-tel-input/dist/css/component.css'; // Component styles
 ```

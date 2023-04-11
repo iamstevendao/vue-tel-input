@@ -37,7 +37,7 @@ International Telephone Input with Vue.
   ```javascript
   import Vue from 'vue';
   import VueTelInput from 'vue-tel-input';
-  import 'vue-tel-input/dist/vue-tel-input.css';
+  import 'vue-tel-input/vue-tel-input.css';
 
   const app = createApp(App);
   app.use(VueTelInput);
@@ -68,7 +68,7 @@ Install the plugin into Vue:
 import { createApp } from 'vue';
 import App from './App.vue';
 import VueTelInput from 'vue-tel-input';
-import 'vue-tel-input/dist/vue-tel-input.css';
+import 'vue-tel-input/vue-tel-input.css';
 
 const globalOptions = {
   mode: 'auto',
@@ -91,7 +91,7 @@ Or use the component directly:
 <script>
   import { ref } from 'vue';
   import { VueTelInput } from 'vue-tel-input';
-  import 'vue-tel-input/dist/vue-tel-input.css';
+  import 'vue-tel-input/vue-tel-input.css';
 
   export default {
     components: {
@@ -137,7 +137,7 @@ Since the library is about 200kb of JavaScript and 100kb of CSS in order to impr
   const VueTelInput = () =>
     Promise.all([
       import(/* webpackChunkName: "chunk-vue-tel-input" */ 'vue-tel-input'),
-      import(/* webpackChunkName: "chunk-vue-tel-input" */ 'vue-tel-input/dist/vue-tel-input.css'),
+      import(/* webpackChunkName: "chunk-vue-tel-input" */ 'vue-tel-input/vue-tel-input.css'),
     ]).then(([{ VueTelInput }]) => VueTelInput);
 
   export default {

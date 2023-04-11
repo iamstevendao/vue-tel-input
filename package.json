@@ -10,6 +10,13 @@
     "type": "git",
     "url": "https://github.com/iamstevendao/vue-tel-input.git"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/vue-tel-input.js",
+      "require": "./dist/vue-tel-input.umd.cjs"
+    },
+    "./vue-tel-input.css": "./dist/vue-tel-input.css"
+  },
   "main": "./dist/vue-tel-input.umd.cjs",
   "module": "./dist/vue-tel-input.js",
   "scripts": {

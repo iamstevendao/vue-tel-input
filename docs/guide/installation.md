@@ -23,7 +23,7 @@ app.use(VueTelInput, globalOptions); // Define default global options here (opti
 app.mount('#app');
 ```
 
-> View all available options in [Props](/vue-tel-input/documentation/props).
+> View all available options in [Props](/usage/props).
 
 Or use the component directly:
 

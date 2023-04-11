@@ -18,7 +18,7 @@
   app.mount('#app');
   ```
 
-  [More info on installation](/vue-tel-input/guide/installation)
+  [More info on installation](/guide/installation)
 
 - Use the `vue-tel-input` component:
 

@@ -1,6 +1,6 @@
 {
   "name": "vue-tel-input",
-  "version": "5.12.0",
+  "version": "5.12.1",
   "description": "International Telephone Input with Vue",
   "author": "Steven Dao <iamstevendao@gmail.com>",
   "license": "MIT",
@@ -11,8 +11,7 @@
   },
   "scripts": {
     "dev": "vuepress dev docs",
-    "build": "cp .browserslistrc.legacy .browserslistrc && vue-cli-service build --target lib src/index.js --dest dist",
-    "build:modern": "cp .browserslistrc.modern .browserslistrc && MODERN=true vue-cli-service build --target lib src/index.js --dest dist-modern",
+    "build": "cp .browserslistrc.modern .browserslistrc && MODERN=true vue-cli-service build --target lib src/index.js --dest dist",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "test:unit": "vue-cli-service test:unit",
@@ -21,8 +20,7 @@
     "prepublishOnly": "npm run build && npm run build:modern"
   },
   "files": [
-    "dist/",
-    "dist-modern/"
+    "dist/"
   ],
   "main": "dist/vue-tel-input.umd.min.js",
   "unpkg": "dist/vue-tel-input.umd.min.js",

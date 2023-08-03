@@ -236,10 +236,13 @@ export default {
       if (!this.dropdownOptions.showSearchBox) {
         return countriesList;
       }
+      const userInput = this.searchQuery;
+      const cleanInput = userInput.replace(/[~`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?-_]/g, '');
+
       return countriesList.filter(
-        (c) => (new RegExp(this.searchQuery, 'i')).test(c.name)
-          || (new RegExp(this.searchQuery, 'i')).test(c.iso2)
-          || (new RegExp(this.searchQuery, 'i')).test(c.dialCode),
+        (c) => (new RegExp(cleanInput, 'i')).test(c.name)
+          || (new RegExp(cleanInput, 'i')).test(c.iso2)
+          || (new RegExp(cleanInput, 'i')).test(c.dialCode),
       );
     },
     phoneObject() {

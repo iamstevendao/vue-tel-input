@@ -42,6 +42,7 @@
           type="text"
           v-model="searchQuery"
           @click.stop
+          @keydown.stop
         />
         <li
           v-for="(pb, index) in sortedCountries"

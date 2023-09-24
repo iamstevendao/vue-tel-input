@@ -76,7 +76,7 @@
           <div style="margin-top: 15px">
             <a
                   style="color: #999999"
-                  href="https://iamstevendao.github.io/vue-tel-input/documentation/props.html"
+                  href="https://iamstevendao.github.io/vue-tel-input/usage/props.html"
                 >
                   <span>...more</span>
                 </a>

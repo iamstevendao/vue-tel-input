@@ -246,7 +246,7 @@ export default {
         return countriesList;
       }
       const userInput = this.searchQuery;
-      const cleanInput = userInput.replace(/[~`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?-_]/g, '');
+      const cleanInput = userInput.replace(/[~`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?-_]|^0{2,}/g, '');
 
       return countriesList.filter(
         (c) => (new RegExp(cleanInput, 'i')).test(c.name)

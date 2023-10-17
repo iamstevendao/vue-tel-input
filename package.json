@@ -34,6 +34,6 @@
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.3.0",
     "eslint-plugin-import": "^2.7.0",
-    "poi": "^9.6.13"
+    "poi": "^12.10.3"
   }
 }

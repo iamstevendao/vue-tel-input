@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { parsePhoneNumberFromString } from 'libphonenumber-js';
+import { parsePhoneNumberFromString } from 'libphonenumber-js/max';
 import utils, { getCountry, setCaretPosition } from '../utils';
 import clickOutside from '../directives/click-outside';
 

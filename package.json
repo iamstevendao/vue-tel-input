@@ -28,17 +28,17 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
-    "libphonenumber-js": "^1.10.12",
-    "vue": "^3.2.47"
+    "libphonenumber-js": "^1.10.51",
+    "vue": "^3.3.9"
   },
   "files": [
     "dist"
   ],
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.1.0",
-    "typescript": "^5.0.2",
-    "vite": "^4.2.1",
-    "vitepress": "^1.0.0-alpha.65",
+    "@vitejs/plugin-vue": "^4.5.0",
+    "typescript": "^5.3.2",
+    "vite": "^5.0.2",
+    "vitepress": "^1.0.0-rc.31",
     "vue-tsc": "^1.2.0"
   },
   "keywords": [

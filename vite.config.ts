@@ -13,6 +13,9 @@ export default defineConfig({
       name: 'VueTelInput',
       fileName: 'vue-tel-input',
     },
+    modulePreload: {
+      polyfill: true,
+    },
     rollupOptions: {
       external: ['vue'],
       output: {

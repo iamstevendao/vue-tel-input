@@ -530,18 +530,18 @@ export default {
       this.$emit('update:modelValue', value);
       this.$emit('on-input', value, this.phoneObject, this.$refs.input);
     },
-    onBlur() {
-      this.$emit('blur');
+    onBlur(e) {
+      this.$emit('blur', e);
     },
-    onFocus() {
+    onFocus(e) {
       setCaretPosition(this.$refs.input, this.phone.length);
-      this.$emit('focus');
+      this.$emit('focus', e);
     },
-    onEnter() {
-      this.$emit('enter');
+    onEnter(e) {
+      this.$emit('enter', e);
     },
-    onSpace() {
-      this.$emit('space');
+    onSpace(e) {
+      this.$emit('space', e);
     },
     focus() {
       this.$refs.input.focus();

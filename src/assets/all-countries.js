@@ -288,7 +288,7 @@ const allCountries = [
     '269',
   ],
   [
-    'Congo (DRC) (Jamhuri ya Kidemokrasia ya Kongo)',
+    'Congo (DRC) (République démocratique du Congo)',
     'cd',
     '243',
   ],

@@ -30,15 +30,17 @@
           class="vti__dropdown-list"
           :class="dropdownOpenDirection"
           role="listbox">
-        <input
-            v-if="dropdownOptions.showSearchBox"
-            class="vti__input vti__search_box"
-            aria-label="Search by country name or country code"
-            :placeholder="sortedCountries.length ? sortedCountries[0].name : ''"
-            type="text"
-            v-model="searchQuery"
-            @click.stop
-        />
+        <div v-if="dropdownOptions.showSearchBox" class="vti__search_box_container">
+          <slot name="search-icon"></slot>
+          <input
+              class="vti__input vti__search_box"
+              aria-label="Search by country name or country code"
+              :placeholder="dropdownOptions.searchBoxPlaceholder || (sortedCountries.length ? sortedCountries[0].name : '')"
+              type="text"
+              v-model="searchQuery"
+              @click.stop
+          />
+        </div>
         <li v-for="(pb, index) in sortedCountries"
             role="option"
             :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
@@ -275,6 +277,7 @@ export default {
       Object.assign(phoneObject, {
         countryCode: result.country,
         valid,
+        possible: result.isPossible?.(),
         country: this.activeCountry,
         formatted,
       });

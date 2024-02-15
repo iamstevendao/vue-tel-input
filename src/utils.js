@@ -116,6 +116,13 @@ export const allProps = [
     inDemo: true,
   },
   {
+    name: 'dropdownOptions.searchBoxPlaceholder',
+    default: '',
+    type: String,
+    description: 'Placeholder for the search box',
+    inDemo: false,
+  },
+  {
     name: 'dropdownOptions.tabindex',
     default: 0,
     type: Number,

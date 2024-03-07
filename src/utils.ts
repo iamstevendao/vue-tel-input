@@ -15,14 +15,14 @@ export function getCountry() {
 }
 
 // Credits: http://blog.vishalon.net/index.php/javascript-getting-and-setting-caret-position-in-textarea/
-export function setCaretPosition(ctrl, pos) {
+export function setCaretPosition(ctrl: HTMLInputElement, pos: number) {
   // Modern browsers
   if (ctrl.setSelectionRange) {
     ctrl.focus();
     ctrl.setSelectionRange(pos, pos);
 
     // IE8 and below
-  } else if (ctrl.createTextRange) {
+  } else if ('createTextRange' in ctrl && typeof ctrl.createTextRange === 'function') {
     const range = ctrl.createTextRange();
     range.collapse(true);
     range.moveEnd('character', pos);
@@ -291,8 +291,17 @@ export const defaultOptions = [...allProps]
       Object.assign(prv, { [crr.name]: crr.default });
     }
     return prv;
-  }, {});
+  }, {} as Record<string, any>);
 
-export default {
+const utils = {
   options: { ...defaultOptions },
 };
+export default utils;
+
+export function getDefault(key: string) {
+  const value = utils.options[key];
+  if (typeof value === 'undefined') {
+    return utils.options[key];
+  }
+  return value;
+}

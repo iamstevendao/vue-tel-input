@@ -197,9 +197,9 @@
     activeCountryCode: '' as CountryCode | '',
     open: false,
     finishMounted: false,
-    selectedIndex: null,
+    selectedIndex: null as number | null,
     typeToFindInput: '',
-    typeToFindTimer: null,
+    typeToFindTimer: undefined as ReturnType<typeof setTimeout> | undefined,
     dropdownOpenDirection: 'below',
     parsedPlaceholder: props.inputOptions.placeholder,
     searchQuery: '',
@@ -328,11 +328,11 @@
   watch(modelValue, (value, oldValue) => {
     if (!testCharacters()) {
       nextTick(() => {
-        data.phone = oldValue;
+        data.phone = oldValue ?? '';
         onInput();
       });
     } else {
-      data.phone = value;
+      data.phone = value ?? '';
     }
   })
   watch(open, (isDropdownOpened) => {
@@ -480,7 +480,7 @@
         phoneObject.value.nationalNumber,
         parsedCountry.iso2,
       )
-        .formatInternational();
+        ?.formatInternational() ?? '';
       return;
     }
 
@@ -539,18 +539,18 @@
 
     emit('on-input', value, phoneObject.value, refInput.value);
   }
-  function onBlur() {
-    emit('blur');
+  function onBlur(e: FocusEvent) {
+    emit('blur', e);
   }
-  function onFocus() {
+  function onFocus(e: FocusEvent) {
     setCaretPosition(refInput.value, data.phone.length);
-    emit('focus');
+    emit('focus', e);
   }
-  function onEnter() {
-    emit('enter');
+  function onEnter(e: KeyboardEvent) {
+    emit('enter', e);
   }
-  function onSpace() {
-    emit('space');
+  function onSpace(e: KeyboardEvent) {
+    emit('space', e);
   }
   // function focus() {
   //   refInput.value?.focus();

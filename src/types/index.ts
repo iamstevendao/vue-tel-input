@@ -1,8 +1,8 @@
-import type { CountryCode } from "libphonenumber-js";
+import type { CountryCode, PhoneNumber } from "libphonenumber-js";
 
 export type Country = [
   CountryName: string,
-  Iso2: CountryCode,
+  Iso2: Lowercase<CountryCode>,
   DialCode: string,
   Priority?: number,
   AreaCodes?: string[]
@@ -15,6 +15,13 @@ export interface CountryObject {
   priority: number;
   areaCodes: string[] | null;
 }
+
+export type PhoneObject = PhoneNumber & {
+  country: CountryObject,
+  countryCode: PhoneNumber['country'],
+  valid: boolean,
+  formatted: string
+};
 
 export interface DropdownOptions {
   disabled?: boolean

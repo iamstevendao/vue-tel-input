@@ -83,8 +83,8 @@
 
 <script setup lang="ts">
   import type { PropType } from 'vue';
-  import type { CountryCode, PhoneNumber } from 'libphonenumber-js';
-  import type { CountryObject, DropdownOptions, InputOptions } from '../types';
+  import type { CountryCode, NumberFormat, PhoneNumber } from 'libphonenumber-js';
+  import type { CountryObject, DropdownOptions, InputOptions, PhoneObject } from '../types';
 
   import { parsePhoneNumberFromString } from 'libphonenumber-js';
   import { getDefault, setCaretPosition, getCountry } from '../utils';
@@ -171,7 +171,7 @@
       default: () => getDefault('invalidMsg') as string,
     },
     mode: {
-      type: String as PropType<'auto' | 'international' | 'national'>,
+      type: String as PropType<'auto' | Lowercase<NumberFormat>>,
       default: () => getDefault('mode') as 'auto',
     },
     onlyCountries: {
@@ -194,7 +194,7 @@
 
   const data = reactive({
     phone: '',
-    activeCountryCode: '' as CountryCode,
+    activeCountryCode: '' as CountryCode | '',
     open: false,
     finishMounted: false,
     selectedIndex: null,
@@ -206,7 +206,7 @@
   })
 
   const activeCountry = computed(() => findCountry(data.activeCountryCode))
-  const parsedMode = computed(() => {
+  const parsedMode = computed<Lowercase<NumberFormat>>(() => {
     if (props.mode === 'auto') {
       if (!data.phone || data.phone[0] !== '+') {
         return 'national';
@@ -254,11 +254,11 @@
     );
   })
   const phoneObject = computed(() => {
-    let result: PhoneNumber | object;
+    let result: PhoneNumber;
     if (data.phone?.[0] === '+') {
-      result = parsePhoneNumberFromString(data.phone) ?? {};
+      result = parsePhoneNumberFromString(data.phone) || {} as PhoneNumber;
     } else {
-      result = parsePhoneNumberFromString(data.phone, data.activeCountryCode) ?? {};
+      result = parsePhoneNumberFromString(data.phone, data.activeCountryCode as CountryCode) || {} as PhoneNumber;
     }
 
     const {
@@ -270,7 +270,7 @@
     let formatted = data.phone;
 
     if (valid) {
-      formatted = result.format?.(parsedMode.value.toUpperCase());
+      formatted = result.format?.(parsedMode.value.toUpperCase() as NumberFormat);
     }
 
     if (result.country && (props.ignoredCountries.length || props.onlyCountries.length)) {
@@ -287,7 +287,7 @@
       formatted,
     });
 
-    return phoneObject;
+    return phoneObject as PhoneObject
   })
 
   watch(activeCountry, (value, oldValue) => {
@@ -552,9 +552,9 @@
   function onSpace() {
     emit('space');
   }
-  function focus() {
-    refInput.value?.focus();
-  }
+  // function focus() {
+  //   refInput.value?.focus();
+  // }
   function toggleDropdown() {
     if (props.disabled || props.dropdownOptions.disabled) {
       return;
@@ -627,7 +627,7 @@
     }
   }
   function reset() {
-    data.selectedIndex = sortedCountries.value.map((c) => c.iso2).indexOf(data.activeCountryCode);
+    data.selectedIndex = sortedCountries.value.map((c) => c.iso2).indexOf(data.activeCountryCode as CountryCode);
     data.open = false;
   }
   function setDropdownPosition() {

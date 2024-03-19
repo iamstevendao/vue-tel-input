@@ -24,6 +24,7 @@
     "noFallthroughCasesInSwitch": true,
     "types": [
       "libphonenumber-js",
+      "vitest"
     ],
   },
   "include": [

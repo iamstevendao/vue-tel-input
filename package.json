@@ -21,6 +21,7 @@
   "module": "./dist/vue-tel-input.js",
   "scripts": {
     "dev": "vitepress dev docs",
+    "test": "vitest --ui",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "docs:dev": "vitepress dev docs",
@@ -35,11 +36,15 @@
     "dist"
   ],
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.5.0",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vitest/ui": "^1.4.0",
+    "@vue/test-utils": "^2.4.5",
+    "jsdom": "^24.0.0",
     "typescript": "^5.3.2",
     "vite": "^5.0.2",
     "vitepress": "^1.0.0-rc.31",
-    "vue-tsc": "^1.8.22"
+    "vitest": "^1.4.0",
+    "vue-tsc": "^2.0.6"
   },
   "keywords": [
     "vue",

@@ -16,8 +16,8 @@ export interface CountryObject {
   areaCodes: string[] | null;
 }
 
-export type PhoneObject = PhoneNumber & {
-  country: CountryObject,
+export type PhoneMeta = {
+  country: PhoneNumber['country'],
   countryCode: PhoneNumber['country'],
   valid: boolean,
   formatted: string

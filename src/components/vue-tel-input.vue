@@ -126,7 +126,6 @@
     'space',
     'validate',
   ])
-  const modelValue = defineModel({ type: String })
   const props = defineProps({
     allCountries: {
       type: Array as PropType<CountryObject[]>,
@@ -191,6 +190,19 @@
       default: () => getDefault('styleClasses') as string,
     },
   })
+  watch(() => props.inputOptions.placeholder, resetPlaceholder)
+
+  const modelValue = defineModel({ type: String })
+  watch(modelValue, (value, oldValue) => {
+    if (!testCharacters()) {
+      nextTick(() => {
+        data.phone = oldValue ?? '';
+        onInput();
+      });
+    } else {
+      data.phone = value ?? '';
+    }
+  })
 
   const data = reactive({
     phone: '',
@@ -204,8 +216,28 @@
     parsedPlaceholder: props.inputOptions.placeholder,
     searchQuery: '',
   })
+  watch(() => data.open, (isDropdownOpened) => {
+    // Emit open and close events
+    if (isDropdownOpened) {
+      setDropdownPosition();
+      emit('open');
+    } else {
+      emit('close');
+    }
+  })
 
   const activeCountry = computed(() => findCountry(data.activeCountryCode))
+  watch(activeCountry, (value, oldValue) => {
+    if (!value && oldValue?.iso2) {
+      data.activeCountryCode = oldValue.iso2;
+      return;
+    }
+    if (value?.iso2) {
+      emit('country-changed', value);
+      // resetPlaceholder();
+    }
+  })
+
   const parsedMode = computed<Lowercase<NumberFormat>>(() => {
     if (props.mode === 'auto') {
       if (!data.phone || data.phone[0] !== '+') {
@@ -219,6 +251,7 @@
     }
     return props.mode;
   })
+
   const filteredCountries = computed(() => {
     // List countries after filtered
     if (props.onlyCountries.length) {
@@ -235,6 +268,7 @@
 
     return props.allCountries;
   })
+
   const sortedCountries = computed(() => {
     // Sort the list countries: from preferred countries to all countries
     const preferredCountries = getCountries(props.preferredCountries)
@@ -253,6 +287,7 @@
         || (new RegExp(cleanInput, 'i')).test(c.dialCode),
     );
   })
+
   const phoneObject = computed(() => {
     let result: PhoneNumber;
     if (data.phone?.[0] === '+') {
@@ -289,17 +324,6 @@
 
     return phoneObject as PhoneObject
   })
-
-  watch(activeCountry, (value, oldValue) => {
-    if (!value && oldValue?.iso2) {
-      data.activeCountryCode = oldValue.iso2;
-      return;
-    }
-    if (value?.iso2) {
-      emit('country-changed', value);
-      // resetPlaceholder();
-    }
-  })
   watch(() => phoneObject.value.countryCode, (value) => {
     data.activeCountryCode = value || '';
   })
@@ -322,28 +346,7 @@
   // finishMounted() {
   //   resetPlaceholder();
   // },
-  watch(() => props.inputOptions.placeholder, () => {
-    resetPlaceholder();
-  })
-  watch(modelValue, (value, oldValue) => {
-    if (!testCharacters()) {
-      nextTick(() => {
-        data.phone = oldValue ?? '';
-        onInput();
-      });
-    } else {
-      data.phone = value ?? '';
-    }
-  })
-  watch(open, (isDropdownOpened) => {
-    // Emit open and close events
-    if (isDropdownOpened) {
-      setDropdownPosition();
-      emit('open');
-    } else {
-      emit('close');
-    }
-  })
+
 
   onMounted(() => {
     if (modelValue.value) {

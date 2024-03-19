@@ -1,25 +1,25 @@
 <template>
   <div ref="refRoot" :class="['vue-tel-input', styleClasses, { disabled: disabled }]">
     <div v-click-outside="clickedOutside"
-        aria-label="Country Code Selector"
-        aria-haspopup="listbox"
-        :aria-expanded="data.open"
-        role="button"
-        :class="['vti__dropdown', { open: data.open, disabled: dropdownOptions.disabled }]"
-        :tabindex="dropdownOptions.tabindex"
-        @keydown="keyboardNav"
-        @click="toggleDropdown"
-        @keydown.space="toggleDropdown"
-        @keydown.esc="reset"
-        @keydown.tab="reset">
+         aria-label="Country Code Selector"
+         aria-haspopup="listbox"
+         :aria-expanded="data.open"
+         role="button"
+         :class="['vti__dropdown', { open: data.open, disabled: dropdownOptions.disabled }]"
+         :tabindex="dropdownOptions.tabindex"
+         @keydown="keyboardNav"
+         @click="toggleDropdown"
+         @keydown.space="toggleDropdown"
+         @keydown.esc="reset"
+         @keydown.tab="reset">
       <span class="vti__selection">
-        <span
-          v-if="dropdownOptions.showFlags"
-          :class="['vti__flag', data.activeCountryCode.toLowerCase()]"
-        ></span>
-        <span v-if="dropdownOptions.showDialCodeInSelection" class="vti__country-code">
-          +{{ activeCountry && activeCountry.dialCode }}
-        </span>
+          <span
+            v-if="dropdownOptions.showFlags"
+            :class="['vti__flag', data.activeCountryCode.toLowerCase()]"
+          ></span>
+          <span v-if="dropdownOptions.showDialCodeInSelection" class="vti__country-code">
+            +{{ activeCountry && activeCountry.dialCode }}
+          </span>
         <slot name="arrow-icon"
             :open="data.open">
           <span class="vti__dropdown-arrow">{{ data.open ? "▲" : "▼" }}</span>
@@ -50,7 +50,7 @@
           <span
               v-if="dropdownOptions.showFlags"
               :class="['vti__flag', pb.iso2.toLowerCase()]"
-          ></span>
+            ></span>
           <strong>{{ pb.name }}</strong>
           <span v-if="dropdownOptions.showDialCodeInList"> +{{ pb.dialCode }} </span>
         </li>

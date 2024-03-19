@@ -15,6 +15,70 @@ describe('vue-tel-input', () => {
     expect(wrapper.find('.vue-tel-input').exists()).toBeTruthy();
   });
   // TODO: Test validation of some specific phone numbers
+
+  describe('Dropdown interaction', () => {
+    it('toggles dropdown on click', async () => {
+      const wrapper = shallowMount(VueTelInput);
+
+      await wrapper.find('.vti__dropdown').trigger('click');
+      expect(wrapper.vm.data.open).toBe(true);
+
+      await wrapper.find('.vti__dropdown').trigger('click');
+      expect(wrapper.vm.data.open).toBe(false);
+    });
+
+    it('closes dropdown when clicked outside', async () => {
+      const wrapper = shallowMount(VueTelInput);
+
+      // Simulate opening the dropdown
+      await wrapper.find('.vti__dropdown').trigger('click');
+      wrapper.vm.$nextTick(() => {
+        expect(wrapper.vm.data.open).toBe(true);
+      })
+
+      // Simulate clicking outside
+      await wrapper.vm.$el.click();
+      wrapper.vm.$nextTick(() => {
+        expect(wrapper.vm.data.open).toBe(false);
+      })
+    });
+  });
+
+  describe('Keyboard navigation', () => {
+    it('navigates through countries using arrow keys', async () => {
+      const wrapper = shallowMount(VueTelInput, {
+        props: {
+          allCountries: [{ iso2: 'US' }, { iso2: 'CA' }],
+          preferredCountries: ['US']
+        }
+      });
+      await wrapper.find('.vti__dropdown').trigger('keydown.down'); // Simulate arrow down press
+      wrapper.vm.$nextTick(() => {
+        expect(wrapper.vm.data.selectedIndex).toBe(0); // Assuming the first country is selected
+      })
+
+      await wrapper.find('.vti__dropdown').trigger('keydown.up'); // Simulate arrow up press
+      wrapper.vm.$nextTick(() => {
+        expect(wrapper.vm.data.selectedIndex).toBe(1); // Assuming it cycles back to the last country
+      })
+    });
+  });
+
+  describe('Search functionality', () => {
+    it('filters countries based on input', async () => {
+      const wrapper = shallowMount(VueTelInput, {
+        props: {
+          allCountries: [{ iso2: 'US', name: 'United States' }, { iso2: 'CA', name: 'Canada' }],
+          dropdownOptions: { showSearchBox: true }
+        }
+      });
+      wrapper.vm.data.searchQuery = 'Uni';
+      wrapper.vm.$nextTick(() => {
+        expect(wrapper.vm.sortedCountries).toHaveLength(1);
+        expect(wrapper.vm.sortedCountries[0].iso2).toBe('US');
+      })
+    });
+  });
 });
 
 describe('Props', () => {

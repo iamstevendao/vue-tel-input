@@ -1,5 +1,5 @@
 <template>
-  <div ref="refRoot" :class="['vue-tel-input', styleClasses, { disabled: disabled }]">
+  <div ref="refRoot" :class="['vue-tel-input', styleClasses, { disabled }]">
     <div v-click-outside="clickedOutside"
          aria-label="Country Code Selector"
          aria-haspopup="listbox"
@@ -61,7 +61,7 @@
            :type="inputOptions.type"
            :autocomplete="inputOptions.autocomplete"
            :autofocus="inputOptions.autofocus"
-           :class="['vti__input', inputOptions.styleClasses]"
+           :class="['vti__input, vti__phone', inputOptions.styleClasses]"
            :disabled="disabled"
            :id="inputOptions.id"
            :maxlength="inputOptions.maxlength"
@@ -84,7 +84,7 @@
 <script setup lang="ts">
   import type { PropType } from 'vue';
   import type { CountryCode, NumberFormat, PhoneNumber } from 'libphonenumber-js';
-  import type { CountryObject, DropdownOptions, InputOptions, PhoneObject } from '../types';
+  import type { CountryObject, DropdownOptions, InputOptions, PhoneMeta } from '../types';
 
   import { parsePhoneNumberFromString } from 'libphonenumber-js';
   import { getDefault, setCaretPosition, getCountry, toLowerCase, toUpperCase } from '../utils';
@@ -190,7 +190,6 @@
       default: () => getDefault('styleClasses') as string,
     },
   })
-  watch(() => props.inputOptions.placeholder, resetPlaceholder)
 
   const modelValue = defineModel({ type: String })
   watch(modelValue, (value, oldValue) => {
@@ -206,7 +205,7 @@
 
   const data = reactive({
     phone: '',
-    activeCountryCode: '' as CountryCode | '',
+    activeCountryCode: undefined as CountryCode | undefined,
     open: false,
     finishMounted: false,
     selectedIndex: null as number | null,
@@ -226,33 +225,6 @@
     }
   })
 
-  const activeCountry = computed(() => findCountry(data.activeCountryCode))
-  watch(activeCountry, (value, oldValue) => {
-    if (!value && oldValue?.iso2) {
-      data.activeCountryCode = oldValue.iso2;
-      return;
-    }
-    if (value?.iso2) {
-      emit('country-changed', value);
-      // resetPlaceholder();
-    }
-  })
-
-  const parsedMode = computed<Lowercase<NumberFormat>>(() => {
-    const mode = toLowerCase(props.mode)
-    if (mode === 'auto') {
-      if (!data.phone || data.phone[0] !== '+') {
-        return 'national';
-      }
-      return 'international';
-    }
-    if (!['national', 'international', 'e.164', 'rfc3966', 'idd'].includes(mode)) {
-      console.error('Invalid value of prop "mode"');
-      return 'international';
-    }
-    return mode;
-  })
-
   const filteredCountries = computed(() => {
     // List countries after filtered
     if (props.onlyCountries.length) {
@@ -268,6 +240,33 @@
     }
 
     return props.allCountries;
+  })
+
+  const activeCountry = computed(() => findCountry(data.activeCountryCode))
+  watch(activeCountry, (value, oldValue) => {
+    if (!value && oldValue?.iso2) {
+      data.activeCountryCode = oldValue.iso2;
+      return;
+    }
+    if (value?.iso2) {
+      emit('country-changed', value);
+      // resetPlaceholder();
+    }
+  })
+
+  const parsedMode = computed<Lowercase<NumberFormat>>(() => {
+    const mode = toLowerCase(props.mode)
+    if (mode === 'auto') {
+      if (!data.phone || data.phone?.startsWith('+')) {
+        return 'national';
+      }
+      return 'international';
+    }
+    if (!['national', 'international', 'e.164', 'rfc3966', 'idd'].includes(mode)) {
+      console.error('Invalid value of prop "mode"');
+      return 'international';
+    }
+    return mode;
   })
 
   const sortedCountries = computed(() => {
@@ -290,43 +289,39 @@
   })
 
   const phoneObject = computed(() => {
-    let result: PhoneNumber;
-    if (data.phone?.[0] === '+') {
-      result = parsePhoneNumberFromString(data.phone) || {} as PhoneNumber;
-    } else {
-      result = parsePhoneNumberFromString(data.phone, data.activeCountryCode as CountryCode) || {} as PhoneNumber;
+    const result = data.phone.startsWith('+')
+      ? parsePhoneNumberFromString(data.phone)
+      : parsePhoneNumberFromString(data.phone, data.activeCountryCode);
+
+    const meta: PhoneMeta = {
+      country: result?.country,
+      countryCode: result?.country,
+      formatted: data.phone,
+      valid: result?.isValid(),
     }
 
-    const {
-      // metadata,
-      ...phoneObject
-    } = result;
-
-    let valid = result.isValid?.();
-    let formatted = data.phone;
-
-    if (valid) {
-      formatted = result.format?.(toUpperCase(parsedMode.value));
+    if (meta.valid) {
+      meta.formatted = result?.format(toUpperCase(parsedMode.value));
     }
 
-    if (result.country && (props.ignoredCountries.length || props.onlyCountries.length)) {
-      if (!findCountry(result.country)) {
-        valid = false;
-        Object.assign(result, { country: null });
-      }
+    if (result?.country
+      && (props.ignoredCountries.length || props.onlyCountries.length)
+      && !findCountry(result.country)) {
+        meta.valid = false;
+        result.country = null;
     }
 
-    Object.assign(phoneObject, {
-      country: activeCountry.value,
-      countryCode: result.country,
-      valid,
-      formatted,
-    });
+    if(!result) {
+      return meta
+    }
 
-    return phoneObject as PhoneObject
+    return {
+      ...meta,
+      ...result,
+    }
   })
   watch(() => phoneObject.value.countryCode, (value) => {
-    data.activeCountryCode = value || '';
+    data.activeCountryCode = value;
   })
   watch(() => phoneObject.value.valid, () => {
     emit('validate', phoneObject.value);
@@ -344,10 +339,12 @@
       }
     });
   })
+
   // finishMounted() {
   //   resetPlaceholder();
   // },
 
+  watch(() => props.inputOptions.placeholder, resetPlaceholder)
 
   onMounted(() => {
     if (modelValue.value) {
@@ -447,11 +444,11 @@
    */
   function getCountries(list: string[] = []) {
     return list
-      .map((countryCode) => findCountry(countryCode))
+      .map(findCountry)
       .filter(Boolean);
   }
   function findCountry(iso = '') {
-    return filteredCountries.value.find((country) => country.iso2 === iso.toUpperCase());
+    return filteredCountries.value.find((country) => country.iso2 === toUpperCase(iso));
   }
   function findCountryByDialCode(dialCode: number) {
     return filteredCountries.value.find((country) => Number(country.dialCode) === dialCode);
@@ -459,7 +456,7 @@
   function getItemClass(index: number, iso2: string) {
     const highlighted = data.selectedIndex === index;
     const lastPreferred = index === props.preferredCountries.length - 1;
-    const preferred = props.preferredCountries.some((c) => c.toUpperCase() === iso2);
+    const preferred = props.preferredCountries.some((c) => toUpperCase(c) === iso2);
     return {
       highlighted,
       'last-preferred': lastPreferred,
@@ -475,6 +472,7 @@
     if (!parsedCountry) {
       return;
     }
+
     if (data.phone?.[0] === '+'
       && parsedCountry.iso2
       && phoneObject.value.nationalNumber) {
@@ -491,12 +489,12 @@
     if (props.inputOptions?.showDialCode && parsedCountry) {
       // Reset phone if the showDialCode is set
       data.phone = `+${parsedCountry.dialCode}`;
-      data.activeCountryCode = parsedCountry.iso2 || '';
+      data.activeCountryCode = parsedCountry.iso2;
       return;
     }
 
     // update value, even if international mode is NOT used
-    data.activeCountryCode = parsedCountry.iso2 || '';
+    data.activeCountryCode = parsedCountry.iso2;
     emitInput(data.phone);
   }
   function cleanInvalidCharacters() {
@@ -631,7 +629,7 @@
     }
   }
   function reset() {
-    data.selectedIndex = sortedCountries.value.map((c) => c.iso2).indexOf(data.activeCountryCode as CountryCode);
+    data.selectedIndex = sortedCountries.value.map((c) => c.iso2).indexOf(data.activeCountryCode);
     data.open = false;
   }
   function setDropdownPosition() {

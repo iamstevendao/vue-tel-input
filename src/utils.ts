@@ -305,3 +305,11 @@ export function getDefault(key: string) {
   }
   return value;
 }
+
+export function toLowerCase<T extends string> (str: T) {
+  return str?.toLowerCase() as Lowercase<T>;
+}
+
+export function toUpperCase<T extends string> (str: T) {
+  return str?.toUpperCase() as Uppercase<T>;
+}

@@ -15,7 +15,7 @@
       <span class="vti__selection">
           <span
             v-if="dropdownOptions.showFlags"
-            :class="['vti__flag', data.activeCountryCode.toLowerCase()]"
+            :class="['vti__flag', toLowerCase(data.activeCountryCode)]"
           ></span>
           <span v-if="dropdownOptions.showDialCodeInSelection" class="vti__country-code">
             +{{ activeCountry && activeCountry.dialCode }}
@@ -49,7 +49,7 @@
             :aria-selected="data.activeCountryCode === pb.iso2 && !pb.preferred">
           <span
               v-if="dropdownOptions.showFlags"
-              :class="['vti__flag', pb.iso2.toLowerCase()]"
+              :class="['vti__flag', toLowerCase(pb.iso2)]"
             ></span>
           <strong>{{ pb.name }}</strong>
           <span v-if="dropdownOptions.showDialCodeInList"> +{{ pb.dialCode }} </span>
@@ -87,7 +87,7 @@
   import type { CountryObject, DropdownOptions, InputOptions, PhoneObject } from '../types';
 
   import { parsePhoneNumberFromString } from 'libphonenumber-js';
-  import { getDefault, setCaretPosition, getCountry } from '../utils';
+  import { getDefault, setCaretPosition, getCountry, toLowerCase, toUpperCase } from '../utils';
   import clickOutside from '../directives/click-outside';
   import { computed, nextTick, onMounted, reactive, shallowRef, watch } from 'vue';
 
@@ -212,7 +212,7 @@
     selectedIndex: null as number | null,
     typeToFindInput: '',
     typeToFindTimer: undefined as ReturnType<typeof setTimeout> | undefined,
-    dropdownOpenDirection: 'below',
+    dropdownOpenDirection: 'below' as 'above' | 'below',
     parsedPlaceholder: props.inputOptions.placeholder,
     searchQuery: '',
   })
@@ -239,30 +239,31 @@
   })
 
   const parsedMode = computed<Lowercase<NumberFormat>>(() => {
-    if (props.mode === 'auto') {
+    const mode = toLowerCase(props.mode)
+    if (mode === 'auto') {
       if (!data.phone || data.phone[0] !== '+') {
         return 'national';
       }
       return 'international';
     }
-    if (!['international', 'national'].includes(props.mode)) {
+    if (!['national', 'international', 'e.164', 'rfc3966', 'idd'].includes(mode)) {
       console.error('Invalid value of prop "mode"');
       return 'international';
     }
-    return props.mode;
+    return mode;
   })
 
   const filteredCountries = computed(() => {
     // List countries after filtered
     if (props.onlyCountries.length) {
       return props.allCountries
-        .filter(({ iso2 }) => props.onlyCountries.some((c) => c.toUpperCase() === iso2));
+        .filter(({ iso2 }) => props.onlyCountries.some((c) => toUpperCase(c) === iso2));
     }
 
     if (props.ignoredCountries.length) {
       return props.allCountries.filter(
-        ({ iso2 }) => !props.ignoredCountries.includes(iso2.toUpperCase())
-          && !props.ignoredCountries.includes(iso2.toLowerCase()),
+        ({ iso2 }) => !props.ignoredCountries.includes(toUpperCase(iso2))
+          && !props.ignoredCountries.includes(toLowerCase(iso2)),
       );
     }
 
@@ -305,7 +306,7 @@
     let formatted = data.phone;
 
     if (valid) {
-      formatted = result.format?.(parsedMode.value.toUpperCase() as NumberFormat);
+      formatted = result.format?.(toUpperCase(parsedMode.value));
     }
 
     if (result.country && (props.ignoredCountries.length || props.onlyCountries.length)) {
@@ -616,7 +617,7 @@
       // don't include preferred countries so we jump to the right place in the alphabet
       const typedCountryI = sortedCountries.value
         .slice(props.preferredCountries.length)
-        .findIndex((c) => c.name.toLowerCase().startsWith(data.typeToFindInput));
+        .findIndex((c) => toLowerCase(c.name).startsWith(data.typeToFindInput));
       if (typedCountryI >= 0) {
         data.selectedIndex = props.preferredCountries.length + typedCountryI;
         const selEle = refList.value.children[data.selectedIndex] as HTMLLIElement;

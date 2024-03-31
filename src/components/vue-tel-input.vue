@@ -1,5 +1,6 @@
 <template>
-  <div ref="refRoot" :class="['vue-tel-input', styleClasses, { disabled }]">
+  <div ref="refRoot"
+       :class="['vue-tel-input', styleClasses, { disabled }]">
     <div v-click-outside="clickedOutside"
          aria-label="Country Code Selector"
          aria-haspopup="listbox"
@@ -17,28 +18,25 @@
             v-if="dropdownOptions.showFlags"
             :class="['vti__flag', toLowerCase(data.activeCountryCode)]"
           ></span>
-          <span v-if="dropdownOptions.showDialCodeInSelection" class="vti__country-code">
+      <span v-if="dropdownOptions.showDialCodeInSelection" class="vti__country-code">
             +{{ activeCountry && activeCountry.dialCode }}
           </span>
-        <slot name="arrow-icon"
+      <slot name="arrow-icon"
             :open="data.open">
-          <span class="vti__dropdown-arrow">{{ data.open ? "▲" : "▼" }}</span>
-        </slot>
+        <span class="vti__dropdown-arrow">{{ data.open ? "▲" : "▼" }}</span>
+      </slot>
       </span>
       <ul v-if="data.open"
           ref="refList"
-          class="vti__dropdown-list"
-          :class="data.dropdownOpenDirection"
+          :class="['vti__dropdown-list', data.dropdownOpenDirection]"
           role="listbox">
-        <input
-            v-if="dropdownOptions.showSearchBox"
-            class="vti__input vti__search_box"
-            aria-label="Search by country name or country code"
-            :placeholder="sortedCountries.length ? sortedCountries[0].name : ''"
-            type="text"
-            v-model="data.searchQuery"
-            @click.stop
-        />
+        <input v-if="dropdownOptions.showSearchBox"
+               :class="['vti__input', 'vti__search_box']"
+               aria-label="Search by country name or country code"
+               :placeholder="sortedCountries.length ? sortedCountries[0].name : ''"
+               type="text"
+               v-model="data.searchQuery"
+               @click.stop />
         <li v-for="(pb, index) in sortedCountries"
             role="option"
             :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
@@ -61,7 +59,7 @@
            :type="inputOptions.type"
            :autocomplete="inputOptions.autocomplete"
            :autofocus="inputOptions.autofocus"
-           :class="['vti__input, vti__phone', inputOptions.styleClasses]"
+           :class="['vti__input', 'vti__phone', inputOptions.styleClasses]"
            :disabled="disabled"
            :id="inputOptions.id"
            :maxlength="inputOptions.maxlength"
@@ -83,7 +81,7 @@
 
 <script setup lang="ts">
   import type { PropType } from 'vue';
-  import type { CountryCode, NumberFormat, PhoneNumber } from 'libphonenumber-js';
+  import type { CountryCode, NumberFormat } from 'libphonenumber-js';
   import type { CountryObject, DropdownOptions, InputOptions, PhoneMeta } from '../types';
 
   import { parsePhoneNumberFromString } from 'libphonenumber-js';
@@ -298,6 +296,7 @@
       countryCode: result?.country,
       formatted: data.phone,
       valid: result?.isValid(),
+      nationalNumber: result?.nationalNumber,
     }
 
     if (meta.valid) {

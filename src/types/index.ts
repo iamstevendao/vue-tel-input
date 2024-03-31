@@ -21,6 +21,7 @@ export type PhoneMeta = {
   countryCode: PhoneNumber['country'],
   valid: boolean,
   formatted: string
+  nationalNumber: string
 };
 
 export interface DropdownOptions {

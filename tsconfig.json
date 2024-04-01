@@ -35,6 +35,9 @@
     "src/index.js",
     "src/index.js"
   ],
+  "exclude": [
+    "src/**/*.test.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

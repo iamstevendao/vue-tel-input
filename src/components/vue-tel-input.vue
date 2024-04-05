@@ -30,13 +30,15 @@
           ref="refList"
           :class="['vti__dropdown-list', data.dropdownOpenDirection]"
           role="listbox">
-        <input v-if="dropdownOptions.showSearchBox"
-               :class="['vti__input', 'vti__search_box']"
-               aria-label="Search by country name or country code"
-               :placeholder="sortedCountries.length ? sortedCountries[0].name : ''"
-               type="text"
-               v-model="data.searchQuery"
-               @click.stop />
+        <div v-if="dropdownOptions.showSearchBox" class="vti__search_box_container">
+            <slot name="search-icon"></slot>
+            <input :class="['vti__input', 'vti__search_box']"
+                  aria-label="Search by country name or country code"
+                  :placeholder="dropdownOptions.searchBoxPlaceholder || (sortedCountries.length ? sortedCountries[0].name : '')"
+                  type="text"
+                  v-model="data.searchQuery"
+                  @click.stop />
+          </div>
         <li v-for="(pb, index) in sortedCountries"
             role="option"
             :class="['vti__dropdown-item', getItemClass(index, pb.iso2)]"
@@ -296,6 +298,7 @@
       countryCode: result?.country,
       formatted: data.phone,
       valid: result?.isValid(),
+      possible: result?.isPossible?.(),
       nationalNumber: result?.nationalNumber,
     }
 
@@ -307,6 +310,7 @@
       && (props.ignoredCountries.length || props.onlyCountries.length)
       && !findCountry(result.country)) {
         meta.valid = false;
+        meta.possible = false;
         result.country = null;
     }
 

@@ -20,7 +20,8 @@ export type PhoneMeta = {
   country: PhoneNumber['country'],
   countryCode: PhoneNumber['country'],
   valid: boolean,
-  formatted: string
+  possible: boolean,
+  formatted: string,
   nationalNumber: string
 };
 
@@ -30,6 +31,7 @@ export interface DropdownOptions {
   showDialCodeInSelection?: boolean
   showFlags?: boolean
   showSearchBox?: boolean
+  searchBoxPlaceholder?: string
   tabindex?: number
 }
 

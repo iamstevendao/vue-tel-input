@@ -89,7 +89,7 @@
   import { parsePhoneNumberFromString } from 'libphonenumber-js';
   import { getDefault, setCaretPosition, getCountry, toLowerCase, toUpperCase } from '../utils';
   import clickOutside from '../directives/click-outside';
-  import { computed, nextTick, onMounted, reactive, shallowRef, watch } from 'vue';
+  import { computed, nextTick, onMounted, reactive, shallowRef, watch, defineExpose } from 'vue';
 
   const refRoot = shallowRef<HTMLDivElement>()
   const refList = shallowRef<HTMLUListElement>()
@@ -557,9 +557,12 @@
   function onSpace(e: KeyboardEvent) {
     emit('space', e);
   }
-  // function focus() {
-  //   refInput.value?.focus();
-  // }
+  function focus() {
+    refInput.value?.focus();
+  }
+  function blur() {
+    refInput.value?.blur();
+  }
   function toggleDropdown() {
     if (props.disabled || props.dropdownOptions.disabled) {
       return;
@@ -644,6 +647,10 @@
       data.dropdownOpenDirection = 'above';
     }
   }
+  defineExpose({
+    focus,
+    blur,
+  })
 </script>
 
 <style src="../assets/sprite.css"></style>

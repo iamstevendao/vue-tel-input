@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Vue Tel Input",
+  base: '/vue-tel-input/',
   description: "International Phone Input for Vue",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

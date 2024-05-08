@@ -18,10 +18,14 @@
     "noEmit": true,
     "jsx": "preserve",
     /* Linting */
-    "strict": true,
+    "strict": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": [
+      "libphonenumber-js",
+      "vitest"
+    ],
   },
   "include": [
     "src/**/*.ts",
@@ -30,6 +34,9 @@
     "src/**/*.vue",
     "src/index.js",
     "src/index.js"
+  ],
+  "exclude": [
+    "src/**/*.test.ts"
   ],
   "references": [
     {

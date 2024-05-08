@@ -34,7 +34,7 @@
     </section>
 
     <section class="options vp-doc">
-      <a 
+      <a
         href="https://github.com/iamstevendao/vue-tel-input/graphs/contributors"
         @click.prevent="showOptions = !showOptions"
       >
@@ -183,7 +183,7 @@ export default {
   text-align: center;
 }
 
-.home .hero > img {
+.home .hero>img {
   max-width: 100%;
   max-height: 100px;
   display: block;
@@ -207,6 +207,7 @@ export default {
 .home .vti__dropdown-list {
   background-color: var(--vp-c-bg);
 }
+
 .home .vti__dropdown-list .vti__dropdown-item.highlighted {
   background-color: var(--vp-c-bg-elv-up);
 }

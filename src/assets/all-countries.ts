@@ -1,5 +1,8 @@
 // A fork of https://github.com/jackocnr/intl-tel-input/blob/master/src/js/data.js
 
+import type { Country, CountryObject } from "../types";
+
+
 // Array of country objects for the flag dropdown.
 
 // Here is the criteria for the plugin to support a given country/territory
@@ -16,7 +19,8 @@
 //    Order (if >1 country with same dial code),
 //    Area codes
 // ]
-const allCountries = [
+
+const allCountries: Country[] = [
   [
     'Afghanistan (‫افغانستان‬‎)',
     'af',
@@ -288,7 +292,7 @@ const allCountries = [
     '269',
   ],
   [
-    'Congo (DRC) (Jamhuri ya Kidemokrasia ya Kongo)',
+    'Congo (DRC) (République démocratique du Congo)',
     'cd',
     '243',
   ],
@@ -1330,4 +1334,4 @@ export default allCountries.map(([name, iso2, dialCode, priority = 0, areaCodes 
   dialCode,
   priority,
   areaCodes,
-}));
+})) as CountryObject[];

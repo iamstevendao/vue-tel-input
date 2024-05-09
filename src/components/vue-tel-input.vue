@@ -257,7 +257,7 @@
   const parsedMode = computed<Lowercase<NumberFormat>>(() => {
     const mode = toLowerCase(props.mode)
     if (mode === 'auto') {
-      if (!data.phone || data.phone?.startsWith('+')) {
+      if (!data.phone?.startsWith('+')) {
         return 'national';
       }
       return 'international';

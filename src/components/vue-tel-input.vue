@@ -294,7 +294,9 @@ export default {
       }
     },
     'phoneObject.countryCode': function (value) {
-      this.activeCountryCode = value || '';
+      if (value) {
+        this.activeCountryCode = value;
+      }
     },
     'phoneObject.valid': function () {
       this.$emit('validate', this.phoneObject);

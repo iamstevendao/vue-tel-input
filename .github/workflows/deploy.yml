@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy Docs
 on:
   workflow_dispatch: {}
   push:
@@ -28,6 +28,6 @@ jobs:
       - uses: actions/upload-pages-artifact@v1
         with:
           path: docs/.vitepress/dist
-      - name: Deploy
+      - name: Deploy Docs
         id: deployment
         uses: actions/deploy-pages@v1

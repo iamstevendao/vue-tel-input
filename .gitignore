@@ -17,6 +17,8 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
+docs/.vitepress/cache
+
 Icon**
 
 # Editor directories and files

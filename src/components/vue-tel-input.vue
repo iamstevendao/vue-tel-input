@@ -324,7 +324,9 @@
     }
   })
   watch(() => phoneObject.value.countryCode, (value) => {
-    data.activeCountryCode = value;
+    if(value) {
+      data.activeCountryCode = value;
+    }
   })
   watch(() => phoneObject.value.valid, () => {
     emit('validate', phoneObject.value);

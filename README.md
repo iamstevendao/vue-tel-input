@@ -14,11 +14,11 @@ International Telephone Input with Vue.
 
 ## Documentation and Demo
 
-[Visit the website](https://vue-tel-input.iamstevendao.com/)
+[Visit the website](https://iamstevendao.com/vue-tel-input/)
 
 ## Vue 2 Support
 
-`vue-tel-input@legacy`: [Guide](https://vue-tel-input.iamstevendao.com/guide/legacy.html)
+`vue-tel-input@legacy`: [Guide](https://iamstevendao.com/vue-tel-input/guide/legacy.html)
 
 ## Changelog
 

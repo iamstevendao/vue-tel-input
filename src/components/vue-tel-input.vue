@@ -278,7 +278,7 @@
     if (!props.dropdownOptions.showSearchBox) {
       return countriesList
     }
-    const userInput = data.searchQuery;
+    const userInput = data.searchQuery.toLowerCase();
     const cleanInput = userInput.replace(/[~`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?-_]/g, '');
 
     return countriesList.filter(

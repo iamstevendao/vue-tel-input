@@ -613,7 +613,7 @@
         choose(sortedCountries.value[data.selectedIndex]);
       }
       data.open = !data.open;
-    } else {
+    } else if (data.open) {
       // typing a country's name
       data.typeToFindInput += e.key;
       clearTimeout(data.typeToFindTimer);

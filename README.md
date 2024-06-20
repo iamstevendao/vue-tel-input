@@ -1,5 +1,5 @@
 <p align="center">
-<img width="100" alt="vue-tel-input-logo" src="https://vue-tel-input.iamstevendao.com/hero.png"/>
+<img width="100" alt="vue-tel-input-logo" src="https://iamstevendao.com/vue-tel-input/hero.png"/>
 </p>
 
 # vue-tel-input
@@ -79,7 +79,7 @@ app.use(VueTelInput, globalOptions); // Define default global options here (opti
 app.mount('#app');
 ```
 
-> View all available options in [Props](https://vue-tel-input.iamstevendao.com/usage/props.html).
+> View all available options in [Props](https://iamstevendao.com/vue-tel-input/usage/props.html).
 
 Or use the component directly:
 

@@ -278,7 +278,7 @@
     if (!props.dropdownOptions.showSearchBox) {
       return countriesList
     }
-    const userInput = data.searchQuery;
+    const userInput = data.searchQuery.toLowerCase();
     const cleanInput = userInput.replace(/[~`!@#$%^&*()+={}\[\];:\'\"<>.,\/\\\?-_]/g, '');
 
     return countriesList.filter(
@@ -324,7 +324,9 @@
     }
   })
   watch(() => phoneObject.value.countryCode, (value) => {
-    data.activeCountryCode = value;
+    if(value) {
+      data.activeCountryCode = value;
+    }
   })
   watch(() => phoneObject.value.valid, () => {
     emit('validate', phoneObject.value);
@@ -611,7 +613,7 @@
         choose(sortedCountries.value[data.selectedIndex]);
       }
       data.open = !data.open;
-    } else {
+    } else if (data.open) {
       // typing a country's name
       data.typeToFindInput += e.key;
       clearTimeout(data.typeToFindTimer);

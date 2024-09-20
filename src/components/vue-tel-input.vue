@@ -89,7 +89,7 @@
   import { parsePhoneNumberFromString } from 'libphonenumber-js';
   import { getDefault, setCaretPosition, getCountry, toLowerCase, toUpperCase } from '../utils';
   import clickOutside from '../directives/click-outside';
-  import { computed, nextTick, onMounted, reactive, shallowRef, watch, defineExpose } from 'vue';
+  import { computed, nextTick, onMounted, reactive, shallowRef, watch } from 'vue';
 
   const refRoot = shallowRef<HTMLDivElement>()
   const refList = shallowRef<HTMLUListElement>()

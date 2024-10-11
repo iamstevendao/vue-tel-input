@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "libphonenumber-js": "^1.10.51",
-    "vue": "^3.4.21"
+    "vue": "^3.5.4"
   },
   "files": [
     "dist"

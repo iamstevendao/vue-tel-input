@@ -28,7 +28,7 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
-  "dependencies": {
+  "peerDependencies": {
     "libphonenumber-js": "^1.10.51",
     "vue": "^3.5.4"
   },

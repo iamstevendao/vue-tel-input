@@ -339,6 +339,19 @@ describe('Props', () => {
         expect(wrapper.find('.vti__dropdown-item > .vti__flag.au').element.parentElement.getAttribute('class')).toContain('preferred');
       })
     });
+
+    it('does not show preferred countries twice', () => {
+      const wrapper = shallowMount(VueTelInput, {
+        props: {
+          preferredCountries: ['AU'],
+        },
+      });
+
+      wrapper.vm.$nextTick(() => {
+        var countryList = wrapper.vm.sortedCountries.filter((c) => c.iso2 == 'AU')
+        expect(countryList.length).toBe(1);
+      })
+    })
   });
   describe(':validCharactersOnly', () => {
     // TODO

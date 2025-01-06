@@ -5,27 +5,28 @@
   "author": "Steven Dao <iamstevendao@gmail.com>",
   "license": "MIT",
   "homepage": "https://iamstevendao.com/vue-tel-input/",
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iamstevendao/vue-tel-input.git"
   },
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/vue-tel-input.js",
-      "require": "./dist/vue-tel-input.umd.cjs",
-      "types": "./dist/vue-tel-input.d.ts"
+      "require": "./dist/vue-tel-input.umd.cjs"
     },
     "./vue-tel-input.css": "./dist/vue-tel-input.css"
   },
   "main": "./dist/vue-tel-input.umd.cjs",
   "module": "./dist/vue-tel-input.js",
   "types": "./dist/vue-tel-input.d.ts",
+  "sideEffects": [
+    "./dist/vue-tel-input.css"
+  ],
   "scripts": {
     "dev": "cd ./docs && pnpm docs:dev",
     "test": "vitest --ui",
-    "build": "vite build && vue-tsc --declaration --emitDeclarationOnly",
-    "build:types": "vue-tsc --declaration --emitDeclarationOnly -p tsconfig.app.json -outFile dist/vue-tel-input.d.ts",
+    "build": "vue-tsc -p tsconfig.app.json --noEmit && vite build",
     "preview": "vite preview"
   },
   "peerDependencies": {

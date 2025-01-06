@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useData } from 'vitepress'
 import Home from './components/Home.vue'
 import DefaultTheme from 'vitepress/theme'

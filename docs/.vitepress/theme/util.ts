@@ -61,7 +61,7 @@ export function resolvePage(pages, rawPath, base) {
     }
   }
   if (base) {
-    rawPath = resolvePath(rawPath, base)
+    rawPath = resolvePath(rawPath, base, false)
   }
   const path = normalize(rawPath)
   for (let i = 0; i < pages.length; i++) {

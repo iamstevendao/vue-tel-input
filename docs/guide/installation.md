@@ -3,7 +3,13 @@
 ### npm
 
 ```bash
-npm install vue-tel-input
+npm install vue-tel-input libphonenumber-js
+
+# yarn 
+yarn add vue-tel-input libphonenumber-js
+
+# pnpm
+pnpm add vue-tel-input libphonenumber-js
 ```
 
 Install the plugin into Vue:

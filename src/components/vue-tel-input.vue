@@ -83,13 +83,12 @@
 
 <script setup lang="ts">
   import type { PropType } from 'vue';
-  import type { CountryCode, NumberFormat } from 'libphonenumber-js';
   import type { CountryObject, DropdownOptions, InputOptions, PhoneMeta } from '../types';
-
+  import type { CountryCode, NumberFormat } from 'libphonenumber-js';
   import { parsePhoneNumberFromString } from 'libphonenumber-js';
+  import { computed, nextTick, onMounted, reactive, shallowRef, watch } from 'vue';
   import { getDefault, setCaretPosition, getCountry, toLowerCase, toUpperCase } from '../utils';
   import clickOutside from '../directives/click-outside';
-  import { computed, nextTick, onMounted, reactive, shallowRef, watch } from 'vue';
 
   const refRoot = shallowRef<HTMLDivElement>()
   const refList = shallowRef<HTMLUListElement>()
@@ -585,7 +584,10 @@
       } else {
         data.selectedIndex = Math.min(sortedCountries.value.length - 1, data.selectedIndex + 1);
       }
-      const selEle = refList.value.children[data.selectedIndex] as HTMLLIElement;
+      const selEle = refList.value?.children[data.selectedIndex] as HTMLLIElement;
+      if(!selEle) {
+        return;
+      }
       selEle.focus();
       if (selEle.offsetTop + selEle.clientHeight
         > refList.value.scrollTop + refList.value.clientHeight) {

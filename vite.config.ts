@@ -1,15 +1,20 @@
+/// <reference types="vitest" />
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { resolve } from 'node:path'
+import dts from 'vite-plugin-dts'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    dts({ tsconfigPath: './tsconfig.app.json', rollupTypes: true  })
+  ],
   base: '/vue-tel-input/',
   build: {
     cssCodeSplit: true,
     lib: {
-      entry: resolve(__dirname, 'src/index.js'),
+      entry: resolve(__dirname, 'src/index.ts'),
       name: 'VueTelInput',
       fileName: 'vue-tel-input',
     },
@@ -22,12 +27,9 @@ export default defineConfig({
         globals: {
           vue: 'Vue',
         },
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name.endsWith('.css')) {
-            return 'vue-tel-input.css';
-          }
-          return assetInfo.name;
-        },
+        // fix for future vite v6
+        exports: 'named',
+        assetFileNames: 'vue-tel-input.[ext]',
       },
     },
   },

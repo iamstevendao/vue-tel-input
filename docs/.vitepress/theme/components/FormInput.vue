@@ -22,30 +22,14 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'FormInput',
-  props: {
-    model: {
-      type: Object,
-    },
-    modelName: {
-      type: String,
-    },
-    label: {
-      type: String,
-      default: '',
-    },
-    type: {
-      type: String,
-      default: 'input',
-    },
-    items: {
-      type: Array,
-      default: () => [],
-    },
-  },
-};
+<script lang="ts" setup>
+const { model, modelName, label = '', type = 'input', items = [] } = defineProps<{
+  model: Record<string, any>;
+  modelName: string;
+  label?: string;
+  type?: 'input' | 'checkbox' | 'radio';
+  items?: string[];
+}>();
 </script>
 
 <style scoped>

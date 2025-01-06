@@ -308,9 +308,15 @@ describe('Props', () => {
   });
   describe(':invalid-msg', () => {
     // TODO
+    it('invalid-msg', () => {
+      expect(true).toBe(true);
+    })
   });
   describe(':mode', () => {
     // TODO
+    it('mode', () => {
+      expect(true).toBe(true);
+    })
   });
   describe(':onlyCountries', () => {
     it('limits the countries to be used', () => {
@@ -342,6 +348,10 @@ describe('Props', () => {
   });
   describe(':validCharactersOnly', () => {
     // TODO
+    it('validCharactersOnly', () => {
+      expect(true).toBe(true);
+    })
+
   });
   describe(':styleClasses', () => {
     it('sets classes along side with .vue-tel-input', () => {

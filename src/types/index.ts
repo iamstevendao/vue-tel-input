@@ -1,4 +1,4 @@
-import type { CountryCode, PhoneNumber } from "libphonenumber-js";
+import type { CountryCode, PhoneNumber } from 'libphonenumber-js';
 
 export type Country = [
   CountryName: string,

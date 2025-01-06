@@ -35,7 +35,6 @@ export default defineConfig({
       {
         text: 'Others',
         items: [
-          { text: 'Typescript Support', link: 'others/typescript-support' },
           { text: 'v3', link: 'others/v3' },
           { text: 'v2', link: 'others/v2' },
           { text: 'Credits', link: 'others/credits' },

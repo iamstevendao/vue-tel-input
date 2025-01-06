@@ -17,7 +17,9 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
-docs/.vitepress/cache
+# vitepress
+.temp
+cache
 
 Icon**
 

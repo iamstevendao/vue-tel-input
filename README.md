@@ -8,10 +8,6 @@ International Telephone Input with Vue.
 
 [![npm](https://img.shields.io/npm/dt/vue-tel-input.svg)](https://www.npmjs.com/package/vue-tel-input) [![stars](https://img.shields.io/github/stars/iamstevendao/vue-tel-input.svg)](https://github.com/iamstevendao/vue-tel-input)
 
-<p align="center">
-<img width="600" alt="In-action GIF" src="https://thumbs.gfycat.com/EducatedPoliteBluefintuna-size_restricted.gif"/>
-</p>
-
 ## Documentation and Demo
 
 [Visit the website](https://iamstevendao.com/vue-tel-input/)
@@ -29,7 +25,13 @@ International Telephone Input with Vue.
 - Install the plugin:
 
   ```sh
-  npm install vue-tel-input
+  npm install vue-tel-input libphonenumber-js
+
+  # yarn 
+  yarn add vue-tel-input libphonenumber-js
+
+  # pnpm
+  pnpm add vue-tel-input libphonenumber-js
   ```
 
 - Add the plugin into your app:

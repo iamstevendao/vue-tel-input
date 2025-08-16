@@ -17,7 +17,7 @@ export default defineConfig({
       polyfill: true,
     },
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', 'libphonenumber-js'],
       output: {
         globals: {
           vue: 'Vue',

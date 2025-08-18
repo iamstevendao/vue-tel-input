@@ -13,9 +13,9 @@
 - Add the plugin into your app:
 
   ```javascript
-  import Vue from 'vue';
-  import VueTelInput from 'vue-tel-input';
-  import 'vue-tel-input/dist/vue-tel-input.css';
+  import Vue from "vue";
+  import { VueTelInput } from "vue-tel-input";
+  import "vue-tel-input/dist/vue-tel-input.css";
 
   Vue.use(VueTelInput);
   ```
@@ -26,7 +26,7 @@
 
   ```html
   <template>
-    <vue-tel-input v-model="phone"></vue-tel-input>
+  	<vue-tel-input v-model="phone"></vue-tel-input>
   </template>
   ```
 
@@ -41,9 +41,9 @@
 Install the plugin into Vue:
 
 ```javascript
-import Vue from 'vue';
-import VueTelInput from 'vue-tel-input';
-import 'vue-tel-input/dist/vue-tel-input.css';
+import Vue from "vue";
+import { VueTelInput } from "vue-tel-input";
+import "vue-tel-input/dist/vue-tel-input.css";
 
 Vue.use(VueTelInput, options); // Define default global options here (optional)
 ```
@@ -55,16 +55,16 @@ Or use the component directly:
 ```html
 <!-- your-component.vue-->
 <template>
-  <vue-tel-input v-model="value"></vue-tel-input>
+	<vue-tel-input v-model="value"></vue-tel-input>
 </template>
 <script>
-  import { VueTelInput } from 'vue-tel-input';
+	import { VueTelInput } from "vue-tel-input";
 
-  export default {
-    components: {
-      VueTelInput,
-    },
-  };
+	export default {
+		components: {
+			VueTelInput,
+		},
+	};
 </script>
 
 <style src="vue-tel-input/dist/vue-tel-input.css"></style>
@@ -82,5 +82,5 @@ Or use the component directly:
 \*\* Otherwise, manually install the plugin into Vue:
 
 ```js
-Vue.use(window['vue-tel-input']);
+Vue.use(window["vue-tel-input"]);
 ```

@@ -26,7 +26,7 @@
         <span class="vti__dropdown-arrow">{{ data.open ? "▲" : "▼" }}</span>
       </slot>
       </span>
-      <ul v-if="data.open"
+      <ul v-show="data.open"
           ref="refList"
           :class="['vti__dropdown-list', data.dropdownOpenDirection]"
           role="listbox">

@@ -274,7 +274,9 @@
     const preferredCountries = getCountries(props.preferredCountries)
       .map((country) => ({ ...country, preferred: true }));
 
-    const countriesList = [...preferredCountries, ...filteredCountries.value] as Array<CountryObject & { preferred: boolean }>
+    const filteredCountriesWithoutPreferred = filteredCountries.value.filter((country) => !preferredCountries.some((c) => c.iso2 == country.iso2))
+
+    const countriesList = [...preferredCountries, ...filteredCountriesWithoutPreferred] as Array<CountryObject & { preferred: boolean }>
     if (!props.dropdownOptions.showSearchBox) {
       return countriesList
     }

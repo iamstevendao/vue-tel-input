@@ -26,6 +26,7 @@ export type PhoneMeta = {
 };
 
 export interface DropdownOptions {
+  ariaLabel?: string
   disabled?: boolean
   showDialCodeInList?: boolean
   showDialCodeInSelection?: boolean

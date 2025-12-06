@@ -81,6 +81,13 @@ export const allProps = [
     inDemo: false,
   },
   {
+    name: 'dropdownOptions.ariaLabel',
+    default: 'Country Code Selector',
+    type: String,
+    description: 'Aria label for the country code selector dropdown',
+    inDemo: false,
+  },
+  {
     name: 'dropdownOptions.disabled',
     default: false,
     type: Boolean,

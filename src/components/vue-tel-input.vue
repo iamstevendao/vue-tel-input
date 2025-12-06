@@ -2,7 +2,7 @@
   <div ref="refRoot"
        :class="['vue-tel-input', styleClasses, { disabled }]">
     <div v-click-outside="clickedOutside"
-         aria-label="Country Code Selector"
+         :aria-label="dropdownOptions.ariaLabel"
          aria-haspopup="listbox"
          :aria-expanded="data.open"
          role="button"

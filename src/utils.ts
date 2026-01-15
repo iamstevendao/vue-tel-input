@@ -295,7 +295,7 @@ export const allProps = [
     default: false,
     type: Boolean,
     description: 'Use strict phone number validation with full metadata (libphonenumber-js/max). When false (default), uses minimal metadata for smaller bundle size. When true, validates phone number patterns more precisely but increases bundle size by ~145KB.',
-    inDemo: true,
+    inDemo: false,
   },
 ];
 

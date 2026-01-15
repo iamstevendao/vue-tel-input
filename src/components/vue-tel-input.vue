@@ -86,10 +86,10 @@
   import type { CountryCode, NumberFormat } from 'libphonenumber-js';
   import type { CountryObject, DropdownOptions, InputOptions, PhoneMeta } from '../types';
 
-  import { parsePhoneNumberFromString } from 'libphonenumber-js';
+  import { parsePhoneNumber, loadStrictParser, isStrictParserReady, parseMin } from '../phone-parser';
   import { getDefault, setCaretPosition, getCountry, toLowerCase, toUpperCase } from '../utils';
   import clickOutside from '../directives/click-outside';
-  import { computed, nextTick, onMounted, reactive, shallowRef, watch } from 'vue';
+  import { computed, nextTick, onMounted, reactive, shallowRef, watch, ref } from 'vue';
 
   const refRoot = shallowRef<HTMLDivElement>()
   const refList = shallowRef<HTMLUListElement>()
@@ -189,7 +189,14 @@
       type: [String, Array, Object],
       default: () => getDefault('styleClasses') as string,
     },
+    strictValidation: {
+      type: Boolean,
+      default: () => getDefault('strictValidation') as boolean,
+    },
   })
+
+  // Track when strict parser is loaded for re-validation
+  const strictParserReady = ref(isStrictParserReady())
 
   const modelValue = defineModel({ type: String })
   watch(modelValue, (value, oldValue) => {
@@ -289,9 +296,12 @@
   })
 
   const phoneObject = computed(() => {
+    // Reactive dependency: triggers re-computation when strict parser loads
+    void strictParserReady.value;
+
     const result = data.phone.startsWith('+')
-      ? parsePhoneNumberFromString(data.phone)
-      : parsePhoneNumberFromString(data.phone, data.activeCountryCode);
+      ? parsePhoneNumber(data.phone, undefined, props.strictValidation)
+      : parsePhoneNumber(data.phone, data.activeCountryCode, props.strictValidation);
 
     const meta: PhoneMeta = {
       country: result?.country,
@@ -309,12 +319,12 @@
     if (result?.country
       && (props.ignoredCountries.length || props.onlyCountries.length)
       && !findCountry(result.country)) {
-        meta.valid = false;
-        meta.possible = false;
-        result.country = null;
+      meta.valid = false;
+      meta.possible = false;
+      result.country = null;
     }
 
-    if(!result) {
+    if (!result) {
       return meta
     }
 
@@ -324,7 +334,7 @@
     }
   })
   watch(() => phoneObject.value.countryCode, (value) => {
-    if(value) {
+    if (value) {
       data.activeCountryCode = value;
     }
   })
@@ -352,6 +362,13 @@
   watch(() => props.inputOptions.placeholder, resetPlaceholder)
 
   onMounted(() => {
+    if (props.strictValidation && !isStrictParserReady()) {
+      loadStrictParser().then(() => {
+        strictParserReady.value = true;
+        emit('validate', phoneObject.value);
+      });
+    }
+
     if (modelValue.value) {
       data.phone = modelValue.value.trim();
     }
@@ -483,7 +500,7 @@
       && phoneObject.value.nationalNumber) {
       data.activeCountryCode = parsedCountry.iso2;
       // Attach the current phone number with the newly selected country
-      data.phone = parsePhoneNumberFromString(
+      data.phone = parseMin(
         phoneObject.value.nationalNumber,
         parsedCountry.iso2,
       )

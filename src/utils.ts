@@ -290,6 +290,13 @@ export const allProps = [
     description: 'Only allow valid characters in a phone number (will also verify in <code>mounted</code>, so phone number with invalid characters will be shown as an empty string)',
     inDemo: false,
   },
+  {
+    name: 'strictValidation',
+    default: false,
+    type: Boolean,
+    description: 'Use strict phone number validation with full metadata (libphonenumber-js/max). When false (default), uses minimal metadata for smaller bundle size. When true, validates phone number patterns more precisely but increases bundle size by ~145KB.',
+    inDemo: false,
+  },
 ];
 
 export const defaultOptions = [...allProps]
@@ -320,10 +327,10 @@ export function getDefault(key: string) {
   return value;
 }
 
-export function toLowerCase<T extends string> (str: T) {
+export function toLowerCase<T extends string>(str: T) {
   return str?.toLowerCase() as Lowercase<T>;
 }
 
-export function toUpperCase<T extends string> (str: T) {
+export function toUpperCase<T extends string>(str: T) {
   return str?.toUpperCase() as Uppercase<T>;
 }

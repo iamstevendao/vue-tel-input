@@ -343,6 +343,114 @@ describe('Props', () => {
   describe(':validCharactersOnly', () => {
     // TODO
   });
+  describe(':strictValidation', () => {
+    it('defaults to false', () => {
+      const wrapper = shallowMount(VueTelInput);
+      expect(wrapper.props('strictValidation')).toBe(false);
+    });
+
+    describe('with strictValidation: false (min metadata)', () => {
+      it('accepts Brazilian mobile with 8 digits (old format)', async () => {
+        const wrapper = shallowMount(VueTelInput, {
+          props: {
+            defaultCountry: 'BR',
+            autoDefaultCountry: false,
+            strictValidation: false,
+          },
+        });
+
+        await wrapper.vm.$nextTick();
+        // +55 (DDI) + 75 (DDD) + 99980948 (8 digits - old format, missing the leading 9)
+        wrapper.vm.data.phone = '+557599980948';
+        await wrapper.vm.$nextTick();
+
+        // Min metadata only checks length, so this passes as valid
+        expect(wrapper.vm.phoneObject.valid).toBe(true);
+      });
+
+      it('accepts valid Brazilian mobile with 9 digits', async () => {
+        const wrapper = shallowMount(VueTelInput, {
+          props: {
+            defaultCountry: 'BR',
+            autoDefaultCountry: false,
+            strictValidation: false,
+          },
+        });
+
+        await wrapper.vm.$nextTick();
+        // +55 (DDI) + 75 (DDD) + 999980948 (9 digits - current format)
+        wrapper.vm.data.phone = '+5575999980948';
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.phoneObject.valid).toBe(true);
+      });
+    });
+
+    describe('with strictValidation: true (max metadata)', () => {
+      it('rejects Brazilian mobile with 8 digits (old format)', async () => {
+        const wrapper = shallowMount(VueTelInput, {
+          props: {
+            defaultCountry: 'BR',
+            autoDefaultCountry: false,
+            strictValidation: true,
+          },
+        });
+
+        await wrapper.vm.$nextTick();
+
+        // Wait for strict parser to load (async dynamic import)
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        // +55 (DDI) + 75 (DDD) + 99980948 (8 digits - old format)
+        // This is the problematic format that max metadata should reject
+        wrapper.vm.data.phone = '+557599980948';
+        await wrapper.vm.$nextTick();
+
+        // Max metadata validates digit patterns, so this should be invalid
+        expect(wrapper.vm.phoneObject.valid).toBe(false);
+      });
+
+      it('accepts valid Brazilian mobile with 9 digits', async () => {
+        const wrapper = shallowMount(VueTelInput, {
+          props: {
+            defaultCountry: 'BR',
+            autoDefaultCountry: false,
+            strictValidation: true,
+          },
+        });
+
+        await wrapper.vm.$nextTick();
+
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        // +55 (DDI) + 75 (DDD) + 999980948 (9 digits - current format)
+        wrapper.vm.data.phone = '+5575999980948';
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.phoneObject.valid).toBe(true);
+      });
+
+      it('accepts valid US phone number', async () => {
+        const wrapper = shallowMount(VueTelInput, {
+          props: {
+            defaultCountry: 'US',
+            autoDefaultCountry: false,
+            strictValidation: true,
+          },
+        });
+
+        await wrapper.vm.$nextTick();
+
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        wrapper.vm.data.phone = '+12015550123';
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.phoneObject.valid).toBe(true);
+        expect(wrapper.vm.phoneObject.country).toBe('US');
+      });
+    });
+  });
   describe(':styleClasses', () => {
     it('sets classes along side with .vue-tel-input', () => {
       const wrapper = shallowMount(VueTelInput, {

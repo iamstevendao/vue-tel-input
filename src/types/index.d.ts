@@ -1,6 +1,12 @@
 import { DefineComponent } from "vue";
+import type { CountryCode, PhoneNumber } from "libphonenumber-js";
 
 export interface DropdownOptions {
+    /**
+     * Native input aria-label attribute
+     * @default ''
+     */
+    ariaLabel?: string;
     /**
      * Disable dropdown
      * @default false
@@ -106,13 +112,30 @@ export interface InputOptions {
     styleClasses?: string | string[] | Record<string, boolean>;
 }
 
+export type Country = [
+    CountryName: string,
+    Iso2: Lowercase<CountryCode>,
+    DialCode: string,
+    Priority?: number,
+    AreaCodes?: string[]
+];
+  
 export interface CountryObject {
     name: string;
-    iso2: string;
+    iso2: CountryCode;
     dialCode: string;
     priority?: number;
-    areaCodes?: string[] | null;
+    areaCode?: string[] | null;
 }
+
+export type PhoneMeta = {
+    country: PhoneNumber['country'],
+    countryCode: PhoneNumber['country'],
+    valid: boolean,
+    possible: boolean,
+    formatted: string,
+    nationalNumber: string
+};
 
 export interface PhoneObject {
     number: string;

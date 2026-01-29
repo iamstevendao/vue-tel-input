@@ -25,7 +25,7 @@
     "dev": "vitepress dev docs",
     "test": "vitest --ui",
     "build": "vue-tsc && vite build",
-    "postbuild": "cp index.d.ts dist/vue-tel-input.d.ts",
+    "postbuild": "cp src/types/index.d.ts dist/vue-tel-input.d.ts",
     "preview": "vite preview",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",

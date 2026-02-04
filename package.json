@@ -1,6 +1,6 @@
 {
   "name": "vue-tel-input",
-  "version": "9.6.0",
+  "version": "9.7.0",
   "description": "International Telephone Input with Vue",
   "author": "Steven Dao <iamstevendao@gmail.com>",
   "license": "MIT",
@@ -12,6 +12,7 @@
   },
   "exports": {
     ".": {
+      "types": "./dist/vue-tel-input.d.ts",
       "import": "./dist/vue-tel-input.js",
       "require": "./dist/vue-tel-input.umd.cjs"
     },
@@ -19,10 +20,12 @@
   },
   "main": "./dist/vue-tel-input.umd.cjs",
   "module": "./dist/vue-tel-input.js",
+  "types": "./dist/vue-tel-input.d.ts",
   "scripts": {
     "dev": "vitepress dev docs",
     "test": "vitest --ui",
     "build": "vue-tsc && vite build",
+    "postbuild": "cp src/types/index.d.ts dist/vue-tel-input.d.ts",
     "preview": "vite preview",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",

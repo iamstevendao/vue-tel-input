@@ -593,7 +593,7 @@
   function clickedOutside() {
     data.open = false;
   }
-  function keyboardNav(e: KeyboardEvent) {
+  async function keyboardNav(e: KeyboardEvent) {
     if (e.keyCode === 40) {
       // down arrow
       e.preventDefault();
@@ -603,6 +603,7 @@
       } else {
         data.selectedIndex = Math.min(sortedCountries.value.length - 1, data.selectedIndex + 1);
       }
+      if (!refList.value) await nextTick()
       const selEle = refList.value.children[data.selectedIndex] as HTMLLIElement;
       selEle.focus();
       if (selEle.offsetTop + selEle.clientHeight
@@ -620,6 +621,7 @@
       } else {
         data.selectedIndex = Math.max(0, data.selectedIndex - 1);
       }
+      if (!refList.value) await nextTick()
       const selEle = refList.value.children[data.selectedIndex] as HTMLLIElement;
       selEle.focus();
       if (selEle.offsetTop < refList.value.scrollTop) {

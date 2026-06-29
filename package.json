@@ -28,11 +28,11 @@
   "unpkg": "dist/vue-tel-input.umd.min.js",
   "jsdelivr": "dist/vue-tel-input.umd.min.js",
   "dependencies": {
-    "core-js": "^3.14.0",
-    "libphonenumber-js": "^1.10.12"
+    "core-js": "^3.14.0"
   },
   "peerDependencies": {
-    "vue": "^2.7.10"
+    "vue": "^2.7.10",
+    "libphonenumber-js": "^1.10.12"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.15.8",

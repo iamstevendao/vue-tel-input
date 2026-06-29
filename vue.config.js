@@ -4,6 +4,9 @@ const path = require('path');
 module.exports = {
   lintOnSave: true,
   configureWebpack: {
+    externals: {
+      'libphonenumber-js': 'libphonenumber-js',
+    },
     plugins: [
       new CopyPlugin({
         patterns: [

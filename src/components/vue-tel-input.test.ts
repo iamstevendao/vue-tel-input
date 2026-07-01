@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import { describe, beforeEach, it, expect, vi } from 'vitest'
 
 import VueTelInput from './vue-tel-input.vue';
@@ -462,6 +462,71 @@ describe('Props', () => {
       });
     });
   });
+  describe('IDD format numbers (e.g. 006595554721)', () => {
+    // 006595554721 = 00 (IDD) + 65 (Singapore) + 95554721 (subscriber)
+    it('resolves an IDD number to the right country without an infinite reactive loop', async () => {
+      // Full mount + v-model + autoFormat to exercise the real reactive flow.
+      const errors: unknown[] = [];
+      const wrapper = mount(VueTelInput, {
+        props: {
+          modelValue: '',
+          defaultCountry: 'FR', // France uses 00 as its IDD prefix
+          autoDefaultCountry: false,
+        },
+      });
+      await wrapper.vm.$nextTick();
+      wrapper.vm.$.appContext.config.errorHandler = (err) => { errors.push(err); };
+
+      await wrapper.setProps({ modelValue: '006595554721' });
+      for (let i = 0; i < 20; i += 1) await wrapper.vm.$nextTick();
+
+      // No "Maximum recursive updates exceeded" crash, resolves to SG not PY.
+      expect(errors.filter((e) => String(e).includes('recursive'))).toHaveLength(0);
+      expect(wrapper.vm.phoneObject.valid).toBe(true);
+      expect(wrapper.vm.phoneObject.country).toBe('SG');
+      expect(wrapper.vm.data.phone.startsWith('+65')).toBe(true);
+      expect(wrapper.vm.data.activeCountryCode).toBe('SG');
+    });
+
+    it('does not oscillate when autoFormat is disabled (phone keeps the IDD prefix)', async () => {
+      const errors: unknown[] = [];
+      const wrapper = mount(VueTelInput, {
+        props: {
+          modelValue: '',
+          defaultCountry: 'FR',
+          autoDefaultCountry: false,
+          autoFormat: false,
+        },
+      });
+      await wrapper.vm.$nextTick();
+      wrapper.vm.$.appContext.config.errorHandler = (err) => { errors.push(err); };
+
+      await wrapper.setProps({ modelValue: '006595554721' });
+      for (let i = 0; i < 20; i += 1) await wrapper.vm.$nextTick();
+
+      // Digits kept as-is, still valid, active country stays the calling context.
+      expect(errors.filter((e) => String(e).includes('recursive'))).toHaveLength(0);
+      expect(wrapper.vm.phoneObject.valid).toBe(true);
+      expect(wrapper.vm.phoneObject.country).toBe('SG');
+      expect(wrapper.vm.data.activeCountryCode).toBe('FR');
+    });
+
+    it('keeps the number invalid when the active country does not use 00 as IDD', async () => {
+      const wrapper = shallowMount(VueTelInput, {
+        props: {
+          defaultCountry: 'US', // US uses 011 as its IDD prefix
+          autoDefaultCountry: false,
+        },
+      });
+
+      await wrapper.vm.$nextTick();
+      wrapper.vm.data.phone = '006595554721';
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.phoneObject.valid).toBeFalsy();
+    });
+  });
+
   describe(':styleClasses', () => {
     it('sets classes along side with .vue-tel-input', () => {
       const wrapper = shallowMount(VueTelInput, {

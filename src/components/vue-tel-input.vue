@@ -314,7 +314,13 @@
     }
 
     if (meta.valid) {
-      meta.formatted = result?.format(toUpperCase(parsedMode.value));
+      // An IDD number (e.g. 006595554721) parses as 'national' but resolves to
+      // a foreign country: format it international so the prefix isn't dropped.
+      const isIddInternational = parsedMode.value === 'national'
+        && result?.country
+        && result.country !== data.activeCountryCode;
+      const effectiveMode = isIddInternational ? 'INTERNATIONAL' : toUpperCase(parsedMode.value);
+      meta.formatted = result?.format(effectiveMode);
     }
 
     if (result?.country
@@ -334,8 +340,12 @@
       ...result,
     }
   })
-  watch(() => phoneObject.value.countryCode, (value) => {
-    if (value) {
+  // Only follow the parsed country once the number is in '+' form, otherwise it
+  // oscillates on IDD numbers (FR→SG→PY→SG…, since SG uses 006 as IDD prefix).
+  // The '+' flag is watched too, so the flag still updates after autoFormat
+  // rewrites the number (countryCode alone doesn't change across that rewrite).
+  watch(() => [phoneObject.value.countryCode, data.phone?.startsWith('+')] as const, ([value, isInternational]) => {
+    if (value && isInternational) {
       data.activeCountryCode = value;
     }
   })

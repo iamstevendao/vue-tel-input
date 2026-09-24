@@ -71,6 +71,26 @@ export interface InputOptions {
      */
     "aria-describedby"?: string;
     /**
+     * Native input aria-invalid attribute
+     * @default undefined
+     */
+    "aria-invalid"?: boolean | "true" | "false" | "grammar" | "spelling";
+    /**
+     * Native input aria-required attribute
+     * @default undefined
+     */
+    "aria-required"?: boolean | "true" | "false";
+    /**
+     * Native input aria-label attribute
+     * @default undefined
+     */
+    "aria-label"?: string;
+    /**
+     * Native input aria-labelledby attribute
+     * @default undefined
+     */
+    "aria-labelledby"?: string;
+    /**
      * Native input id attribute
      * @default ''
      */

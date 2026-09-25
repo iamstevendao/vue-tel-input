@@ -282,6 +282,69 @@ describe('Props', () => {
         expect(wrapper.find('.vti__input').attributes('inputmode')).toBe('tel');
       })
     });
+    it('.aria-invalid sets `aria-invalid` native attribute of input', async () => {
+      const wrapper = shallowMount(VueTelInput, {
+        props: {
+          inputOptions: { 'aria-invalid': true },
+        },
+      });
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.find('.vti__input').attributes('aria-invalid')).toBe('true');
+    });
+    it('.aria-required sets `aria-required` native attribute of input', async () => {
+      const wrapper = shallowMount(VueTelInput, {
+        props: {
+          inputOptions: { 'aria-required': true },
+        },
+      });
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.find('.vti__input').attributes('aria-required')).toBe('true');
+    });
+    it('.aria-label sets `aria-label` native attribute of input', async () => {
+      const wrapper = shallowMount(VueTelInput, {
+        props: {
+          inputOptions: { 'aria-label': 'Phone number' },
+        },
+      });
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.find('.vti__input').attributes('aria-label')).toBe('Phone number');
+    });
+    it('.aria-labelledby sets `aria-labelledby` native attribute of input', async () => {
+      const wrapper = shallowMount(VueTelInput, {
+        props: {
+          inputOptions: { 'aria-labelledby': 'phone-label' },
+        },
+      });
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.find('.vti__input').attributes('aria-labelledby')).toBe('phone-label');
+    });
+    it('does not render ARIA attributes on input when not set', async () => {
+      const wrapper = shallowMount(VueTelInput);
+      await wrapper.vm.$nextTick();
+
+      const attrs = wrapper.find('.vti__input').attributes();
+      expect(attrs).not.toHaveProperty('aria-invalid');
+      expect(attrs).not.toHaveProperty('aria-required');
+      expect(attrs).not.toHaveProperty('aria-label');
+      expect(attrs).not.toHaveProperty('aria-labelledby');
+    });
+    it('.aria-invalid follows the consumer when the error state is cleared', async () => {
+      const wrapper = shallowMount(VueTelInput, {
+        props: {
+          inputOptions: { 'aria-invalid': true },
+        },
+      });
+      await wrapper.vm.$nextTick();
+      expect(wrapper.find('.vti__input').attributes('aria-invalid')).toBe('true');
+
+      await wrapper.setProps({ inputOptions: { 'aria-invalid': false } });
+
+      expect(wrapper.find('.vti__input').attributes('aria-invalid')).toBe('false');
+    });
     it('.name sets `name` native attribute of input', () => {
       const wrapper = shallowMount(VueTelInput, {
         props: {

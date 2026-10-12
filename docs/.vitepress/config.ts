@@ -5,6 +5,25 @@ export default defineConfig({
   title: "Vue Tel Input",
   base: '/vue-tel-input/',
   description: "International Phone Input for Vue",
+  sitemap: { hostname: 'https://iamstevendao.com/vue-tel-input/' },
+  head: [
+    ['meta', { name: 'author', content: 'Steven Dao' }],
+    ['link', { rel: 'author', href: 'https://iamstevendao.com/' }],
+    ['script', { type: 'application/ld+json' }, JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareSourceCode',
+      name: 'vue-tel-input',
+      description: 'International telephone input for Vue',
+      url: 'https://iamstevendao.com/vue-tel-input/',
+      codeRepository: 'https://github.com/iamstevendao/vue-tel-input',
+      author: {
+        '@type': 'Person',
+        '@id': 'https://iamstevendao.com/#person',
+        name: 'Steven Dao',
+        url: 'https://iamstevendao.com/',
+      },
+    })],
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -13,6 +32,10 @@ export default defineConfig({
       { text: 'Changelog', link: 'https://github.com/iamstevendao/vue-tel-input/releases' },
       { text: 'GitHub', link: 'https://github.com/iamstevendao/vue-tel-input' }
     ],
+
+    footer: {
+      message: 'Made by <a href="https://iamstevendao.com/">Steven Dao</a>, founder of <a href="https://speakeroo.app/?utm_source=vue-tel-input&utm_medium=referral">Speakeroo</a>.',
+    },
 
     sidebar: [
       {

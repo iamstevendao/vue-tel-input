@@ -601,34 +601,42 @@
     if (e.keyCode === 40) {
       // down arrow
       e.preventDefault();
+      const wasOpen = data.open;
       data.open = true;
-      if (data.selectedIndex === null) {
-        data.selectedIndex = 0;
-      } else {
-        data.selectedIndex = Math.min(sortedCountries.value.length - 1, data.selectedIndex + 1);
-      }
-      const selEle = refList.value.children[data.selectedIndex] as HTMLLIElement;
-      selEle.focus();
-      if (selEle.offsetTop + selEle.clientHeight
-        > refList.value.scrollTop + refList.value.clientHeight) {
-        refList.value.scrollTop = selEle.offsetTop
-          - refList.value.clientHeight
-          + selEle.clientHeight;
-      }
+      nextTick(() => {
+        if (data.selectedIndex === null) {
+          data.selectedIndex = 0;
+        } else {
+          data.selectedIndex = Math.min(sortedCountries.value.length - 1, data.selectedIndex + (wasOpen ? 1 : 0));
+        }
+        const adjustIndex = props.dropdownOptions.showSearchBox ? 1 : 0;
+        const selEle = refList.value.children[adjustIndex + data.selectedIndex] as HTMLLIElement;
+        selEle.focus();
+        if (selEle.offsetTop + selEle.clientHeight
+          > refList.value.scrollTop + refList.value.clientHeight) {
+          refList.value.scrollTop = selEle.offsetTop
+            - refList.value.clientHeight
+            + selEle.clientHeight;
+        }
+      });
     } else if (e.keyCode === 38) {
       // up arrow
       e.preventDefault();
+      const wasOpen = data.open;
       data.open = true;
-      if (data.selectedIndex === null) {
-        data.selectedIndex = sortedCountries.value.length - 1;
-      } else {
-        data.selectedIndex = Math.max(0, data.selectedIndex - 1);
-      }
-      const selEle = refList.value.children[data.selectedIndex] as HTMLLIElement;
-      selEle.focus();
-      if (selEle.offsetTop < refList.value.scrollTop) {
-        refList.value.scrollTop = selEle.offsetTop;
-      }
+      nextTick(() => {
+        if (data.selectedIndex === null) {
+          data.selectedIndex = sortedCountries.value.length - 1;
+        } else {
+          data.selectedIndex = Math.max(0, data.selectedIndex - (wasOpen ? 1 : 0));
+        }
+        const adjustIndex = props.dropdownOptions.showSearchBox ? 1 : 0;
+        const selEle = refList.value.children[adjustIndex + data.selectedIndex] as HTMLLIElement;
+        selEle.focus();
+        if (selEle.offsetTop < refList.value.scrollTop) {
+          refList.value.scrollTop = selEle.offsetTop;
+        }
+      });
     } else if (e.keyCode === 13) {
       // enter key
       if (data.selectedIndex !== null) {
@@ -648,7 +656,8 @@
         .findIndex((c) => toLowerCase(c.name).startsWith(data.typeToFindInput));
       if (typedCountryI >= 0) {
         data.selectedIndex = props.preferredCountries.length + typedCountryI;
-        const selEle = refList.value.children[data.selectedIndex] as HTMLLIElement;
+        const adjustIndex = props.dropdownOptions.showSearchBox ? 1 : 0;
+        const selEle = refList.value.children[adjustIndex + data.selectedIndex] as HTMLLIElement;
         const needToScrollTop = selEle.offsetTop < refList.value.scrollTop;
         const needToScrollBottom = selEle.offsetTop + selEle.clientHeight
           > refList.value.scrollTop + refList.value.clientHeight;

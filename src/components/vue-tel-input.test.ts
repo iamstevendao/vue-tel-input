@@ -49,6 +49,8 @@ describe('vue-tel-input', () => {
       { iso2: 'AF', name: 'Afghanistan', dialCode: '93' },
       { iso2: 'AU', name: 'Australia', dialCode: '61' },
       { iso2: 'BR', name: 'Brazil', dialCode: '55' },
+      { iso2: 'FR', name: 'France', dialCode: '33' },
+      { iso2: 'GF', name: 'French Guiana', dialCode: '594' },
     ];
     const keyCodes = { ArrowDown: 40, ArrowUp: 38, Enter: 13, Escape: 27 };
     let wrapper: ReturnType<typeof mount>;
@@ -72,6 +74,16 @@ describe('vue-tel-input', () => {
     const press = async (...keys: (keyof typeof keyCodes)[]) => {
       for (const key of keys) {
         document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key, keyCode: keyCodes[key], bubbles: true }));
+        await nextMacrotask();
+      }
+    };
+    const typeInSearchBox = async (text: string) => {
+      const searchBox = wrapper.find('.vti__search_box').element as HTMLInputElement;
+      searchBox.focus();
+      for (const key of text) {
+        searchBox.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
+        searchBox.value += key;
+        searchBox.dispatchEvent(new Event('input', { bubbles: true }));
         await nextMacrotask();
       }
     };
@@ -119,6 +131,16 @@ describe('vue-tel-input', () => {
       await press('ArrowDown', 'Escape');
       expect(wrapper.find('.vti__dropdown-list').exists()).toBe(false);
       expect(document.activeElement).toBe(wrapper.find('.vti__dropdown').element);
+    });
+
+    it('chooses the first search result with Enter', async () => {
+      mountInput({ showSearchBox: true });
+      await wrapper.find('.vti__dropdown').trigger('click');
+      await typeInSearchBox('fr');
+      expect(highlighted()?.textContent).toContain('France');
+
+      await press('Enter');
+      expect(wrapper.emitted('country-changed')!.at(-1)![0]).toMatchObject({ iso2: 'FR' });
     });
 
     it('handles the arrow keys when the search matches no country', async () => {

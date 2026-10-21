@@ -1,7 +1,8 @@
 <template>
   <div ref="refRoot"
        :class="['vue-tel-input', styleClasses, { disabled }]">
-    <div v-click-outside="clickedOutside"
+    <div ref="refDropdown"
+         v-click-outside="clickedOutside"
          :aria-label="dropdownOptions.ariaLabel"
          aria-haspopup="listbox"
          :aria-expanded="data.open"
@@ -97,6 +98,7 @@
   import { computed, nextTick, onMounted, reactive, shallowRef, watch, ref } from 'vue';
 
   const refRoot = shallowRef<HTMLDivElement>()
+  const refDropdown = shallowRef<HTMLDivElement>()
   const refList = shallowRef<HTMLUListElement>()
   const refInput = shallowRef<HTMLInputElement>()
 
@@ -233,6 +235,9 @@
       setDropdownPosition();
       emit('open');
     } else {
+      if (refList.value?.contains(document.activeElement)) {
+        refDropdown.value.focus();
+      }
       emit('close');
     }
   })
@@ -597,46 +602,59 @@
   function clickedOutside() {
     data.open = false;
   }
-  function keyboardNav(e: KeyboardEvent) {
+  function getActiveCountryIndex() {
+    return sortedCountries.value.map((c) => c.iso2).indexOf(data.activeCountryCode);
+  }
+  function getListItem(index: number) {
+    return refList.value?.querySelectorAll<HTMLLIElement>('.vti__dropdown-item')[index];
+  }
+  function openAtActiveCountry(fallbackIndex: number) {
+    const activeIndex = getActiveCountryIndex();
+    data.selectedIndex = activeIndex >= 0 ? activeIndex : fallbackIndex;
+    data.open = true;
+  }
+  async function keyboardNav(e: KeyboardEvent) {
     if (e.keyCode === 40) {
       // down arrow
       e.preventDefault();
-      const wasOpen = data.open;
-      data.open = true;
-      nextTick(() => {
-        if (data.selectedIndex === null) {
-          data.selectedIndex = 0;
-        } else {
-          data.selectedIndex = Math.min(sortedCountries.value.length - 1, data.selectedIndex + (wasOpen ? 1 : 0));
-        }
-        const adjustIndex = props.dropdownOptions.showSearchBox ? 1 : 0;
-        const selEle = refList.value.children[adjustIndex + data.selectedIndex] as HTMLLIElement;
-        selEle.focus();
-        if (selEle.offsetTop + selEle.clientHeight
-          > refList.value.scrollTop + refList.value.clientHeight) {
-          refList.value.scrollTop = selEle.offsetTop
-            - refList.value.clientHeight
-            + selEle.clientHeight;
-        }
-      });
+      if (!data.open) {
+        openAtActiveCountry(0);
+      } else if (data.selectedIndex === null) {
+        data.selectedIndex = 0;
+      } else {
+        data.selectedIndex = Math.min(sortedCountries.value.length - 1, data.selectedIndex + 1);
+      }
+      await nextTick();
+      const selEle = getListItem(data.selectedIndex);
+      if (!selEle) {
+        return;
+      }
+      selEle.focus();
+      if (selEle.offsetTop + selEle.clientHeight
+        > refList.value.scrollTop + refList.value.clientHeight) {
+        refList.value.scrollTop = selEle.offsetTop
+          - refList.value.clientHeight
+          + selEle.clientHeight;
+      }
     } else if (e.keyCode === 38) {
       // up arrow
       e.preventDefault();
-      const wasOpen = data.open;
-      data.open = true;
-      nextTick(() => {
-        if (data.selectedIndex === null) {
-          data.selectedIndex = sortedCountries.value.length - 1;
-        } else {
-          data.selectedIndex = Math.max(0, data.selectedIndex - (wasOpen ? 1 : 0));
-        }
-        const adjustIndex = props.dropdownOptions.showSearchBox ? 1 : 0;
-        const selEle = refList.value.children[adjustIndex + data.selectedIndex] as HTMLLIElement;
-        selEle.focus();
-        if (selEle.offsetTop < refList.value.scrollTop) {
-          refList.value.scrollTop = selEle.offsetTop;
-        }
-      });
+      if (!data.open) {
+        openAtActiveCountry(sortedCountries.value.length - 1);
+      } else if (data.selectedIndex === null) {
+        data.selectedIndex = sortedCountries.value.length - 1;
+      } else {
+        data.selectedIndex = Math.max(0, data.selectedIndex - 1);
+      }
+      await nextTick();
+      const selEle = getListItem(data.selectedIndex);
+      if (!selEle) {
+        return;
+      }
+      selEle.focus();
+      if (selEle.offsetTop < refList.value.scrollTop) {
+        refList.value.scrollTop = selEle.offsetTop;
+      }
     } else if (e.keyCode === 13) {
       // enter key
       if (data.selectedIndex !== null) {
@@ -656,8 +674,7 @@
         .findIndex((c) => toLowerCase(c.name).startsWith(data.typeToFindInput));
       if (typedCountryI >= 0) {
         data.selectedIndex = props.preferredCountries.length + typedCountryI;
-        const adjustIndex = props.dropdownOptions.showSearchBox ? 1 : 0;
-        const selEle = refList.value.children[adjustIndex + data.selectedIndex] as HTMLLIElement;
+        const selEle = getListItem(data.selectedIndex);
         const needToScrollTop = selEle.offsetTop < refList.value.scrollTop;
         const needToScrollBottom = selEle.offsetTop + selEle.clientHeight
           > refList.value.scrollTop + refList.value.clientHeight;
@@ -668,7 +685,7 @@
     }
   }
   function reset() {
-    data.selectedIndex = sortedCountries.value.map((c) => c.iso2).indexOf(data.activeCountryCode);
+    data.selectedIndex = getActiveCountryIndex();
     data.open = false;
   }
   function setDropdownPosition() {

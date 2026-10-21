@@ -38,6 +38,7 @@
                   :placeholder="dropdownOptions.searchBoxPlaceholder || (sortedCountries.length ? sortedCountries[0].name : '')"
                   type="text"
                   v-model="data.searchQuery"
+                  @input="data.selectedIndex = 0"
                   @click.stop />
           </div>
         <li v-for="(pb, index) in sortedCountries"

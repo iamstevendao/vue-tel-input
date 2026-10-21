@@ -1,5 +1,5 @@
-import { shallowMount } from '@vue/test-utils';
-import { describe, beforeEach, it, expect, vi } from 'vitest'
+import { mount, shallowMount } from '@vue/test-utils';
+import { describe, beforeEach, afterEach, it, expect, vi } from 'vitest'
 
 import VueTelInput from './vue-tel-input.vue';
 import * as utils from '../utils';
@@ -45,22 +45,89 @@ describe('vue-tel-input', () => {
   });
 
   describe('Keyboard navigation', () => {
-    it('navigates through countries using arrow keys', async () => {
-      const wrapper = shallowMount(VueTelInput, {
-        props: {
-          allCountries: [{ iso2: 'US' }, { iso2: 'CA' }],
-          preferredCountries: ['US']
-        }
-      });
-      await wrapper.find('.vti__dropdown').trigger('keydown.down'); // Simulate arrow down press
-      wrapper.vm.$nextTick(() => {
-        expect(wrapper.vm.data.selectedIndex).toBe(0); // Assuming the first country is selected
-      })
+    const countries = [
+      { iso2: 'AF', name: 'Afghanistan', dialCode: '93' },
+      { iso2: 'AU', name: 'Australia', dialCode: '61' },
+      { iso2: 'BR', name: 'Brazil', dialCode: '55' },
+    ];
+    const keyCodes = { ArrowDown: 40, ArrowUp: 38, Enter: 13, Escape: 27 };
+    let wrapper: ReturnType<typeof mount>;
+    let errors: unknown[];
+    const nextMacrotask = () => new Promise((resolve) => { setTimeout(resolve); });
+    const collectError = (err: unknown) => { errors.push(err); };
 
-      await wrapper.find('.vti__dropdown').trigger('keydown.up'); // Simulate arrow up press
-      wrapper.vm.$nextTick(() => {
-        expect(wrapper.vm.data.selectedIndex).toBe(1); // Assuming it cycles back to the last country
-      })
+    const mountInput = (dropdownOptions = {}) => {
+      wrapper = mount(VueTelInput, {
+        attachTo: document.body,
+        props: {
+          allCountries: countries,
+          defaultCountry: 'AU',
+          autoDefaultCountry: false,
+          dropdownOptions: { tabindex: 0, ...dropdownOptions },
+        },
+        global: { config: { errorHandler: collectError } },
+      });
+      (wrapper.find('.vti__dropdown').element as HTMLElement).focus();
+    };
+    const press = async (...keys: (keyof typeof keyCodes)[]) => {
+      for (const key of keys) {
+        document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key, keyCode: keyCodes[key], bubbles: true }));
+        await nextMacrotask();
+      }
+    };
+    const highlighted = () => document.querySelector('.vti__dropdown-item.highlighted');
+
+    beforeEach(async () => {
+      await nextMacrotask();
+      errors = [];
+      process.on('unhandledRejection', collectError);
+    });
+    afterEach(() => {
+      process.off('unhandledRejection', collectError);
+      wrapper.unmount();
+    });
+
+    it('opens on the active country with the arrow keys', async () => {
+      mountInput();
+      await press('ArrowDown');
+      expect(document.activeElement).toBe(highlighted());
+      expect(highlighted()?.textContent).toContain('Australia');
+
+      await press('Escape', 'ArrowUp');
+      expect(document.activeElement).toBe(highlighted());
+      expect(highlighted()?.textContent).toContain('Australia');
+      expect(errors).toEqual([]);
+    });
+
+    it('moves focus with the highlight when the search box is shown', async () => {
+      mountInput({ showSearchBox: true });
+      for (const key of ['ArrowDown', 'ArrowDown', 'ArrowUp'] as const) {
+        await press(key);
+        expect(document.activeElement).toBe(highlighted());
+      }
+    });
+
+    it('chooses the focused country with Enter and returns focus to the dropdown', async () => {
+      mountInput();
+      await press('ArrowDown', 'ArrowDown', 'Enter');
+      expect(wrapper.emitted('country-changed')!.at(-1)![0]).toMatchObject({ iso2: 'BR' });
+      expect(document.activeElement).toBe(wrapper.find('.vti__dropdown').element);
+    });
+
+    it('returns focus to the dropdown when closed with Escape', async () => {
+      mountInput();
+      await press('ArrowDown', 'Escape');
+      expect(wrapper.find('.vti__dropdown-list').exists()).toBe(false);
+      expect(document.activeElement).toBe(wrapper.find('.vti__dropdown').element);
+    });
+
+    it('handles the arrow keys when the search matches no country', async () => {
+      mountInput({ showSearchBox: true });
+      await wrapper.find('.vti__dropdown').trigger('click');
+      await wrapper.find('.vti__search_box').setValue('zzz');
+      (wrapper.find('.vti__search_box').element as HTMLElement).focus();
+      await press('ArrowDown', 'ArrowUp');
+      expect(errors).toEqual([]);
     });
   });
 
